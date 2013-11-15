@@ -1,0 +1,302 @@
+<!-- Author: Michael Milstead / Mode87.com
+	 for Untame.net
+	 Twitter Bootstrap Tutorial
+	 Parallax Demo, 2013
+-->
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Sibzy Alpha</title>
+	<meta name="description" content="Sibzy">
+	<meta name="author" content="Sibzy">
+
+	<!-- <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<script src="js/bootstrap.min.js"></script> --> 
+
+	<script src="js/jquery-1.6.1.min.js"></script>
+
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+
+	<script src="js/init.js"></script>
+
+	<script> 
+	function sizeSlideshow(){
+			$('#main').height(($('html').height()-($('header').height()+$('footer').height()))+'px');
+
+			//$('div.slider-nav span').css('margin-top',($('#intro').height()/2-50)+'px');
+			$('section#intro').css('min-height',$('#main').height() - 100 + 'px');
+		}
+
+	$().ready(function() {
+			
+		sizeSlideshow(); 
+			$('#intro').hide().fadeIn('slow');
+			//$('#intro').hide().delay(1600).fadeIn('slow');
+			$('#mission').hide().delay(1000).fadeIn('slow');
+			$('.navbar').hide().delay(1600).fadeIn('slow');
+			$('#home').hide().delay(1600).fadeIn('slow');
+			$('#about').hide().delay(1600).fadeIn('slow');
+
+			$(window).resize(sizeSlideshow);
+	});
+			</script> 
+
+	<style type="text/css">
+		html {
+			height: 100%;
+			overflow: scroll;
+			overflow-x: hidden;
+		}
+		#intro { 
+			/*background: url(images/intro.png) 50% 0 fixed; 
+			*/
+			background: #6969b3;
+			height: auto;  
+			margin: 0 auto; 
+		    width: 100%; 
+		    position: relative; 
+		    /* box-shadow: 0 0 50px rgba(0,0,0,0.8);    Box shadow seems to work with solid background colors.  */
+		    padding: 100px 0;
+
+		}
+
+			#story { 
+			background: url(images/team.jpg) 50% 0 fixed; 
+			height: auto;  
+			margin: 0 auto; 
+		    width: 100%; 
+		    position: relative; 
+		    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+		    padding: 200px 0;
+		}
+
+		#home { 
+			background: url(http://i.imgur.com/Sw326fm.jpg) 50% 0 fixed; 
+			height: auto;  
+			margin: 0 auto; 
+		    width: 100%; 
+		    position: relative; 
+		    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+		    padding: 200px 0;
+		}
+		#about { 
+			background: url(images/about.png) 50% 0 fixed; 
+			height: auto;
+			margin: 0 auto; 
+		    width: 100%; 
+		    position: relative; 
+		    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+		    padding: 100px 0;
+		    color: #fff;
+		}
+
+		
+	</style>
+
+</head>
+
+<body>
+
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="navbar-header"> 
+ <a class="navbar-brand" href="#">Sibzy Alpha </a>
+  </div> 
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li> <a href="#">Home</a></li>
+      <li><a href="#home">The Team</a></li>
+       <li><a href="#about">About</a></li>
+      
+  </div><!-- /.navbar-collapse -->
+</nav>
+
+	<!-- Section #1 -->
+	<section id="intro" data-speed="6" data-type="background">
+		<div class="container" id="main">
+			<div class="row">
+
+		        <center> 
+		          <img class="img-responsive" height="1000px" src="images/logo.png">
+		        </center> 
+	    	</div>
+	    	<div class"row"> 
+	    	<section id="mission"> 
+	    		<div class="jumbotron" style=" box-shadow: 0 0 50px rgba(0,0,0,0.8);">
+  <h2>The Sibzy Model</h2>
+	    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	    		tempor fficia deserunt mollit anim id est laborum.</p>
+  <p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+</div>
+	    
+	    </section> 
+
+	</div> 
+
+
+	    	
+	    </div>
+	</section>
+
+	<!-- Section #2 -->
+	<section id="story" data-speed="4" data-type="background">
+		<div class="container" >
+		
+		<div class="row" style="background-color:rgba(255,255,255,0.5);"> 
+<h1> Our Story </h1> 
+		
+<p> <h4>  A group of friends at MIT started Sibzy with a mission to improve the dining experience for vegetarians and vegans by connecting restaurants with customers. Why not have a specialized site that caters specifically to veggie food lovers? To learn more about Sibzy, you can read our FAQ. Join us by creating a profile or by listing your awesome restaurant! </p> </h4> 
+<p> <h4>  A group of friends at MIT started Sibzy with a mission to improve the dining experience for vegetarians and vegans by connecting restaurants with customers. Why not have a specialized site that caters specifically to veggie food lovers? To learn more about Sibzy, you can read our FAQ. Join us by creating a profile or by listing your awesome restaurant! </p> </h4> 
+<p> <h4>  A group of friends at MIT started Sibzy with a mission to improve the dining experience for vegetarians and vegans by connecting restaurants with customers. Why not have a specialized site that caters specifically to veggie food lovers? To learn more about Sibzy, you can read our FAQ. Join us by creating a profile or by listing your awesome restaurant! </p> </h4> 
+</div> 
+
+
+
+	<div class="row" style="background-color:rgba(255,255,255,0.5); margin-top: 150px; "> 
+<h1> Our Story </h1> 
+		
+<p> <h4>  A group of friends at MIT started Sibzy with a mission to improve the dining experience for vegetarians and vegans by connecting restaurants with customers. Why not have a specialized site that caters specifically to veggie food lovers? To learn more about Sibzy, you can read our FAQ. Join us by creating a profile or by listing your awesome restaurant! </p> </h4> 
+<p> <h4>  A group of friends at MIT started Sibzy with a mission to improve the dining experience for vegetarians and vegans by connecting restaurants with customers. Why not have a specialized site that caters specifically to veggie food lovers? To learn more about Sibzy, you can read our FAQ. Join us by creating a profile or by listing your awesome restaurant! </p> </h4> 
+<p> <h4>  A group of friends at MIT started Sibzy with a mission to improve the dining experience for vegetarians and vegans by connecting restaurants with customers. Why not have a specialized site that caters specifically to veggie food lovers? To learn more about Sibzy, you can read our FAQ. Join us by creating a profile or by listing your awesome restaurant! </p> </h4> 
+</div> 
+
+		
+
+	    </div>
+	</section>
+
+	<section id="home" data-speed="4" data-type="background">
+		<div class="container" style="background-color:rgba(255,255,255,0.5);">
+		
+<div class="row" > 
+<div class="col-md-6"> 
+	<center> 
+	<h1> Amol Bhave </h1> 
+<img src="images/amol.jpg" class="img-circle"> 
+</div> 
+</center> 
+
+<div class="col-md-6">
+<center>  
+	<h1>Fernando Trujano</h1> 
+<img src="images/fernando.jpg" class="img-circle"> 
+</div> 
+</center> 
+
+</div> 
+
+<div class="row"> 
+
+<div class="col-md-6"> 
+	<center> 
+	<h1> Karan Kashyap </h1> 
+<img src="images/karan.jpg" class="img-circle"> 
+</div> 
+</center> 
+
+<div class="col-md-6"> 
+	<center> 
+	<h1> Jonathan Uesato</h1> 
+<img src="images/jonathan.jpg" class="img-circle"> 
+</div>
+</center>  
+</div> 
+		 
+
+
+		
+
+	    </div>
+	</section>
+
+	<!-- Section #3 -->
+	<section id="about" data-speed="2" data-type="background">
+		<div class="container">
+			<div class="page-header">
+				<h1>Final Section Headline <small>Some subtext goes here...</small></h1>
+			</div>
+			<div class="row">
+		        <div class="col-md-4">
+		          <h2>More Details</h2>
+		          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque cursus nisl consectetur et.</p>
+		          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque cursus nisl consectetur et.</p>
+		          <p><a class="btn btn-success">View details &raquo;</a></p>
+		        </div><!-- /col-md-4 -->
+		        <div class="col-md-4">
+		         	<h2>Heading</h2>
+		         	<div class="media">
+						<a class="pull-left" href="#">
+					    	<img class="media-object" src="images/check.png">
+						</a>
+						<div class="media-body">
+						    <h4 class="media-heading">Media heading</h4>
+						    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante.
+						</div>
+					</div>
+		         	<div class="media">
+						<a class="pull-left" href="#">
+					    	<img class="media-object" src="images/check.png">
+						</a>
+						<div class="media-body">
+						    <h4 class="media-heading">Media heading</h4>
+						    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante.
+						</div>
+					</div>
+		         	<div class="media">
+						<a class="pull-left" href="#">
+					    	<img class="media-object" src="images/check.png">
+						</a>
+						<div class="media-body">
+						    <h4 class="media-heading">Media heading</h4>
+						    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante.
+						</div>
+					</div>
+		        </div><!-- /col-md-4 -->
+		        <div class="col-md-4">
+		          <h2>Log In</h2>
+		          <form class="form">
+					  <div class="control-group">
+					    <label class="control-label" for="inputEmail">Email</label>
+					    <div class="controls">
+					      <input type="text" id="inputEmail" placeholder="Email">
+					    </div>
+					  </div>
+					  <div class="control-group">
+					    <label class="control-label" for="inputPassword">Password</label>
+					    <div class="controls">
+					      <input type="password" id="inputPassword" placeholder="Password">
+					    </div>
+					  </div>
+					  <div class="control-group">
+					    <div class="controls">
+					      <label class="checkbox">
+					        <input type="checkbox"> Remember me <br><br>
+					      </label>
+					      <button type="submit" class="btn btn-success">Sign in</button>
+					    </div>
+					  </div>
+					</form>
+		        </div><!-- /col-md-4 -->
+	    	</div>
+	    </div>
+	</section>
+
+</body>
+ <script src="plugins.js"></script>
+   <script>
+             $('#top-nav').onePageNav({
+                 currentClass: 'active',
+                 changeHash: true,
+                 scrollSpeed: 1200
+            });
+        </script>
+
+
+       
+        <script src="modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+</html>
