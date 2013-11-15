@@ -22,6 +22,26 @@ pip install -r requirements.txt
 python manage.py syncdb
 ```
 
+In the end you will have a directory structure similar to this:
+```
+sibzy
+  |-- bin
+  |-- lib
+  |-- local
+  |-- www
+  |    |-- sibzy
+  |    |     |-- manage.py
+  |    |     |-- requirements.txt
+  |    |     |-- requirements.system
+  |    |     |-- README.md
+  |    |     |-- docs
+  |    |     |     |-- --
+  |    |     |-- sibzy
+  |    |           |-- settings.py
+  |    |           |-- --
+             
+```
+
 Running
 -------
 
