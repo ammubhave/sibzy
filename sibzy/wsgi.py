@@ -19,6 +19,7 @@ sys.path.append('/home/ubuntu/sibzy/local/lib/python2.7/site-packages')
 #raise Exception(os.getcwd())
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sibzy.settings")
 
+os.chdir(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 activate_env=os.path.expanduser("../../bin/activate_this.py")
 execfile(activate_env, dict(__file__=activate_env))
 
