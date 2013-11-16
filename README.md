@@ -24,7 +24,7 @@ python manage.py syncdb
 
 In the end you will have a directory structure similar to this:
 ```
-sibzy
+sibzy  (This will be referred to as the sibzy virtualenv folder)
   |-- bin
   |-- lib
   |-- local
@@ -45,6 +45,9 @@ sibzy
 Running
 -------
 
+Navigate to the sibzy virtualenv folder
 ```
+source bin/activate
+cd www/sibzy
 python manage.py runserver
 ```
