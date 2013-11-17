@@ -9,6 +9,7 @@ def search(request, q):
     rs = []
     for restaurant in restaurants:
         rs.append({
+            'id': restaurant.id,
             'name': restaurant.name,
             'location': {
                 'latitude': float(restaurant.location.latitude),
