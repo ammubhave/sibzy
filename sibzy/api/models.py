@@ -8,11 +8,20 @@ class AppSetting(models.Model):
     
     def __unicode__(self):
         return "{0}: {1}".format(self.key, self.value)
+    
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    fbid = models.TextField()
+    fbusername = models.TextField(blank=True)
+    fbaccess_token = models.TextField(blank=True)
+    dish_category_strong_user = ListField(EmbeddedModelField('DishCategory'), blank=True)
+    dish_category_weak_user = ListField(EmbeddedModelField('DishCategory'), blank=True)
+    dish_category_weak_sys = ListField(EmbeddedModelField('DishCategory'), blank=True)
 
 class Restaurant(models.Model):
     name = models.CharField(max_length=255)
     location = models.ForeignKey('Location')
-    #category = models.ForeignKey('RestaurantCategory')
+    category = models.ForeignKey('RestaurantCategory')
     dishes = ListField(EmbeddedModelField('Dish'), blank=True)#related_name='restaurants', 
     rating = models.OneToOneField('RestaurantRating', related_name='restaurant')
     
@@ -41,14 +50,27 @@ class Location(models.Model):
    
     address = models.TextField()
     city = models.CharField(max_length=50)
-    state = models.CharField(max_length=50)
-    country = models.CharField(max_length=50)
+    state = models.ForeignKey('State')
+    country = models.ForeignKey('Country')
     
     phone = models.CharField(max_length=20)
     
     def __unicode__(self):
         return "{0}, {1}, {2}, {3}".format(self.address, self.city, self.state, self.country)
+
+class State(models.Model):
+    name = models.TextField()
+    country = models.ForeignKey('Country')
     
+    def __unicode__(self):
+        return "{0} - {1}".format(self.name, self.country.name)
+    
+    
+class Country(models.Model):
+    name = models.TextField()
+    
+    def __unicode__(self):
+        return "{0}".format(self.name)
     
 class Dish(models.Model):
     name = models.CharField(max_length=255)

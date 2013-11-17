@@ -6,6 +6,7 @@ admin.site.register(Restaurant)
 admin.site.register(RestaurantRating)
 admin.site.register(Location)
 admin.site.register(Dish)
+admin.site.register(UserProfile)
 
 
 #class ModelListField(ListField):
