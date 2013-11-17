@@ -6,4 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'load/([A-Za-z0-9_/]+)$', 'sibzy.api.views.load'),
+    
+    url(r'restaurant/(\w+)$', 'sibzy.api.views.restaurant_profile'),
+    url(r'test$', 'sibzy.api.views.test_view'),
 )

@@ -5,6 +5,5 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', 'sibzy.api.views.load', {'template_path': 'base'}),
-    
+    url(r'^$', 'sibzy.api.views.load', {'template_path': 'base'}),    
 )

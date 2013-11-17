@@ -12,9 +12,12 @@ class AppSetting(models.Model):
 class Restaurant(models.Model):
     name = models.CharField(max_length=255)
     location = models.ForeignKey('Location')
-    
-    dishes = models.ManyToManyField('Dish', related_name='restaurants')
+    #category = models.ForeignKey('RestaurantCategory')
+    dishes = ListField(EmbeddedModelField('Dish'), blank=True)#related_name='restaurants', 
     rating = models.OneToOneField('RestaurantRating', related_name='restaurant')
+    
+    def __str__(self):
+        return self.name
     
 class RestaurantCategory(models.Model):
     name = models.CharField(max_length=255)
