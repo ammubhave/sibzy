@@ -6,4 +6,5 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'sibzy.api.views.load', {'template_path': 'base'}),
+    
 )
