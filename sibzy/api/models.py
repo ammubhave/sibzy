@@ -52,6 +52,8 @@ class Location(models.Model):
     
 class Dish(models.Model):
     name = models.CharField(max_length=255)
+    tag = models.CharField(max_length=255)
+    price = models.DecimalField(max_digits=7, decimal_places = 2)
     categories = models.ManyToManyField('DishCategory', related_name='dishes')
     
     @property
