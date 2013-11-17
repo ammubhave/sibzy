@@ -5,6 +5,7 @@ from django.forms.extras.widgets import *
 admin.site.register(Restaurant)
 admin.site.register(RestaurantRating)
 admin.site.register(Location)
+admin.site.register(Dish)
 
 
 #class ModelListField(ListField):

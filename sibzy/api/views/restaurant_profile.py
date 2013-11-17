@@ -6,6 +6,11 @@ import json
 
 def restaurant_profile(request, restaurant_id):
     restaurant = get_object_or_404(Restaurant, id=restaurant_id)
+    dishes = []
+    for dish in restaurant.dishes:
+        dishes.append({
+            'name': dish.name
+        })
     return HttpResponse(json.dumps({
             'name': restaurant.name,
             'location': {
@@ -16,6 +21,7 @@ def restaurant_profile(request, restaurant_id):
                 'state': restaurant.location.state,
                 'country': restaurant.location.country,
                 'phone': restaurant.location.phone,
-            },            
+            },
+            'dishes': dishes,
         }))
     
