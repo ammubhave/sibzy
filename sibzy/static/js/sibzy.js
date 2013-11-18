@@ -1,13 +1,23 @@
-var c = {}
+var c = {}, rs = {};
+
+function show_restaurant_details(id) {
+    //console.log(rs[id].name);
+    $('#restaurant_name').text(rs[id].name);
+}
+
 function activate_links() {
     $('a[href]').each(function (index, elem) {
            //22 alert('y');
             elem = $(elem);
-            var newpath = elem.attr('href').substring(1);
-            newpath = newpath.substring(0, newpath.indexOf('?'));
+            var newpath = elem.attr('href').substring(1);         
+            
             
             //console.log(elem);
             if (elem.attr('href').indexOf('#') == 0 && elem.attr('href').length > 1) {
+                
+                newpath = newpath.substring(0, newpath.indexOf('?'));
+                
+                
                 elem.unbind('click');
                 elem.click(function(e){
                     $(this).unbind('click');
@@ -15,6 +25,11 @@ function activate_links() {
                     e.preventDefault();
                     //console.log($(this).context.hash);
                     navigate(elem.attr('href').substring(1));
+                    
+                    if (newpath == 'restaurant_profile') {
+                        show_restaurant_details(elem.attr('href').substring(elem.attr('href').indexOf('?id=') + 4));
+                    }
+                    
                     return false;
                 });
                 
@@ -33,13 +48,18 @@ function activate_links() {
             }
         });
 }
-function navigate(path) {
+function navigate(path) {    
+    
+    
     window.location = './#' + path;
+    if (path.indexOf('?') != -1) {
+        path = path.substring(0, path.indexOf('?'));
+    }
     if (path in c) {
         $('#content').remove();
         $('#content_parent').html($('<div>').attr('id', 'content'));
         
-        $( "#content" ).html( c[path] );
+        $("#content" ).html( c[path] );
         
         //console.log($('#content a[href]'));
         
@@ -57,6 +77,8 @@ $(function () {
         navigate('home');
     } else {
         navigate(window.location.hash.substring(1));
+        
+        
     }
     $('#txtSearch').keyup(function (data) {
         q = $('#txtSearch').val();
@@ -69,7 +91,7 @@ $(function () {
                 $('.search_q').text(q);
                 
                 $.each( data, function( index, r ) {
-                    console.log(r);
+                    rs[r['id']] = r;
                     $('#search_results').append($('<a href="#restaurant_profile?id=' + r['id'] + '"><h2>' + r['name'] + '</h2></a>'));
                 });
                 activate_links();

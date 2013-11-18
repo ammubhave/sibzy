@@ -31,6 +31,7 @@ class Restaurant(models.Model):
     
     def json(self):
         return json.dumps({
+            'id': self.id,
             'name': self.name,
             'location': json.loads(self.location.json()),
             'dishes': [json.loads(d.json()) for d in self.dishes],
