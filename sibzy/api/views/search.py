@@ -7,29 +7,13 @@ import json, operator
 
 # Returns list of search result objects
 def search(request, q):
-    dbDishQ = Q(name__icontains=q)
+    #dbDishQ = Q(name__icontains=q)
+    #
+    #if request.user.is_authenticated():        
+    #    dbDishQDishCategoryStrong = reduce(operator.and_, [Q(category=c.id) for c in request.user_profile.dish_category_strong])
+    #    dbDishQ &= dbDishQDishCategoryStrong
+    #    
+    #dishes = Dish.objects.filter(dbDishQ)
     
-    if request.user.is_authenticated():        
-        dbDishQDishCategoryStrong = reduce(operator.and_, [Q(category=c.id) for c in request.user_profile.dish_category_strong])
-        dbDishQ &= dbDishQDishCategoryStrong
-        
-    dishes = Dish.objects.filter(dbDishQ)
-    
-    restaurants = Restaurant.objects.filter(dbQ)
-    rs = []
-    for restaurant in restaurants:
-        rs.append({
-            'type': 'restaurant',
-            'id': restaurant.id,
-            'name': restaurant.name,
-            'location': {
-                'latitude': float(restaurant.location.latitude),
-                'longitude': float(restaurant.location.longitude),
-                'address': restaurant.location.address,
-                'city': restaurant.location.city,
-                'state': restaurant.location.state,
-                'country': restaurant.location.country,
-                'phone': restaurant.location.phone,
-            },
-        })
-    return HttpResponse(json.dumps(rs))
+    restaurants = Restaurant.objects.filter(name__icontains=q)
+    return HttpResponse(json.dumps([json.loads(r.json()) for r in restaurants]))

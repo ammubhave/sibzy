@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from djangotoolbox.fields import ListField, EmbeddedModelField
+import json
 
 class AppSetting(models.Model):
     key = models.CharField(max_length=255)
@@ -21,12 +22,20 @@ class UserProfile(models.Model):
 class Restaurant(models.Model):
     name = models.CharField(max_length=255)
     location = models.ForeignKey('Location')
-    category = models.ForeignKey('RestaurantCategory')
+    #category = models.ForeignKey('RestaurantCategory')
     dishes = ListField(EmbeddedModelField('Dish'), blank=True)#related_name='restaurants', 
     rating = models.OneToOneField('RestaurantRating', related_name='restaurant')
     
     def __str__(self):
         return self.name
+    
+    def json(self):
+        return json.dumps({
+            'name': self.name,
+            'location': json.loads(self.location.json()),
+            'dishes': [json.loads(d.json()) for d in self.dishes],
+            'rating': json.loads(self.rating.json()),
+        })
     
 class RestaurantCategory(models.Model):
     name = models.CharField(max_length=255)
@@ -43,6 +52,17 @@ class RestaurantRating(models.Model):
     seafoodint = models.DecimalField(max_digits=7, decimal_places=1)
     # TODO: ADD MORE    
     
+    def json(self):
+        return json.dumps({
+            'total': float(self.total),
+            'vegetarian': float(self.vegetarian),
+            'vegan': float(self.vegan),
+            'glutenfree': float(self.glutenfree),
+            'peanutfree': float(self.peanutfree),
+            'lactoseint': float(self.lactoseint),
+            'seafoodint': float(self.seafoodint),
+        })
+    
 
 class Location(models.Model):
     latitude = models.DecimalField(max_digits=7, decimal_places=1)
@@ -50,13 +70,22 @@ class Location(models.Model):
    
     address = models.TextField()
     city = models.CharField(max_length=50)
-    state = models.ForeignKey('State')
-    country = models.ForeignKey('Country')
+    #state = models.ForeignKey('State')
+   # country = models.ForeignKey('Country')
     
     phone = models.CharField(max_length=20)
     
     def __unicode__(self):
         return "{0}, {1}, {2}, {3}".format(self.address, self.city, self.state, self.country)
+    
+    def json(self):
+        return json.dumps({
+            'latitude': float(self.latitude),
+            'longitude': float(self.longitude),
+            'address': self.address,
+            'city': self.city,
+        })
+    
 
 class State(models.Model):
     name = models.TextField()
@@ -84,11 +113,25 @@ class Dish(models.Model):
     
     #restaurants = models.ManyToManyFields(Restaurant, related_name='dishes') - ALREADY EXISTS BY DEFAULT
     
+    def json(self):
+        return json.dumps({
+            'name': self.name,
+            'tag': self.tag,
+            'price': float(self.price),
+            'categories': [json.loads(c.json()) for c in self.categories],
+        })
+    
 class DishCategory(models.Model):
     name = models.CharField(max_length=255)
     slug = models.CharField(max_length=255, unique=True)
     
     #dishes = models.ManyToManyFields(Dish, related_name='categories') - ALREADY EXISTS BY DEFAULT
+    
+    def json(self):
+        return json.dumps({
+            'name': self.name,
+            'slug': self.slug,
+        })
     
 class DishRating(models.Model):
     dish = models.ForeignKey(Dish)

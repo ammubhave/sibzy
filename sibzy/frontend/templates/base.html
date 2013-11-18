@@ -17,13 +17,8 @@
 	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
     <script src="/static/js/fblogin.js"></script>
-	
+	<script src="/static/js/sibzy.js"></script>
 
-	<script>
-		$(function () {
-			$('#content').load('/api/load/home');
-		});
-    </script> 
 
 	<style type="text/css">
 		html {
@@ -42,17 +37,25 @@
     </div> 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-            <li><a href="#">Home</a></li>
-            <li><a href="#home">The Team</a></li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#theteam">The Team</a></li>
             <li><a href="#about">About</a></li>
-            <li><fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button></li>
+            <li></li>
         </ul>
+        <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <input type="text" id="txtSearch" class="form-control" placeholder="Search">
+            </div>
+            <a href="#search"></a>
+        </form>
     </div><!-- /.navbar-collapse -->
+    
     </nav>
-	
-	<div id="content">
-
-	
-   </div>
+    <br /><br />
+    <fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
+	<div id="content_parent">
+        <div id="content">
+        </div>
+    </div>
 </body>
 </html>
