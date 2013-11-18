@@ -18,6 +18,7 @@ cd sibzy
 source bin/activate
 mkdir www
 cp <the path to the sibzy repo directory> www -r
+cd www/sibzy
 pip install -r requirements.txt
 python manage.py syncdb
 ```
@@ -45,7 +46,8 @@ sibzy  (This will be referred to as the sibzy virtualenv folder)
 Running
 -------
 
-Navigate to the sibzy virtualenv folder
+Navigate to the sibzy virtualenv folder.
+If you already activated the virtualenv (i.e. you have a (sibzy) written on the left of the command prompt) then you can directly cd to the sibzy repo directory.
 ```
 source bin/activate
 cd www/sibzy
