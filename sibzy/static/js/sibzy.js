@@ -1,19 +1,11 @@
 var c = {}
-
-function navigate(path) {
-    window.location = './#' + path;
-    if (path in c) {
-        $('#content').remove();
-        $('#content_parent').html($('<div>').attr('id', 'content'));
-        
-        $( "#content" ).html( c[path] );
-        
-        //console.log($('#content a[href]'));
-        
-        $('a[href]').each(function (index, elem) {
+function activate_links() {
+    $('a[href]').each(function (index, elem) {
            //22 alert('y');
             elem = $(elem);
             var newpath = elem.attr('href').substring(1);
+            newpath = newpath.substring(0, newpath.indexOf('?'));
+            
             //console.log(elem);
             if (elem.attr('href').indexOf('#') == 0 && elem.attr('href').length > 1) {
                 elem.unbind('click');
@@ -40,6 +32,18 @@ function navigate(path) {
                 }
             }
         });
+}
+function navigate(path) {
+    window.location = './#' + path;
+    if (path in c) {
+        $('#content').remove();
+        $('#content_parent').html($('<div>').attr('id', 'content'));
+        
+        $( "#content" ).html( c[path] );
+        
+        //console.log($('#content a[href]'));
+        
+        activate_links();
     } else {
         $.get('/api/load/' + path, function( data ) {
             c[path] = data;
@@ -66,8 +70,9 @@ $(function () {
                 
                 $.each( data, function( index, r ) {
                     console.log(r);
-                    $('#search_results').append($('<h2>' + r['name'] + '</h2>'));
+                    $('#search_results').append($('<a href="#restaurant_profile?id=' + r['id'] + '"><h2>' + r['name'] + '</h2></a>'));
                 });
+                activate_links();
             });            
         }        
     });
