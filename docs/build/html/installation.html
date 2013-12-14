@@ -25,6 +25,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Sibzy 1.0.0 documentation" href="index.html" />
+    <link rel="next" title="Deployment" href="deployment.html" />
     <link rel="prev" title="Welcome to Sibzy’s documentation!" href="index.html" /> 
   </head>
   <body>
@@ -34,6 +35,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="deployment.html" title="Deployment"
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Welcome to Sibzy’s documentation!"
              accesskey="P">previous</a> |</li>
@@ -54,10 +58,67 @@
 <p>Subversion clone URL: <a class="reference external" href="https://github.com/ammubhave/sibzy">https://github.com/ammubhave/sibzy</a></p>
 <div class="section" id="development-environment">
 <h2>Development Environment<a class="headerlink" href="#development-environment" title="Permalink to this headline">¶</a></h2>
-<p>Clone the Git repository using thw following command:</p>
+<div class="section" id="clone-repository">
+<h3>Clone repository<a class="headerlink" href="#clone-repository" title="Permalink to this headline">¶</a></h3>
+<p>Clone the Git repository using the following command:</p>
 <div class="highlight-python"><pre>git clone git@github.com:ammubhave/sibzy.git</pre>
 </div>
-<p>This will create a directory called sibzy which will be the repository root directory.</p>
+<p>This will create a directory called sibzy which will be the repository root directory</p>
+</div>
+<div class="section" id="installing-system-wide-requirements">
+<h3>Installing system-wide requirements<a class="headerlink" href="#installing-system-wide-requirements" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>cd sibzy/requirements
+cat base.system | sudo apt-get install
+cat dev.system | sudo apt-get install
+sudo pip install virtualenv
+sudo pip install virtualenvwrapper
+echo 'source /usr/local/bin/virtualenvwrapper.sh' &gt;&gt; ~/.bashrc
+source ~/.bashrc</pre>
+</div>
+<p>You should now have system-wide dependencies installed.</p>
+</div>
+<div class="section" id="installing-virtual-environment-and-local-dependencies">
+<h3>Installing virtual environment and local dependencies<a class="headerlink" href="#installing-virtual-environment-and-local-dependencies" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>mkvirtualenv sibzy
+pip install -r dev.txt</pre>
+</div>
+<p>Now you should have all the python local dependencies installed.</p>
+</div>
+<div class="section" id="configuring-database">
+<h3>Configuring database<a class="headerlink" href="#configuring-database" title="Permalink to this headline">¶</a></h3>
+<p>We will create a file called .my.cnf in your home directory (if you don&#8217;t already have one) which will hold our db settings</p>
+<p><em>.my.cnf</em></p>
+<div class="highlight-python"><pre>[client]
+user=&lt;mysql db user&gt;
+password=&lt;mysql db password&gt;</pre>
+</div>
+<p>Create a MySQL database called <strong>sibzy</strong> by opening a terminal:</p>
+<div class="highlight-python"><pre>$ mysql -u &lt;mysql db user&gt; -p
+Enter Password: &lt;mysql db password&gt;
+
+mysql&gt; create database sibzy;
+Query OK, 1 row affected
+
+mysql&gt; exit
+Bye</pre>
+</div>
+<p>You should now have created a database named sibzy.</p>
+</div>
+<div class="section" id="configuring-envionment-variables">
+<h3>Configuring envionment variables<a class="headerlink" href="#configuring-envionment-variables" title="Permalink to this headline">¶</a></h3>
+<p>We will now configure the environment variables. Open a terminal:</p>
+<div class="highlight-python"><pre>echo 'SECRET_KEY="&lt;some random secret key&gt;"' &gt;&gt; ~/.virtualenvs/sibzy/bin/activate</pre>
+</div>
+</div>
+<div class="section" id="running-a-server">
+<h3>Running a server<a class="headerlink" href="#running-a-server" title="Permalink to this headline">¶</a></h3>
+<p>Open a terminal window.</p>
+<p>If you see <em>(sibzy)</em> written on the left side of the prompt then you have an active virtual environment.</p>
+<p>If you do not see the <em>(sibzy)</em> prompt, type <tt class="docutils literal"><span class="pre">workon</span> <span class="pre">sibzy</span></tt> to activate the virtual environment</p>
+<p>Navigate to the directory where <strong>manage.py</strong> file is located and run <tt class="docutils literal"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">runserver</span> <span class="pre">--settings=sibzy.settings.dev</span></tt></p>
+<p>You should have a server running at <strong>http://localhost:8000/</strong></p>
+<p>If you want to terminate the server, just press Ctrl+C</p>
+</div>
 </div>
 <div class="section" id="production-environment">
 <h2>Production Environment<a class="headerlink" href="#production-environment" title="Permalink to this headline">¶</a></h2>
@@ -87,7 +148,15 @@
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Installation</a><ul>
-<li><a class="reference internal" href="#development-environment">Development Environment</a></li>
+<li><a class="reference internal" href="#development-environment">Development Environment</a><ul>
+<li><a class="reference internal" href="#clone-repository">Clone repository</a></li>
+<li><a class="reference internal" href="#installing-system-wide-requirements">Installing system-wide requirements</a></li>
+<li><a class="reference internal" href="#installing-virtual-environment-and-local-dependencies">Installing virtual environment and local dependencies</a></li>
+<li><a class="reference internal" href="#configuring-database">Configuring database</a></li>
+<li><a class="reference internal" href="#configuring-envionment-variables">Configuring envionment variables</a></li>
+<li><a class="reference internal" href="#running-a-server">Running a server</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#production-environment">Production Environment</a></li>
 </ul>
 </li>
@@ -96,6 +165,9 @@
   <h4>Previous topic</h4>
   <p class="topless"><a href="index.html"
                         title="previous chapter">Welcome to Sibzy&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="deployment.html"
+                        title="next chapter">Deployment</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/installation.txt"
@@ -124,6 +196,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="deployment.html" title="Deployment"
+             >next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Welcome to Sibzy’s documentation!"
              >previous</a> |</li>
