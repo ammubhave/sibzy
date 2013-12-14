@@ -7,6 +7,7 @@ Installation
 Install packages from requirements.system
 Run
 ```
+sudo apt-get update
 pip install virtualenvwrapper
 source /usr/local/bin/virtualenvwrapper.sh
 
