@@ -4,6 +4,14 @@ Sibzy
 Installation
 ------------
 
+Install packages from requirements.system
+Run
+```
+pip install virtualenvwrapper
+```
+
+
+
 Navigate to the root repo directory
 ```
 cd sibzy

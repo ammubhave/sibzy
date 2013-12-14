@@ -1,4 +1,4 @@
-python-virtualenv
-mongodb
-python-pip
+git
 python
+python-pip
+python-virtualenv
