@@ -8,11 +8,15 @@ Install packages from requirements.system
 Run
 ```
 pip install virtualenvwrapper
+source /usr/local/bin/virtualenvwrapper.sh
+
+mkvirtualenv sibzy
 ```
 
+Edit your .bashrc file and add the last line (source one) at the end.
 
 
-Navigate to the root repo directory
+
 ```
 cd sibzy
 sudo apt-get install $(< requirements.system)
