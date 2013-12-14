@@ -8,7 +8,18 @@ https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/
 """
 
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sibzy.settings")
+import sys
+import site
+
+site.addsitedir('/home/ubuntu/.virtualenvs/sibzy/lib/python2.7/site-packages')
+
+path = '/home/ubuntu/sibzy/sibzy'
+if path not in sys.path:
+    sys.path.append(path)
+
+
+os.environ.setdefault("SECRET_KEY", "sdfkj234#$%#$%sdfgkjhAASDFSD$53453")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sibzy.settings.prod")
 
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
