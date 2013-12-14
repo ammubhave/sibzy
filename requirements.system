@@ -3,3 +3,5 @@ python
 python-pip
 python-virtualenv
 mysql-server
+python-dev
+libmysqlclient-dev
