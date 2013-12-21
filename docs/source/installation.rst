@@ -26,6 +26,8 @@ This will create a directory called sibzy which will be the repository root dire
 Installing system-wide requirements
 ===================================
 
+These commands will work only for Linux. If you are using Mac OSX or Windows, try to figure out how to make it work and also report back to me the steps!
+
 ::
 
     cd sibzy/requirements
