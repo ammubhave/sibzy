@@ -19,7 +19,7 @@ if path not in sys.path:
 
 
 os.environ.setdefault("SECRET_KEY", "sdfkj234#$%#$%sdfgkjhAASDFSD$53453")
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sibzy.settings.prod")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sibzy.settings.dev")
 
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
