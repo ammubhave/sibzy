@@ -70,7 +70,7 @@ WSGI_APPLICATION = 'sibzy.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sibzy',
+        #'NAME': 'sibzy',
 	'OPTIONS': {
             'read_default_file': '~/.my.cnf',
         },
