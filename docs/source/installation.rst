@@ -79,7 +79,7 @@ Configuring envionment variables
 
 We will now configure the environment variables. Open a terminal::
 
-    echo 'SECRET_KEY="<some random secret key>"' >> ~/.virtualenvs/sibzy/bin/activate
+    echo 'export SECRET_KEY="<some random secret key>"' >> ~/.virtualenvs/sibzy/bin/activate
     
 Running a server
 ================
