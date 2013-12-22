@@ -74,7 +74,7 @@ function navigate(path) {
 
 $(function () {
     if (window.location.hash == '') {
-        navigate('home');
+        navigate('landing');
     } else {
         navigate(window.location.hash.substring(2));
         
