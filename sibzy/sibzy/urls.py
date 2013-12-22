@@ -4,10 +4,12 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'sibzy.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
+    # Backend API urls
+    url(r'^!/', include('backend.urls')),
 
+    # Admin Site urls
     url(r'^admin/', include(admin.site.urls)),
-	url(r'', include('frontend.urls')),
+
+    # All else pass to frontend
+    url(r'', include('frontend.urls')),
 )
