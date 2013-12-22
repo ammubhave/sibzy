@@ -67,16 +67,6 @@ WSGI_APPLICATION = 'sibzy.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        #'NAME': 'sibzy',
-	'OPTIONS': {
-            'read_default_file': '~/.my.cnf',
-        },
-    }
-}
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
