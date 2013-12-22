@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def load_template(request, template_path):
+    return render(request, template_path + '.html')
