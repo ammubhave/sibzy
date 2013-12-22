@@ -13,6 +13,7 @@ Contents:
 
    installation
    deployment
+   structure
 
 Indices and tables
 ==================

@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Directory Structure &mdash; Sibzy 1.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Sibzy 1.0.0 documentation" href="index.html" />
+    <link rel="prev" title="Deployment" href="deployment.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="deployment.html" title="Deployment"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Sibzy 1.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="directory-structure">
+<h1>Directory Structure<a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="repository-root-structure">
+<h2>Repository Root Structure (/)<a class="headerlink" href="#repository-root-structure" title="Permalink to this headline">¶</a></h2>
+<dl class="glossary docutils">
+<dt id="term-docs">docs</dt>
+<dd>This directory contains all documentation related files. The final html documentation is available at docs/build/html/index.html. The Sphinx source code resides in docs/build/source directory</dd>
+<dt id="term-requirements">requirements</dt>
+<dd><p class="first">This directory contains the lists of required system packages and python packages.</p>
+<div class="last line-block">
+<div class="line"><em>System package Requirements:</em> base.system, dev.system, prod.system</div>
+<div class="line"><em>Python PIP Requirements:</em> base.txt, dev.txt, prod.txt</div>
+</div>
+</dd>
+<dt id="term-serve-static">serve_static</dt>
+<dd>Should not be touched or modified directly. This directory holds all static files which are generated using <cite>python manage.py collectstatic</cite> command and hence should not be modified directly. This folder is only to be used in production environment for service static files. Do not run collectstatic in a development envionment otherwise it will mess up things production static files.</dd>
+<dt id="term-sibzy">sibzy</dt>
+<dd>The project root directory. Holds all source code for the website.</dd>
+</dl>
+</div>
+<div class="section" id="project-root-structure-sibzy">
+<h2>Project Root Structure (/sibzy)<a class="headerlink" href="#project-root-structure-sibzy" title="Permalink to this headline">¶</a></h2>
+<dl class="glossary docutils">
+<dt id="term-backend">backend</dt>
+<dd>This app forms an interface between the outisde world and internal source code. It handles service AJAX pages and HTML snapshots, handles DB queries made from urls and other stuff.</dd>
+<dt id="term-frontend">frontend</dt>
+<dd>This app handles content which is actually seen by the user. Handles rendering of the home page and customization for different devices.</dd>
+<dt id="term-6">sibzy</dt>
+<dd>This is the project configuration directory. It holds settings for development and production environment and the master url server.</dd>
+<dt id="term-static">static</dt>
+<dd>Holds all the static files required for serving. This directory is accessible to the world via /static url.</dd>
+<dt id="term-templates">templates</dt>
+<dd>Holds all templates required. Also holds customization for administration section.</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Directory Structure</a><ul>
+<li><a class="reference internal" href="#repository-root-structure">Repository Root Structure (/)</a></li>
+<li><a class="reference internal" href="#project-root-structure-sibzy">Project Root Structure (/sibzy)</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="deployment.html"
+                        title="previous chapter">Deployment</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/structure.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="deployment.html" title="Deployment"
+             >previous</a> |</li>
+        <li><a href="index.html">Sibzy 1.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Amol Bhave; Fernando Trujano; Jonathan Uesato; Karan Kashyap.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.
+    </div>
+  </body>
+</html>
