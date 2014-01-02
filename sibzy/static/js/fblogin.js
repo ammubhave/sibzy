@@ -22,8 +22,15 @@ function updateLoginStatus(response) {
           }
         }
       })
-      testAPI();
+      
+      
     }
+    console.log('Welcome!  Fetching your information.... ');
+      FB.api('/me', function(response) {
+        console.log('Good to see you, ' + response.name + '.');
+        console.log(response);
+        $('fb-username').text(response.username);
+      });
     $('.fb-login').show();
     //alert('connect');
   } else if (response.status === 'not_authorized') {
@@ -81,9 +88,9 @@ window.fbAsyncInit = function() {
 
 // Here we run a very simple test of the Graph API after login is successful. 
 // This testAPI() function is only called in those cases. 
-function testAPI() {
-  console.log('Welcome!  Fetching your information.... ');
-  FB.api('/me', function(response) {
-    console.log('Good to see you, ' + response.name + '.');
-  });
-}
+//function testAPI() {
+//  console.log('Welcome!  Fetching your information.... ');
+//  FB.api('/me', function(response) {
+//    console.log('Good to see you, ' + response.name + '.');
+//  });
+//}
