@@ -50,15 +50,17 @@ function activate_links() {
                     return false;
                 });
                 
-                if (!(newpath in c)) {
+                if (!(newpath in c))
+                {
+                    newpaths = newpath.split('/')
                     
                     //console.log(elem.attr('href').substring(1) + '-');
-                    $.get('/!/backend/load/' + elem.attr('href').substring(2), function( data ) {
-                        c[elem.attr('href').substring(2)] = data;
+                    $.get('/!/' + newpaths[0] + '/load/' + newpaths[1], function( data ) {
+                        c[newpaths[0] + '/' + newpaths[1]] = data;
                     }).fail( function(data){
                         //get the status code
                         console.log(data);
-                        c[elem.attr('href').substring(2)] = data.responseText;
+                        c[newpaths[0] + '/' + newpaths[1]] = data.responseText;
                     });
                     //console.log(elem.attr('href').substring(1) + '-');
                 }
@@ -66,24 +68,23 @@ function activate_links() {
         });
 }
 function navigate(path) {    
-    
+    paths = path.split('/')
     
     window.location = './#!' + path;
     if (path.indexOf('?') != -1) {
         path = path.substring(0, path.indexOf('?'));
     }
-    if (path in c) {
+    if ((paths[0] + '/' + paths[1]) in c) {
         $('#content').remove();
         $('#content_parent').html($('<div>').attr('id', 'content'));
         
-        $("#content" ).html( c[path] );
-        
+        $("#content" ).html( c[paths[0] + '/' + paths[1]] );
         //console.log($('#content a[href]'));
         
         activate_links();
     } else {
-        $.get('/!/backend/load/' + path, function( data ) {
-            c[path] = data;
+        $.get('/!/' + paths[0] + '/load/' + paths[1], function( data ) {
+            c[paths[0] + '/' + paths[1]] = data;
             navigate(path);
         });
     }
@@ -91,7 +92,7 @@ function navigate(path) {
 
 $(function () {
     if (window.location.hash == '') {
-        navigate('landing');
+        navigate('frontend/landing');
     } else {
         navigate(window.location.hash.substring(2));        
     }
@@ -99,10 +100,10 @@ $(function () {
         q = $('#txtSearch').val();
         console.log(q)
         if (q == '') {
-            navigate('home');
+            navigate('frontend/home');
         } else {
             $.getJSON('/!/search/' + encodeURIComponent(q), function( data ) {
-                navigate('search');
+                navigate('frontend/search');
                 $('.search_q').text(q);
                 
                 $.each( data, function( index, r ) {

@@ -6,6 +6,5 @@ admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    url(r'^fb$', 'auth.views.login_fb'),
-    url(r'^logout$', 'auth.views.logout_fb'),
+    url(r'^(.*)$', 'restaurant.views.profile'),
 )

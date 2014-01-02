@@ -48,10 +48,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'frontend',
-    'backend',
     'auth',
-    'restaurants',
-    'comments',
+    'restaurant',
+    'comment',
     'search',
 )
 
@@ -97,5 +96,7 @@ STATICFILES_DIRS = (
 )
 
 TEMPLATE_DIRS = (
-    os.path.join(PROJECT_DIR, 'templates'),
+    os.path.join(PROJECT_DIR, 'frontend', 'templates'),
+    os.path.join(PROJECT_DIR, 'restaurant', 'templates'),
+    os.path.join(PROJECT_DIR, 'auth', 'templates'),
 )
