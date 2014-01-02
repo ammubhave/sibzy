@@ -1,3 +1,5 @@
+var me;
+
 function updateLoginStatus(response) {
   // Here we specify what we do with the response anytime this event occurs. 
   if (response.status === 'connected') {
@@ -21,19 +23,18 @@ function updateLoginStatus(response) {
             alert('Server authentication failed');
           }
         }
-      })
-      
-      
+      }) 
     }
     console.log('Welcome!  Fetching your information.... ');
-      FB.api('/me', function(response) {
-        console.log('Good to see you, ' + response.name + '.');
-        console.log(response);
-        $('.fb-name').text(response.name);
-        $('.fb-firstname').text(response.first_name);
-        $('.fb-lastname').text(response.last_name);
-        $('.fb-username').text(response.username);
-      });
+    FB.api('/me', function(response) {
+      console.log('Good to see you, ' + response.name + '.');
+      console.log(response);
+      $('.fb-name').text(response.name);
+      $('.fb-firstname').text(response.first_name);
+      $('.fb-lastname').text(response.last_name);
+      $('.fb-username').text(response.username);
+      me = response;
+    });
     $('.fb-login').show();
     //alert('connect');
   } else if (response.status === 'not_authorized') {
@@ -46,7 +47,10 @@ function updateLoginStatus(response) {
     // (2) it is a bad experience to be continually prompted to login upon page load.
     FB.login();
     $('.fb-nologin').show();
-     //alert('connectnotauthorized');
+    if (document.cookie.indexOf('fbid=') != -1)
+      $.ajax({ url: '/!/auth/logout' });
+
+    //alert('connectnotauthorized');
   } else {
     // In this case, t alert('connectnot');he person is not logged into Facebook, so we call the login() 
     // function to prompt them to do so. Note that at this stage there is no indication
@@ -55,6 +59,10 @@ function updateLoginStatus(response) {
     // The same caveats as above apply to the FB.login() call here.
     FB.login();
     $('.fb-nologin').show();
+    
+    if (document.cookie.indexOf('fbid=') != -1)
+      $.ajax({ url: '/!/auth/logout' });
+
      //alert('connectnot');
   }
 }
