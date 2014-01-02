@@ -9,11 +9,11 @@ import json
 from django.contrib.auth import logout, login, authenticate
 
 
-def logout(request):
+def logout_fb(request):
     response = HttpResponse(json.dumps({'status': 'success'}))
     response.set_cookie('fbaccess_token', '')
     response.set_cookie('fbid', '')
-    logout()
+    logout(request)
     return response
 
 

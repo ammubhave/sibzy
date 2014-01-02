@@ -7,5 +7,5 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     url(r'^login/fb$', 'auth.views.login_fb'),
-    url(r'^logout$', 'auth.views.logout'),
+    url(r'^logout$', 'auth.views.logout_fb'),
 )
