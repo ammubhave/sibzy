@@ -83,9 +83,16 @@ function navigate(path) {
         
         activate_links();
     } else {
-        $.get('/!/' + paths[0] + '/load/' + paths[1], function( data ) {
-            c[paths[0] + '/' + paths[1]] = data;
-            navigate(path);
+        $.ajax({
+            url: '/!/' + paths[0] + '/load/' + paths[1],
+            success: function( data ) {
+                c[paths[0] + '/' + paths[1]] = data;
+                navigate(path);
+            },
+            error: function(xhr, status, error) {
+                c[paths[0] + '/' + paths[1]] = xhr.responseText;
+                navigate(path);
+            }
         });
     }
 }
