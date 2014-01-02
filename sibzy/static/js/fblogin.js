@@ -35,6 +35,8 @@ function updateLoginStatus(response) {
       $('.fb-username').text(response.username);
       me = response;
     });
+    
+    $('.fb-nologin').hide();   
     $('.fb-login').show();
     //alert('connect');
   } else if (response.status === 'not_authorized') {
@@ -47,6 +49,7 @@ function updateLoginStatus(response) {
     // (2) it is a bad experience to be continually prompted to login upon page load.
     FB.login();
     $('.fb-nologin').show();
+    $('.fb-login').hide();
     if (document.cookie.indexOf('fbid=') != -1)
       $.ajax({ url: '/!/auth/logout' });
 
@@ -59,7 +62,7 @@ function updateLoginStatus(response) {
     // The same caveats as above apply to the FB.login() call here.
     FB.login();
     $('.fb-nologin').show();
-    
+    $('.fb-login').hide();
     if (document.cookie.indexOf('fbid=') != -1)
       $.ajax({ url: '/!/auth/logout' });
 
