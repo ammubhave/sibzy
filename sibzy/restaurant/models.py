@@ -7,7 +7,7 @@ class Restaurant(models.Model):
     name = models.CharField(max_length=255)
     location = models.ForeignKey('Location')
     #category = models.ForeignKey('RestaurantCategory')
-   # dishes = ListField(EmbeddedModelField('Dish'), blank=True)  #related_name='restaurants', 
+    dishes = models.ManyToManyField('Dish', blank=True)  #related_name='restaurants', 
     rating = models.OneToOneField('RestaurantRating', related_name='restaurant')
 
     def __str__(self):
@@ -18,7 +18,7 @@ class Restaurant(models.Model):
             'id': self.id,
             'name': self.name,
             'location': json.loads(self.location.json()),
-            'dishes': [json.loads(d.json()) for d in self.dishes],
+            'dishes': [json.loads(d.json()) for d in self.dishes.all()],
             'rating': json.loads(self.rating.json()),
         })
 
@@ -53,7 +53,7 @@ class RestaurantRating(models.Model):
 
 class Location(models.Model):
     latitude = models.DecimalField(max_digits=7, decimal_places=1)
-    longitude = models.DecimalField(max_digits=7, decimal_places=1)    
+    longitude = models.DecimalField(max_digits=7, decimal_places=1)
 
     address = models.TextField()
     city = models.CharField(max_length=50)
@@ -63,7 +63,7 @@ class Location(models.Model):
     phone = models.CharField(max_length=20)
 
     def __unicode__(self):
-        return "{0}, {1}, {2}, {3}".format(self.address, self.city, self.state, self.country)
+        return "{0}, {1}".format(self.address, self.city)
 
     def json(self):
         return json.dumps({
