@@ -30,6 +30,8 @@ function updateLoginStatus(response) {
         console.log('Good to see you, ' + response.name + '.');
         console.log(response);
         $('.fb-name').text(response.name);
+        $('.fb-firstname').text(response.first_name);
+        $('.fb-lastname').text(response.last_name);
         $('.fb-username').text(response.username);
       });
     $('.fb-login').show();
