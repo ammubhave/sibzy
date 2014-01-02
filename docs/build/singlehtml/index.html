@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Sibzy 1.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="None" href="index.html#document-index" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="index.html#document-index">Sibzy 1.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="welcome-to-sibzy-s-documentation">
+<h1>Welcome to Sibzy&#8217;s documentation!<a class="headerlink" href="#welcome-to-sibzy-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<span id="document-installation"></span><div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Download the source code from Github</p>
+<p>HTTPS clone URL: <a class="reference external" href="https://github.com/ammubhave/sibzy.git">https://github.com/ammubhave/sibzy.git</a></p>
+<p>SSH clone URL: <a class="reference external" href="mailto:git&#37;&#52;&#48;github&#46;com">git<span>&#64;</span>github<span>&#46;</span>com</a>:ammubhave/sibzy.git</p>
+<p>Subversion clone URL: <a class="reference external" href="https://github.com/ammubhave/sibzy">https://github.com/ammubhave/sibzy</a></p>
+<div class="section" id="development-environment">
+<h3>Development Environment<a class="headerlink" href="#development-environment" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="clone-repository">
+<h4>Clone repository<a class="headerlink" href="#clone-repository" title="Permalink to this headline">¶</a></h4>
+<p>Clone the Git repository using the following command:</p>
+<div class="highlight-python"><pre>git clone git@github.com:ammubhave/sibzy.git</pre>
+</div>
+<p>This will create a directory called sibzy which will be the repository root directory</p>
+</div>
+<div class="section" id="installing-system-wide-requirements">
+<h4>Installing system-wide requirements<a class="headerlink" href="#installing-system-wide-requirements" title="Permalink to this headline">¶</a></h4>
+<p>These commands will work only for Linux. If you are using Mac OSX, install brew and install packages inside base.system and dev.system using brew. If you are using Windows, try to figure out how to make it work and also report back to me the steps!</p>
+<div class="highlight-python"><pre>cd sibzy/requirements
+cat base.system | sudo apt-get install
+cat dev.system | sudo apt-get install
+sudo pip install virtualenv
+sudo pip install virtualenvwrapper
+echo 'source /usr/local/bin/virtualenvwrapper.sh' &gt;&gt; ~/.bashrc
+source ~/.bashrc</pre>
+</div>
+<p>You should now have system-wide dependencies installed.</p>
+</div>
+<div class="section" id="installing-virtual-environment-and-local-dependencies">
+<h4>Installing virtual environment and local dependencies<a class="headerlink" href="#installing-virtual-environment-and-local-dependencies" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><pre>mkvirtualenv sibzy
+pip install -r dev.txt</pre>
+</div>
+<p>Now you should have all the python local dependencies installed.</p>
+</div>
+<div class="section" id="configuring-database">
+<h4>Configuring database<a class="headerlink" href="#configuring-database" title="Permalink to this headline">¶</a></h4>
+<p>We will create a file called .my.cnf in your home directory (if you don&#8217;t already have one) which will hold our db settings</p>
+<p><em>.my.cnf</em></p>
+<div class="highlight-python"><pre>[client]
+user=&lt;mysql db user&gt;
+password=&lt;mysql db password&gt;</pre>
+</div>
+<p>Create a MySQL database called <strong>sibzy</strong> by opening a terminal:</p>
+<div class="highlight-python"><pre>$ mysql -u &lt;mysql db user&gt; -p
+Enter Password: &lt;mysql db password&gt;
+
+mysql&gt; create database sibzy;
+Query OK, 1 row affected
+
+mysql&gt; exit
+Bye</pre>
+</div>
+<p>You should now have created a database named sibzy.</p>
+</div>
+<div class="section" id="configuring-envionment-variables">
+<h4>Configuring envionment variables<a class="headerlink" href="#configuring-envionment-variables" title="Permalink to this headline">¶</a></h4>
+<p>We will now configure the environment variables. Open a terminal:</p>
+<div class="highlight-python"><pre>echo 'export SECRET_KEY="&lt;some random secret key&gt;"' &gt;&gt; ~/.virtualenvs/sibzy/bin/activate</pre>
+</div>
+</div>
+<div class="section" id="running-a-server">
+<h4>Running a server<a class="headerlink" href="#running-a-server" title="Permalink to this headline">¶</a></h4>
+<p>Open a terminal window.</p>
+<p>If you see <em>(sibzy)</em> written on the left side of the prompt then you have an active virtual environment.</p>
+<p>If you do not see the <em>(sibzy)</em> prompt, type <tt class="docutils literal"><span class="pre">workon</span> <span class="pre">sibzy</span></tt> to activate the virtual environment</p>
+<p>Navigate to the directory where <strong>manage.py</strong> file is located and run <tt class="docutils literal"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">runserver</span> <span class="pre">--settings=sibzy.settings.dev</span></tt></p>
+<p>You should have a server running at <strong>http://localhost:8000/</strong></p>
+<p>If you want to terminate the server, just press Ctrl+C</p>
+</div>
+</div>
+<div class="section" id="production-environment">
+<h3>Production Environment<a class="headerlink" href="#production-environment" title="Permalink to this headline">¶</a></h3>
+<p>The production environment consists of an Apache2 server and a MySQL server. Apache uses the mod_wsgi module to serve wsgi.py file residing in the sibzy folder.</p>
+<p>We use the following Apache configuration:</p>
+<div class="highlight-python"><pre>&lt;VirtualHost *:80&gt;
+    &lt;Directory /home/ubuntu/sibzy/&gt;
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride None
+        Order allow,deny
+        allow from all
+    &lt;/Directory&gt;
+
+    WSGIScriptAlias / /home/ubuntu/sibzy/sibzy/sibzy/wsgi.py
+
+&lt;/VirtualHost&gt;</pre>
+</div>
+</div>
+</div>
+<span id="document-deployment"></span><div class="section" id="deployment">
+<h2>Deployment<a class="headerlink" href="#deployment" title="Permalink to this headline">¶</a></h2>
+</div>
+<span id="document-structure"></span><div class="section" id="directory-structure">
+<h2>Directory Structure<a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="repository-root-structure">
+<h3>Repository Root Structure (/)<a class="headerlink" href="#repository-root-structure" title="Permalink to this headline">¶</a></h3>
+<dl class="glossary docutils">
+<dt id="term-docs">docs</dt>
+<dd>This directory contains all documentation related files. The final html documentation is available at docs/build/html/index.html. The Sphinx source code resides in docs/build/source directory</dd>
+<dt id="term-requirements">requirements</dt>
+<dd><p class="first">This directory contains the lists of required system packages and python packages.</p>
+<div class="last line-block">
+<div class="line"><em>System package Requirements:</em> base.system, dev.system, prod.system</div>
+<div class="line"><em>Python PIP Requirements:</em> base.txt, dev.txt, prod.txt</div>
+</div>
+</dd>
+<dt id="term-serve-static">serve_static</dt>
+<dd>Should not be touched or modified directly. This directory holds all static files which are generated using <cite>python manage.py collectstatic</cite> command and hence should not be modified directly. This folder is only to be used in production environment for service static files. Do not run collectstatic in a development envionment otherwise it will mess up things production static files.</dd>
+<dt id="term-sibzy">sibzy</dt>
+<dd>The project root directory. Holds all source code for the website.</dd>
+</dl>
+</div>
+<div class="section" id="project-root-structure-sibzy">
+<h3>Project Root Structure (/sibzy)<a class="headerlink" href="#project-root-structure-sibzy" title="Permalink to this headline">¶</a></h3>
+<dl class="glossary docutils">
+<dt id="term-backend">backend</dt>
+<dd>This app forms an interface between the outisde world and internal source code. It handles service AJAX pages and HTML snapshots, handles DB queries made from urls and other stuff.</dd>
+<dt id="term-frontend">frontend</dt>
+<dd>This app handles content which is actually seen by the user. Handles rendering of the home page and customization for different devices.</dd>
+<dt id="term-6">sibzy</dt>
+<dd>This is the project configuration directory. It holds settings for development and production environment and the master url server.</dd>
+<dt id="term-static">static</dt>
+<dd>Holds all the static files required for serving. This directory is accessible to the world via /static url.</dd>
+<dt id="term-templates">templates</dt>
+<dd>Holds all templates required. Also holds customization for administration section.</dd>
+</dl>
+</div>
+</div>
+<span id="document-technical"></span><div class="section" id="technical-information">
+<h2>Technical Information<a class="headerlink" href="#technical-information" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="dynamic-css-classes">
+<h3>Dynamic CSS Classes<a class="headerlink" href="#dynamic-css-classes" title="Permalink to this headline">¶</a></h3>
+<dl class="glossary docutils">
+<dt id="term-fb-login">.fb-login</dt>
+<dd>The element is visible only when the user is logged in.</dd>
+<dt id="term-fb-nologin">.fb-nologin</dt>
+<dd>The element is visible only when is not logged in.</dd>
+<dt id="term-fb-name">.fb-name</dt>
+<dd>The innerText is set to the user&#8217;s full name</dd>
+<dt id="term-fb-username">.fb-username</dt>
+<dd>The innerText is set to the user&#8217;s username</dd>
+</dl>
+</div>
+<div class="section" id="how-to">
+<h3>How to<a class="headerlink" href="#how-to" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="how-to-login">
+<h4>How to login?<a class="headerlink" href="#how-to-login" title="Permalink to this headline">¶</a></h4>
+<p>Call FB.login() by setting onclick</p>
+</div>
+<div class="section" id="how-to-logout">
+<h4>How to logout?<a class="headerlink" href="#how-to-logout" title="Permalink to this headline">¶</a></h4>
+<p>Call FB.logout() by settins onclick</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html#document-index">Table Of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-installation">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#development-environment">Development Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#production-environment">Production Environment</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-deployment">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-structure">Directory Structure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#repository-root-structure">Repository Root Structure (/)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#project-root-structure-sibzy">Project Root Structure (/sibzy)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-technical">Technical Information</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#dynamic-css-classes">Dynamic CSS Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#how-to">How to</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="index.html#document-index">Sibzy 1.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Amol Bhave; Fernando Trujano; Jonathan Uesato; Karan Kashyap.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.
+    </div>
+  </body>
+</html>
