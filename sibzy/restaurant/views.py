@@ -1,11 +1,9 @@
 from django.shortcuts import render
-from restaurant.models import RestaurantEntry
+from restaurant.models import Restaurant
+
 
 def profile(request):
-    
-    
-    response = HttpResponse(json.dumps({'status': 'success'}))
-    response.set_cookie('fbaccess_token', '')
-    response.set_cookie('fbid', '')
-    logout(request)
+    restaurant = Restaurant.objects.get(request.GET['id'])
+
+    response = HttpResponse(restaurant.json())
     return response
