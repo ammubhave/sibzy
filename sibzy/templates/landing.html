@@ -1,49 +1,8 @@
-<style>
-    #intro { 
-			/*background: url(images/intro.png) 50% 0 fixed; 
-			*/
-			background: #6969b3;
-			height: auto;  
-			margin: 0 auto; 
-		    width: 100%; 
-		    position: relative; 
-		    /* box-shadow: 0 0 50px rgba(0,0,0,0.8);    Box shadow seems to work with solid background colors.  */
-		    padding: 100px 0;
+<link rel="stylesheet" type="text/css" href="/static/js/sb/shadowbox.css">
+<script type="text/javascript" src="/static/js/sb/shadowbox.js"></script>
 
-		}
 
-			#story { 
-			background: url(/static/images/team.jpg) 50% 0 fixed; 
-			height: auto;  
-			margin: 0 auto; 
-		    width: 100%; 
-		    position: relative; 
-		    box-shadow: 0 0 50px rgba(0,0,0,0.8);
-		    padding: 200px 0;
-		}
-
-		#home { 
-			background: url(http://i.imgur.com/Sw326fm.jpg) 50% 0 fixed; 
-			height: auto;  
-			margin: 0 auto; 
-		    width: 100%; 
-		    position: relative; 
-		    box-shadow: 0 0 50px rgba(0,0,0,0.8);
-		    padding: 200px 0;
-		}
-		#about { 
-			background: url(/static/images/about.png) 50% 0 fixed; 
-			height: auto;
-			margin: 0 auto; 
-		    width: 100%; 
-		    position: relative; 
-		    box-shadow: 0 0 50px rgba(0,0,0,0.8);
-		    padding: 100px 0;
-		    color: #fff;
-		}
-
-		
-</style>
+<link rel="stylesheet" type="text/css" href="/static/css/landing.css">
 <script>
     function sizeSlideshow(){
 			$('#main').height(($('html').height()-($('header').height()+$('footer').height()))+'px');
@@ -79,9 +38,9 @@
 	    	<section id="mission"> 
 	    		<div class="jumbotron" style=" box-shadow: 0 0 50px rgba(0,0,0,0.8);">
   <h2>The Sibzy Model</h2>
-	    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	    		tempor fficia deserunt mollit anim id est laborum.</p>
-  <p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+	    		<p>Started by MIT students, Sibzy personalizes the food review system with dish-by-dish ratings and menus filtered to your tastes and preferences</p>
+	    		
+  <p><a href="http://www.youtube.com/embed/JRausCJJP_8?autoplay=1" rel="shadowbox;player=iframe;width=1152;height=650" class="btn btn-primary btn-lg" role="button">Watch Video</a> <button onclick="FB.login()" class="btn btn-success btn-lg" role="button">Sign Up</button> </p>
 </div>
 	    
 	    </section> 
@@ -93,6 +52,83 @@
 	    </div>
 	</section>
 
+	<!-- Restaurants and Users --> 
+	<section id="restaurant" data-speed="6" data-type="background"> 
+		<div class="container" id="main">
+			<div class="row">
+				<div class="col-md-6">
+				<h1> For Users </h1> 
+
+				 						<div class="media">
+                                                <a class="pull-left" href="#">
+                                                    <img class="media-object" src="/static/images/check.png">
+                                                </a>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading">Explore</h4>
+														Explore restaurants using our specialized vegetarian and vegan menus.            
+						                                   </div>
+                                        </div>
+
+                                        <div class="media">
+                                                <a class="pull-left" href="#">
+                                                    <img class="media-object" src="/static/images/check.png">
+                                                </a>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading">Connect</h4>
+                                                      Connect with fellow veggie enthusiasts and see what they recommend.
+                                                </div>
+                                        </div>
+
+                                        <div class="media">
+                                                <a class="pull-left" href="#">
+                                                    <img class="media-object" src="/static/images/check.png">
+                                                </a>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading">Share</h4>
+                                                     Share your dining experience by rating, upvoting & commenting.
+                                                </div>
+                                        </div>
+				</div> 
+
+		        <div class="col-md-6">
+				<h1> For Restaurants </h1> 
+
+				  						<div class="media">
+                                                <a class="pull-left" href="#">
+                                                    <img class="media-object" src="/static/images/check.png">
+                                                </a>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading">Reach</h4>
+                                                     Reach out to vegetarian and vegan food lovers.
+                                                </div>
+                                        </div>
+
+                                        <div class="media">
+                                                <a class="pull-left" href="#">
+                                                    <img class="media-object" src="/static/images/check.png">
+                                                </a>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading">Discover</h4>
+                                                      Discover what customers have to say about their dining experience.
+                                                </div>
+                                        </div>
+
+                                        <div class="media">
+                                                <a class="pull-left" href="#">
+                                                    <img class="media-object" src="/static/images/check.png">
+                                                </a>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading">Improve</h4>
+                                                     Improve your restaurant by responding to customer feedback.
+                                                </div>
+                                        </div>
+			    </div> 
+		   </div> 
+
+
+		</div> 
+	</section> 
+
 	<!-- Section #2 -->
 	<section id="story" data-speed="4" data-type="background">
 		<div class="container" >
@@ -101,23 +137,18 @@
 <h1> Our Story </h1> 
 		
 <p> <h4>  A group of friends at MIT started Sibzy with a mission to improve the dining experience for vegetarians and vegans by connecting restaurants with customers. Why not have a specialized site that caters specifically to veggie food lovers? To learn more about Sibzy, you can read our FAQ. Join us by creating a profile or by listing your awesome restaurant! </p> </h4> 
-<p> <h4>  A group of friends at MIT started Sibzy with a mission to improve the dining experience for vegetarians and vegans by connecting restaurants with customers. Why not have a specialized site that caters specifically to veggie food lovers? To learn more about Sibzy, you can read our FAQ. Join us by creating a profile or by listing your awesome restaurant! </p> </h4> 
-<p> <h4>  A group of friends at MIT started Sibzy with a mission to improve the dining experience for vegetarians and vegans by connecting restaurants with customers. Why not have a specialized site that caters specifically to veggie food lovers? To learn more about Sibzy, you can read our FAQ. Join us by creating a profile or by listing your awesome restaurant! </p> </h4> 
-</div> 
+
+<p> <h1> The Sibzy Model </h1> </p>  
+
+<p> <h4> 1) Explore specialized restaurant menus of only the vegetarian and vegan dishes - 
+don't worry about an item having meat or broth because it's catered to veggie food lovers! </h4> </p>
+
+<p> <h4>2) Use our dynamic search feature to search for restaurants based on location, even search for your favorite vegetarian dishes by name.</h4> </p>
+<p> <h4>3) Rate, comment, and upvote your favorite dishes. Give restaurants your feedback to help them improve. See what others recommend.</h4> </p> 
+
+<hr/> 
 
 
-
-	<div class="row" style="background-color:rgba(255,255,255,0.5); margin-top: 150px; "> 
-<h1> Our Story </h1> 
-		
-<p> <h4>  A group of friends at MIT started Sibzy with a mission to improve the dining experience for vegetarians and vegans by connecting restaurants with customers. Why not have a specialized site that caters specifically to veggie food lovers? To learn more about Sibzy, you can read our FAQ. Join us by creating a profile or by listing your awesome restaurant! </p> </h4> 
-<p> <h4>  A group of friends at MIT started Sibzy with a mission to improve the dining experience for vegetarians and vegans by connecting restaurants with customers. Why not have a specialized site that caters specifically to veggie food lovers? To learn more about Sibzy, you can read our FAQ. Join us by creating a profile or by listing your awesome restaurant! </p> </h4> 
-<p> <h4>  A group of friends at MIT started Sibzy with a mission to improve the dining experience for vegetarians and vegans by connecting restaurants with customers. Why not have a specialized site that caters specifically to veggie food lovers? To learn more about Sibzy, you can read our FAQ. Join us by creating a profile or by listing your awesome restaurant! </p> </h4> 
-</div> 
-
-		
-
-	    </div>
 	</section>
 
 	<section id="home" data-speed="4" data-type="background">
@@ -168,70 +199,22 @@
 	<section id="about" data-speed="2" data-type="background">
 		<div class="container">
 			<div class="page-header">
-				<h1>Final Section Headline <small>Some subtext goes here...</small></h1>
+				<h1>Sibzy <small> Try it today!</small></h1>
 			</div>
 			<div class="row">
-		        <div class="col-md-4">
+		        <div class="col-md-6">
 		          <h2>More Details</h2>
-		          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque cursus nisl consectetur et.</p>
-		          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque cursus nisl consectetur et.</p>
-		          <p><a class="btn btn-success">View details &raquo;</a></p>
+		          <p>To use Sibzy, just login with your Facebook acount. We promise to never post on your wall without your permission.</p>
+		          <p>We would love to hear from you! If you have any questions please <a href="#!cotnact"> contact us</a></p>
+		          <p>You can also check out our  <a href="#!faq">FAQ</a> </p> 
+		          <p><button onclick="FB.login()" class="btn btn-success btn-lg" role="button">Sign Up</button> </p>
 		        </div><!-- /col-md-4 -->
-		        <div class="col-md-4">
-		         	<h2>Heading</h2>
-		         	<div class="media">
-						<a class="pull-left" href="#">
-					    	<img class="media-object" src="/static/images/check.png">
-						</a>
-						<div class="media-body">
-						    <h4 class="media-heading">Media heading</h4>
-						    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante.
-						</div>
-					</div>
-		         	<div class="media">
-						<a class="pull-left" href="#">
-					    	<img class="media-object" src="/static/images/check.png">
-						</a>
-						<div class="media-body">
-						    <h4 class="media-heading">Media heading</h4>
-						    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante.
-						</div>
-					</div>
-		         	<div class="media">
-						<a class="pull-left" href="#">
-					    	<img class="media-object" src="/static/images/check.png">
-						</a>
-						<div class="media-body">
-						    <h4 class="media-heading">Media heading</h4>
-						    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante.
-						</div>
-					</div>
+		        <div class="col-md-6">
+		         	<h2>More Stuff</h2>
+		         	
+					Something about privacy, partnered restaurants and other stuff here. 
 		        </div><!-- /col-md-4 -->
-		        <div class="col-md-4">
-		          <h2>Log In</h2>
-		          <form class="form">
-					  <div class="control-group">
-					    <label class="control-label" for="inputEmail">Email</label>
-					    <div class="controls">
-					      <input type="text" id="inputEmail" placeholder="Email">
-					    </div>
-					  </div>
-					  <div class="control-group">
-					    <label class="control-label" for="inputPassword">Password</label>
-					    <div class="controls">
-					      <input type="password" id="inputPassword" placeholder="Password">
-					    </div>
-					  </div>
-					  <div class="control-group">
-					    <div class="controls">
-					      <label class="checkbox">
-					        <input type="checkbox"> Remember me <br><br>
-					      </label>
-					      <button type="submit" class="btn btn-success">Sign in</button>
-					    </div>
-					  </div>
-					</form>
-		        </div><!-- /col-md-4 -->
+		     
 	    	</div>
 	    </div>
 	</section>
@@ -247,4 +230,7 @@
 
        
         <script src="/static/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script type="text/javascript">
+Shadowbox.init();
+</script>
 		

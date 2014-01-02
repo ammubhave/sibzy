@@ -19,6 +19,7 @@
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
     <script src="/static/js/fblogin.js"></script>
 	<script src="/static/js/sibzy.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/sibzy.css">
 
 
 	<style type="text/css">
@@ -27,6 +28,11 @@
 			overflow: scroll;
 			overflow-x: hidden;
 		}
+
+       .facebook 
+        { 
+            font-size: 10;
+        }
 		
 	</style>
 </head>
@@ -49,11 +55,19 @@
             </div>
             <a href="#search"></a>
         </form>
+        <div class="navbar-right">
+
+        <div class="fb-nologin"> <button class="btn btn-primary" onclick="FB.login()"> Login </button> </div> 
+        <div class="fb-login"> <span class="fb-name"> </span> </div> 
+        <div class="fb-login"> <span class="fb-username"> </span> </div> 
+        <div class="fb-login"> <a onclick="FB.logout()"> Logout</a> </div> 
+
+    </div> 
     </div><!-- /.navbar-collapse -->
     
     </nav>
     <br /><br />
-    <fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
+    
 	<div id="content_parent">
         <div id="content">
         </div>
