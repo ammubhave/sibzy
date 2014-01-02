@@ -1,0 +1,55 @@
+ #intro { 
+			/*background: url(images/intro.png) 50% 0 fixed; 
+			*/
+			background: #6969b3;
+			height: auto;  
+			margin: 0 auto; 
+		    width: 100%; 
+		    position: relative; 
+		    /* box-shadow: 0 0 50px rgba(0,0,0,0.8);    Box shadow seems to work with solid background colors.  */
+		    padding: 100px 0;
+
+		}
+
+		#restaurant { 
+			background: #f0661a;
+			height: auto;  
+			margin: 0 auto; 
+		    width: 100%; 
+		    position: relative; 
+		    /* box-shadow: 0 0 50px rgba(0,0,0,0.8);    Box shadow seems to work with solid background colors.  */
+		    padding: 100px 0;
+		    color: #FFFFFF;
+		}
+
+			#story { 
+			background: url(/static/images/team.jpg) 50% 0 fixed; 
+			height: auto;  
+			margin: 0 auto; 
+		    width: 100%; 
+		    position: relative; 
+		    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+		    padding: 200px 0;
+		}
+
+		#home { 
+			background: url(http://i.imgur.com/Sw326fm.jpg) 50% 0 fixed; 
+			height: auto;  
+			margin: 0 auto; 
+		    width: 100%; 
+		    position: relative; 
+		    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+		    padding: 200px 0;
+		}
+		#about { 
+			background: url(/static/images/about.png) 50% 0 fixed; 
+			height: auto;
+			margin: 0 auto; 
+		    width: 100%; 
+		    position: relative; 
+		    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+		    padding: 100px 0;
+		    color: #fff;
+		}
+
+		
