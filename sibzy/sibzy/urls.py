@@ -5,6 +5,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Backend API urls
+    url(r'^!/auth/', include('auth.urls')),
     url(r'^!/', include('backend.urls')),
 
     # Admin Site urls
