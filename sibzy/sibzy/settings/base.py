@@ -50,6 +50,9 @@ INSTALLED_APPS = (
     'frontend',
     'backend',
     'auth',
+    'restaurants',
+    'comments',
+    'search',
 )
 
 MIDDLEWARE_CLASSES = (

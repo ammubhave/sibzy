@@ -53,7 +53,7 @@ function activate_links() {
                 if (!(newpath in c)) {
                     
                     //console.log(elem.attr('href').substring(1) + '-');
-                    $.get('/!/load/' + elem.attr('href').substring(2), function( data ) {
+                    $.get('/!/backend/load/' + elem.attr('href').substring(2), function( data ) {
                         c[elem.attr('href').substring(2)] = data;
                     }).fail( function(data){
                         //get the status code
@@ -82,7 +82,7 @@ function navigate(path) {
         
         activate_links();
     } else {
-        $.get('/!/load/' + path, function( data ) {
+        $.get('/!/backend/load/' + path, function( data ) {
             c[path] = data;
             navigate(path);
         });
