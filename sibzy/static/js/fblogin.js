@@ -29,7 +29,8 @@ function updateLoginStatus(response) {
       FB.api('/me', function(response) {
         console.log('Good to see you, ' + response.name + '.');
         console.log(response);
-        $('fb-username').text(response.username);
+        $('.fb-name').text(response.name);
+        $('.fb-username').text(response.username);
       });
     $('.fb-login').show();
     //alert('connect');
