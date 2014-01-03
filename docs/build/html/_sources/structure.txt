@@ -43,3 +43,4 @@ Project Root Structure (/sibzy)
         
     templates
         Holds all templates required. Also holds customization for administration section.
+

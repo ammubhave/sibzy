@@ -6,8 +6,8 @@ import json
 class Restaurant(models.Model):
     name = models.CharField(max_length=255)
     location = models.ForeignKey('Location')
-    #category = models.ForeignKey('RestaurantCategory')
-    dishes = models.ManyToManyField('Dish', blank=True)  #related_name='restaurants', 
+    category = models.ManyToManyField('RestaurantCategory', related_name='restaurants', blank=True)
+    dishes = models.ManyToManyField('Dish', related_name='restaurants', blank=True)
     rating = models.OneToOneField('RestaurantRating', related_name='restaurant')
 
     def __str__(self):
@@ -18,6 +18,7 @@ class Restaurant(models.Model):
             'id': self.id,
             'name': self.name,
             'location': json.loads(self.location.json()),
+            'category': [json.loads(c.json()) for c in self.category.all()],
             'dishes': [json.loads(d.json()) for d in self.dishes.all()],
             'rating': json.loads(self.rating.json()),
         })
@@ -26,6 +27,12 @@ class Restaurant(models.Model):
 class RestaurantCategory(models.Model):
     name = models.CharField(max_length=255)
     slug = models.CharField(max_length=255, unique=True)
+
+    def json(self):
+        return json.dumps({
+            'name': self.name,
+            'slug': self.slug,
+        })
 
 
 class RestaurantRating(models.Model):
@@ -56,9 +63,9 @@ class Location(models.Model):
     longitude = models.DecimalField(max_digits=7, decimal_places=1)
 
     address = models.TextField()
-    city = models.CharField(max_length=50)
-    #state = models.ForeignKey('State')
-   # country = models.ForeignKey('Country')
+    city = models.ForeignKey('City')
+    state = models.ForeignKey('State')
+    country = models.ForeignKey('Country')
 
     phone = models.CharField(max_length=20)
 
@@ -70,16 +77,25 @@ class Location(models.Model):
             'latitude': float(self.latitude),
             'longitude': float(self.longitude),
             'address': self.address,
-            'city': self.city,
+            'city': self.city.name,
+            'state': self.state.name,
+            'country': self.country.name,
         })
 
+class City(models.Model):
+    name = models.TextField()
+    state = models.ForeignKey('State')
+    
+    def __unicode__(self):
+        return "{0}, {1}, {2}".format(self.name, self.state.name, self.state.country.name)
+    
 
 class State(models.Model):
     name = models.TextField()
     country = models.ForeignKey('Country')
 
     def __unicode__(self):
-        return "{0} - {1}".format(self.name, self.country.name)
+        return "{0}, {1}".format(self.name, self.country.name)
 
 
 class Country(models.Model):

@@ -20,6 +20,38 @@ Dynamic CSS Classes
     .fb-username
         The innerText is set to the user's username
         
+/restaurant
+===================
+
+..  glossary::
+
+    .restaurant-name
+        The name of the restaurant
+    
+    .restaurant-location-latitude
+        The latitude
+    
+    .restaurant-location-longitude
+        The longitude
+        
+    .restaurant-location-address
+        The street address
+        
+    .restaurant-location-city
+        The city
+        
+    .restaurant-rating-total
+        The total rating
+        
+    .restaurant-rating-glutenfree
+        The glutenfree rating
+    
+    .restaurant-rating-vegetarian
+        The vegetarian rating
+        
+    .restaurant-rating-vegan
+        The vegan rating
+        
 ******
 How to
 ******
