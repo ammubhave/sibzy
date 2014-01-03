@@ -99,4 +99,5 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_DIR, 'frontend', 'templates'),
     os.path.join(PROJECT_DIR, 'restaurant', 'templates'),
     os.path.join(PROJECT_DIR, 'auth', 'templates'),
+	os.path.join(PROJECT_DIR, 'search', 'templates'),
 )

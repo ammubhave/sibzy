@@ -6,6 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    url(r'^fb$', 'auth.views.login_fb'),
-    url(r'^logout$', 'auth.views.logout_fb'),
+    url(r'^load/q$', 'frontend.views.load_template', {'template_path': 'search_q'}),
+
+    url(r'^q/(.*)$', 'search.views.q'),
 )
