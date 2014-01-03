@@ -18,7 +18,28 @@ import os
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-#sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, os.path.abspath('../../sibzy'))
+# setup Django
+from sibzy.settings import dev
+from django.conf import settings
+
+dev.LOGGING_CONFIG = None
+dev.DEFAULT_INDEX_TABLESPACE = None
+dev.DEFAULT_TABLESPACE = None
+dev.TRANSACTIONS_MANAGED = None
+dev.CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/django_cache',
+    }
+}
+settings.configure(dev)
+
+
+from auth.models import UserProfile
+print dir(UserProfile)
+#print sys.path
+
 
 # -- General configuration ------------------------------------------------
 

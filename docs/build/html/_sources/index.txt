@@ -15,6 +15,7 @@ Contents:
    deployment
    structure
    technical
+   models
 
 Indices and tables
 ==================

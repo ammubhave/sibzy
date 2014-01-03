@@ -4,10 +4,21 @@ import json
 
 
 class Restaurant(models.Model):
+    ''' Restaurant details '''
+
+    #: CharField(255): Restaurant name
     name = models.CharField(max_length=255)
+
+    #: :py:class:`restaurant.models.Location`: Restaurant location
     location = models.ForeignKey('Location')
+
+    #: ManyToManyField: List of all :py:class:`restaurant.models.RestaurantCategory` this restaurant belongs to
     category = models.ManyToManyField('RestaurantCategory', related_name='restaurants', blank=True)
+
+    #: ManyToManyField: List of all :py:class:`restaurant.models.Dish` this restaurant serves
     dishes = models.ManyToManyField('Dish', related_name='restaurants', blank=True)
+
+    #: OneToOneField: The associated :py:class:`restaurant.models.RestaurantRating`
     rating = models.OneToOneField('RestaurantRating', related_name='restaurant')
 
     def __str__(self):
@@ -25,7 +36,12 @@ class Restaurant(models.Model):
 
 
 class RestaurantCategory(models.Model):
+    ''' Restaurant Category '''
+
+    #: CharField(255): Category name
     name = models.CharField(max_length=255)
+
+    #: CharField(255): Unique slug for this category
     slug = models.CharField(max_length=255, unique=True)
 
     def json(self):
@@ -36,13 +52,29 @@ class RestaurantCategory(models.Model):
 
 
 class RestaurantRating(models.Model):
+    ''' Restaurant Rating (One to one with :py:class:`restaurant.models.Restaurant`) '''
+
     #restaurant = models.OneToOneField(Restaurant, related_name='rating') - ALREADY EXISTS
+
+    #: DecimalField(6.1): The total restaurant rating
     total = models.DecimalField(max_digits=7, decimal_places=1)
+
+    #: DecimalField(6.1): Vegetarian specific restaurant rating
     vegetarian = models.DecimalField(max_digits=7, decimal_places=1)
+
+    #: DecimalField(6.1): Vegan specific restaurant rating
     vegan = models.DecimalField(max_digits=7, decimal_places=1)
+
+    #: DecimalField(6.1): Gluten free food specific restaurant rating
     glutenfree = models.DecimalField(max_digits=7, decimal_places=1)
+
+    #: DecimalField(6.1): Peanut free food specific restaurant rating
     peanutfree = models.DecimalField(max_digits=7, decimal_places=1)
+
+    #: DecimalField(6.1): Lactose free food specific restaurant rating
     lactoseint = models.DecimalField(max_digits=7, decimal_places=1)
+
+    #: DecimalField(6.1): Seafood free food specific restaurant rating
     seafoodint = models.DecimalField(max_digits=7, decimal_places=1)
     # TODO: ADD MORE
 
@@ -59,14 +91,27 @@ class RestaurantRating(models.Model):
 
 
 class Location(models.Model):
+    ''' Restaurant Location '''
+
+    #: DecimalField(6.1): Location latitude
     latitude = models.DecimalField(max_digits=7, decimal_places=1)
+
+    #: DecimalField(6.1): Location longitude
     longitude = models.DecimalField(max_digits=7, decimal_places=1)
 
+    #: TextField: Location street address, does not include city, state or country
     address = models.TextField()
+
+    #: :py:class:`restaurant.models.City`: Location city
     city = models.ForeignKey('City')
+
+    #: :py:class:`restaurant.models.State`: Location state
     state = models.ForeignKey('State')
+
+    #: :py:class:`restaurant.models.Country`: Location country
     country = models.ForeignKey('Country')
 
+    #: CharField(20): Contact phone number
     phone = models.CharField(max_length=20)
 
     def __unicode__(self):
@@ -82,16 +127,27 @@ class Location(models.Model):
             'country': self.country.name,
         })
 
+
 class City(models.Model):
+    ''' City '''
+
+    #: TextField: City name
     name = models.TextField()
+
+    #: :py:class:`restaurant.models.State`: State
     state = models.ForeignKey('State')
-    
+
     def __unicode__(self):
         return "{0}, {1}, {2}".format(self.name, self.state.name, self.state.country.name)
-    
+
 
 class State(models.Model):
+    ''' State '''
+
+    #: TextField: State name
     name = models.TextField()
+
+    #: :py:class:`restaurant.models.Country`: Country
     country = models.ForeignKey('Country')
 
     def __unicode__(self):
@@ -99,6 +155,9 @@ class State(models.Model):
 
 
 class Country(models.Model):
+    ''' Country '''
+
+    #: TextField: Country name
     name = models.TextField()
 
     def __unicode__(self):
@@ -106,11 +165,21 @@ class Country(models.Model):
 
 
 class Dish(models.Model):
+    ''' Dish '''
+
+    #: CharField(255): Dish name
     name = models.CharField(max_length=255)
+
+    #: CharField(255): The tag under which the dish should be categorized
     tag = models.CharField(max_length=255)
+
+    #: DecimalField(5.2): The price in dollars
     price = models.DecimalField(max_digits=7, decimal_places = 2)
+
+    #: ManyToManyField: List of all :py:class:`restaurant.models.DishCategory`
     categories = models.ManyToManyField('DishCategory', related_name='dishes')
 
+    #: Return rating of this dish
     @property
     def ratings(self):
         return DishRating.objects.filter(dish=self.id)
@@ -127,7 +196,12 @@ class Dish(models.Model):
 
 
 class DishCategory(models.Model):
+    ''' Dish category '''
+
+    #: CharField(255): Dish name
     name = models.CharField(max_length=255)
+
+    #: CharField(255): Unique slug for this category
     slug = models.CharField(max_length=255, unique=True)
 
     #dishes = models.ManyToManyFields(Dish, related_name='categories') - ALREADY EXISTS BY DEFAULT
@@ -140,11 +214,24 @@ class DishCategory(models.Model):
 
 
 class DishRating(models.Model):
+    ''' Rating given by a single user to a dish '''
+
+    #: :py:class:`restaurant.models.Dish`: The associated dish
     dish = models.ForeignKey(Dish)
+
+    #: :py:class:`restaurant.models.Restaurant`: The assocated restaurant
     restaurant = models.ForeignKey(Restaurant)
+
+    #: :py:class:`django.contrib.auth.models.User`: The user who rated this dish
     user = models.ForeignKey(User)
+
+    #: IntegerField: The rating given
     value = models.IntegerField(default=0)
+
+    #: TextField: Any optional comment by the user
     comment = models.TextField(blank=True)
+
+    #: DateTimeField: The DateTime when this dish was rated
     dtadded = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):

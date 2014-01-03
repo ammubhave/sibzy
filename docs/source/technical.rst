@@ -52,6 +52,15 @@ Dynamic CSS Classes
     .restaurant-rating-vegan
         The vegan rating
         
+    .restaurant-rating-peanutfree
+        The peanutfree rating
+        
+    .restaurant-rating-lactoseint
+        The lactose intolerant rating
+        
+    .restaurant-rating-seafoodint
+        The seafood intolerant rating
+        
 ******
 How to
 ******

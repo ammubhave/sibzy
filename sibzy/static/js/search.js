@@ -18,6 +18,12 @@ $(function() {
                 item.css('display', '');
                 item.children('.restaurant-name').text(restaurant.name);
                 
+                item.children('.restaurant-location-latitude').text(restaurant.location.latitude);
+                item.children('.restaurant-location-longitude').text(restaurant.location.longitude);
+                item.children('.restaurant-location-address').text(restaurant.location.address);
+                item.children('.restaurant-location-city').text(restaurant.location.city.name);
+                item.children('.restaurant-location-state').text(restaurant.location.state);
+                
                 $('#search-result').append(item);
             }
         }
