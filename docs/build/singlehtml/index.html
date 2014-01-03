@@ -1,44 +1,138 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Sibzy 1.0.0 documentation</title>
-    
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Sibzy 1.0.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1.0.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
+        URL_ROOT:'./',
+        VERSION:'1.0.0',
+        COLLAPSE_INDEX:false,
+        FILE_SUFFIX:'.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="None" href="index.html#document-index" /> 
-  </head>
-  <body>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li><a href="index.html#document-index">Sibzy 1.0.0 documentation</a> &raquo;</li> 
-      </ul>
-    </div>  
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body">
-            
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+    <link rel="top" title="None" href="index.html#document-index"/> 
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html#document-index" class="icon icon-home"> Sibzy</a>
+        <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search docs" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-installation">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-installation#development-environment">Development Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-installation#production-environment">Production Environment</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-deployment">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-structure">Directory Structure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-structure#repository-root-structure">Repository Root Structure (/)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-structure#project-root-structure-sibzy">Project Root Structure (/sibzy)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-technical">Technical Information</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-technical#dynamic-css-classes">Dynamic CSS Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-technical#how-to">How to</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-views">Views</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-views#module-auth.views">sibzy.auth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-views#module-frontend.views">sibzy.frontend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-views#module-restaurant.views">sibzy.restaurant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-views#module-search.views">sibzy.search</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-models">Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-models#module-django.contrib.auth.models">django.contrib.auth.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-models#module-auth.models">sibzy.auth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-models#module-restaurant.models">sibzy.restaurant</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-templates">Templates</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-templates#sibzy-frontend">sibzy.frontend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-templates#sibzy-restaurant">sibzy.restaurant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-templates#sibzy-search">sibzy.search</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top">
+        <i data-toggle="wy-nav-top" class="icon icon-reorder"></i>
+        <a href="index.html#document-index">Sibzy</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <ul class="wy-breadcrumbs">
+  <li><a href="index.html#document-index">Docs</a> &raquo;</li>
+  <li><a href="">Sibzy 1.0.0 documentation</a></li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+</ul>
+<hr/>
+
+          
   <div class="section" id="welcome-to-sibzy-s-documentation">
 <h1>Welcome to Sibzy&#8217;s documentation!<a class="headerlink" href="#welcome-to-sibzy-s-documentation" title="Permalink to this headline">¶</a></h1>
 <p>Contents:</p>
@@ -225,6 +319,82 @@ Bye</pre>
 <h4>How to logout?<a class="headerlink" href="#how-to-logout" title="Permalink to this headline">¶</a></h4>
 <p>Call FB.logout() by settins onclick</p>
 </div>
+</div>
+</div>
+<span id="document-views"></span><div class="section" id="views">
+<h2>Views<a class="headerlink" href="#views" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-auth.views">
+<span id="sibzy-auth"></span><h3>sibzy.auth<a class="headerlink" href="#module-auth.views" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="auth.views.login_fb">
+<tt class="descclassname">auth.views.</tt><tt class="descname">login_fb</tt><big>(</big><em>request</em><big>)</big><a class="reference internal" href="_modules/auth/views.html#login_fb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#auth.views.login_fb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Login the user in the django session.
+Also convert short lived token to long lived token and tell the client about the long lived token.
+Also save into our database the long lived token.</p>
+<p>This gets called using the short lived access token generated by the client API.</p>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><p class="first"><em>On Success</em>: <tt class="docutils literal"><span class="pre">{status:</span> <span class="pre">'success',</span> <span class="pre">access_token:</span> <span class="pre">'&lt;long</span> <span class="pre">lived</span> <span class="pre">access</span> <span class="pre">token&gt;'}</span></tt></p>
+<p class="last"><em>On Error</em>: <tt class="docutils literal"><span class="pre">{status:</span> <span class="pre">'error',</span> <span class="pre">code:</span> <span class="pre">&lt;integer</span> <span class="pre">error</span> <span class="pre">code&gt;}</span></tt></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="auth.views.logout_fb">
+<tt class="descclassname">auth.views.</tt><tt class="descname">logout_fb</tt><big>(</big><em>request</em><big>)</big><a class="reference internal" href="_modules/auth/views.html#logout_fb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#auth.views.logout_fb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logout from the django seesion. Delete the <em>fbaccess_token</em> and <em>fbid</em> cookie.</p>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><tt class="docutils literal"><span class="pre">{status:</span> <span class="pre">'success'}</span></tt></dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-frontend.views">
+<span id="sibzy-frontend"></span><h3>sibzy.frontend<a class="headerlink" href="#module-frontend.views" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="frontend.views.load_template">
+<tt class="descclassname">frontend.views.</tt><tt class="descname">load_template</tt><big>(</big><em>request</em>, <em>template_path</em><big>)</big><a class="reference internal" href="_modules/frontend/views.html#load_template"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#frontend.views.load_template" title="Permalink to this definition">¶</a></dt>
+<dd><p>Render the static template &lt;template_path&gt;.html</p>
+<dl class="docutils">
+<dt><strong>Arguments:</strong></dt>
+<dd><em>template_path</em>: The template filename without the extension</dd>
+<dt><strong>Returns:</strong></dt>
+<dd>The contents of the file &lt;template_path.html&gt; rendered</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-restaurant.views">
+<span id="sibzy-restaurant"></span><h3>sibzy.restaurant<a class="headerlink" href="#module-restaurant.views" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="restaurant.views.profile">
+<tt class="descclassname">restaurant.views.</tt><tt class="descname">profile</tt><big>(</big><em>request</em>, <em>restaurant_id</em><big>)</big><a class="reference internal" href="_modules/restaurant/views.html#profile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#restaurant.views.profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the restaurant object corresponsing to restaurant_id</p>
+<dl class="docutils">
+<dt><strong>Arguments:</strong></dt>
+<dd><em>restaurant_id</em>: The numeric ID of the restaurant</dd>
+<dt><strong>Returns:</strong></dt>
+<dd><tt class="docutils literal"><span class="pre">&lt;restaurant</span> <span class="pre">JSON</span> <span class="pre">object&gt;</span></tt></dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-search.views">
+<span id="sibzy-search"></span><h3>sibzy.search<a class="headerlink" href="#module-search.views" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="search.views.q">
+<tt class="descclassname">search.views.</tt><tt class="descname">q</tt><big>(</big><em>request</em>, <em>query</em><big>)</big><a class="reference internal" href="_modules/search/views.html#q"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#search.views.q" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do a search from the query. Search details yet to be implemented.</p>
+<dl class="docutils">
+<dt><strong>Arguments:</strong></dt>
+<dd><em>query</em>: The textual search query from the user</dd>
+<dt><strong>Returns:</strong></dt>
+<dd><tt class="docutils literal"><span class="pre">[&lt;restaurant</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;restaurant</span> <span class="pre">object&gt;,</span> <span class="pre">...]</span></tt></dd>
+</dl>
+</dd></dl>
+
 </div>
 </div>
 <span id="document-models"></span><div class="section" id="models">
@@ -694,6 +864,42 @@ since we cannot trust the client for the user details</p>
 
 </div>
 </div>
+<span id="document-templates"></span><div class="section" id="templates">
+<h2>Templates<a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="sibzy-frontend">
+<h3>sibzy.frontend<a class="headerlink" href="#sibzy-frontend" title="Permalink to this headline">¶</a></h3>
+<dl class="glossary docutils">
+<dt id="term-html">404.html</dt>
+<dd>The 404 Page not Found default template</dd>
+<dt id="term-1">500.html</dt>
+<dd>The 500 Internal Server Error default template</dd>
+<dt id="term-about-html">about.html</dt>
+<dd><strong>#!frontend/about</strong>: The About us page</dd>
+<dt id="term-base-html">base.html</dt>
+<dd><strong>/</strong>: The Base parent template which is always shown. This contains JS code to load child templates.</dd>
+<dt id="term-home-html">home.html</dt>
+<dd><strong>#!frontend/home</strong>: The logged in home page</dd>
+<dt id="term-landing-html">landing.html</dt>
+<dd><strong>#!frontend/landing</strong>: The not-logged in landing page</dd>
+<dt id="term-theteam-html">theteam.html</dt>
+<dd><strong>#!frontend/theteam</strong>: The Team section of the website</dd>
+</dl>
+</div>
+<div class="section" id="sibzy-restaurant">
+<h3>sibzy.restaurant<a class="headerlink" href="#sibzy-restaurant" title="Permalink to this headline">¶</a></h3>
+<dl class="glossary docutils">
+<dt id="term-restaurant-profile-html">restaurant_profile.html</dt>
+<dd><strong>#!restaurant/profile/&lt;restaurant id&gt;</strong>: The specific restaurant profile landing page. Contains code to load the details from the server.</dd>
+</dl>
+</div>
+<div class="section" id="sibzy-search">
+<h3>sibzy.search<a class="headerlink" href="#sibzy-search" title="Permalink to this headline">¶</a></h3>
+<dl class="glossary docutils">
+<dt id="term-search-q-html">search_q.html</dt>
+<dd><strong>#!search/q/&lt;query&gt;</strong>: Code to do a search and display search results</dd>
+</dl>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="indices-and-tables">
@@ -706,63 +912,24 @@ since we cannot trust the client for the user details</p>
 </div>
 
 
-          </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html#document-index">Table Of Contents</a></h3>
-  <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html#document-installation">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="index.html#development-environment">Development Environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#production-environment">Production Environment</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="index.html#document-deployment">Deployment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html#document-structure">Directory Structure</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="index.html#repository-root-structure">Repository Root Structure (/)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#project-root-structure-sibzy">Project Root Structure (/sibzy)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="index.html#document-technical">Technical Information</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="index.html#dynamic-css-classes">Dynamic CSS Classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#how-to">How to</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="index.html#document-models">Models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="index.html#module-django.contrib.auth.models">django.contrib.auth.models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#module-auth.models">sibzy.auth</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#module-restaurant.models">sibzy.restaurant</a></li>
-</ul>
-</li>
-</ul>
+          <footer>
+  
 
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+  <hr/>
+
+  <p>
+      &copy; Copyright 2013, Amol Bhave; Fernando Trujano; Jonathan Uesato; Karan Kashyap.
+  </p>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li><a href="index.html#document-index">Sibzy 1.0.0 documentation</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer">
-        &copy; Copyright 2013, Amol Bhave; Fernando Trujano; Jonathan Uesato; Karan Kashyap.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+</body>
 </html>

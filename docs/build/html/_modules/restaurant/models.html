@@ -1,52 +1,139 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>restaurant.models &mdash; Sibzy 1.0.0 documentation</title>
-    
-    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>restaurant.models &mdash; Sibzy 1.0.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../',
-        VERSION:     '1.0.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
+        URL_ROOT:'../../',
+        VERSION:'1.0.0',
+        COLLAPSE_INDEX:false,
+        FILE_SUFFIX:'.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="Sibzy 1.0.0 documentation" href="../../index.html" />
-    <link rel="up" title="Module code" href="../index.html" /> 
-  </head>
-  <body>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li><a href="../../index.html">Sibzy 1.0.0 documentation</a> &raquo;</li>
-          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
-      </ul>
-    </div>  
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body">
-            
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+    <link rel="top" title="Sibzy 1.0.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../../index.html" class="icon icon-home"> Sibzy</a>
+        <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search docs" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#development-environment">Development Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#production-environment">Production Environment</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../structure.html">Directory Structure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../structure.html#repository-root-structure">Repository Root Structure (/)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../structure.html#project-root-structure-sibzy">Project Root Structure (/sibzy)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../technical.html">Technical Information</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../technical.html#dynamic-css-classes">Dynamic CSS Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../technical.html#how-to">How to</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../views.html">Views</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../views.html#module-auth.views">sibzy.auth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../views.html#module-frontend.views">sibzy.frontend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../views.html#module-restaurant.views">sibzy.restaurant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../views.html#module-search.views">sibzy.search</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../models.html#module-django.contrib.auth.models">django.contrib.auth.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../models.html#module-auth.models">sibzy.auth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../models.html#module-restaurant.models">sibzy.restaurant</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../templates.html">Templates</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../templates.html#sibzy-frontend">sibzy.frontend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../templates.html#sibzy-restaurant">sibzy.restaurant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../templates.html#sibzy-search">sibzy.search</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top">
+        <i data-toggle="wy-nav-top" class="icon icon-reorder"></i>
+        <a href="../../index.html">Sibzy</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <ul class="wy-breadcrumbs">
+  <li><a href="../../index.html">Docs</a> &raquo;</li>
+  <li><a href="">restaurant.models</a></li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+</ul>
+<hr/>
+
+          
   <h1>Source code for restaurant.models</h1><div class="highlight"><pre>
 <span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
 <span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
@@ -54,10 +141,21 @@
 
 
 <div class="viewcode-block" id="Restaurant"><a class="viewcode-back" href="../../models.html#restaurant.models.Restaurant">[docs]</a><span class="k">class</span> <span class="nc">Restaurant</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Restaurant details &#39;&#39;&#39;</span>
+
+    <span class="c">#: CharField(255): Restaurant name</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
+
+    <span class="c">#: :py:class:`restaurant.models.Location`: Restaurant location</span>
     <span class="n">location</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;Location&#39;</span><span class="p">)</span>
+
+    <span class="c">#: ManyToManyField: List of all :py:class:`restaurant.models.RestaurantCategory` this restaurant belongs to</span>
     <span class="n">category</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span><span class="s">&#39;RestaurantCategory&#39;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&#39;restaurants&#39;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c">#: ManyToManyField: List of all :py:class:`restaurant.models.Dish` this restaurant serves</span>
     <span class="n">dishes</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span><span class="s">&#39;Dish&#39;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&#39;restaurants&#39;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c">#: OneToOneField: The associated :py:class:`restaurant.models.RestaurantRating`</span>
     <span class="n">rating</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">OneToOneField</span><span class="p">(</span><span class="s">&#39;RestaurantRating&#39;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&#39;restaurant&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -75,7 +173,12 @@
 
 </div>
 <div class="viewcode-block" id="RestaurantCategory"><a class="viewcode-back" href="../../models.html#restaurant.models.RestaurantCategory">[docs]</a><span class="k">class</span> <span class="nc">RestaurantCategory</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Restaurant Category &#39;&#39;&#39;</span>
+
+    <span class="c">#: CharField(255): Category name</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
+
+    <span class="c">#: CharField(255): Unique slug for this category</span>
     <span class="n">slug</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -86,13 +189,29 @@
 
 </div>
 <div class="viewcode-block" id="RestaurantRating"><a class="viewcode-back" href="../../models.html#restaurant.models.RestaurantRating">[docs]</a><span class="k">class</span> <span class="nc">RestaurantRating</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Restaurant Rating (One to one with :py:class:`restaurant.models.Restaurant`) &#39;&#39;&#39;</span>
+
     <span class="c">#restaurant = models.OneToOneField(Restaurant, related_name=&#39;rating&#39;) - ALREADY EXISTS</span>
+
+    <span class="c">#: DecimalField(6.1): The total restaurant rating</span>
     <span class="n">total</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c">#: DecimalField(6.1): Vegetarian specific restaurant rating</span>
     <span class="n">vegetarian</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c">#: DecimalField(6.1): Vegan specific restaurant rating</span>
     <span class="n">vegan</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c">#: DecimalField(6.1): Gluten free food specific restaurant rating</span>
     <span class="n">glutenfree</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c">#: DecimalField(6.1): Peanut free food specific restaurant rating</span>
     <span class="n">peanutfree</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c">#: DecimalField(6.1): Lactose free food specific restaurant rating</span>
     <span class="n">lactoseint</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c">#: DecimalField(6.1): Seafood free food specific restaurant rating</span>
     <span class="n">seafoodint</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="c"># TODO: ADD MORE</span>
 
@@ -109,14 +228,27 @@
 
 </div>
 <div class="viewcode-block" id="Location"><a class="viewcode-back" href="../../models.html#restaurant.models.Location">[docs]</a><span class="k">class</span> <span class="nc">Location</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Restaurant Location &#39;&#39;&#39;</span>
+
+    <span class="c">#: DecimalField(6.1): Location latitude</span>
     <span class="n">latitude</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c">#: DecimalField(6.1): Location longitude</span>
     <span class="n">longitude</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
+    <span class="c">#: TextField: Location street address, does not include city, state or country</span>
     <span class="n">address</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+
+    <span class="c">#: :py:class:`restaurant.models.City`: Location city</span>
     <span class="n">city</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;City&#39;</span><span class="p">)</span>
+
+    <span class="c">#: :py:class:`restaurant.models.State`: Location state</span>
     <span class="n">state</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;State&#39;</span><span class="p">)</span>
+
+    <span class="c">#: :py:class:`restaurant.models.Country`: Location country</span>
     <span class="n">country</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;Country&#39;</span><span class="p">)</span>
 
+    <span class="c">#: CharField(20): Contact phone number</span>
     <span class="n">phone</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -131,17 +263,28 @@
             <span class="s">&#39;state&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
             <span class="s">&#39;country&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
         <span class="p">})</span>
+
 </div>
 <div class="viewcode-block" id="City"><a class="viewcode-back" href="../../models.html#restaurant.models.City">[docs]</a><span class="k">class</span> <span class="nc">City</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; City &#39;&#39;&#39;</span>
+
+    <span class="c">#: TextField: City name</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+
+    <span class="c">#: :py:class:`restaurant.models.State`: State</span>
     <span class="n">state</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;State&#39;</span><span class="p">)</span>
-    
+
     <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s">&quot;{0}, {1}, {2}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-    
+
 </div>
 <div class="viewcode-block" id="State"><a class="viewcode-back" href="../../models.html#restaurant.models.State">[docs]</a><span class="k">class</span> <span class="nc">State</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; State &#39;&#39;&#39;</span>
+
+    <span class="c">#: TextField: State name</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+
+    <span class="c">#: :py:class:`restaurant.models.Country`: Country</span>
     <span class="n">country</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;Country&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -149,6 +292,9 @@
 
 </div>
 <div class="viewcode-block" id="Country"><a class="viewcode-back" href="../../models.html#restaurant.models.Country">[docs]</a><span class="k">class</span> <span class="nc">Country</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Country &#39;&#39;&#39;</span>
+
+    <span class="c">#: TextField: Country name</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -156,11 +302,21 @@
 
 </div>
 <div class="viewcode-block" id="Dish"><a class="viewcode-back" href="../../models.html#restaurant.models.Dish">[docs]</a><span class="k">class</span> <span class="nc">Dish</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Dish &#39;&#39;&#39;</span>
+
+    <span class="c">#: CharField(255): Dish name</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
+
+    <span class="c">#: CharField(255): The tag under which the dish should be categorized</span>
     <span class="n">tag</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
+
+    <span class="c">#: DecimalField(5.2): The price in dollars</span>
     <span class="n">price</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">decimal_places</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="c">#: ManyToManyField: List of all :py:class:`restaurant.models.DishCategory`</span>
     <span class="n">categories</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span><span class="s">&#39;DishCategory&#39;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&#39;dishes&#39;</span><span class="p">)</span>
 
+    <span class="c">#: Return rating of this dish</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">ratings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">DishRating</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">dish</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
@@ -177,7 +333,12 @@
 
 </div>
 <div class="viewcode-block" id="DishCategory"><a class="viewcode-back" href="../../models.html#restaurant.models.DishCategory">[docs]</a><span class="k">class</span> <span class="nc">DishCategory</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Dish category &#39;&#39;&#39;</span>
+
+    <span class="c">#: CharField(255): Dish name</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
+
+    <span class="c">#: CharField(255): Unique slug for this category</span>
     <span class="n">slug</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
     <span class="c">#dishes = models.ManyToManyFields(Dish, related_name=&#39;categories&#39;) - ALREADY EXISTS BY DEFAULT</span>
@@ -190,55 +351,48 @@
 
 </div>
 <div class="viewcode-block" id="DishRating"><a class="viewcode-back" href="../../models.html#restaurant.models.DishRating">[docs]</a><span class="k">class</span> <span class="nc">DishRating</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Rating given by a single user to a dish &#39;&#39;&#39;</span>
+
+    <span class="c">#: :py:class:`restaurant.models.Dish`: The associated dish</span>
     <span class="n">dish</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Dish</span><span class="p">)</span>
+
+    <span class="c">#: :py:class:`restaurant.models.Restaurant`: The assocated restaurant</span>
     <span class="n">restaurant</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Restaurant</span><span class="p">)</span>
+
+    <span class="c">#: :py:class:`django.contrib.auth.models.User`: The user who rated this dish</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
+
+    <span class="c">#: IntegerField: The rating given</span>
     <span class="n">value</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c">#: TextField: Any optional comment by the user</span>
     <span class="n">comment</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c">#: DateTimeField: The DateTime when this dish was rated</span>
     <span class="n">dtadded</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now_add</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">DishRating</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 </pre></div>
 
-          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <p>
+      &copy; Copyright 2013, Amol Bhave; Fernando Trujano; Jonathan Uesato; Karan Kashyap.
+  </p>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li><a href="../../index.html">Sibzy 1.0.0 documentation</a> &raquo;</li>
-          <li><a href="../index.html" >Module code</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer">
-        &copy; Copyright 2013, Amol Bhave; Fernando Trujano; Jonathan Uesato; Karan Kashyap.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+</body>
 </html>
