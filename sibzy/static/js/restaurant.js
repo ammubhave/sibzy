@@ -9,14 +9,21 @@ $(function () {
             success: function (data) {
                 console.log(data);
                 $('.restaurant-name').text(data.name);
+                
                 $('.restaurant-location-latitude').text(data.location.latitude);
                 $('.restaurant-location-longitude').text(data.location.longitude);
                 $('.restaurant-location-address').text(data.location.address);
-                $('.restaurant-location-city').text(data.location.city);
+                $('.restaurant-location-city').text(data.location.city.name);
+                $('.restaurant-location-state').text(data.location.state.name);
+                $('.restaurant-location-country').text(data.location.country.name);
+                
                 $('.restaurant-rating-total').text(data.rating.total);
                 $('.restaurant-rating-glutenfree').text(data.rating.glutenfree);
                 $('.restaurant-rating-vegetarian').text(data.rating.vegetarian);
                 $('.restaurant-rating-vegan').text(data.rating.vegan);
+                $('.restaurant-rating-peanutfree').text(data.rating.peanutfree);
+                $('.restaurant-rating-lactoseint').text(data.rating.lactoseint);
+                $('.restaurant-rating-seafoodint').text(data.rating.seafoodint);
             }
         });
     }
