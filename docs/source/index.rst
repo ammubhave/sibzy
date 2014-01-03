@@ -15,7 +15,9 @@ Contents:
    deployment
    structure
    technical
+   views
    models
+   templates
 
 Indices and tables
 ==================
