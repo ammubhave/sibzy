@@ -16,6 +16,7 @@ $(function () {
                 $('.restaurant-location-city').text(data.location.city.name);
                 $('.restaurant-location-state').text(data.location.state.name);
                 $('.restaurant-location-country').text(data.location.country.name);
+                $('.restaurant-location-phone').text(data.location.phone);
                 
                 $('.restaurant-rating-total').text(data.rating.total);
                 $('.restaurant-rating-glutenfree').text(data.rating.glutenfree);

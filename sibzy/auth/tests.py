@@ -41,3 +41,4 @@ class LoginTest(LiveServerTestCase):
 
         WebDriverWait(self.browser, 100).until(lambda browser: 'fbid' in browser.get_cookies() and browser.get_cookies()['fbid'] != '')
 
+untu 

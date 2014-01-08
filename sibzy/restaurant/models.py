@@ -125,6 +125,7 @@ class Location(models.Model):
             'city': self.city.name,
             'state': self.state.name,
             'country': self.country.name,
+            'phone': self.phone,
         })
 
 
