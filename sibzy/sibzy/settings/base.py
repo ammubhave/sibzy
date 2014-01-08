@@ -57,7 +57,7 @@ INSTALLED_APPS = (
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+#    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -67,7 +67,7 @@ ROOT_URLCONF = 'sibzy.urls'
 
 WSGI_APPLICATION = 'sibzy.wsgi.application'
 
-
+CSRF_COOKIE_SECURE = False
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
@@ -101,3 +101,15 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_DIR, 'auth', 'templates'),
 	os.path.join(PROJECT_DIR, 'search', 'templates'),
 )
+
+TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
+"django.core.context_processors.debug",
+"django.core.context_processors.i18n",
+"django.core.context_processors.media",
+"django.core.context_processors.static",
+"django.core.context_processors.tz",
+"django.contrib.messages.context_processors.messages",
+'django.core.context_processors.csrf',)
+
+FB_APPID = '259749734165537'
+FB_APPSECRET = '30894c0518e604fa530c7c36f21cdaea'

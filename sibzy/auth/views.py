@@ -2,8 +2,7 @@ import os, urllib
 import re
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
-from auth.models import *
-from django.contrib.auth.models import User
+from auth.models import User, UserProfile
 import facebook
 import json
 from django.contrib.auth import logout, login, authenticate
@@ -60,8 +59,9 @@ def login_fb(request):
 
     graph = facebook.GraphAPI(long_access_token)
     profile = graph.get_object('me')
-
+    print profile
     user = User.objects.filter(userprofile__fbid=profile['id'])
+   
     if len(user) > 0:
         user = user[0]
         user_profile = user.userprofile
@@ -69,11 +69,17 @@ def login_fb(request):
         user_profile.fbusername = profile['username']
         user_profile.save()
     else:
+        print 'T'
         user = User.objects.create_user(profile['id'], profile['id'] + '@facebook.com', profile['id'] + 'sibzypassword')
         user.save()
+        print '5'
         user_profile = UserProfile(user=user, fbid=profile['id'], fbaccess_token=long_access_token,
                                    fbusername=profile['username'])
+        print '4'
         user_profile.save()
+        
+        user_profile = UserProfile.objects.filter()
+        print user_profile
 
     user = authenticate(username=profile['id'], password=profile['id'] + 'sibzypassword')
     if user is not None and user.is_active:

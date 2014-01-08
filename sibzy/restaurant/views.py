@@ -13,7 +13,7 @@ def profile(request, restaurant_id):
         ``<restaurant JSON object>``
 
     '''
-    
+
     restaurant = Restaurant.objects.get(id=restaurant_id)
 
     response = HttpResponse(restaurant.json())
