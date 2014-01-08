@@ -23,6 +23,22 @@
 
 			$(window).resize(sizeSlideshow);
 	});
+
+	$(document).ready(function(){
+    $('section[data-type="background"]').each(function(){
+        var $bgobj = $(this); // assigning the object
+     
+        $(window).scroll(function() {
+            var yPos = -($window.scrollTop() / $bgobj.data('speed')); 
+             
+            // Put together our final background position
+            var coords = '50% '+ yPos + 'px';
+ 
+            // Move the background
+            $bgobj.css({ backgroundPosition: coords });
+        }); 
+    });    
+}); 
 </script>
 
 <!-- Section #1 -->
@@ -40,7 +56,7 @@
   <h2>The Sibzy Model</h2>
 	    		<p>Started by MIT students, Sibzy personalizes the food review system with dish-by-dish ratings and menus filtered to your tastes and preferences</p>
 	    		
-  <p><a href="http://www.youtube.com/embed/e71LrNLMaDE?autoplay=1" rel="shadowbox;player=iframe;width=1152;height=650" class="btn btn-primary btn-lg" role="button">Watch Video</a> <button onclick="FB.login()" class="btn btn-success btn-lg" role="button">Sign Up</button> </p>
+  <p><a href="http://www.youtube.com/embed/cMXrKnDKjiE?autoplay=1" rel="shadowbox;player=iframe;width=1152;height=650" class="btn btn-primary btn-lg" role="button">Watch Video</a> <button onclick="FB.login()" class="btn btn-success btn-lg" role="button">Sign Up</button> </p>
 </div>
 	    
 	    </section> 
@@ -55,7 +71,7 @@
 	<!-- Restaurants and Users --> 
 	<section id="restaurant" data-speed="6" data-type="background"> 
 		<div class="container" id="main">
-			<div class="row">
+			<div class="row" style="padding-top: 100px; padding-bottom: 100pxß">
 				<div class="col-md-6">
 				<h1> For Users </h1> 
 
@@ -133,7 +149,7 @@
 	<section id="story" data-speed="4" data-type="background">
 		<div class="container" >
 		
-		<div class="row" style="background-color:rgba(255,255,255,0.5);"> 
+		<div class="row" style="background-color:rgba(255,255,255,0.5); padding: 15px; "> 
 <h1> Our Story </h1> 
 		
 <p> <h4>  A group of friends at MIT started Sibzy with a mission to improve the dining experience for vegetarians and vegans by connecting restaurants with customers. Why not have a specialized site that caters specifically to veggie food lovers? To learn more about Sibzy, you can read our FAQ. Join us by creating a profile or by listing your awesome restaurant! </p> </h4> 
@@ -178,8 +194,8 @@ don't worry about an item having meat or broth because it's catered to veggie fo
 	<h1> Karan Kashyap </h1> 
 <img src="/static/images/karan.jpg" class="img-circle"> 
 </div> 
-</center> 
 
+</center> 
 <div class="col-md-6"> 
 	<center> 
 	<h1> Jonathan Uesato</h1> 
