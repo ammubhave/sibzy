@@ -25,6 +25,13 @@ $(function () {
                 $('.restaurant-rating-peanutfree').text(data.rating.peanutfree);
                 $('.restaurant-rating-lactoseint').text(data.rating.lactoseint);
                 $('.restaurant-rating-seafoodint').text(data.rating.seafoodint);
+                
+                // Restaurant Categories
+                $.each(data.category, function(index, category) {
+                });
+            },
+            error: function(data) {
+                alert('404 Not Found');
             }
         });
     }
