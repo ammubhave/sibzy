@@ -10,6 +10,6 @@ def load_template(request, template_path):
     **Returns:**
         The contents of the file <template_path.html> rendered
     '''
-    if not request.user.is_staff or not settings.DEBUG:
+    if not request.user.is_staff and not settings.DEBUG:
         return render(request, 'temp_landing.html')
     return render(request, template_path + '.html')
