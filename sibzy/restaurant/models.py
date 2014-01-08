@@ -141,6 +141,11 @@ class City(models.Model):
     def __unicode__(self):
         return "{0}, {1}, {2}".format(self.name, self.state.name, self.state.country.name)
 
+    def json(self):
+        return json.dumps({
+            'name': self.name,
+        })
+
 
 class State(models.Model):
     ''' State '''
@@ -154,6 +159,11 @@ class State(models.Model):
     def __unicode__(self):
         return "{0}, {1}".format(self.name, self.country.name)
 
+    def json(self):
+        return json.dumps({
+            'name': self.name,
+        })
+
 
 class Country(models.Model):
     ''' Country '''
@@ -163,6 +173,11 @@ class Country(models.Model):
 
     def __unicode__(self):
         return "{0}".format(self.name)
+    
+    def json(self):
+        return json.dumps({
+            'name': self.name,
+        })
 
 
 class Dish(models.Model):

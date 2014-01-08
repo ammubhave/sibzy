@@ -13,9 +13,9 @@ $(function () {
                 $('.restaurant-location-latitude').text(data.location.latitude);
                 $('.restaurant-location-longitude').text(data.location.longitude);
                 $('.restaurant-location-address').text(data.location.address);
-                $('.restaurant-location-city').text(data.location.city.name);
-                $('.restaurant-location-state').text(data.location.state.name);
-                $('.restaurant-location-country').text(data.location.country.name);
+                $('.restaurant-location-city').text(data.location.city);
+                $('.restaurant-location-state').text(data.location.state);
+                $('.restaurant-location-country').text(data.location.country);
                 $('.restaurant-location-phone').text(data.location.phone);
                 
                 $('.restaurant-rating-total').text(data.rating.total);
