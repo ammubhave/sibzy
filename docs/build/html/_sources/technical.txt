@@ -40,6 +40,15 @@ Dynamic CSS Classes
     .restaurant-location-city
         The city
         
+    .restaurant-location-state
+        The state
+    
+    .restaurant-location-country
+        The country
+        
+    .restaurant-location-phone
+        The phone number
+        
     .restaurant-rating-total
         The total rating
         
