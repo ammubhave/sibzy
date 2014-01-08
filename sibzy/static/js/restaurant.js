@@ -27,7 +27,13 @@ $(function () {
                 $('.restaurant-rating-seafoodint').text(data.rating.seafoodint);
                 
                 // Restaurant Categories
+                $('.restaurant-categories').text('');
                 $.each(data.category, function(index, category) {
+                    var item = $('._restaurant-categories-element').clone();
+                    item.children('._restaurant-categories-element-name').text(category.name);
+                    item.children('._restaurant-categories-element-slug').text(category.slug);
+                    
+                    $('.restaurant-categories').append(item);
                 });
             },
             error: function(data) {
