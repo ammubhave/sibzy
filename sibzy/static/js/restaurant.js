@@ -29,7 +29,25 @@ $(function () {
                 // Restaurant Categories
                 $('.restaurant-categories').text('');
                 $.each(data.category, function(index, category) {
+                    var item = $('._restaurant-categories-element-start').clone();
+                    item.show();
+                    item.removeClass('._restaurant-categories-element');
+                    item.children('._restaurant-categories-element-name').text(category.name);
+                    item.children('._restaurant-categories-element-slug').text(category.slug);
+                    
+                    $('.restaurant-categories').append(item);
+                });
+                $.each(data.category, function(index, category) {
                     var item = $('._restaurant-categories-element').clone();
+                    item.show();
+                    item.removeClass('._restaurant-categories-element');
+                    item.children('._restaurant-categories-element-name').text(category.name);
+                    item.children('._restaurant-categories-element-slug').text(category.slug);
+                    
+                    $('.restaurant-categories').append(item);
+                });
+                $.each(data.category, function(index, category) {
+                    var item = $('._restaurant-categories-element-end').clone();
                     item.show();
                     item.removeClass('._restaurant-categories-element');
                     item.children('._restaurant-categories-element-name').text(category.name);
