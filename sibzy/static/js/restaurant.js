@@ -30,7 +30,7 @@ $(function () {
                 $('.restaurant-categories').text('');
                 $.each(data.category, function(index, category) {
                     var item = $('._restaurant-categories-element').clone();
-                    item.css('display', '');
+                    item.show();
                     item.children('._restaurant-categories-element-name').text(category.name);
                     item.children('._restaurant-categories-element-slug').text(category.slug);
                     
