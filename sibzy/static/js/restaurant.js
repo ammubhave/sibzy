@@ -30,6 +30,10 @@ $(function () {
                 $('.restaurant-categories').text('');
                 $.each(data.category, function(index, category) {
                     var item = null;
+                    if (data.category.length == 1) {
+                        item = $('._restaurant-categories-element').clone();
+                        item.removeClass('._restaurant-categories-element');
+                    }
                     if (index == 0) {
                         item = $('._restaurant-categories-element-start').clone();
                         item.removeClass('._restaurant-categories-element-start');
