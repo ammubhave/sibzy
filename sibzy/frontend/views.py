@@ -1,5 +1,5 @@
 from django.shortcuts import render
-import settings
+from django.conf import settings
 
 def load_template(request, template_path):
     ''' Render the static template <template_path>.html
