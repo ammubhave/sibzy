@@ -61,6 +61,18 @@ Dynamic CSS Classes
     .restaurant-rating-seafoodint
         The seafood intolerant rating
         
+    .restaurant-categories
+        The restaurant categories. This element will contain copies of ._restaurant-categories-element
+        
+    ._restaurant-categories-element
+        Internal. Copies of this element will populate .restaurant-categories
+    
+    ._restaurant-categories-element-name
+        Internal. Inside ._restaurant-categories-element. Category name
+    
+    ._restaurant-categories-element-slug
+        Internal. Inside ._restaurant-categories-element. Category slug
+        
 ******
 How to
 ******
