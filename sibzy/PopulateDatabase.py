@@ -1,7 +1,3 @@
-from django.shortcuts import render
-# from restaurant.models import Restaurant
-from django.http import HttpResponse
-
 import os
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
@@ -39,21 +35,14 @@ def populateFromGrubhub():
             latitude = re.search('<meta itemprop="latitude" content="(.*?)"', s)
             longitude = re.search('<meta itemprop="longitude" content="(.*?)"', s)
             cuisine = re.findall('<span itemprop="servesCuisine">(.*?)</span>', s)
-            # if (city.group(1) )
-            loc = Location(latitude = latitude.group(1), longitude = longitude.group(1), address = street.group(1), city = City.objects.get(name = 'Boston'), state = State.objects.get(name = 'Massachusetts'), country = Country.objects.get(name = "United States"), phone = telephone.group(1))
+            loc = Location(latitude = latitude.group(1), longitude = longitude.group(1), address = street.group(1), city = City.objects.get(name = city.group(1)), state = State.objects.get(name = state.group(1)), country = Country.objects.get(name = "United States"), phone = telephone.group(1))
             loc.save()
             dishes = p.findall(s) #dish menu
             sampledishlist = []
             for dish in dishes:
-                # categ = DishCategory(name = 'a', slug = 'b')
-                categ = DishCategory.objects.filter(slug = 'b')
-                if len(categ) == 0:
-                    categ = DishCategory(name = 'a', slug = 'b')
-                    categ.save()
-                else:
-                    categ = categ[0]
-                dish = Dish(name = dish[0], tag = dish[0], price = dish[1].rstrip('+') )
-                #dish = Dish(name = dish[0], tag = dish[0], price = dish[1].rstrip('+'), vegetarian = len(dish[0])%2, vegan = len(dish[0])%2, gluten = len(dish[0])%2 )
+                categ = DishCategory(name = 'a', slug = 'b')
+                categ.save()
+                dish = Dish(name = dish[0], tag = dish[0], price = dish[1].rstrip('+'), vegetarian = len(dish[0])%2, vegan = len(dish[0])%2, gluten = len(dish[0])%2 )
                 dish.save()
                 dish.categories.add(categ)
                 dish.save()
@@ -61,11 +50,7 @@ def populateFromGrubhub():
 
             rating = RestaurantRating(total = 1, vegetarian = 1, vegan = 1, glutenfree = 1, peanutfree = 1, lactoseint = 1, seafoodint = 1)
             rating.save()
-            cool = Restaurant(name = name.group(1), location = loc, rating= rating)
-            cool.save()
-            print name.group(1)
-            for dish in sampledishlist:
-                cool.dishes.add(dish)
+            cool = Restaurant(name = name.group(1), location = loc, dishes = sampledishlist,rating= rating)
             cool.save()
             #dishes = p.findall(s)
             #for dish in dishes:
@@ -81,22 +66,3 @@ def test_view(request):
     #r.save()
     populateFromGrubhub()
     return HttpResponse("OK")
-
-def profile(request, restaurant_id):
-    ''' Return the restaurant object corresponsing to restaurant_id
-
-    **Arguments:**
-        *restaurant_id*: The numeric ID of the restaurant
-
-    **Returns:**
-        ``<restaurant JSON object>``
-
-    '''
-
-    restaurant = Restaurant.objects.get(id=restaurant_id)
-
-    response = HttpResponse(restaurant.json())
-    return response
-
-def methodhere(request):
-    
