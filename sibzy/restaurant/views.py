@@ -99,4 +99,4 @@ def profile(request, restaurant_id):
     return response
 
 def methodhere(request):
-    
+    pass
