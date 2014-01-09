@@ -1,3 +1,5 @@
+var restaurant = {};
+
 $(function () {
     path = document.location.hash.substring(2);//.substring(document.location.indexOf('#!') + 2)
     paths = path.split('/');
@@ -51,8 +53,16 @@ $(function () {
                     item.children('._restaurant-categories-element-slug').text(category.slug);
                     
                     $('.restaurant-categories').append(item);
+                   
                 });
-            
+                
+                 
+                    
+                    // Rating
+                    restaurant.rating = { };
+                    restaurant.rating.total = parseFloat(data.rating.total);
+                   //alert(restaurant.rating.total);
+                    $('._restaurant-rating-total').trigger('ondataload');
             },
             error: function(data) {
                 alert('404 Not Found');
