@@ -102,6 +102,7 @@ urls.pop(1)
 def printdishes(s):
     dishes = p.findall(s)
 def populateFromGrubhub():
+
     for url in urls:
         listing = []
         with contextlib.closing(urllib2.urlopen("https://www.grubhub.com/restaurant/" + url)) as spage:
@@ -144,9 +145,10 @@ def populateFromGrubhub():
             for dish in sampledishlist:
                 cool.dishes.add(dish)
             cool.save()
+    return HttpResponse("Cambridge scraping finished")
 def test_view(request):
-    populateFromGrubhub()
-    return HttpResponse("OK")
+    
+    return HttpResponse(populateFromGrubhub())
 
 
 def profile(request, restaurant_id):
