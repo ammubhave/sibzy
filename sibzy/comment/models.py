@@ -31,7 +31,7 @@ class Comment(models.Model):
     def json(self):
         return json.dumps({
             'id': self.id,
-            'user': self.user.id,
+            'user': json.loads(self.user.json()),
             'restaurant': self.restaurant.id,
             'dish': self.dish.id,
             'rating_value': self.rating_value,

@@ -98,10 +98,10 @@ class Location(models.Model):
     ''' Restaurant Location '''
 
     #: DecimalField(6.1): Location latitude
-    latitude = models.DecimalField(max_digits=7, decimal_places=1)
+    latitude = models.DecimalField(max_digits=14, decimal_places=10)
 
     #: DecimalField(6.1): Location longitude
-    longitude = models.DecimalField(max_digits=7, decimal_places=1)
+    longitude = models.DecimalField(max_digits=14, decimal_places=10)
 
     #: TextField: Location street address, does not include city, state or country
     address = models.TextField()

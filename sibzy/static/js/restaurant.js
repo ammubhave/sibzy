@@ -11,6 +11,7 @@ $(function () {
             success: function (data) {
                 console.log(data);
                 $('.restaurant-name').text(data.name);
+                restaurant = data;
                 
                 $('.restaurant-location-latitude').text(data.location.latitude);
                 $('.restaurant-location-longitude').text(data.location.longitude);
@@ -19,6 +20,8 @@ $(function () {
                 $('.restaurant-location-state').text(data.location.state);
                 $('.restaurant-location-country').text(data.location.country);
                 $('.restaurant-location-phone').text(data.location.phone);
+                restaurant.location = data.location;
+                //$('#map-canvas').trigger('ondataload');
                 
                 $('.restaurant-rating-total').text(data.rating.total);
                 $('.restaurant-rating-glutenfree').text(data.rating.glutenfree);
@@ -74,3 +77,27 @@ $(function () {
     }
     console.log(path);
 });
+
+$('#map-canvas').bind('ondataload', function() {
+				//alert('load map');
+				var myLatlng = new google.maps.LatLng(restaurant.location.latitude, restaurant.location.longitude);
+				var mapOptions = {
+					center: myLatlng,
+					zoom: 17
+				};
+				var map = new google.maps.Map(document.getElementById("map-canvas"),
+					mapOptions);
+				
+				var marker = new google.maps.Marker({
+					position: myLatlng,
+					map: map,
+					title: restaurant.name,
+				});
+				var infowindow = new google.maps.InfoWindow({
+					content: restaurant.name
+				});
+					google.maps.event.addListener(marker, 'click', function() {
+					infowindow.open(map,marker);
+				  });
+				
+			});

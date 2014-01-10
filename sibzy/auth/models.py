@@ -3,6 +3,13 @@ from django.contrib.auth.models import User
 
 import json
 
+User.profile = lambda self: UserProfile.objects.get(user=self.id)
+
+User.json = lambda self: json.dumps({
+    'id': self.id,
+    'fbid': self.username,
+    'fbusername': self.profile().fbusername,
+    })
 
 class UserProfile(models.Model):
     ''' Stores the profile details of a user '''

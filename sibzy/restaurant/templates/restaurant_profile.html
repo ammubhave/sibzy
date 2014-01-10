@@ -28,7 +28,13 @@
 		<span class="restaurant-location-state"> </span> 
 		 <span class="restaurant-location-country"> </span> </br> 
 		<span class="restaurant-location-phone"> </span> </br> 
-		<span class="restaurant-location-zip"></address> <button type="button" class="btn btn-default">Map</button>
+		<span class="restaurant-location-zip"></address> <button type="button" onclick="$('#map-canvas').toggle(); $('#map-canvas').trigger('ondataload');" class="btn btn-default">Map</button>
+		<div id="map-canvas" style="width: 500px; height: 500px; display: none"></div>
+		
+		<script>
+			
+		</script>
+		
 		</div>
 	</div>
 	<div class="row clearfix">
@@ -100,7 +106,7 @@
 								console.log(comment);
 								entry.find('._dish-details-comments-entry-ratingvalue').text(comment.rating_value);
 								entry.find('._dish-details-comments-entry-commenttext').text(comment.comment_text);
-								entry.find('._dish-details-comments-entry-user').text(comment.user);
+								entry.find('._dish-details-comments-entry-user').text(comment.user.fbusername);
 								
 								$('#dish-details-comments').append(entry);
 							});
