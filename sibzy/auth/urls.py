@@ -8,4 +8,5 @@ urlpatterns = patterns(
     '',
     url(r'^login/fb$', 'auth.views.login_fb'),
     url(r'^logout$', 'auth.views.logout_fb'),
+    url(r'^load/me$', 'auth.views.me'),
 )

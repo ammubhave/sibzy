@@ -7,6 +7,8 @@ import facebook
 import json
 from django.contrib.auth import logout, login, authenticate
 
+def me(request):
+    return render(request, 'auth_me.html')
 
 def logout_fb(request):
     ''' Logout from the django seesion. Delete the *fbaccess_token* and *fbid* cookie.

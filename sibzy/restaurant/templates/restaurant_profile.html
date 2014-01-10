@@ -85,6 +85,19 @@
       </div>
     </div>
 	
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#dishes" href="#collapseOthers">
+          Other
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOthers" class="panel-collapse collapse">
+      <div class="panel-body" id="panelOthers">
+      
+      </div>
+    </div>
+	
 	<script>
 		$('._restaurant-dishes').bind('ondataload', function() {
 			$.each(restaurant.dishes, function(index, dish) {
@@ -113,25 +126,20 @@
 						}
 					})
 				});
-				
+				entry.find('._restaurant-dishes-entry-name').text(dish.name);
+				entry.find('._restaurant-dishes-entry-price').text(dish.price);
 				//console.log(dish.categories);
 				if ($.inArray('Entree', dish.categories) > -1) {					
-					entry.find('._restaurant-dishes-entry-name').text(dish.name);
-					entry.find('._restaurant-dishes-entry-price').text(dish.price);
 					$('#panelEntrees').append(entry);
 					//alert(dish.name);
-				}
-				if ($.inArray('Appetizer', dish.categories) > -1) {
-					entry.find('._restaurant-dishes-entry-name').text(dish.name);
-					entry.find('._restaurant-dishes-entry-price').text(dish.price);
+				} else if ($.inArray('Appetizer', dish.categories) > -1) {
 					$('#panelAppetizers').append(entry);
 					//alert(dish.name);
-				}
-				if ($.inArray('Desert', dish.categories) > -1) {
-					entry.find('._restaurant-dishes-entry-name').text(dish.name);
-					entry.find('._restaurant-dishes-entry-price').text(dish.price);
+				} else if ($.inArray('Desert', dish.categories) > -1) {					
 					$('#panelDeserts').append(entry);
 					//alert(dish.name);
+				} else {
+					$('#panelOthers').append(entry);
 				}
 				
 			});
