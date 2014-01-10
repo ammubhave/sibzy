@@ -65,7 +65,7 @@ $(function () {
                     restaurant.rating = { };
                     restaurant.rating.total = parseFloat(data.rating.total);
                   // alert(data.rating.total);
-                    $('#rating').trigger('ondataload');
+                    $('._restaurant-rating-total').trigger('ondataload');
                     
                     restaurant.dishes = data.dishes;
                     $('._restaurant-dishes').trigger('ondataload');
