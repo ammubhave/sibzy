@@ -7,9 +7,12 @@ import facebook
 import json
 from django.contrib.auth import logout, login, authenticate
 
+
 def me(request):
     return render(request, 'auth_me.html')
 
+
+@login_required
 def logout_fb(request):
     ''' Logout from the django seesion. Delete the *fbaccess_token* and *fbid* cookie.
 
@@ -79,7 +82,6 @@ def login_fb(request):
                                    fbusername=profile['username'])
         print '4'
         user_profile.save()
-        
         user_profile = UserProfile.objects.filter()
         print user_profile
 
