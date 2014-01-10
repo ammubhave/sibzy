@@ -57,7 +57,7 @@ def login_fb(request):
     #                                                   '30894c0518e604fa530c7c36f21cdaea')['access_token']
 
     # For now let's not worry about expriation of access token and just use short lived token
-    long_access_token = short_access_token
+    #long_access_token = short_access_token
 
     graph = facebook.GraphAPI(long_access_token)
     profile = graph.get_object('me')
