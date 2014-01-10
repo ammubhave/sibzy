@@ -34,9 +34,12 @@
 	<div class="row clearfix">
 		<div class="col-md-6 column" style="padding-left: 0px;">
 
-			<div class="panel-group" id="dishes">
+			<div class="panel-group _restaurant-dishes" id="dishes">
   <div class="panel panel-default">
-
+	<div class="_restaurant-dishes-entry" style="display:none">
+		<span class="_restaurant-dishes-entry-name">Appetizer 1</span>
+		<span class="pull-right"><div class="_restaurant-dishes-entry-price">$15</div></span>
+	</div>
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#dishes" href="#collapseAppetizers">
@@ -46,7 +49,7 @@
     </div>
     <div id="collapseAppetizers" class="panel-collapse collapse">
       <div class="panel-body" id="panelAppetizers">
-       <div class="_restaurant-dishes-entry"><div class="_restaurant-dishes-entry-name">Appetizer 1</div><span class="pull-right"><div class="_restaurant-dishes-entry-price">$15</div></span></div>
+       
       </div>
     </div>
 
@@ -59,7 +62,7 @@
     </div>
     <div id="collapseEntrees" class="panel-collapse collapse in">
       <div class="panel-body" id="panelEntrees">
-       Some Vegetarian Dish<span class="pull-right">$13</span>
+       
       </div>
     </div>
 
@@ -72,13 +75,22 @@
     </div>
     <div id="collapseDeserts" class="panel-collapse collapse">
       <div class="panel-body" id="panelDeserts">
-       Good Stuff<span class="pull-right">$9</span>
+      
       </div>
     </div>
 	
 	<script>
-		$('#dishes').bind('ondataload', function() {
-			$.each(restaurant.dishes);
+		$('._restaurant-dishes').bind('ondataload', function() {
+			$.each(restaurant.dishes, function(index, dish) {
+				if ($.inArray({name:'Entrees', slug:'entrees'}, dish.categories)) {
+					var entry = $('._restaurant-dishes-entry').clone();
+					entry.show();
+					entry.children('._restaurant-dishes-entry-name').text(dish.name);
+					entry.children('._restaurant-dishes-entry-price').text(dish.price);
+					$('#panelEntrees').append(entry);
+					//alert(dish.name);
+				}
+			});
 		});
 	</script>
 

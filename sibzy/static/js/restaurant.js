@@ -63,6 +63,9 @@ $(function () {
                     restaurant.rating.total = parseFloat(data.rating.total);
                    //alert(restaurant.rating.total);
                     $('._restaurant-rating-total').trigger('ondataload');
+                    
+                    restaurant.dishes = data.dishes;
+                    $('._restaurant-dishes').trigger('ondataload');
             },
             error: function(data) {
                 alert('404 Not Found');
