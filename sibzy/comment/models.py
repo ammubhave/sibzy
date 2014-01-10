@@ -26,12 +26,12 @@ class Comment(models.Model):
     comment_text = models.TextField(blank=True)
 
     def __str__(self):
-        return self.dish
+        return self.dish.name
 
     def json(self):
         return json.dumps({
             'id': self.id,
-            'user': self.user,
+            'user': self.user.id,
             'restaurant': self.restaurant.id,
             'dish': self.dish.id,
             'rating_value': self.rating_value,

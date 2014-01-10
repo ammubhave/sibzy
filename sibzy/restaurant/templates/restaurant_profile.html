@@ -82,31 +82,51 @@
 	<script>
 		$('._restaurant-dishes').bind('ondataload', function() {
 			$.each(restaurant.dishes, function(index, dish) {
+				var entry = $('._restaurant-dishes-entry').clone();
+				entry.show();
+				entry.css('background-color', 'grey');
+				entry.bind('click', function() {
+					$('#dish-details-name').text(dish.name);
+					$('#dish-comments').html('');
+					$.ajax({
+						url: '!/comment/dish/' + dish.id,
+						dataType: 'json',
+						success: function(data) {
+							//console.log(data);
+							$.each(data, function(index, comment) {
+								var entry = $('._dish-details-comments-entry').clone();
+								entry.show();
+								console.log(comment);
+								entry.find('._dish-details-comments-entry-ratingvalue').text(comment.rating_value);
+								entry.find('._dish-details-comments-entry-commenttext').text(comment.comment_text);
+								entry.find('._dish-details-comments-entry-user').text(comment.user);
+								
+								$('#dish-details-comments').append(entry);
+							});
+						}
+					})
+				});
+				
 				//console.log(dish.categories);
-				if ($.inArray('Entree', dish.categories) > -1) {
-					var entry = $('._restaurant-dishes-entry').clone();
-					entry.show();
-					entry.children('._restaurant-dishes-entry-name').text(dish.name);
-					entry.children('._restaurant-dishes-entry-price').text(dish.price);
+				if ($.inArray('Entree', dish.categories) > -1) {					
+					entry.find('._restaurant-dishes-entry-name').text(dish.name);
+					entry.find('._restaurant-dishes-entry-price').text(dish.price);
 					$('#panelEntrees').append(entry);
 					//alert(dish.name);
 				}
 				if ($.inArray('Appetizer', dish.categories) > -1) {
-					var entry = $('._restaurant-dishes-entry').clone();
-					entry.show();
-					entry.children('._restaurant-dishes-entry-name').text(dish.name);
-					entry.children('._restaurant-dishes-entry-price').text(dish.price);
+					entry.find('._restaurant-dishes-entry-name').text(dish.name);
+					entry.find('._restaurant-dishes-entry-price').text(dish.price);
 					$('#panelAppetizers').append(entry);
 					//alert(dish.name);
 				}
 				if ($.inArray('Desert', dish.categories) > -1) {
-					var entry = $('._restaurant-dishes-entry').clone();
-					entry.show();
-					entry.children('._restaurant-dishes-entry-name').text(dish.name);
-					entry.children('._restaurant-dishes-entry-price').text(dish.price);
+					entry.find('._restaurant-dishes-entry-name').text(dish.name);
+					entry.find('._restaurant-dishes-entry-price').text(dish.price);
 					$('#panelDeserts').append(entry);
 					//alert(dish.name);
 				}
+				
 			});
 		});
 	</script>
@@ -126,34 +146,25 @@
 				</div>
 				<div class="col-md-6 column"> 
 					
-						<h2> <strong> Dish name </strong> </h2> </br> 
+						<h2> <strong id="dish-details-name"> Dish name </strong> </h2> </br> 
 						<p> ***** </p> 
 						<p> Dish Description </p> 
 					
 				</div>
-			</div> 
+			</div>
+		
+			<div id="dish-details-comments"></div>
 
-			<div class="row" style="margin-top: 10px; padding:12px; padding-left: 0px; background-color: rgba(82, 204, 41, 0.22) " > 
+			<div class="row _dish-details-comments-entry" style="display: none; margin-top: 10px; padding:12px; padding-left: 0px; background-color: rgba(82, 204, 41, 0.22) " > 
 				<div class="col-md-3 column"  > 
 					<img alt="100x100" src="http://lorempixel.com/100/100/food" />
 				</div>
 				<div class="col-md-6 column"> 
-						 <strong> Dish summary </strong> <span class="pull-right"> **** </span> </br> 
-						<p> Review goes here and it is really good </p> 			
+						 <strong class="_dish-details-comments-entry-user"> USer id </strong> <span class="pull-right _dish-details-comments-entry-ratingvalue"> **** </span> </br> 
+						<p class="_dish-details-comments-entry-commenttext"> Review goes here and it is really good </p> 			
 				</div>
 			
-			</div>
-
-			<div class="row" style="margin-top: 10px; padding:12px; padding-left: 0px; background-color: rgba(82, 204, 41, 0.22) " > 
-				<div class="col-md-3 column"  > 
-					<img alt="100x100" src="http://lorempixel.com/100/100/food" />
-				</div>
-				<div class="col-md-6 column"> 
-						 <strong> Dish summary </strong> <span class="pull-right"> **** </span> </br> 
-						<p> Review goes here and it is really good. Loren ipsum Dolores, I forgot the rest and am too lazy to look it up.  </p> 			
-				</div>
-			</div>
-			
+			</div>			
 			
 		</div>
 	

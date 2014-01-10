@@ -49,10 +49,10 @@ class RestaurantCategory(models.Model):
             'name': self.name,
             'slug': self.slug,
         })
-    
+
     def __str__(self):
         return self.name;
-    
+
 
 
 class RestaurantRating(models.Model):
@@ -208,6 +208,7 @@ class Dish(models.Model):
 
     def json(self):
         return json.dumps({
+            'id': self.id,
             'name': self.name,
             'tag': self.tag,
             'price': float(self.price),
