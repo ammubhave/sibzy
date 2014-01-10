@@ -98,7 +98,11 @@ function navigate(path) {
 
 $(function () {
     if (window.location.hash == '') {
-        navigate('frontend/landing');
+        if (getCookie('fbid') == null) {
+            navigate('frontend/landing');
+        } else {
+            navigate('frontend/home');
+        }
         
     } else {
         navigate(window.location.hash.substring(2));        

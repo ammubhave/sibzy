@@ -137,7 +137,7 @@ def populateFromGrubhub():
             # print name.group(1)
             for dish in sampledishlist:
                 cool.dishes.add(dish)
-            cool.save()          
+            cool.save()
 def test_view(request):
     populateFromGrubhub()
     return HttpResponse("OK")

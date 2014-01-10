@@ -13,4 +13,5 @@ urlpatterns = patterns(
 
     url(r'^(\d+)/get$', 'comment.views.comment_get'),
     url(r'^(\d+)/set$', 'comment.views.comment_set'),
+    #url(r'^(\d+)/up$', 'comment.views.comment')
 )
