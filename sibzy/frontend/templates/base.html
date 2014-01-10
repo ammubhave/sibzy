@@ -54,15 +54,32 @@
                 <input type="text" id="txtSearch" class="form-control" placeholder="Search">
             </div>
         </form>
-        <div class="navbar-right">
+    
 
-        <div class="fb-nologin"> <button class="btn btn-primary" onclick="FB.login()"> Login </button> </div> 
-        <div class="fb-login"> <span class="fb-name"> </span> </div> 
-        <div class="fb-login"> <span class="fb-username"> </span> </div> 
-        <div class="fb-login"> <a onclick="FB.logout()"> Logout</a> </div> 
+       <ul class="nav navbar-nav navbar-right">
+        <li>  <div class="fb-nologin"> <button class="btn btn-primary" onclick="FB.login()"> Login </button> </div> </li>
+        <li style="line-height: 60px; color:white; "> <div class="fb-login"> <span class="fb-name"> </span> </div> </li> 
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <button type="button" class="btn btn-default btn-sm fb-usernamenamelogin">
+            <span class="glyphicon glyphicon-cog"></span>
+            </button><b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header"> <div class="fb-login"> <span class="fb-username"> </span> </div> </li>
+              <li><a href="#!auth/user">My Account</a></li>
+             
+              <li class="divider"></li>
+              <li><a href="#"><div class="fb-login"><center><button type="button" class="btn btn-default btn-md"> <a onclick="FB.logout()"> Logout</a></button></center> </div> </a></li>
+        </ul>
+      </li>
+    </ul>
+        
+
+
+
+        <!-- --> 
 
     </div> 
-    </div><!-- /.navbar-collapse -->
+    
     
     </nav>
     <br /><br />
