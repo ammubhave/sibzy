@@ -11,7 +11,7 @@ $(function () {
             success: function (data) {
                 console.log(data);
                 $('.restaurant-name').text(data.name);
-                restaurant = data;
+                restaurant.name = data.name;
                 
                 $('.restaurant-location-latitude').text(data.location.latitude);
                 $('.restaurant-location-longitude').text(data.location.longitude);
@@ -64,8 +64,8 @@ $(function () {
                     // Rating
                     restaurant.rating = { };
                     restaurant.rating.total = parseFloat(data.rating.total);
-                   //alert(restaurant.rating.total);
-                    $('._restaurant-rating-total').trigger('ondataload');
+                  // alert(data.rating.total);
+                    $('#rating').trigger('ondataload');
                     
                     restaurant.dishes = data.dishes;
                     $('._restaurant-dishes').trigger('ondataload');
