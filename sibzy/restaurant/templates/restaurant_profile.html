@@ -87,7 +87,7 @@
 				entry.css('background-color', 'grey');
 				entry.bind('click', function() {
 					$('#dish-details-name').text(dish.name);
-					$('#dish-comments').html('');
+					$('#dish-details-comments').html('');
 					$.ajax({
 						url: '!/comment/dish/' + dish.id,
 						dataType: 'json',
