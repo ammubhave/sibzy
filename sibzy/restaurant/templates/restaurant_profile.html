@@ -102,6 +102,7 @@
 	
 	<script>
 		$('._restaurant-dishes').bind('ondataload', function() {
+			$('#dishinfo').show();
 			$.each(restaurant.dishes, function(index, dish) {
 				var entry = $('._restaurant-dishes-entry').clone();
 				entry.show();
