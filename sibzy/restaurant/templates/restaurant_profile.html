@@ -82,7 +82,8 @@
 	<script>
 		$('._restaurant-dishes').bind('ondataload', function() {
 			$.each(restaurant.dishes, function(index, dish) {
-				if ($.inArray({name:'Entree', slug:'entree'}, dish.categories)) {
+				//console.log(dish.categories);
+				if ($.inArray('Entree', dish.categories) > -1) {
 					var entry = $('._restaurant-dishes-entry').clone();
 					entry.show();
 					entry.children('._restaurant-dishes-entry-name').text(dish.name);
@@ -90,7 +91,7 @@
 					$('#panelEntrees').append(entry);
 					//alert(dish.name);
 				}
-				if ($.inArray({name:'Appetizer', slug:'appetizer'}, dish.categories)) {
+				if ($.inArray('Appetizer', dish.categories) > -1) {
 					var entry = $('._restaurant-dishes-entry').clone();
 					entry.show();
 					entry.children('._restaurant-dishes-entry-name').text(dish.name);
@@ -98,7 +99,7 @@
 					$('#panelAppetizers').append(entry);
 					//alert(dish.name);
 				}
-				if ($.inArray({name:'Desert', slug:'desert'}, dish.categories)) {
+				if ($.inArray('Desert', dish.categories) > -1) {
 					var entry = $('._restaurant-dishes-entry').clone();
 					entry.show();
 					entry.children('._restaurant-dishes-entry-name').text(dish.name);

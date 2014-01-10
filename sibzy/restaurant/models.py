@@ -207,7 +207,7 @@ class Dish(models.Model):
             'name': self.name,
             'tag': self.tag,
             'price': float(self.price),
-            'categories': [json.loads(c.json()) for c in self.categories.all()],
+            'categories': [c.name for c in self.categories.all()],
         })
     
     def __str__(self):
