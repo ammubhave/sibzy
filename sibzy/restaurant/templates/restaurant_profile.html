@@ -7,8 +7,16 @@
 		</div>
 		<div class="col-md-4 column">
 			<h1> <span class="restaurant-name"> </span> </h1> </br> 
-			<span class="restaurant-categories"> </span> 
-			<h3> Categories</h3> </br> 
+
+			<div id="rating" class="_restaurant-rating-total" style=" background-image: url('http://i.imgur.com/pDkElep.png'); background-repeat: repeat-x; height: 20px; width:0px;  background-size: 100px 20px ">   </div>
+<script>$('#rating').bind('ondataload', function () { $(this).css('width', (restaurant.rating.total * 20) + 'px' ) });</script>
+
+			<span class="_restaurant-categories-element-start" style="display:none"> <span class="_restaurant-categories-element-name"> </span>, <!--<span class="_restaurant-categories-element-slug"> </span>-->  </span>
+
+			<span class="_restaurant-categories-element" style="display:none"> <span class="_restaurant-categories-element-name"> </span>, <!--<span class="_restaurant-categories-element-slug"> </span>-->  </span>
+
+			<span class="_restaurant-categories-element-end" style="display:none"> <span class="_restaurant-categories-element-name"> </span> <!--<span class="_restaurant-categories-element-slug"> </span>-->  </span> 
+			
 			<span class="restaurant-rating-total"> </span> 
 
 		</div>
@@ -23,7 +31,7 @@
 		</div>
 	</div>
 	<div class="row clearfix">
-		<div class="col-md-6 column">
+		<div class="col-md-6 column" style="padding-left: 0px;">
 
 			<div class="panel-group" id="accordion">
   <div class="panel panel-default">
@@ -72,10 +80,13 @@
 </div> 
 			
 		</div>
-		<div class="col-md-6 column">
-			<div class="row" style="margin:10px; background-color: rgba(105, 105, 179, 0.32);"> 
+		
+ 
+		<div id="dish" class="col-md-6 column">
+
+			<div class="row" style="padding:12px; padding-left: 0px;  background-color: rgba(105, 105, 179, 0.32);"> 
 				<div class="col-md-3 column"> 
-					<img alt="140x140" src="http://lorempixel.com/140/140/" />
+					<img alt="140x140" src="http://lorempixel.com/140/140/food" />
 				</div>
 				<div class="col-md-6 column"> 
 					
@@ -86,89 +97,40 @@
 				</div>
 			</div> 
 
-			<div class="row" > 
+			<div class="row" style="margin-top: 10px; padding:12px; padding-left: 0px; background-color: rgba(82, 204, 41, 0.22) " > 
 				<div class="col-md-3 column"  > 
-					<img alt="100x100" src="http://lorempixel.com/100/100/" />
+					<img alt="100x100" src="http://lorempixel.com/100/100/food" />
 				</div>
 				<div class="col-md-6 column"> 
-					
 						 <strong> Dish summary </strong> <span class="pull-right"> **** </span> </br> 
-						<p> Review goes here and it is really good </p> 
-					
+						<p> Review goes here and it is really good </p> 			
 				</div>
-			</div> 
-
 			
-			<dl>
-				<dt>
-					Description lists
-				</dt>
-				<dd>
-					A description list is perfect for defining terms.
-				</dd>
-				<dt>
-					Euismod
-				</dt>
-				<dd>
-					Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.
-				</dd>
-				<dd>
-					Donec id elit non mi porta gravida at eget metus.
-				</dd>
-				<dt>
-					Malesuada porta
-				</dt>
-				<dd>
-					Etiam porta sem malesuada magna mollis euismod.
-				</dd>
-				<dt>
-					Felis euismod semper eget lacinia
-				</dt>
-				<dd>
-					Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-				</dd>
-			</dl>
+			</div>
+
+			<div class="row" style="margin-top: 10px; padding:12px; padding-left: 0px; background-color: rgba(82, 204, 41, 0.22) " > 
+				<div class="col-md-3 column"  > 
+					<img alt="100x100" src="http://lorempixel.com/100/100/food" />
+				</div>
+				<div class="col-md-6 column"> 
+						 <strong> Dish summary </strong> <span class="pull-right"> **** </span> </br> 
+						<p> Review goes here and it is really good. Loren ipsum Dolores, I forgot the rest and am too lazy to look it up.  </p> 			
+				</div>
+			</div>
+			
+			
 		</div>
-	</div>
+	
 </div>
 
 <!--  **************** --> 
 
-<div style=" margin-right: 70px; padding: 30px; background: red; " class="row col-md-offset-1" > 
-	<div class="col-md- "> 
-		<img src="http://placehold.it/200&text=Simmons+Dining"/> 
-	</div> 	
-	<div class="col-md-4"> 
-		<div class = "row"> 
-			<h1> <span class="restaurant-name"> </span> </h1> </br> 
-		</div> 
-		<span class="restaurant-categories"> </span> 
-			<h3> Categories</h3> </br> 
-		<span class="restaurant-rating-total"> </span> 
-	</div> 
-	<div class="col-md-3"> 
-		<span class="restaurant-location-address"> </span> </br> 
-		<span class="restaurant-location-city"> </span>, 
-		<span class="restaurant-location-state"> </span> 
-		 <span class="restaurant-location-country"> </span> </br> 
-		<span class="restaurant-location-phone"> </span> </br> 
 
-	</div> 
-
-
-</div> 
-
-<span class="_restaurant-categories-element-start" style="display:none"> <span class="_restaurant-categories-element-name"> </span>, <!--<span class="_restaurant-categories-element-slug"> </span>-->  </span>
-
-<span class="_restaurant-categories-element" style="display:none"> <span class="_restaurant-categories-element-name"> </span>, <!--<span class="_restaurant-categories-element-slug"> </span>-->  </span>
-
-<span class="_restaurant-categories-element-end" style="display:none"> <span class="_restaurant-categories-element-name"> </span> <!--<span class="_restaurant-categories-element-slug"> </span>-->  </span> 
 
 
 <!-- ****** --> 
 
-<div id="rating" class="_restaurant-rating-total" style=" background-image: url('http://www.comicbookdaily.com/wp-content/uploads/2013/07/bifffive.png'); background-repeat: repeat-x; height: 100px; background-size: 500px 100px ">   </div>
-<script>$('#rating').bind('ondataload', function () { $(this).css('width', (restaurant.rating.total * 100) + 'px' ) });</script>
+
 
 
   
