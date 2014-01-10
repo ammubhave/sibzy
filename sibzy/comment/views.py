@@ -3,7 +3,7 @@ import re
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from auth.models import User, UserProfile
-from comment.models import Comment
+from comment.models import Comment, CommentVote
 import json
 
 
@@ -43,6 +43,23 @@ def comment_set(request, comment_id):
     return HttpResponse("{'status': 'success'}")
 
 
+def comment_vote(request, comment_id, value):
+    ''' Upvote or downvote a comment based on value
+
+    **Arguments:**
+        *comment_id*: Comment ID
+        *value*: The value as +1 or -1
+
+    **Returns:**
+        ``{'status': '<status>'}``
+    '''
+
+    comment = get_object_or_404(Comment, id=comment_id)
+    vote = CommentVote
+
+    return HttpResponse("{'status': 'success'}")
+
+
 def dish(request, dish_id):
     ''' Gets all the comments on the dish
 
@@ -72,6 +89,20 @@ def restaurant(request, restaurant_id):
 
     return HttpResponse(json.dumps([json.loads(comment.json()) for comment in comments]))
 
+
+def user(request):
+    ''' Gets all the comments on the dish by the current logged in user
+
+    **Arguments:**
+        *user_id*: User ID
+
+    **Returns:**
+        ``[<comment json object>, <comment json object>, ...]```
+    '''
+
+    comments = Comment.objects.filter(user=request.user.id)
+
+    return HttpResponse(json.dumps([json.loads(comment.json()) for comment in comments]))
 
 def dish_new(request, dish_id):
     ''' Creates a new comment on a dish
