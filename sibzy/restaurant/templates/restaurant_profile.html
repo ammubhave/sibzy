@@ -84,7 +84,7 @@
 			$.each(restaurant.dishes, function(index, dish) {
 				var entry = $('._restaurant-dishes-entry').clone();
 				entry.show();
-				entry.css('background-color', 'grey');
+				//entry.css('background-color', 'grey');
 				entry.bind('click', function() {
 					$('#dish-details-name').text(dish.name);
 					$('#dish-details-comments').html('');
