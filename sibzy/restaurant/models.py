@@ -49,6 +49,10 @@ class RestaurantCategory(models.Model):
             'name': self.name,
             'slug': self.slug,
         })
+    
+    def __str__(self):
+        return self.name;
+    
 
 
 class RestaurantRating(models.Model):
