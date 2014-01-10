@@ -39,6 +39,7 @@ class Comment(models.Model):
             'dish': self.dish.id,
             'rating_value': self.rating_value,
             'comment_text': self.comment_text,
+            'votes': self.votes,
         })
 
 class CommentVote(models.Model):

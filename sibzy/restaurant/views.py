@@ -13,9 +13,10 @@ import contextlib
 
 # initialize database
 def fill_locations(request):
-
     country_usa = Country(name='United States')
-    country_usa.save()
+
+    if len(Country.objects.filter(name='United States')) == 0:        
+        country_usa.save()
 
     states = [
         ('AK', 'Alaska'),
@@ -72,18 +73,23 @@ def fill_locations(request):
     ]
 
     for (state_code, state_name) in states:
+
         state = State(name=state_name, country=country_usa)
-        state.save()
+        if len(State.objects.filter(name=state_name)) == 0:        
+            state.save()
         
         if state.name == 'Massachusetts':
-            cambridge = City(name='Cambridge', state=state)
-            cambridge.save()
-            boston = City(name='Boston', state=state)
-            boston.save()
-            lexington = City(name='Lexington', state=state)
-            lexington.save()
+            if len(City.objects.filter(name='Cambridge')) == 0:
+                cambridge = City(name='Cambridge', state=state)
+                cambridge.save()
+            if len(City.objects.filter(name='Boston')) == 0:
+                boston = City(name='Boston', state=state)
+                boston.save()
+            if len(City.objects.filter(name='Lexington')) == 0:
+                lexington = City(name='Lexington', state=state)
+                lexington.save()
 
-    return HttpResponse("OK")
+    return HttpResponse("Locations have been added to database")
 
 
 #Grubhub scraper for Cambridge area
@@ -96,6 +102,7 @@ urls.pop(1)
 def printdishes(s):
     dishes = p.findall(s)
 def populateFromGrubhub():
+
     for url in urls:
         listing = []
         with contextlib.closing(urllib2.urlopen("https://www.grubhub.com/restaurant/" + url)) as spage:
@@ -138,9 +145,10 @@ def populateFromGrubhub():
             for dish in sampledishlist:
                 cool.dishes.add(dish)
             cool.save()
+    return HttpResponse("Cambridge scraping finished")
 def test_view(request):
-    populateFromGrubhub()
-    return HttpResponse("OK")
+    
+    return HttpResponse(populateFromGrubhub())
 
 
 def profile(request, restaurant_id):

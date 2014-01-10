@@ -1,5 +1,6 @@
 import os, urllib
 import re
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from auth.models import User, UserProfile
@@ -7,6 +8,7 @@ from comment.models import Comment, CommentVote
 import json
 
 
+@login_required
 def comment_get(request, comment_id):
     ''' Get the comment with id = comment_id
 
@@ -22,6 +24,7 @@ def comment_get(request, comment_id):
     return HttpResponse(comment.json())
 
 
+@login_required
 def comment_set(request, comment_id):
     ''' Updates the comment with id = comment_id
 
@@ -43,6 +46,7 @@ def comment_set(request, comment_id):
     return HttpResponse("{'status': 'success'}")
 
 
+@login_required
 def comment_vote(request, comment_id, value):
     ''' Upvote or downvote a comment based on value
 
@@ -55,11 +59,24 @@ def comment_vote(request, comment_id, value):
     '''
 
     comment = get_object_or_404(Comment, id=comment_id)
-    vote = CommentVote
+    delta = value
+    vote = CommentVote.objects.filter(comment=comment.id, user=request.user.id)
+    if len(vote) == 0:
+        vote = CommentVote(comment=comment, user=request.user, value=value)
+    else:
+        vote = vote[0]
+        delta = value - vote.value
+
+    vote.value = value
+    vote.save()
+
+    comment.votes += delta
+    comment.save()
 
     return HttpResponse("{'status': 'success'}")
 
 
+@login_required
 def dish(request, dish_id):
     ''' Gets all the comments on the dish
 
@@ -75,6 +92,7 @@ def dish(request, dish_id):
     return HttpResponse(json.dumps([json.loads(comment.json()) for comment in comments]))
 
 
+@login_required
 def restaurant(request, restaurant_id):
     ''' Gets all the comments on the dish
 
@@ -90,6 +108,7 @@ def restaurant(request, restaurant_id):
     return HttpResponse(json.dumps([json.loads(comment.json()) for comment in comments]))
 
 
+@login_required
 def user(request):
     ''' Gets all the comments on the dish by the current logged in user
 
@@ -104,6 +123,8 @@ def user(request):
 
     return HttpResponse(json.dumps([json.loads(comment.json()) for comment in comments]))
 
+
+@login_required
 def dish_new(request, dish_id):
     ''' Creates a new comment on a dish
 
@@ -125,6 +146,7 @@ def dish_new(request, dish_id):
     return HttpResponse(json.dumps({'status': 'success', 'id': comment.id}))
 
 
+@login_required
 def restaurant_new(request, restaurant_id):
     ''' Creates a new comment on a restaurant
 
