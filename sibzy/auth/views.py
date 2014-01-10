@@ -37,7 +37,7 @@ def login_fb(request):
         *On Error*: ``{status: 'error', code: <integer error code>}``
     '''
 
-    if request.user.is_authenticated():
+    if request.user.is_authenticated() and 'fbid' in request.COOKIES:
         return HttpResponseRedirect('/')
 
     if 'error' in request.POST or 'access_token' not in request.POST:
