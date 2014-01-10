@@ -63,7 +63,7 @@ def populateFromGrubhub():
             rating.save()
             cool = Restaurant(name = name.group(1), location = loc, rating= rating)
             cool.save()
-            print name.group(1)
+            # print name.group(1)
             for dish in sampledishlist:
                 cool.dishes.add(dish)
             cool.save()
@@ -99,6 +99,7 @@ def profile(request, restaurant_id):
     response = HttpResponse(restaurant.json())
     return response
 
+<<<<<<< HEAD
 def fill_locations(request):
 
     country_usa = Country(name='United States')
@@ -171,3 +172,7 @@ def fill_locations(request):
             lexington.save()
 
     return HttpResponse("OK")
+=======
+def methodhere(request):
+    pass
+>>>>>>> e01db84f1763a7bb8d48cfc598bb08009e063d16
