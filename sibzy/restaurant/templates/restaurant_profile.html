@@ -33,47 +33,53 @@
 	<div class="row clearfix">
 		<div class="col-md-6 column" style="padding-left: 0px;">
 
-			<div class="panel-group" id="accordion">
+			<div class="panel-group" id="dishes">
   <div class="panel panel-default">
 
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+        <a data-toggle="collapse" data-parent="#dishes" href="#collapseAppetizers">
           Appetizers
         </a>
       </h4>
     </div>
-    <div id="collapseOne" class="panel-collapse collapse">
-      <div class="panel-body">
-       Appetizer 1<span class="pull-right">$15</span>
+    <div id="collapseAppetizers" class="panel-collapse collapse">
+      <div class="panel-body" id="panelAppetizers">
+       <div class="_restaurant-dishes-entry"><div class="_restaurant-dishes-entry-name">Appetizer 1</div><span class="pull-right"><div class="_restaurant-dishes-entry-price">$15</div></span></div>
       </div>
     </div>
 
 	<div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+        <a data-toggle="collapse" data-parent="#dishes" href="#collapseEntrees">
           Entrees
         </a>
       </h4>
     </div>
-    <div id="collapseTwo" class="panel-collapse collapse in">
-      <div class="panel-body">
+    <div id="collapseEntrees" class="panel-collapse collapse in">
+      <div class="panel-body" id="panelEntrees">
        Some Vegetarian Dish<span class="pull-right">$13</span>
       </div>
     </div>
 
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+        <a data-toggle="collapse" data-parent="#dishes" href="#collapseDeserts">
           Deserts
         </a>
       </h4>
     </div>
-    <div id="collapseThree" class="panel-collapse collapse">
-      <div class="panel-body">
+    <div id="collapseDeserts" class="panel-collapse collapse">
+      <div class="panel-body" id="panelDeserts">
        Good Stuff<span class="pull-right">$9</span>
       </div>
     </div>
+	
+	<script>
+		$('#dishes').bind('ondataload', function() {
+			$.each(restaurant.dishes);
+		});
+	</script>
 
 
   </div>
