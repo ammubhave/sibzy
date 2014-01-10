@@ -209,6 +209,9 @@ class Dish(models.Model):
             'price': float(self.price),
             'categories': [json.loads(c.json()) for c in self.categories.all()],
         })
+    
+    def __str__(self):
+        return self.name
 
 
 class DishCategory(models.Model):
@@ -227,6 +230,10 @@ class DishCategory(models.Model):
             'name': self.name,
             'slug': self.slug,
         })
+    
+    def __str__(self):
+        return self.name
+    
 
 
 class DishRating(models.Model):

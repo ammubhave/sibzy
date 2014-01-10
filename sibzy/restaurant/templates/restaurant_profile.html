@@ -82,12 +82,28 @@
 	<script>
 		$('._restaurant-dishes').bind('ondataload', function() {
 			$.each(restaurant.dishes, function(index, dish) {
-				if ($.inArray({name:'Entrees', slug:'entrees'}, dish.categories)) {
+				if ($.inArray({name:'Entree', slug:'entree'}, dish.categories)) {
 					var entry = $('._restaurant-dishes-entry').clone();
 					entry.show();
 					entry.children('._restaurant-dishes-entry-name').text(dish.name);
 					entry.children('._restaurant-dishes-entry-price').text(dish.price);
 					$('#panelEntrees').append(entry);
+					//alert(dish.name);
+				}
+				if ($.inArray({name:'Appetizer', slug:'appetizer'}, dish.categories)) {
+					var entry = $('._restaurant-dishes-entry').clone();
+					entry.show();
+					entry.children('._restaurant-dishes-entry-name').text(dish.name);
+					entry.children('._restaurant-dishes-entry-price').text(dish.price);
+					$('#panelAppetizers').append(entry);
+					//alert(dish.name);
+				}
+				if ($.inArray({name:'Desert', slug:'desert'}, dish.categories)) {
+					var entry = $('._restaurant-dishes-entry').clone();
+					entry.show();
+					entry.children('._restaurant-dishes-entry-name').text(dish.name);
+					entry.children('._restaurant-dishes-entry-price').text(dish.price);
+					$('#panelDeserts').append(entry);
 					//alert(dish.name);
 				}
 			});
