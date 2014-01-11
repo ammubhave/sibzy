@@ -18,7 +18,7 @@ def q(request, query):
     resp = []
     for restaurant in restaurants:
         element = json.loads(restaurant.json())
-        element['dish'] = None
+        element['dishes'] = None
         resp.append(element)
     response = HttpResponse(json.dumps(resp))
     return response
