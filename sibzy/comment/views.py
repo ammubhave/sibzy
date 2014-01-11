@@ -88,7 +88,7 @@ def dish(request, dish_id):
         ``[<comment json object>, <comment json object>, ...]``
     '''
 
-    comments = Comment.objects.filter(dish=dish_id)
+    comments = Comment.objects.filter(dish=dish_id).order_by('-dtadded')
 
     return HttpResponse(json.dumps([json.loads(comment.json()) for comment in comments]))
 

@@ -28,6 +28,9 @@ class Comment(models.Model):
     #: IntegerField: The votes on this comment
     votes = models.IntegerField(default=0)
 
+    #: DateTimeField: The date time when this comment was added
+    dtadded = models.DateTimeField(auto_now_add=True)
+
     def __str__(self):
         return self.dish.name
 
@@ -40,6 +43,7 @@ class Comment(models.Model):
             'rating_value': self.rating_value,
             'comment_text': self.comment_text,
             'votes': self.votes,
+            'dtadded': str(self.dtadded),
         })
 
 class CommentVote(models.Model):
