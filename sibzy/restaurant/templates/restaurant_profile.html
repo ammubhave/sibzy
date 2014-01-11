@@ -108,7 +108,7 @@
 				entry.show();
 				//entry.css('background-color', 'grey');
 				entry.bind('click', function() {
-					if ($('#dishinfo').css('display') == 'none') {
+					//if ($('#dishinfo').css('display') == 'none') {
 					
 						$('#dishinfo').show();
 						$('.restaurants-comments-new').hide();
@@ -125,7 +125,7 @@
 								},
 								dataType: 'json',
 								success: function(data) {
-									
+									entry.trigger('click');
 								}
 							});
 						});
@@ -151,12 +151,12 @@
 							}
 						})
 					
-					} else {
+					/*} else {
 						
 						$('#dishinfo').hide();
 						$('.restaurants-comments-new').show();
 						$('.dishes-comments-new').hide();
-					}
+					}*/
 				});
 				entry.find('._restaurant-dishes-entry-name').text(dish.name);
 				entry.find('._restaurant-dishes-entry-price').text(dish.price);

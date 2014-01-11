@@ -141,7 +141,7 @@ def dish_new(request, dish_id):
     if rating_value < 0 or rating_value > 5:
         return HttpResponse("{'status': 'failed'}")
 
-    comment = Comment(rating_value=rating_value, dish=dish, restaurant=dish.restaurants.all()[0], comment_text=request.POST['comment_text'])
+    comment = Comment(user=request.user, rating_value=rating_value, dish=dish, restaurant=dish.restaurants.all()[0], comment_text=request.POST['comment_text'])
     comment.save()
 
     return HttpResponse(json.dumps({'status': 'success', 'id': comment.id}))
