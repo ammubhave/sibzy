@@ -108,6 +108,8 @@ def populateFromGrubhub():
         with contextlib.closing(urllib2.urlopen("https://www.grubhub.com/restaurant/" + url)) as spage:
             s = spage.read()
             name = re.search('<div itemprop="name">(.*?)</div>', s)
+            if len(Restaurant.objects.filter(name= name.group(1))):
+                continue
             #address = re.search('<p class="restaurantAddress fine_print">(.*?)</p>', s)
             #print "Address:", address.group(1)
             street = re.search('<span itemprop="streetAddress">(.*?)</span>', s)
