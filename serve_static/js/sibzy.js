@@ -1,22 +1,37 @@
 var c = {}, rs = {};
 
-function show_restaurant_details(id) {
-    //console.log(rs[id].name);
-    $('#restaurant_name').text(rs[id].name);
+// using jQuery
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }
 
 function activate_links() {
+    
     $('a[href]').each(function (index, elem) {
            //22 alert('y');
-            elem = $(elem);
+            elem = $(elem);           
             var newpath = elem.attr('href').substring(2);         
-            
             
             //console.log(elem);
             if (elem.attr('href').indexOf('#!') == 0 && elem.attr('href').length > 1) {
+               
                 
-                newpath = newpath.substring(0, newpath.indexOf('?'));
-                
+                if (newpath.indexOf('?') != -1)
+                    newpath = newpath.substring(0, newpath.indexOf('?'));
+            
+                // console.log('P: ' + newpath)
                 
                 elem.unbind('click');
                 elem.click(function(e){
@@ -26,22 +41,23 @@ function activate_links() {
                     //console.log($(this).context.hash);
                     navigate(elem.attr('href').substring(2));
                     
-                    if (newpath == 'restaurant_profile') {
-                        show_restaurant_details(elem.attr('href').substring(elem.attr('href').indexOf('?id=') + 4));
-                    }
+                    //if (newpath == 'restaurant_profile') {
+                    //    show_restaurant_details(elem.attr('href').substring(elem.attr('href').indexOf('?id=') + 4));
+                    //}
                     
                     return false;
                 });
-                
-                if (!(newpath in c)) {
-                    
+                var newpaths = newpath.split('/')
+                //console.log(elem);
+                if (!((newpaths[0] + '/' + newpaths[1]) in c))
+                {
                     //console.log(elem.attr('href').substring(1) + '-');
-                    $.get('/!/load/' + elem.attr('href').substring(2), function( data ) {
-                        c[elem.attr('href').substring(2)] = data;
+                    $.get('/!/' + newpaths[0] + '/load/' + newpaths[1], function( data ) {
+                        c[newpaths[0] + '/' + newpaths[1]] = data;
                     }).fail( function(data){
                         //get the status code
                         console.log(data);
-                        c[elem.attr('href').substring(2)] = data.responseText;
+                        c[newpaths[0] + '/' + newpaths[1]] = data.responseText;
                     });
                     //console.log(elem.attr('href').substring(1) + '-');
                 }
@@ -49,53 +65,69 @@ function activate_links() {
         });
 }
 function navigate(path) {    
-    
-    
+    var paths = path.split('/')
+    //console.log('navigate(' + path + ')')
     window.location = './#!' + path;
-    if (path.indexOf('?') != -1) {
+    
+    if (path.indexOf('?') != -1)
         path = path.substring(0, path.indexOf('?'));
-    }
-    if (path in c) {
+    
+    //console.log(c);
+    if ((paths[0] + '/' + paths[1]) in c) {
         $('#content').remove();
         $('#content_parent').html($('<div>').attr('id', 'content'));
         
-        $("#content" ).html( c[path] );
-        
+        $("#content" ).html( c[paths[0] + '/' + paths[1]] );
         //console.log($('#content a[href]'));
         
         activate_links();
     } else {
-        $.get('/!/load/' + path, function( data ) {
-            c[path] = data;
-            navigate(path);
+        $.ajax({
+            url: '/!/' + paths[0] + '/load/' + paths[1],
+            success: function( data ) {
+                c[paths[0] + '/' + paths[1]] = data;
+                navigate(path);//window.location.hash = '';
+            },
+            error: function(xhr, status, error) {
+                c[paths[0] + '/' + paths[1]] = xhr.responseText;
+                navigate(path);
+            }
         });
     }
 }
 
 $(function () {
     if (window.location.hash == '') {
-        navigate('home');
+        if (getCookie('fbid') == null) {
+            navigate('frontend/landing');
+        } else {
+            navigate('frontend/home');
+        }
+        
     } else {
-        navigate(window.location.hash.substring(2));
-        
-        
+        navigate(window.location.hash.substring(2));        
     }
     $('#txtSearch').keyup(function (data) {
         q = $('#txtSearch').val();
-        console.log(q)
+        //console.log(q)
         if (q == '') {
-            navigate('home');
+            navigate('frontend/home');
         } else {
-            $.getJSON('/!/search/' + encodeURIComponent(q), function( data ) {
-                navigate('search');
-                $('.search_q').text(q);
-                
-                $.each( data, function( index, r ) {
-                    rs[r['id']] = r;
-                    $('#search_results').append($('<a href="#restaurant_profile?id=' + r['id'] + '"><h2>' + r['name'] + '</h2></a>'));
-                });
-                activate_links();
-            });            
+            navigate('search/q/' + encodeURIComponent(q));
+            //$.getJSON('/!/search/' + encodeURIComponent(q), function( data ) {
+            //    navigate('frontend/search');
+            //    $('.search_q').text(q);
+            //    
+            //    $.each( data, function( index, r ) {
+            //        rs[r['id']] = r;
+            //        $('#search_results').append($('<a href="#restaurant_profile?id=' + r['id'] + '"><h2>' + r['name'] + '</h2></a>'));
+            //    });
+            //    activate_links();
+            //});
         }        
     });
+    
+    $.ajaxSetup({
+        headers: { 'X-CSRFToken': getCookie('csrftoken') }
+    }); 
 });
