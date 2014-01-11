@@ -107,13 +107,14 @@
 				var entry = $('._restaurant-dishes-entry').clone();
 				entry.show();
 				//entry.css('background-color', 'grey');
+				entry.unbind('click');
 				entry.bind('click', function() {
 					//if ($('#dishinfo').css('display') == 'none') {
 					
 						$('#dishinfo').show();
 						$('.restaurants-comments-new').hide();
 						$('.dishes-comments-new').show();
-						
+						$('#dishes-comments-button').unbind('click');
 						$('#dishes-comments-button').bind('click', function() {
 							
 							$.ajax({
