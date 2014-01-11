@@ -15,6 +15,10 @@ def q(request, query):
     '''
 
     restaurants = Restaurant.objects.filter(name__icontains=query)[:10]
-
-    response = HttpResponse(json.dumps([json.loads(restaurant.json()) for restaurant in restaurants]))
+    resp = []
+    for restaurant in restaurants:
+        element = json.loads(restaurant.json())
+        element.dish = None
+        resp.append(element)
+    response = HttpResponse(json.dumps(resp))
     return response
