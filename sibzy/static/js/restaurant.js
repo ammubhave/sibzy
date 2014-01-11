@@ -11,6 +11,7 @@ $(function () {
             success: function (data) {
                 console.log(data);
                 $('.restaurant-name').text(data.name);
+                $('#txtSearch').val(data.name);
                 restaurant.name = data.name;
                 
                 $('.restaurant-location-latitude').text(data.location.latitude);

@@ -16,16 +16,20 @@ $(function() {
                 
                 var item = $('#search-data-item').clone();
                 item.css('display', '');
-                item.children('.restaurant-name').text(restaurant.name);
+                item.find('.restaurant-name').text(restaurant.name);
                 
-                item.children('.restaurant-location-latitude').text(restaurant.location.latitude);
-                item.children('.restaurant-location-longitude').text(restaurant.location.longitude);
-                item.children('.restaurant-location-address').text(restaurant.location.address);
-                item.children('.restaurant-location-city').text(restaurant.location.city.name);
-                item.children('.restaurant-location-state').text(restaurant.location.state);
+                item.find('.restaurant-location-latitude').text(restaurant.location.latitude);
+                item.find('.restaurant-location-longitude').text(restaurant.location.longitude);
+                item.find('.restaurant-location-address').text(restaurant.location.address);
+                item.find('.restaurant-location-city').text(restaurant.location.city.name);
+                item.find('.restaurant-location-state').text(restaurant.location.state);
+                item.find('.restaurant-link').attr('href', '#!restaurant/profile/' + restaurant.id);
+               
                 
                 $('#search-result').append(item);
+                
             }
+            activate_links();
         }
     })
 })
