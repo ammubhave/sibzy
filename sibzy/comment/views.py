@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from auth.models import User, UserProfile
 from comment.models import Comment, CommentVote
+from restaurant.models import Dish
 import json
 
 
@@ -140,7 +141,7 @@ def dish_new(request, dish_id):
     if rating_value < 0 or rating_value > 5:
         return HttpResponse("{'status': 'failed'}")
 
-    comment = Comment(rating_value=rating_value, dish=dish, restaurant=dish.restaurants_set.all()[0], comment_text=request.POST['comment_text'])
+    comment = Comment(rating_value=rating_value, dish=dish, restaurant=dish.restaurant_set.all()[0], comment_text=request.POST['comment_text'])
     comment.save()
 
     return HttpResponse(json.dumps({'status': 'success', 'id': comment.id}))
