@@ -14,7 +14,7 @@ def q(request, query):
         ``[<restaurant object>, <restaurant object>, ...]``
     '''
 
-    restaurants = Restaurant.objects.filter(name__icontains=query)[0-10]
+    restaurants = Restaurant.objects.filter(name__icontains=query)[0:10]
 
     response = HttpResponse(json.dumps([json.loads(restaurant.json()) for restaurant in restaurants]))
     return response
