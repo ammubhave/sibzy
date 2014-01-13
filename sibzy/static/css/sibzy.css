@@ -3,33 +3,57 @@
             display: none;
         }
 
-        .fb-nologin {
-            display: none;
-        }
+.fb-nologin {
+    display: none;
+}
 
 h1 { 
-font-family: "Helvetica";
+    font-family: "Helvetica";
 }
 
 #restaurant-head { 
-margin-top: 50px;
-margin-bottom: 50px;
-background-color: rgba(105, 105, 179, 0.32);
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background-color: rgba(105, 105, 179, 0.32);
 }
 
 #profile-image { 
-padding: 20px;
-padding-left: 5px;
+    padding: 20px;
+    padding-left: 5px;
 }
 
-#rating { 
-background-image: url('http://i.imgur.com/pDkElep.png');
-background-repeat: repeat-x; 
-height: 20px; 
-width:0px; 
-background-size: 100px 20px
+.rating { 
+    background-image: url('http://i.imgur.com/pDkElep.png');
+    background-repeat: repeat-x; 
+    height: 20px; 
+    width:0px; 
+    background-size: 100px 20px
 }
 
 .noshow {
     display:none;
 }
+
+#mapcanvas {
+    width: 500px; 
+    height: 500px; 
+    display: none
+}
+
+#dishinfo {
+    padding:12px; padding-left: 0px;  background-color: rgba(105, 105, 179, 0.32); display:none
+}
+
+#review { 
+    padding:12px; 
+    margin-top:10px;
+    background-color: rgba(240, 102, 26, 0.41);
+}
+
+#comment { 
+    display: none;
+    margin-top: 10px; 
+    padding:12px;
+    padding-left: 0px;
+    background-color: rgba(82, 204, 41, 0.22)
+   }

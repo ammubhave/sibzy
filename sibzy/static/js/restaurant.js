@@ -102,3 +102,83 @@ $('#map-canvas').bind('ondataload', function() {
 				  });
 				
 			});
+
+$('#rating').bind('ondataload', function () { 
+    $(this).css('width', (restaurant.rating.total * 20) + 'px' ) 
+});
+
+$('._restaurant-dishes').bind('ondataload', function() {
+            
+            $.each(restaurant.dishes, function(index, dish) {
+                var entry = $('._restaurant-dishes-entry').clone();
+                entry.show();
+                //entry.css('background-color', 'grey');
+                entry.unbind('click');
+                entry.bind('click', function() {
+                    //if ($('#dishinfo').css('display') == 'none') {
+                    
+                        $('#dishinfo').show();
+                        $('.dishes-comments-new').show();
+                        $('#dishes-comments-button').unbind('click');
+                        $('#dishes-comments-button').bind('click', function() {
+                            
+                            $.ajax({
+                                method: 'POST',
+                                url: '!/comment/dish/' + dish.id + '/new',
+                                data: {
+                                    'comment_text': $('#dishes-comments-text').val(),
+                                    'rating_value': 3
+                                },
+                                dataType: 'json',
+                                success: function(data) {
+                                    entry.trigger('click');
+                                }
+                            });
+                        });
+                        
+                        $('#dish-details-name').text(dish.name);
+                        $('#dish-details-comments').html('');
+                        $.ajax({
+                            url: '!/comment/dish/' + dish.id,
+                            dataType: 'json',
+                            success: function(data) {
+                                //console.log(data);
+                                $.each(data, function(index, comment) {
+                                    var entry = $('._dish-details-comments-entry').clone();
+                                    entry.show();
+                                    entry.removeClass('_dish-details-comments-entry');
+                                    console.log(comment);
+                                    entry.find('._dish-details-comments-entry-ratingvalue').text(comment.rating_value);
+                                    entry.find('._dish-details-comments-entry-commenttext').text(comment.comment_text);
+                                    entry.find('._dish-details-comments-entry-user').text(comment.user.fbusername);
+                                    
+                                    $('#dish-details-comments').append(entry);
+                                });
+                            }
+                        })
+                    
+                    /*} else {
+                        
+                        $('#dishinfo').hide();
+                        $('.restaurants-comments-new').show();
+                        $('.dishes-comments-new').hide();
+                    }*/
+                });
+                entry.find('._restaurant-dishes-entry-name').text(dish.name);
+                entry.find('._restaurant-dishes-entry-price').text(dish.price);
+                //console.log(dish.categories);
+                if ($.inArray('Entree', dish.categories) > -1) {                    
+                    $('#panelEntrees').append(entry);
+                    //alert(dish.name);
+                } else if ($.inArray('Appetizer', dish.categories) > -1) {
+                    $('#panelAppetizers').append(entry);
+                    //alert(dish.name);
+                } else if ($.inArray('Desert', dish.categories) > -1) {                 
+                    $('#panelDeserts').append(entry);
+                    //alert(dish.name);
+                } else {
+                    $('#panelOthers').append(entry);
+                }
+                
+            });
+        });
