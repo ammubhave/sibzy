@@ -79,7 +79,7 @@ $(function () {
     console.log(path);
 });
 
-$('#map-canvas').bind('ondataload', function() {
+    $('#map-canvas').bind('ondataload', function() {
 				//alert('load map');
 				var myLatlng = new google.maps.LatLng(restaurant.location.latitude, restaurant.location.longitude);
 				var mapOptions = {
