@@ -12,14 +12,7 @@ $(function() {
         zoom: 17
     };
     var map = new google.maps.Map(document.getElementById("map-canvas"),
-        mapOptions);
-    
-    var marker = new google.maps.Marker({
-      //  position: myLatlng,
-        map: map,
-       // title: restaurant.name,
-    });
-    
+        mapOptions);    
     
     
     $.ajax({
@@ -41,8 +34,8 @@ $(function() {
                 item.find('.restaurant-location-state').text(restaurant.location.state);
                 //item.find('.restaurant-link').attr('href', '#!restaurant/profile/' + restaurant.id);
                 
-                var myLatlng = new google.maps.LatLng(restaurant.location.latitude, restaurant.location.longitude);
-                marker = new google.maps.Marker({
+                    var myLatlng = new google.maps.LatLng(restaurant.location.latitude, restaurant.location.longitude);
+                    var marker = new google.maps.Marker({
                         position: myLatlng,
                         map: map,
                         title: restaurant.name,
@@ -52,7 +45,7 @@ $(function() {
                     });
                     google.maps.event.addListener(marker, 'click', function() {
                         infowindow.open(map,marker);
-                });
+                    });
 
                 if (i == 0) {                    
                     map.setCenter(myLatlng);
