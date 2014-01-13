@@ -3,191 +3,145 @@
 
 
 <link rel="stylesheet" type="text/css" href="/static/css/landing.css">
-<script>
-    function sizeSlideshow(){
-			$('#main').height(($('html').height()-($('header').height()+$('footer').height()))+'px');
-
-			//$('div.slider-nav span').css('margin-top',($('#intro').height()/2-50)+'px');
-			$('section#intro').css('min-height',$('#main').height() - 100 + 'px');
-		}
-
-	$().ready(function() {
-			
-		sizeSlideshow(); 
-			$('#intro').hide().fadeIn('slow');
-			//$('#intro').hide().delay(1600).fadeIn('slow');
-			$('#mission').hide().delay(1000).fadeIn('slow');
-			$('.navbar').hide().delay(1600).fadeIn('slow');
-			$('#home').hide().delay(1600).fadeIn('slow');
-			$('#about').hide().delay(1600).fadeIn('slow');
-
-			$(window).resize(sizeSlideshow);
-	});
-
-	$(document).ready(function(){
-    $('section[data-type="background"]').each(function(){
-        var $bgobj = $(this); // assigning the object
-     
-        $(window).scroll(function() {
-            var yPos = -($window.scrollTop() / $bgobj.data('speed')); 
-             
-            // Put together our final background position
-            var coords = '50% '+ yPos + 'px';
- 
-            // Move the background
-            $bgobj.css({ backgroundPosition: coords });
-        }); 
-    });    
-}); 
-</script>
+<script type="text/javascript" src="/static/js/fadein.js"></script>
 
 <!-- Section #1 -->
-	<section id="intro" data-speed="6" data-type="background">
-		<div class="container" id="main">
-			<div class="row">
+<section id="intro" data-speed="6" data-type="background">
+	<div class="container" id="main">
+		<div class="row">
+            <center> 
+                <img class="img-responsive" height="1000px" src="/static/images/logo.png">
+	        </center> 
+    	</div>
+        <div class"row"> 
+            <section id="mission"> 
+                <div class="jumbotron" style=" box-shadow: 0 0 50px rgba(0,0,0,0.8);">
+                    <h2>The Sibzy Model</h2>
 
-		        <center> 
-		          <img class="img-responsive" height="1000px" src="/static/images/logo.png">
-		        </center> 
-	    	</div>
-	    	<div class"row"> 
-	    	<section id="mission"> 
-	    		<div class="jumbotron" style=" box-shadow: 0 0 50px rgba(0,0,0,0.8);">
-  <h2>The Sibzy Model</h2>
-	    		<p>Started by MIT students, Sibzy personalizes the food review system with dish-by-dish ratings and menus filtered to your tastes and preferences</p>
-	    		
-  <p><a href="http://www.youtube.com/embed/cMXrKnDKjiE?autoplay=1" rel="shadowbox;player=iframe;width=1152;height=650" class="btn btn-primary btn-lg" role="button">Watch Video</a> <button onclick="FB.login()" class="btn btn-success btn-lg" role="button">Sign Up</button> 
+                    <p>Started by MIT students, Sibzy personalizes the food review system with dish-by-dish ratings and menus filtered to your tastes and preferences</p>
 
- </p>
-</div>
-	   
-	    </section> 
+                    <p><a href="http://www.youtube.com/embed/cMXrKnDKjiE?autoplay=1" rel="shadowbox;player=iframe;width=1152;height=650" class="btn btn-primary btn-lg" role="button">Watch Video</a> <button onclick="FB.login()" class="btn btn-success btn-lg" role="button">Sign Up</button> </p>
+                </div>
+            </section> 
+        </div> 
+    </div>
+</section>
 
+<!-- Restaurants and Users --> 
+<section id="restaurant" data-speed="6" data-type="background"> 
+	<div class="container" id="main">
+		<div class="row" style="padding-top: 100px; padding-bottom: 100pxß">
+			<div class="col-md-6">
+			<h1> For Users </h1> 
+
+				<div class="media">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" src="/static/images/check.png">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">Explore</h4>
+						Explore restaurants using our specialized vegetarian and vegan menus.            
+                    </div>
+                </div>
+
+                <div class="media">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" src="/static/images/check.png">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">Connect</h4>
+                        Connect with fellow veggie enthusiasts and see what they recommend.
+                    </div>
+                </div>
+
+                <div class="media">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" src="/static/images/check.png">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">Share</h4>
+                        Share your dining experience by rating, upvoting & commenting.
+                    </div>
+                </div>
+			</div> 
+
+	        <div class="col-md-6">
+
+			<h1> For Restaurants </h1> 
+
+				<div class="media">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" src="/static/images/check.png">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">Reach</h4>
+                         Reach out to vegetarian and vegan food lovers.
+                    </div>
+                </div>
+
+                <div class="media">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" src="/static/images/check.png">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">Discover</h4>
+                          Discover what customers have to say about their dining experience.
+                    </div>
+                </div>
+
+                <div class="media">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" src="/static/images/check.png">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">Improve</h4>
+                         Improve your restaurant by responding to customer feedback.
+                    </div>
+                </div>
+		    </div> 
+	   </div> 
 	</div> 
+</section> 
 
-
-	    	
-	    </div>
-	</section>
-
-	<!-- Restaurants and Users --> 
-	<section id="restaurant" data-speed="6" data-type="background"> 
-		<div class="container" id="main">
-			<div class="row" style="padding-top: 100px; padding-bottom: 100pxß">
-				<div class="col-md-6">
-				<h1> For Users </h1> 
-
-				 						<div class="media">
-                                                <a class="pull-left" href="#">
-                                                    <img class="media-object" src="/static/images/check.png">
-                                                </a>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">Explore</h4>
-														Explore restaurants using our specialized vegetarian and vegan menus.            
-						                                   </div>
-                                        </div>
-
-                                        <div class="media">
-                                                <a class="pull-left" href="#">
-                                                    <img class="media-object" src="/static/images/check.png">
-                                                </a>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">Connect</h4>
-                                                      Connect with fellow veggie enthusiasts and see what they recommend.
-                                                </div>
-                                        </div>
-
-                                        <div class="media">
-                                                <a class="pull-left" href="#">
-                                                    <img class="media-object" src="/static/images/check.png">
-                                                </a>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">Share</h4>
-                                                     Share your dining experience by rating, upvoting & commenting.
-                                                </div>
-                                        </div>
-				</div> 
-
-		        <div class="col-md-6">
-				<h1> For Restaurants </h1> 
-
-				  						<div class="media">
-                                                <a class="pull-left" href="#">
-                                                    <img class="media-object" src="/static/images/check.png">
-                                                </a>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">Reach</h4>
-                                                     Reach out to vegetarian and vegan food lovers.
-                                                </div>
-                                        </div>
-
-                                        <div class="media">
-                                                <a class="pull-left" href="#">
-                                                    <img class="media-object" src="/static/images/check.png">
-                                                </a>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">Discover</h4>
-                                                      Discover what customers have to say about their dining experience.
-                                                </div>
-                                        </div>
-
-                                        <div class="media">
-                                                <a class="pull-left" href="#">
-                                                    <img class="media-object" src="/static/images/check.png">
-                                                </a>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">Improve</h4>
-                                                     Improve your restaurant by responding to customer feedback.
-                                                </div>
-                                        </div>
-			    </div> 
-		   </div> 
-
-
-		</div> 
-	</section> 
-
-	<!-- Section #2 -->
-	<section id="story" data-speed="4" data-type="background">
-		<div class="container" >
-		
+<!-- Section #2 --> <!-- Comment from Jonathan - Can we delete this shit  -->
+<section id="story" data-speed="4" data-type="background">
+	<div class="container" >
 		<div class="row" style="background-color:rgba(255,255,255,0.5); padding: 15px; "> 
-<h1> Our Story </h1> 
+            <h1> Our Story </h1> 
 		
-<p> <h4>  A group of friends at MIT started Sibzy with a mission to improve the dining experience for vegetarians and vegans by connecting restaurants with customers. Why not have a specialized site that caters specifically to veggie food lovers? To learn more about Sibzy, you can read our FAQ. Join us by creating a profile or by listing your awesome restaurant! </p> </h4> 
+            <p> <h4>  A group of friends at MIT started Sibzy with a mission to improve the dining experience for vegetarians and vegans by connecting restaurants with customers. Why not have a specialized site that caters specifically to veggie food lovers? To learn more about Sibzy, you can read our FAQ. Join us by creating a profile or by listing your awesome restaurant! </p> </h4> 
 
-<p> <h1> The Sibzy Model </h1> </p>  
+            <p> <h1> The Sibzy Model </h1> </p>  
 
-<p> <h4> 1) Explore specialized restaurant menus of only the vegetarian and vegan dishes - 
-don't worry about an item having meat or broth because it's catered to veggie food lovers! </h4> </p>
+            <p> <h4> 1) Explore specialized restaurant menus of only the vegetarian and vegan dishes - 
+            don't worry about an item having meat or broth because it's catered to veggie food lovers! </h4> </p>
 
-<p> <h4>2) Use our dynamic search feature to search for restaurants based on location, even search for your favorite vegetarian dishes by name.</h4> </p>
-<p> <h4>3) Rate, comment, and upvote your favorite dishes. Give restaurants your feedback to help them improve. See what others recommend.</h4> </p> 
+            <p> <h4>2) Use our dynamic search feature to search for restaurants based on location, even search for your favorite vegetarian dishes by name.</h4> </p>
+            
+            <p> <h4>3) Rate, comment, and upvote your favorite dishes. Give restaurants your feedback to help them improve. See what others recommend.</h4> </p> 
 
-<hr/> 
+            <hr/>
+        </div>
+    </div>
+</section>
 
+<section id="home" data-speed="4" data-type="background">
+	<div class="container" style="background-color:rgba(255,255,255,0.5);">
+		<div class="row" > 
+            <div class="col-md-6"> 
+                <center> 
+                    <h1> Amol Bhave </h1> 
+                    <img src="/static/images/amol.jpg" class="img-circle"> 
+                </center>
+            </div>
 
-	</section>
-
-	<section id="home" data-speed="4" data-type="background">
-		<div class="container" style="background-color:rgba(255,255,255,0.5);">
-		
-<div class="row" > 
-<div class="col-md-6"> 
-	<center> 
-	<h1> Amol Bhave </h1> 
-<img src="/static/images/amol.jpg" class="img-circle"> 
-</div> 
-</center> 
-
-<div class="col-md-6">
-<center>  
-	<h1>Fernando Trujano</h1> 
-<img src="/static/images/fernando.jpg" class="img-circle"> 
-</div> 
-</center> 
-
-</div> 
+            <div class="col-md-6">
+                <center>  
+                	<h1>Fernando Trujano</h1> 
+                <img src="/static/images/fernando.jpg" class="img-circle"> 
+                </center> 
+            </div> 
+        </div> 
 
 <div class="row"> 
 
@@ -206,10 +160,6 @@ don't worry about an item having meat or broth because it's catered to veggie fo
 </center>  
 </div> 
 		 
-
-
-		
-
 	    </div>
 	</section>
 
