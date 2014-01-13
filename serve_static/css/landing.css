@@ -1,4 +1,4 @@
- #intro { 
+		#intro { 
 			/*background: url(images/intro.png) 50% 0 fixed; 
 			*/
 			background: #6969b3;
@@ -12,19 +12,19 @@
 		}
 
 		#restaurant { 
+
 			background: #f0661a;
 			height: auto;  
-			margin: 0 auto; 
+			margin: 0; 
 		    width: 100%; 
 		    position: relative; 
 		    box-shadow: 0 0 50px rgba(0,0,0,0.8);  
-		    padding: 100px 0;
+		    padding: 0px 0;
 		    color: #FFFFFF;
 
-		    min-height: 1000px;
 		}
 
-			#story { 
+		#story { 
 			background: url(/static/images/team.jpg) 50% 0 fixed; 
 			height: auto;  
 			margin: 0 auto; 
@@ -43,6 +43,7 @@
 		    box-shadow: 0 0 50px rgba(0,0,0,0.8);
 		    padding: 200px 0;
 		}
+		
 		#about { 
 			background: url(/static/images/about.png) 50% 0 fixed; 
 			height: auto;
