@@ -6,6 +6,20 @@ $(function() {
     
     $('.search-query').text(query);
     
+   // var myLatlng = new google.maps.LatLng(restaurant.location.latitude, restaurant.location.longitude);
+    var mapOptions = {
+       // center: myLatlng,
+        zoom: 17
+    };
+    var map = new google.maps.Map(document.getElementById("map-canvas"),
+        mapOptions);
+    
+    var marker = new google.maps.Marker({
+      //  position: myLatlng,
+        map: map,
+       // title: restaurant.name,
+    });
+    
     $.ajax({
         url: '/!/search/q/' + encodeURIComponent(query),
         dataType: 'json',
@@ -28,12 +42,34 @@ $(function() {
                 item.mouseenter(function() {
                     $(this).removeClass('bs-callout-info');
                     $(this).addClass('bs-callout-warning');
+                    
+                    var myLatlng = new google.maps.LatLng(restaurant.location.latitude, restaurant.location.longitude);
+                    
+                    marker.setMap(null);
+                    //delete marker;
+                    
+                    map.setCenter(myLatlng);
+                    
+                    marker = new google.maps.Marker({
+                        position: myLatlng,
+                        map: map,
+                        title: restaurant.name,
+                    });
+                    var infowindow = new google.maps.InfoWindow({
+                        content: restaurant.name
+                    });
+                    google.maps.event.addListener(marker, 'click', function() {
+                        infowindow.open(map,marker);
+                    });
+                    
                 }).mouseleave(function () {
                     $(this).removeClass('bs-callout-warning');
                     $(this).addClass('bs-callout-info');
                 }).click(function () {
                     navigate('restaurant/profile/' + restaurant.id);
                 });
+                
+                
                 
                 $('#search-result').append(item);
                 
