@@ -20,6 +20,8 @@ $(function() {
        // title: restaurant.name,
     });
     
+    
+    
     $.ajax({
         url: '/!/search/q/' + encodeURIComponent(query),
         dataType: 'json',
@@ -39,10 +41,8 @@ $(function() {
                 item.find('.restaurant-location-state').text(restaurant.location.state);
                 //item.find('.restaurant-link').attr('href', '#!restaurant/profile/' + restaurant.id);
                 
-                if (i == 0) {
-                    var myLatlng = new google.maps.LatLng(restaurant.location.latitude, restaurant.location.longitude);
-                    map.setCenter(myLatlng);
-                    marker = new google.maps.Marker({
+                var myLatlng = new google.maps.LatLng(restaurant.location.latitude, restaurant.location.longitude);
+                marker = new google.maps.Marker({
                         position: myLatlng,
                         map: map,
                         title: restaurant.name,
@@ -52,7 +52,10 @@ $(function() {
                     });
                     google.maps.event.addListener(marker, 'click', function() {
                         infowindow.open(map,marker);
-                    });
+                });
+
+                if (i == 0) {                    
+                    map.setCenter(myLatlng);
                 }
                 
                 item.mouseenter(function() {
@@ -61,22 +64,9 @@ $(function() {
                     
                     var myLatlng = new google.maps.LatLng(restaurant.location.latitude, restaurant.location.longitude);
                     
-                    marker.setMap(null);
-                    //delete marker;
-                    
                     map.setCenter(myLatlng);
                     
-                    marker = new google.maps.Marker({
-                        position: myLatlng,
-                        map: map,
-                        title: restaurant.name,
-                    });
-                    var infowindow = new google.maps.InfoWindow({
-                        content: restaurant.name
-                    });
-                    google.maps.event.addListener(marker, 'click', function() {
-                        infowindow.open(map,marker);
-                    });
+                    
                     
                 }).mouseleave(function () {
                     $(this).removeClass('bs-callout-warning');

@@ -12,6 +12,10 @@ $(function () {
                 console.log(data);
                 $('.restaurant-name').text(data.name);
                 $('#txtSearch').val(data.name);
+                $('#txtSearch').click(function () {
+                    $(this).val('');
+                    $(this).unbind('click');
+                })
                 restaurant.name = data.name;
                 
                 $('.restaurant-location-latitude').text(data.location.latitude);
