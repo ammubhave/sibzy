@@ -1,206 +1,112 @@
 <script src="/static/js/restaurant.js"></script>
-<!-- HI AMOL -->
+
 <div class="container">
-	<div class="row clearfix" style="margin-top: 50px; margin-bottom: 50px; background-color: rgba(105, 105, 179, 0.32); ">
+	<div class="row clearfix" id="restaurant-head">
 		<div class="col-md-2 column">
-			<img style="padding: 20px; padding-left: 5px; "alt="170x170" src="http://lorempixel.com/170/170/" />
+			<img id="profile-image" alt="170x170" src="http://lorempixel.com/170/170/" />
 		</div>
 		<div class="col-md-4 column">
 			<h1> <span class="restaurant-name"> </span> </h1> </br> 
-
-			<div id="rating" class="_restaurant-rating-total" style=" background-image: url('http://i.imgur.com/pDkElep.png'); background-repeat: repeat-x; height: 20px; width:0px;  background-size: 100px 20px ">   </div>
-<script>$('#rating').bind('ondataload', function () { $(this).css('width', (restaurant.rating.total * 20) + 'px' ) });</script>
-
-			<span class="_restaurant-categories-element-start" style="display:none"> <span class="_restaurant-categories-element-name"> </span>, <!--<span class="_restaurant-categories-element-slug"> </span>-->  </span>
-
-			<span class="_restaurant-categories-element" style="display:none"> <span class="_restaurant-categories-element-name"> </span>, <!--<span class="_restaurant-categories-element-slug"> </span>-->  </span>
-
-			<span class="_restaurant-categories-element-end" style="display:none"> <span class="_restaurant-categories-element-name"> </span> <!--<span class="_restaurant-categories-element-slug"> </span>-->  </span> 
-			
+			<div id="rating" class="_restaurant-rating-total rating"> </div>
+			<span class="_restaurant-categories-element-start noshow" > 
+                <span class="_restaurant-categories-element-name"> </span> 
+            </span>
+			<span class="_restaurant-categories-element noshow" >
+                <span class="_restaurant-categories-element-name"> </span>
+            </span>
+			<span class="_restaurant-categories-element-end noshow" > 
+                <span class="_restaurant-categories-element-name"> </span>
+            </span> 		
 			<span class="restaurant-categories"></span>
-			
 			<span class="restaurant-rating-total"> </span> 
-
 		</div>
+
 		<div class="col-md-4 column">
-			<h3>
-				
-			</h3> <address> <strong><span class="restaurant-name"> </span></strong><br /> <span class="restaurant-location-address"> </span> </br> 
-		<span class="restaurant-location-city"> </span>, 
-		<span class="restaurant-location-state"> </span> 
-		 <span class="restaurant-location-country"> </span> </br> 
-		<span class="restaurant-location-phone"> </span> </br> 
-		<span class="restaurant-location-zip"></address> <button type="button" onclick="$('#map-canvas').toggle(); $('#map-canvas').trigger('ondataload');" class="btn btn-default">Map</button>
-		<div id="map-canvas" style="width: 500px; height: 500px; display: none"></div>
-		
-		<script>
-			
-		</script>
-		
+			<address> <strong><span class="restaurant-name"> </span></strong><br /> <span class="restaurant-location-address"> </span> </br> 
+    		<span class="restaurant-location-city"> </span>, 
+    		<span class="restaurant-location-state"> </span> 
+    		<span class="restaurant-location-country"> </span> </br> 
+    		<span class="restaurant-location-phone"> </span> </br> 
+    		<span class="restaurant-location-zip"></address> <button type="button" onclick="$('#map-canvas').toggle(); $('#map-canvas').trigger('ondataload');" class="btn btn-default">Map</button>
+    		<div id="map-canvas" ></div>
 		</div>
 	</div>
-	<div class="row clearfix">
-		<div class="col-md-6 column" style="padding-left: 0px;">
 
-			<div class="panel-group _restaurant-dishes" id="dishes">
-  <div class="panel panel-default">
-	<div class="_restaurant-dishes-entry" style="display:none">
-		<span class="_restaurant-dishes-entry-name">Appetizer 1</span>
-		<span class="pull-right">$<span class="_restaurant-dishes-entry-price">$15</span></span>
-	</div>
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#dishes" href="#collapseAppetizers">
-          Appetizers
-        </a>
-      </h4>
-    </div>
-    <div id="collapseAppetizers" class="panel-collapse collapse">
-      <div class="panel-body" id="panelAppetizers">
-       
-      </div>
-    </div>
+    <div class="row clearfix">
+        <div class="col-md-6 column" style="padding-left: 0px;">
+            <div class="panel-group _restaurant-dishes" id="dishes">
+              <div class="panel panel-default">
 
-	<div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#dishes" href="#collapseEntrees">
-          Entrees
-        </a>
-      </h4>
-    </div>
-    <div id="collapseEntrees" class="panel-collapse collapse in">
-      <div class="panel-body" id="panelEntrees">
-       
-      </div>
-    </div>
+            	<div class="_restaurant-dishes-entry" style="display:none">
+            		<span class="_restaurant-dishes-entry-name">Appetizer 1</span>
+            		<span class="pull-right">$<span class="_restaurant-dishes-entry-price">$15</span></span>
+            	</div>
 
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#dishes" href="#collapseDeserts">
-          Deserts
-        </a>
-      </h4>
-    </div>
-    <div id="collapseDeserts" class="panel-collapse collapse">
-      <div class="panel-body" id="panelDeserts">
-      
-      </div>
-    </div>
-	
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#dishes" href="#collapseOthers">
-          Other
-        </a>
-      </h4>
-    </div>
-    <div id="collapseOthers" class="panel-collapse collapse">
-      <div class="panel-body" id="panelOthers">
-      
-      </div>
-    </div>
-	
-	<script>
-		$('._restaurant-dishes').bind('ondataload', function() {
-			
-			$.each(restaurant.dishes, function(index, dish) {
-				var entry = $('._restaurant-dishes-entry').clone();
-				entry.show();
-				//entry.css('background-color', 'grey');
-				entry.unbind('click');
-				entry.bind('click', function() {
-					//if ($('#dishinfo').css('display') == 'none') {
-					
-						$('#dishinfo').show();
-						$('.dishes-comments-new').show();
-						$('#dishes-comments-button').unbind('click');
-						$('#dishes-comments-button').bind('click', function() {
-							
-							$.ajax({
-								method: 'POST',
-								url: '!/comment/dish/' + dish.id + '/new',
-								data: {
-									'comment_text': $('#dishes-comments-text').val(),
-									'rating_value': 3
-								},
-								dataType: 'json',
-								success: function(data) {
-									entry.trigger('click');
-								}
-							});
-						});
-						
-						$('#dish-details-name').text(dish.name);
-						$('#dish-details-comments').html('');
-						$.ajax({
-							url: '!/comment/dish/' + dish.id,
-							dataType: 'json',
-							success: function(data) {
-								//console.log(data);
-								$.each(data, function(index, comment) {
-									var entry = $('._dish-details-comments-entry').clone();
-									entry.show();
-									entry.removeClass('_dish-details-comments-entry');
-									console.log(comment);
-									entry.find('._dish-details-comments-entry-ratingvalue').text(comment.rating_value);
-									entry.find('._dish-details-comments-entry-commenttext').text(comment.comment_text);
-									entry.find('._dish-details-comments-entry-user').text(comment.user.fbusername);
-									
-									$('#dish-details-comments').append(entry);
-								});
-							}
-						})
-					
-					/*} else {
-						
-						$('#dishinfo').hide();
-						$('.restaurants-comments-new').show();
-						$('.dishes-comments-new').hide();
-					}*/
-				});
-				entry.find('._restaurant-dishes-entry-name').text(dish.name);
-				entry.find('._restaurant-dishes-entry-price').text(dish.price);
-				//console.log(dish.categories);
-				if ($.inArray('Entree', dish.categories) > -1) {					
-					$('#panelEntrees').append(entry);
-					//alert(dish.name);
-				} else if ($.inArray('Appetizer', dish.categories) > -1) {
-					$('#panelAppetizers').append(entry);
-					//alert(dish.name);
-				} else if ($.inArray('Desert', dish.categories) > -1) {					
-					$('#panelDeserts').append(entry);
-					//alert(dish.name);
-				} else {
-					$('#panelOthers').append(entry);
-				}
-				
-			});
-		});
-	</script>
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#dishes" href="#collapseAppetizers">
+                      Appetizers
+                    </a>
+                  </h4>
+                </div>
 
+                <div id="collapseAppetizers" class="panel-collapse collapse">
+                    <div class="panel-body" id="panelAppetizers"> </div>
+                </div>
 
-  </div>
-</div> 
-			
-		</div>
+            	<div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#dishes" href="#collapseEntrees">
+                      Entrees
+                    </a>
+                  </h4>
+                </div>
+
+                <div id="collapseEntrees" class="panel-collapse collapse in">
+                  <div class="panel-body" id="panelEntrees"></div>
+                </div>
+
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#dishes" href="#collapseDeserts">
+                      Deserts
+                    </a>
+                  </h4>
+                </div>
+
+                <div id="collapseDeserts" class="panel-collapse collapse">
+                  <div class="panel-body" id="panelDeserts"></div>
+                </div>
+            	
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#dishes" href="#collapseOthers">
+                      Other
+                    </a>
+                  </h4>
+                </div>
+
+                <div id="collapseOthers" class="panel-collapse collapse">
+                  <div class="panel-body" id="panelOthers"> </div>
+                </div>
+
+            </div>
+        </div> 			
+    </div>
 		
- 
 		<div id="dish" class="col-md-6 column">
-
-			<div id="dishinfo" class="row" style="padding:12px; padding-left: 0px;  background-color: rgba(105, 105, 179, 0.32); display:none"> 
+			<div id="dishinfo" class="row noshow"> 
 				<div class="col-md-3 column"> 
 					<img alt="140x140" src="http://lorempixel.com/140/140/food" />
 				</div>
 				<div class="col-md-6 column"> 
-					
 						<h2> <strong id="dish-details-name"> Dish name </strong> </h2> </br> 
 						<p> ***** </p> 
-						<p> Dish Description </p> 
-					
+						<p> Dish Description </p> 				
 				</div>
 			</div>
 		
-			<div class="row dishes-comments-new" style="padding:12px; margin-top:10px; background-color: rgba(240, 102, 26, 0.41); display:none"> 
+			<div class="row dishes-comments-new noshow" id="review" > 
 				<p>Dude's Name</p> 
 				<div class="col-md-3 column"> Upload Picure</div> 
 				<div class="col-md-9 column"> 
@@ -209,30 +115,20 @@
 				</div>
 			</div>
 
-
 			<div id="dish-details-comments"></div>
 
-			<div class="row _dish-details-comments-entry" style="display: none; margin-top: 10px; padding:12px; padding-left: 0px; background-color: rgba(82, 204, 41, 0.22) " > 
+			<div class="row _dish-details-comments-entry noshow" id="comment" style="" > 
 				<div class="col-md-3 column"  > 
 					<img alt="100x100" src="http://lorempixel.com/100/100/food" />
 				</div>
 				<div class="col-md-6 column"> 
 						 <strong class="_dish-details-comments-entry-user"> USer id </strong> <span class="pull-right _dish-details-comments-entry-ratingvalue"> **** </span> </br> 
-						<p class="_dish-details-comments-entry-commenttext"> Review goes here and it is really good </p> 			
+						<p class="_dish-details-comments-entry-commenttext"> Review goes here and it is really good </p> 		
 				</div>
-			
-			</div>			
-			
-		</div>
+			</div>					
+    	</div>
 	
 </div>
-
-<!--  **************** --> 
-
-
-
-
-<!-- ****** --> 
 
 
 
