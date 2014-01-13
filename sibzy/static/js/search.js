@@ -21,10 +21,19 @@ $(function() {
                 item.find('.restaurant-location-latitude').text(restaurant.location.latitude);
                 item.find('.restaurant-location-longitude').text(restaurant.location.longitude);
                 item.find('.restaurant-location-address').text(restaurant.location.address);
-                item.find('.restaurant-location-city').text(restaurant.location.city.name);
+                item.find('.restaurant-location-city').text(restaurant.location.city);
                 item.find('.restaurant-location-state').text(restaurant.location.state);
-                item.find('.restaurant-link').attr('href', '#!restaurant/profile/' + restaurant.id);
-               
+                //item.find('.restaurant-link').attr('href', '#!restaurant/profile/' + restaurant.id);
+                
+                item.mouseenter(function() {
+                    $(this).removeClass('bs-callout-info');
+                    $(this).addClass('bs-callout-warning');
+                }).mouseleave(function () {
+                    $(this).removeClass('bs-callout-warning');
+                    $(this).addClass('bs-callout-info');
+                }).click(function () {
+                    navigate('restaurant/profile/' + restaurant.id);
+                });
                 
                 $('#search-result').append(item);
                 

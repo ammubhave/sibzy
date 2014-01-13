@@ -1,11 +1,65 @@
 <script src="/static/js/search.js"></script>
-<br /><br /><br />
-Search for <span class="search-query"></span>
+
+<style>
+    /*
+ * Callouts
+ *
+ * Not quite alerts, but custom and helpful notes for folks reading the docs.
+ * Requires a base and modifier class.
+ */
+
+/* Common styles for all types */
+.bs-callout {
+  margin: 20px 0;
+  padding: 20px;
+  border-left: 3px solid #eee;
+}
+.bs-callout h4 {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+.bs-callout p:last-child {
+  margin-bottom: 0;
+}
+
+/* Variations */
+.bs-callout-danger {
+  background-color: #fdf7f7;
+  border-color: #eed3d7;
+}
+.bs-callout-danger h4 {
+  color: #b94a48;
+}
+.bs-callout-warning {
+  background-color: #faf8f0;
+  border-color: #faebcc;
+}
+.bs-callout-warning h4 {
+  color: #8a6d3b;
+}
+.bs-callout-info {
+  background-color: #f4f8fa;
+  border-color: #bce8f1;
+}
+.bs-callout-info h4 {
+  color: #34789a;
+}
+
+</style>
+
+<h2>Search for <span class="search-query"></span></h2>
+<hr />
 
 
-<div id="search-data-item" style="display:none; padding: 10px; border: 1px solid black; margin: 10px;">
-   <a class="restaurant-link" href="#"> <span class="restaurant-name"></span>
-    </a>
+<div class="bs-callout bs-callout-info" id="search-data-item" style="display:none; cursor: pointer">
+    <h4><span class="restaurant-name"></span></h4>
+    <p>
+        <address style="margin-bottom: 0">
+			<span class="restaurant-location-address"></span><br />
+			<span class="restaurant-location-city"></span>, <span class="restaurant-location-state"></span> <span class="restaurant-location-zip"></span><br />
+			<abbr title="Phone">P:</abbr> <span class="restaurant-location-phone"></span>
+		</address> 
+    </p>
 </div>
 
 <div id="search-result">
