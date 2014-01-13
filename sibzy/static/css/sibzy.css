@@ -1,14 +1,35 @@
 .fb-login {
 
-			display: none;
-		}
+            display: none;
+        }
 
-		.fb-nologin {
-			display: none;
-		}
+        .fb-nologin {
+            display: none;
+        }
 
 h1 { 
 font-family: "Helvetica";
+}
 
+#restaurant-head { 
+margin-top: 50px;
+margin-bottom: 50px;
+background-color: rgba(105, 105, 179, 0.32);
+}
 
+#profile-image { 
+padding: 20px;
+padding-left: 5px;
+}
+
+#rating { 
+background-image: url('http://i.imgur.com/pDkElep.png');
+background-repeat: repeat-x; 
+height: 20px; 
+width:0px; 
+background-size: 100px 20px
+}
+
+.noshow {
+    display:none;
 }
