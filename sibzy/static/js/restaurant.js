@@ -115,7 +115,7 @@ $('._restaurant-dishes').bind('ondataload', function() {
             
             $.each(restaurant.dishes, function(index, dish) {
                 var entry = $('._restaurant-dishes-entry').clone();
-				entry.removeClass('._restaurant-dishes-entry');
+				entry.removeClass('_restaurant-dishes-entry');
                 entry.show();
                 //entry.css('background-color', 'grey');
                 entry.unbind('click');
@@ -148,6 +148,7 @@ $('._restaurant-dishes').bind('ondataload', function() {
                         
                         $('#dish-details-name').text(dish.name);
 						
+						$('#dish-details-rating-stars').html('');
 						var i = 0;
 						for (; i < dish.rating; i++) {
 							$('#dish-details-rating-stars').append($('<i class="glyphicon glyphicon-star"></i>'));
@@ -163,7 +164,7 @@ $('._restaurant-dishes').bind('ondataload', function() {
                             success: function(data) {
                                 //console.log(data);
                                 $.each(data, function(index, comment) {
-                                    var entry = $('._dish-details-comments-entry').clone();
+                                    var entry = $('._dish-details-comments-entry').clone();									
                                     entry.show();
                                     entry.removeClass('_dish-details-comments-entry');
                                     console.log(comment);
