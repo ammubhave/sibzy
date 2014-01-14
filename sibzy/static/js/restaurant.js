@@ -115,6 +115,7 @@ $('._restaurant-dishes').bind('ondataload', function() {
             
             $.each(restaurant.dishes, function(index, dish) {
                 var entry = $('._restaurant-dishes-entry').clone();
+				entry.removeClass('._restaurant-dishes-entry');
                 entry.show();
                 //entry.css('background-color', 'grey');
                 entry.unbind('click');
