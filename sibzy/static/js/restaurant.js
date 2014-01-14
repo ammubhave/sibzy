@@ -146,9 +146,15 @@ $('._restaurant-dishes').bind('ondataload', function() {
 						$('#dishes-comments-button5').bind('click', function() { comment_fn(5); });
                         
                         $('#dish-details-name').text(dish.name);
-						for (var i = 0; i < dish.rating.total; i++) {
+						
+						var i = 0;
+						for (; i < dish.rating; i++) {
 							$('#dish-details-rating-stars').append($('<i class="glyphicon glyphicon-star"></i>'));
 						}
+						for (; i < 5; i++) {
+							$('#dish-details-rating-stars').append($('<i class="glyphicon glyphicon-star-empty"></i>'));
+						}
+						
                         $('#dish-details-comments').html('');
                         $.ajax({
                             url: '!/comment/dish/' + dish.id,

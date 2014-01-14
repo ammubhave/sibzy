@@ -4,6 +4,7 @@ import json
 from django.db.models import Avg
 
 
+
 class Restaurant(models.Model):
     ''' Restaurant details '''
 
@@ -204,9 +205,9 @@ class Dish(models.Model):
     section = models.ForeignKey('DishCategory')
 
     #: Return rating of this dish
-    @property
     def ratings(self):
-        return DishRating.objects.filter(dish=self.id)
+        from comment.models import Comment
+        return Comment.objects.filter(dish=self.id)
 
     #restaurants = models.ManyToManyFields(Restaurant, related_name='dishes') - ALREADY EXISTS BY DEFAULT
 
@@ -217,7 +218,7 @@ class Dish(models.Model):
             'tag': self.tag,
             'price': float(self.price),
             'categories': [c.name for c in self.categories.all()],
-            'rating': str(self.ratings.aggregate(Avg('value'))['value__avg']),
+            'rating': self.ratings().aggregate(Avg('rating_value'))['rating_value__avg'],
         })
     
     def __str__(self):
