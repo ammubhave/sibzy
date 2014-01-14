@@ -120,27 +120,35 @@ $('._restaurant-dishes').bind('ondataload', function() {
                 entry.unbind('click');
                 entry.bind('click', function() {
                     //if ($('#dishinfo').css('display') == 'none') {
-                    
+						$('#review').show();
                         $('#dishinfo').show();
                         $('.dishes-comments-new').show();
                         $('#dishes-comments-button').unbind('click');
-                        $('#dishes-comments-button').bind('click', function() {
-                            
-                            $.ajax({
+						var comment_fn = function(val) {
+							$.ajax({
                                 method: 'POST',
                                 url: '!/comment/dish/' + dish.id + '/new',
                                 data: {
                                     'comment_text': $('#dishes-comments-text').val(),
-                                    'rating_value': 3
+                                    'rating_value': val
                                 },
                                 dataType: 'json',
                                 success: function(data) {
                                     entry.trigger('click');
                                 }
                             });
-                        });
+						};
+                        $('#dishes-comments-button0').bind('click', function() { comment_fn(0); });
+						$('#dishes-comments-button1').bind('click', function() { comment_fn(1); });
+						$('#dishes-comments-button2').bind('click', function() { comment_fn(2); });
+						$('#dishes-comments-button3').bind('click', function() { comment_fn(3); });
+						$('#dishes-comments-button4').bind('click', function() { comment_fn(4); });
+						$('#dishes-comments-button5').bind('click', function() { comment_fn(5); });
                         
                         $('#dish-details-name').text(dish.name);
+						for (var i = 0; i < dish.rating.total; i++) {
+							$('#dish-details-rating-stars').append($('<i class="glyphicon glyphicon-star"></i>'));
+						}
                         $('#dish-details-comments').html('');
                         $.ajax({
                             url: '!/comment/dish/' + dish.id,

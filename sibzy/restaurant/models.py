@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 import json
+from django.db.models import Avg
 
 
 class Restaurant(models.Model):
@@ -216,6 +217,7 @@ class Dish(models.Model):
             'tag': self.tag,
             'price': float(self.price),
             'categories': [c.name for c in self.categories.all()],
+            'rating': str(self.ratings.aggregate(Avg('value'))['value__avg']),
         })
     
     def __str__(self):
