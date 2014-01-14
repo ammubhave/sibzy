@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 import json
+from django.db.models import Avg
 
 
 class Restaurant(models.Model):
@@ -199,6 +200,9 @@ class Dish(models.Model):
     #: ManyToManyField: List of all :py:class:`restaurant.models.DishCategory`
     categories = models.ManyToManyField('DishCategory', related_name='dishes')
 
+    #: ForeignKey(DishCategory): The Dish Category
+    section = models.ForeignKey('DishCategory')
+
     #: Return rating of this dish
     @property
     def ratings(self):
@@ -213,6 +217,7 @@ class Dish(models.Model):
             'tag': self.tag,
             'price': float(self.price),
             'categories': [c.name for c in self.categories.all()],
+            'rating': str(self.ratings.aggregate(Avg('value'))['value__avg']),
         })
     
     def __str__(self):
@@ -238,8 +243,6 @@ class DishCategory(models.Model):
     
     def __str__(self):
         return self.name
-    
-
 
 class DishRating(models.Model):
     ''' Rating given by a single user to a dish '''

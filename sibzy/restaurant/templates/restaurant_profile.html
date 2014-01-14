@@ -5,7 +5,7 @@
 </button>
 
 <div class="container">
-	<div class="row clearfix" id="restaurant-head">
+	<div class="row clearfix" id="restaurant-head" style="background-color: #ffb273; border: solid 2px #ff7400; border-radius: 5px;">
 		<div class="col-md-2 column" style="padding:0">
 			<img id="profile-image" alt="170x170" src="http://lorempixel.com/170/170/" />
 		</div>
@@ -43,13 +43,23 @@
 		
 		</div>
 	</div>
-
+	<style>
+	  .panel-default {
+		border-color: #006363;
+	  }
+	</style>
     <div class="row clearfix">
-        <div class="col-md-6 column" style="padding-left: 0px;">
+        <div class="col-md-6 column" style="padding :10px; background-color: #5CCCCC; border-radius: 5px;  border: solid 2px #009999">
+		  <h2 style="text-align: center; color: #006363">Menu</h2>
+		  <hr style="border-top-color: #006363" />
             <div class="panel-group _restaurant-dishes" id="dishes">
-              <div class="panel panel-default">
+              
 
+<<<<<<< HEAD
             	<a href="#dish" class="_restaurant-dishes-entry noshow" style="text-decoration:none;">
+=======
+            	<div class="_restaurant-dishes-entry noshow" style="text-decoration:none; border-radius: 5px;">
+>>>>>>> 6766d073e1d7940a405a4198740d70d1bc5551c0
 
             		<div class="menu-dish"> <span class="_restaurant-dishes-entry-name">Appetizer 1</span>
 
@@ -72,8 +82,8 @@
                             
             		<span class="pull-right">$<span class="_restaurant-dishes-entry-price">$15</span></span>
                     </div> 
-            	</a>
-
+            	</div>
+			  <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#dishes" href="#collapseAppetizers">
@@ -86,6 +96,8 @@
                     <div class="panel-body" id="panelAppetizers"> </div>
                 </div>
 
+			  </div>
+			  <div class="panel panel-default">
             	<div class="panel-heading">
                   <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#dishes" href="#collapseEntrees">
@@ -97,7 +109,8 @@
                 <div id="collapseEntrees" class="panel-collapse collapse in">
                   <div class="panel-body" id="panelEntrees"></div>
                 </div>
-
+			  </div>
+			  <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#dishes" href="#collapseDeserts">
@@ -109,7 +122,8 @@
                 <div id="collapseDeserts" class="panel-collapse collapse">
                   <div class="panel-body" id="panelDeserts"></div>
                 </div>
-            	
+			  </div>
+              <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#dishes" href="#collapseOthers">
@@ -121,35 +135,51 @@
                 <div id="collapseOthers" class="panel-collapse collapse">
                   <div class="panel-body" id="panelOthers"> </div>
                 </div>
+			</div>
 
-            </div>
         </div> 			
     </div>
 		
-		<div id="dish" class="col-md-6 column">
-			<div id="dishinfo" class="row noshow"> 
+		<div id="dish" class="col-md-6 column" style="padding: 0 10px; color: white">
+		  <div style="padding: 10px 25px; background-color: #FF7373; border-radius: 5px;">
+			<div id="dishinfo" class="row noshow" style="background-color:#ff4040; border: solid 2px #A60000; border-radius: 5px;"> 
 				<div class="col-md-3 column"> 
-					<img alt="140x140" src="http://lorempixel.com/140/140/food" />
+					<img alt="140x140" src="http://lorempixel.com/120/120/food" />
 				</div>
 				<div class="col-md-6 column"> 
-						<h2> <strong id="dish-details-name"> Dish name </strong> </h2> </br> 
-						<p> ***** </p> 
+						<h2> <strong id="dish-details-name"> Dish name </strong> </h2>
+						<p id="dish-details-rating-stars"></p> 
 						<p> Dish Description </p> 				
 				</div>
 			</div>
-		
-			<div class="row dishes-comments-new noshow" id="review" > 
+			<br />
+			<div class="row"  style="background-color:#ff4040; border: solid 2px #A60000; border-radius: 5px;">
+			  <div class="col-md-12 column"> 
+			
+			<div id="review" style="display: none">
+			  <div class="row dishes-comments-new" > 
 				<p>Dude's Name</p> 
-				<div class="col-md-3 column"> Upload Picure</div> 
+				<div class="col-md-3 column">
+				  <img alt="100x100" src="http://lorempixel.com/100/100/food" />
+				</div> 
 				<div class="col-md-9 column"> 
-					<textarea id="dishes-comments-text" class="form-control" rows="3"></textarea>
-					<button id="dishes-comments-button" type="button" class="btn btn-default">Submit</button>
+					<textarea id="dishes-comments-text" class="form-control" rows="4"></textarea>
+			  	</div>
+			  </div>
+			  <br />
+			  <div class="btn-group btn-group-justified">
+					  <a id="dishes-comments-button0" class="btn btn-danger" role="button">0</a>
+					  <a id="dishes-comments-button1" class="btn btn-warning" role="button">1</a>
+					  <a id="dishes-comments-button2" class="btn btn-default" role="button">2</a>					  
+					  <a id="dishes-comments-button3" class="btn btn-info" role="button">3</a>
+					  <a id="dishes-comments-button4" class="btn btn-primary" role="button">4</a>					  
+					  <a id="dishes-comments-button5" class="btn btn-success" role="button">5</a>
 				</div>
 			</div>
 
 			<div id="dish-details-comments"></div>
 
-			<div class="row _dish-details-comments-entry noshow" id="comment" style="" > 
+			<div class="row _dish-details-comments-entry noshow" id="comment" style="margin: 0 -15px; border-top: solid 2px #A60000" > 
 				<div class="col-md-3 column"  > 
 					<img alt="100x100" src="http://lorempixel.com/100/100/food" />
 				</div>
@@ -157,7 +187,11 @@
 						 <strong class="_dish-details-comments-entry-user"> USer id </strong> <span class="pull-right _dish-details-comments-entry-ratingvalue"> **** </span> </br> 
 						<p class="_dish-details-comments-entry-commenttext"> Review goes here and it is really good </p> 		
 				</div>
-			</div>					
+			
+			</div>
+			</div>
+			
+		  </div>
     	</div>
 	
 </div>
