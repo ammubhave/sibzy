@@ -199,6 +199,9 @@ class Dish(models.Model):
     #: ManyToManyField: List of all :py:class:`restaurant.models.DishCategory`
     categories = models.ManyToManyField('DishCategory', related_name='dishes')
 
+    #: ForeignKey(DishCategory): The Dish Category
+    section = models.ForeignKey('DishCategory')
+
     #: Return rating of this dish
     @property
     def ratings(self):
@@ -238,8 +241,6 @@ class DishCategory(models.Model):
     
     def __str__(self):
         return self.name
-    
-
 
 class DishRating(models.Model):
     ''' Rating given by a single user to a dish '''
