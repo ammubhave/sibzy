@@ -5,7 +5,7 @@
 </button>
 
 <div class="container">
-	<div class="row clearfix" id="restaurant-head">
+	<div class="row clearfix" id="restaurant-head" style="background-color: #ffb273; border: solid 2px #ff7400; border-radius: 5px;">
 		<div class="col-md-2 column" style="padding:0">
 			<img id="profile-image" alt="170x170" src="http://lorempixel.com/170/170/" />
 		</div>
@@ -43,13 +43,19 @@
 		
 		</div>
 	</div>
-
+	<style>
+	  .panel-default {
+		border-color: #006363;
+	  }
+	</style>
     <div class="row clearfix">
-        <div class="col-md-6 column" style="padding-left: 0px;">
+        <div class="col-md-6 column" style="padding :10px; background-color: #5CCCCC; border-radius: 5px;  border: solid 2px #009999">
+		  <h2 style="text-align: center; color: #006363">Menu</h2>
+		  <hr style="border-top-color: #006363" />
             <div class="panel-group _restaurant-dishes" id="dishes">
               <div class="panel panel-default">
 
-            	<a href="dish" class="_restaurant-dishes-entry noshow" style="text-decoration:none;">
+            	<a href="#" class="_restaurant-dishes-entry noshow" style="text-decoration:none; border-radius: 5px;">
 
             		<div class="menu-dish"> <span class="_restaurant-dishes-entry-name">Appetizer 1</span>
 
@@ -86,6 +92,8 @@
                     <div class="panel-body" id="panelAppetizers"> </div>
                 </div>
 
+			  </div>
+			  <div class="panel panel-default">
             	<div class="panel-heading">
                   <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#dishes" href="#collapseEntrees">
@@ -97,7 +105,8 @@
                 <div id="collapseEntrees" class="panel-collapse collapse in">
                   <div class="panel-body" id="panelEntrees"></div>
                 </div>
-
+			  </div>
+			  <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#dishes" href="#collapseDeserts">
@@ -109,7 +118,8 @@
                 <div id="collapseDeserts" class="panel-collapse collapse">
                   <div class="panel-body" id="panelDeserts"></div>
                 </div>
-            	
+			  </div>
+              <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#dishes" href="#collapseOthers">
@@ -121,6 +131,7 @@
                 <div id="collapseOthers" class="panel-collapse collapse">
                   <div class="panel-body" id="panelOthers"> </div>
                 </div>
+			</div>
 
             </div>
         </div> 			
