@@ -124,7 +124,12 @@ $('._restaurant-dishes').bind('ondataload', function() {
 						$('#review').show();
                         $('#dishinfo').show();
                         $('.dishes-comments-new').show();
-                        $('#dishes-comments-button').unbind('click');
+                        $('#dishes-comments-button0').unbind('click');
+						$('#dishes-comments-button1').unbind('click');
+						$('#dishes-comments-button2').unbind('click');
+						$('#dishes-comments-button3').unbind('click');
+						$('#dishes-comments-button4').unbind('click');
+						$('#dishes-comments-button5').unbind('click');
 						var comment_fn = function(val) {
 							$.ajax({
                                 method: 'POST',
