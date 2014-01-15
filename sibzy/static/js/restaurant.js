@@ -3,6 +3,17 @@ var restaurant = {};
 $(function () {
     path = document.location.hash.substring(2);//.substring(document.location.indexOf('#!') + 2)
     paths = path.split('/');
+	
+	if (was_search == true) {
+		was_search = false;
+		$('#back_to_search').css('display', 'block');
+		$('#back_to_search').click(function () {
+			console.log(last_search_q);
+			$('#txtSearch').val(last_search_q);
+			navigate('search/q/' + last_search_q);
+			return false;
+		});
+	}
     
     if (paths[1] == 'profile') {
         $.ajax({
@@ -74,6 +85,7 @@ $(function () {
                     
                     restaurant.dishes = data.dishes;
                     $('._restaurant-dishes').trigger('ondataload');
+					$('#map-canvas').toggle(); $('#map-canvas').trigger('ondataload');
             },
             error: function(data) {
                 alert('404 Not Found');
@@ -88,7 +100,7 @@ $(function () {
 				var myLatlng = new google.maps.LatLng(restaurant.location.latitude, restaurant.location.longitude);
 				var mapOptions = {
 					center: myLatlng,
-					zoom: 17
+					zoom: 15
 				};
 				var map = new google.maps.Map(document.getElementById("map-canvas"),
 					mapOptions);
@@ -176,7 +188,7 @@ $('._restaurant-dishes').bind('ondataload', function() {
                                     entry.find('._dish-details-comments-entry-ratingvalue').text(comment.rating_value);
                                     entry.find('._dish-details-comments-entry-commenttext').text(comment.comment_text);
                                     entry.find('._dish-details-comments-entry-user').text(comment.user.fbusername);
-                                    
+                                    entry.find('._dish-details-comments-entry-picture').attr('src', 'http://graph.facebook.com/' + comment.user.fbusername + '/picture?type=square&type=large');
                                     $('#dish-details-comments').append(entry);
                                 });
                             }

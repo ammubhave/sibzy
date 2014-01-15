@@ -1,8 +1,43 @@
 <script src="/static/js/restaurant.js"></script>
 
-<button type="button" class="btn btn-default btn-lg">
-  <span class="glyphicon glyphicon-backward"></span> Back to search ""
-</button>
+<Style>
+  .arrow-left {
+	width: 0;
+	height: 0;
+	border-top: 10px solid white;
+	border-bottom: 10px solid white;
+	display: inline-block;
+	border-right:10px solid red; 
+} .arrow-left-2{
+	width: 0;
+	height: 0;
+	border-top: 10px solid red;
+	border-bottom: 10px solid red;
+	display: inline-block;
+	border-right:10px solid white; 
+}
+</Style>
+
+<a href="#" id="back_to_search" style="display: none; height: 20px; line-height:20px; color: white; width: 130px; background-color: red; margin-bottom:10px">
+  <span class="arrow-left">
+	
+  </span>
+  <span class="arrow-left-2">
+	
+  </span><span class="arrow-left">
+	
+  </span>
+  <span class="arrow-left-2">
+	
+  </span><span class="arrow-left">
+	
+  </span>
+  <span class="arrow-left-2">
+	
+  </span><span class="arrow-left">
+	
+  </span>
+</a>
 
 <div class="container">
 	<div class="row clearfix" id="restaurant-head" style="background-color: #ffb273; border: solid 2px #ff7400; border-radius: 5px;">
@@ -25,23 +60,19 @@
 			<span class="restaurant-rating-total"> </span> 
 		</div>
 
-		<div class="col-md-4 column">
+		<div class="col-md-2 column">
 
 			<address>
 				<strong><span class="restaurant-name"></span></strong><br />
 				<span class="restaurant-location-address"></span><br />
 				<span class="restaurant-location-city"></span>, <span class="restaurant-location-state"></span> <span class="restaurant-location-zip"></span><br />
 				<abbr title="Phone">P:</abbr> <span class="restaurant-location-phone"></span>
-			</address>
-		</br> 
-		 <button type="button" onclick="$('#map-canvas').toggle(); $('#map-canvas').trigger('ondataload');" class="btn btn-default">Map</button>
-		<div id="map-canvas" style="width: 500px; height: 500px; display: none"></div>
-		
-		<script>
-			
-		</script>
-		
+			</address></div>
+		</br>
+		<div class="col-md-4 column">
+		<div id="map-canvas" style="width: 100%; height: 150px; display: none"></div>
 		</div>
+		
 	</div>
 	<style>
 	  .panel-default {
@@ -53,17 +84,8 @@
 		  <h2 style="text-align: center; color: #006363">Menu</h2>
 		  <hr style="border-top-color: #006363" />
             <div class="panel-group _restaurant-dishes" id="dishes">
-              
-
-<<<<<<< HEAD
-            	<a href="#dish" class="_restaurant-dishes-entry noshow" style="text-decoration:none;">
-=======
             	<div class="_restaurant-dishes-entry noshow" style="text-decoration:none; border-radius: 5px;">
->>>>>>> 6766d073e1d7940a405a4198740d70d1bc5551c0
-
             		<div class="menu-dish"> <span class="_restaurant-dishes-entry-name">Appetizer 1</span>
-
-
                         <!-- This stuff needs to be linked --> 
 
                         <span class="label label-success">Vegetarian</span>
@@ -149,7 +171,7 @@
 				<div class="col-md-6 column"> 
 						<h2> <strong id="dish-details-name"> Dish name </strong> </h2>
 						<p id="dish-details-rating-stars"></p> 
-						<p> Dish Description </p> 				
+						<p>Dish Description</p> 				
 				</div>
 			</div>
 			<br />
@@ -181,7 +203,7 @@
 
 			<div class="row _dish-details-comments-entry noshow" id="comment" style="margin: 0 -15px; border-top: solid 2px #A60000" > 
 				<div class="col-md-3 column"  > 
-					<img alt="100x100" src="http://lorempixel.com/100/100/food" />
+					<img alt="100x100" class="_dish-details-comments-entry-picture" style="height:100px; width: 100px;" src="" />
 				</div>
 				<div class="col-md-6 column"> 
 						 <strong class="_dish-details-comments-entry-user"> USer id </strong> <span class="pull-right _dish-details-comments-entry-ratingvalue"> **** </span> </br> 

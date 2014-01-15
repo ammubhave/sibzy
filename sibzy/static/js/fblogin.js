@@ -33,6 +33,7 @@ function updateLoginStatus(response) {
       $('.fb-firstname').text(response.first_name);
       $('.fb-lastname').text(response.last_name);
       $('.fb-username').text(response.username);
+      $('.fb-picture').attr('src', 'http://graph.facebook.com/' + response.username + '/picture?type=square&type=large');
       me = response;
     });
     
@@ -65,8 +66,7 @@ function updateLoginStatus(response) {
     $('.fb-login').hide();
     if (document.cookie.indexOf('fbid=') != -1)
       $.ajax({ url: '/!/auth/logout' });
-
-     //alert('connectnot');
+    // alert('connectnot');
   }
 }
 
@@ -79,12 +79,14 @@ window.fbAsyncInit = function() {
     xfbml      : true  // parse XFBML
   });
   console.log('fbinit');
+  $('.fb-login').hide();
+  $('.fb-nologin').hide();
   // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
   // for any authentication related change, such as login, logout or session refresh. This means that
   // whenever someone who was previously logged out tries to log in again, the correct case below 
   // will be handled. 
   FB.getLoginStatus(function(response) {
- //   updateLoginStatus(response);
+    updateLoginStatus(response);
   });
   FB.Event.subscribe('auth.authResponseChange', function(response) {
     updateLoginStatus(response);

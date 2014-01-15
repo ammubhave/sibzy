@@ -1,3 +1,5 @@
+
+
 $(function() {
     path = document.location.hash.substring(2);
     paths = path.split('/');
@@ -19,6 +21,7 @@ $(function() {
         url: '/!/search/q/' + encodeURIComponent(query),
         dataType: 'json',
         success: function(data) {
+            $('#txtSearch').val(query);
             $('#search-result').html('');
             for (var i = 0; i < data.length; i++) {
                 var restaurant = data[i];
@@ -65,6 +68,9 @@ $(function() {
                     $(this).removeClass('bs-callout-warning');
                     $(this).addClass('bs-callout-info');
                 }).click(function () {
+                    was_search = true;
+                    last_search_q = $('#txtSearch').val();
+                    
                     navigate('restaurant/profile/' + restaurant.id);
                 });
                 

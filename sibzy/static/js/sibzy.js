@@ -1,4 +1,6 @@
 var c = {}, rs = {};
+var was_search = false;
+var last_search_q = '';
 
 // using jQuery
 function getCookie(name) {

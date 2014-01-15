@@ -1,12 +1,13 @@
-<script src="/static/js/restaurant.js"></script>
+<script src="/static/js/user.js"></script>
 
 <div class="container">
-	<div class="row clearfix" style="margin-top: 50px; margin-bottom: 50px; background-color: rgba(105, 105, 179, 0.32); ">
+	<div class="row clearfix" style="margin-top: 50px; margin-bottom: 50px; border-radius: 5px; border: 2px solid blue; background-color: rgba(105, 105, 179, 0.32); ">
 		<div class="col-md-2 column">
-			<img style="padding: 20px; padding-left: 5px; "alt="170x170" src="http://lorempixel.com/170/170/" />
+			<img class="fb-picture" style="padding: 20px; padding-left: 5px; width: 170px; height: 170px; "alt="170x170" src="http://lorempixel.com/170/170/" />
 		</div>
 		<div class="col-md-4 column">
-			<h1> <span class="user-name">User name</span> </h1> </br> 
+			<h1><span class="fb-name"></span></h1>
+			<h4><span class="fb-username"></span></h4>
 
 			
 		</div>
@@ -16,33 +17,17 @@
 		
 		</div>
 	</div>
-	<div id="user-comments" class="row clearfix" style="background-color: rgb(180,200,200); padding: 10px;">
-        sdfsd
+	<div class="row clearfix" style="background-color: rgb(180,200,200); padding: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;">
+        Comments
     </div>
-    
-    
-			<div class="row _dish-details-comments-entry" style="display: none; margin-top: 10px; padding:12px; padding-left: 0px; background-color: rgba(82, 204, 41, 0.22) " > 
-				<div class="col-md-3 column"  > 
-					<img alt="100x100" src="http://lorempixel.com/100/100/food" />
-				</div>
-				<div class="col-md-6 column"> 
-						 <strong class="_dish-details-comments-entry-dish"> Dish id </strong> <span class="pull-right _dish-details-comments-entry-ratingvalue"> **** </span> </br> 
-						<p class="_dish-details-comments-entry-commenttext"> Review goes here and it is really good </p> 			
+    <div id="user-comments" ></div>
+
+			<div class="row _dish-details-comments-entry noshow" style="background: orange; margin: 0 -15px; padding:10px; border-top: solid 2px #A60000" > 
+				<div class="col-md-12 column"> 
+					<span class="pull-right _dish-details-comments-entry-ratingvalue"></span> </br> 
+					<p class="_dish-details-comments-entry-commenttext">Review goes here and it is really good</p>
 				</div>
 			
-			</div>		
+			</div>	
 	
 </div>
-
-<!--  **************** --> 
-
-
-
-
-<!-- ****** --> 
-
-
-
-
-  
-
