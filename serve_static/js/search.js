@@ -6,6 +6,15 @@ $(function() {
     
     $('.search-query').text(query);
     
+   // var myLatlng = new google.maps.LatLng(restaurant.location.latitude, restaurant.location.longitude);
+    var mapOptions = {
+       // center: myLatlng,
+        zoom: 17
+    };
+    var map = new google.maps.Map(document.getElementById("map-canvas"),
+        mapOptions);    
+    
+    
     $.ajax({
         url: '/!/search/q/' + encodeURIComponent(query),
         dataType: 'json',
@@ -16,16 +25,55 @@ $(function() {
                 
                 var item = $('#search-data-item').clone();
                 item.css('display', '');
-                item.children('.restaurant-name').text(restaurant.name);
+                item.find('.restaurant-name').text(restaurant.name);
                 
-                item.children('.restaurant-location-latitude').text(restaurant.location.latitude);
-                item.children('.restaurant-location-longitude').text(restaurant.location.longitude);
-                item.children('.restaurant-location-address').text(restaurant.location.address);
-                item.children('.restaurant-location-city').text(restaurant.location.city.name);
-                item.children('.restaurant-location-state').text(restaurant.location.state);
+                item.find('.restaurant-location-latitude').text(restaurant.location.latitude);
+                item.find('.restaurant-location-longitude').text(restaurant.location.longitude);
+                item.find('.restaurant-location-address').text(restaurant.location.address);
+                item.find('.restaurant-location-city').text(restaurant.location.city);
+                item.find('.restaurant-location-state').text(restaurant.location.state);
+                //item.find('.restaurant-link').attr('href', '#!restaurant/profile/' + restaurant.id);
+                
+                    var myLatlng = new google.maps.LatLng(restaurant.location.latitude, restaurant.location.longitude);
+                    var marker = new google.maps.Marker({
+                        position: myLatlng,
+                        map: map,
+                        title: restaurant.name,
+                    });
+                    var infowindow = new google.maps.InfoWindow({
+                        content: restaurant.name
+                    });
+                    google.maps.event.addListener(marker, 'click', function() {
+                        infowindow.open(map,marker);
+                    });
+
+                if (i == 0) {                    
+                    map.setCenter(myLatlng);
+                }
+                
+                item.mouseenter(function() {
+                    $(this).removeClass('bs-callout-info');
+                    $(this).addClass('bs-callout-warning');
+                    
+                    var myLatlng = new google.maps.LatLng(restaurant.location.latitude, restaurant.location.longitude);
+                    
+                    map.setCenter(myLatlng);
+                    
+                    
+                    
+                }).mouseleave(function () {
+                    $(this).removeClass('bs-callout-warning');
+                    $(this).addClass('bs-callout-info');
+                }).click(function () {
+                    navigate('restaurant/profile/' + restaurant.id);
+                });
+                
+                
                 
                 $('#search-result').append(item);
+                
             }
+            activate_links();
         }
     })
 })

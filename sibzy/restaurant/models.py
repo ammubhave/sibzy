@@ -11,6 +11,9 @@ class Restaurant(models.Model):
     #: CharField(255): Restaurant name
     name = models.CharField(max_length=255)
 
+    #: TextField(255): Restaurant description
+    description = models.TextField(blank=True)
+
     #: :py:class:`restaurant.models.Location`: Restaurant location
     location = models.ForeignKey('Location')
 
@@ -191,6 +194,9 @@ class Dish(models.Model):
 
     #: CharField(255): Dish name
     name = models.CharField(max_length=255)
+
+    #: TextField: Dish description
+    description = models.TextField(blank=True)
 
     #: CharField(255): The tag under which the dish should be categorized
     tag = models.CharField(max_length=255)

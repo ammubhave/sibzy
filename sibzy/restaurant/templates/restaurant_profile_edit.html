@@ -154,12 +154,65 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">				
 				<form class="navbar-form navbar-left" role="search">
 					<div class="form-group">
-						<input type="text" value="Restaurant Administration: {{ restaurant.name }}" style="width: 500px; border-color: #007339; background-color: #228653; color: white; font-weight: 900;"  disabled="disabled" class="form-control" placeholder="">
+						<input type="text" id="head-restaurant-name" value="Restaurant Administration: {{ restaurant.name }}" style="width: 500px; border-color: #007339; background-color: #228653; color: white; font-weight: 900;"  disabled="disabled" class="form-control" placeholder="">
 					</div>
 				</form>
 			</div>
 		</nav>
 	</div>
+	
+	<script>
+	  $(function () {
+		edit_restaurant_name = function() {
+		  $('.noedit-restaurant-name').hide();
+		  $('.edit-restaurant-name').show();
+		  
+		  $('#text-restaurant-name').focus();
+		  $('#text-restaurant-name').blur(save_restaurant_name);
+		};
+		save_restaurant_name = function () {
+		  $('.noedit-restaurant-name').show();
+		  $('.edit-restaurant-name').hide();
+		  
+		  $.ajax({
+			url: 'save',
+			data: {'name': $('#text-restaurant-name').val()}
+		  });
+		  
+		  $('.restaurant-name').text($('#text-restaurant-name').val());
+		  if($('#text-restaurant-name').val() == '') {
+			$('.restaurant-name').text('[Restaurant Name]')
+		  }
+		  $('#head-restaurant-name').val('Restaurant Administration: ' + $('#text-restaurant-name').val());
+		  $('#restaurant-name').click(edit_restaurant_name);
+		};
+		save_restaurant_name();
+		
+		
+		edit_restaurant_description = function() {
+		  $('.noedit-restaurant-description').hide();
+		  $('.edit-restaurant-description').show();
+		  
+		  $('#text-restaurant-description').focus();
+		  $('#text-restaurant-description').blur(save_restaurant_description);
+		};
+		save_restaurant_description = function () {
+		  $('.noedit-restaurant-description').show();
+		  $('.edit-restaurant-description').hide();
+		  
+		  $.ajax({
+			url: 'save',
+			data: {'description': $('#text-restaurant-description').val()}
+		  });
+		  $('#restaurant-description').text($('#text-restaurant-description').val());
+		  if($('#text-restaurant-description').val() == '') {
+			$('#restaurant-description').text('[Restaurant Description]')
+		  }
+		  $('#restaurant-description').click(edit_restaurant_description);
+		};
+		save_restaurant_description();
+	  });
+	</script>
     
 	<div id="content_parent" style="background-color: white; margin: 20px; margin-top: 70px; padding: 20px;">
         <div id="content">
@@ -174,7 +227,16 @@
 						  background-color: #FFE900;
 						}
 					  </style>
-					  <h1><span id="restaurant-name">{{ restaurant.name }}</span></h1><br />
+					  <h1 class="noedit-restaurant-name"><span id="restaurant-name" class="restaurant-name">{{ restaurant.name }}</span></h1><br />
+					  <input id="text-restaurant-name" class="form-control edit-restaurant-name" value="{{ restaurant.name }}" />
+					  
+					  <style>
+						#restaurant-description:hover {
+						  background-color: #FFE900;
+						}
+					  </style>
+					  <div class="noedit-restaurant-description" id="restaurant-description">{{ restaurant.description }}</div>
+					  <textarea class="edit-restaurant-description form-control" id="text-restaurant-description">{{ restaurant.description }}</textarea>
 					  
 					  <div id="rating" class="_restaurant-rating-total rating"> </div>
 					  <span class="_restaurant-categories-element-start noshow" > 
@@ -194,15 +256,14 @@
 		  
 					  <address>
 						  <strong><span class="restaurant-name"></span></strong><br />
-						  <span class="restaurant-location-address"></span><br />
-						  <span class="restaurant-location-city"></span>, <span class="restaurant-location-state"></span> <span class="restaurant-location-zip"></span><br />
-						  <abbr title="Phone">P:</abbr> <span class="restaurant-location-phone"></span>
+						  <span class="restaurant-location-address">{{ restaurant.location.address }}</span><br />
+						  <span class="restaurant-location-city">{{ restaurant.location.city.name }}</span>, <span class="restaurant-location-state">{{ restaurant.location.state.name }}</span> <span class="restaurant-location-zip">{{ restaurant.location.zip }}</span><br />
+						  <abbr title="Phone">P:</abbr> <span class="restaurant-location-phone">{{ restaurant.location.phone }}</span>
 					  </address></div>
 				  </br>
 				  <div class="col-md-4 column">
 				  <div id="map-canvas" style="width: 100%; height: 150px; display: none"></div>
-				  </div>
-				  
+				  </div>				  
 			  </div>
 			  <style>
 				.panel-default {
@@ -214,138 +275,137 @@
 					<h2 style="text-align: center; color: #006363">Menu</h2>
 					<hr style="border-top-color: #006363" />
 					  <div class="panel-group _restaurant-dishes" id="dishes">
-						  <div class="_restaurant-dishes-entry noshow" style="text-decoration:none; border-radius: 5px;">
-							  <div class="menu-dish"> <span class="_restaurant-dishes-entry-name">Appetizer 1</span>
-								  <!-- This stuff needs to be linked --> 
-		  
-								  <span class="label label-success">Vegetarian</span>
-								  <span class="label label-info">Vegan</span>
-								  <span class="label label-primary">Organic</span>
-								  <span class="label label-warning">Nut watch</span>
-								  <span class="label label-danger">Gluten watch</span>
-		  
-									  <!-- For Restaurants
-								  <span class="label label-default">Vegetarian</span>
-								  <span class="label label-default">Vegan</span>
-								  <span class="label label-default">Organic</span>
-								  <span class="label label-default">Nut watch</span>
-								  <span class="label label-default">Gluten watch</span>
-									  -->
+						{% regroup restaurant.dishes.all by section as section_list %}
+						<style>
+							.section-head:hover {
+							  background-color: yellow;
+							  cursor: text;
+							}
+						</style>
+						{% for section in section_list %}				
+						<div class="panel panel-default">
+						  <div class="panel-heading" style="margin:0; padding: 0">
+							<h4 class="panel-title" style="width: 100%;">
+							  <div style="display: inline-block; width: 100%; padding: 10px;">
+								<span id="{{ section.grouper.id }}section-name" class="noedit-{{ section.grouper.id }}section-name section-head" style="float: left; padding: 2px; display: inline-block; width: 100%;">{{ section.grouper.name }}</span>
+								<input id="text-{{ section.grouper.id }}section-name" class="edit-{{ section.grouper.id }}section-name form-control" value="{{ section.grouper.name }}" />
+								
+								<script>
+								  function edit_{{section.grouper.id}}section_name() {
+									$('.noedit-{{ section.grouper.id }}section-name').hide();
+									$('.edit-{{ section.grouper.id }}section-name').show();
+									
+									$('#text-{{ section.grouper.id }}section-name').focus();
+									$('#text-{{ section.grouper.id }}section-name').blur(save_{{ section.grouper.id }}section_name);
+								  }
+								  function save_{{section.grouper.id}}section_name() {
+									$('.noedit-{{ section.grouper.id }}section-name').show();
+									$('.edit-{{ section.grouper.id }}section-name').hide();
+									
+									$.ajax({
+									  url: 'save',
+									  data: {
+										'section_id': {{ section.grouper.id }},
+										'section_name': $('#text-{{ section.grouper.id }}section-name').val()
+									  }
+									});
+									$('#{{ section.grouper.id }}section-name').text($('#text-{{ section.grouper.id }}section-name').val());
+									if($('#text-{{ section.grouper.id }}section-name').val() == '') {
+									  $('#{{ section.grouper.id }}section-name').text('[Section Name]')
+									}
+									$('#{{ section.grouper.id }}section-name').click(edit_{{ section.grouper.id }}section_name);
+								  }
+								  save_{{section.grouper.id}}section_name();
+								</script>
+							  </div>
+							</h4>
+						  </div>
+						  <div id="collapse{{ section.grouper.slug }}" class="panel-collapse">
+							  <div class="panel-body" id="panel{{ section.grouper.slug }}">
+								
+								{% for dish in section.list %}
+								
+								  <div style="text-decoration:none; border-radius: 5px;" onclick="(function () {
+									  $('#placeholder-dishinfo').hide();
+									  $('#dishinfo').show();
 									  
-							  <span class="pull-right">$<span class="_restaurant-dishes-entry-price">$15</span></span>
-							  </div> 
-						  </div>
-						<div class="panel panel-default">
-						  <div class="panel-heading">
-							<h4 class="panel-title">
-							  <a data-toggle="collapse" data-parent="#dishes" href="#collapseAppetizers">
-								Appetizers
-							  </a>
-							</h4>
-						  </div>
-		  
-						  <div id="collapseAppetizers" class="panel-collapse collapse">
-							  <div class="panel-body" id="panelAppetizers"> </div>
-						  </div>
-		  
+									  $('#dish-details-name').text($('#{{ dish.id }}-dish-entry-name').text());
+									  $('#dish-details-description').text($('#{{ dish.id }}-dish-entry-description').text());
+									})();">
+									<div class="menu-dish"> <span id="{{ dish.id }}-dish-entry-name">{{ dish.name }}</span>
+									    <span id="{{ dish.id }}-dish-entry-description" class="noshow">{{ dish.description }}</span>
+										<span class="label label-success">Vegetarian</span>
+										<span class="label label-info">Vegan</span>
+										<span class="label label-primary">Organic</span>
+										<span class="label label-warning">Nut watch</span>
+										<span class="label label-danger">Gluten watch</span>
+									<span class="pull-right" style="font-weight: 900; color: darkblue">$ <span class="_restaurant-dishes-entry-price">{{ dish.price }}</span></span>
+									</div>
+								  </div>
+								{% endfor %}
+							  </div>
+						  </div>		  
 						</div>
+						{% endfor %}
+						
 						<div class="panel panel-default">
-						  <div class="panel-heading">
-							<h4 class="panel-title">
-							  <a data-toggle="collapse" data-parent="#dishes" href="#collapseEntrees">
-								Entrees
-							  </a>
+						  <div class="panel-heading" style="margin:0; padding: 0">
+							<h4 class="panel-title" style="width: 100%;">
+							  <div style="display: inline-block; width: 100%; padding: 10px;">
+								<style>
+								  .section-new:hover {
+									cursor: pointer;
+									background-color: #AAFFAA;
+								  }
+								</style>
+								<span id="section-new" class="section-new" style="padding: 2px; display: inline-block; width: 100%">+ Add New Section</span>
+								<script>
+								  function edit_{{section.grouper.id}}section_name() {
+									$('.noedit-{{ section.grouper.id }}section-name').hide();
+									$('.edit-{{ section.grouper.id }}section-name').show();
+									
+									$('#text-{{ section.grouper.id }}section-name').focus();
+									$('#text-{{ section.grouper.id }}section-name').blur(save_{{ section.grouper.id }}section_name);
+								  }
+								  function save_{{section.grouper.id}}section_name() {
+									$('.noedit-{{ section.grouper.id }}section-name').show();
+									$('.edit-{{ section.grouper.id }}section-name').hide();
+									
+									$.ajax({
+									  url: 'save',
+									  data: {
+										'section_id': {{ section.grouper.id }},
+										'section_name': $('#text-{{ section.grouper.id }}section-name').val()
+									  }
+									});
+									$('#{{ section.grouper.id }}section-name').text($('#text-{{ section.grouper.id }}section-name').val());
+									if($('#text-{{ section.grouper.id }}section-name').val() == '') {
+									  $('#{{ section.grouper.id }}section-name').text('[Section Name]')
+									}
+									$('#{{ section.grouper.id }}section-name').click(edit_{{ section.grouper.id }}section_name);
+								  }
+								  save_{{section.grouper.id}}section_name();
+								</script>
+							  </div>
 							</h4>
-						  </div>
-		  
-						  <div id="collapseEntrees" class="panel-collapse collapse in">
-							<div class="panel-body" id="panelEntrees"></div>
 						  </div>
 						</div>
-						<div class="panel panel-default">
-						  <div class="panel-heading">
-							<h4 class="panel-title">
-							  <a data-toggle="collapse" data-parent="#dishes" href="#collapseDeserts">
-								Deserts
-							  </a>
-							</h4>
-						  </div>
-		  
-						  <div id="collapseDeserts" class="panel-collapse collapse">
-							<div class="panel-body" id="panelDeserts"></div>
-						  </div>
-						</div>
-						<div class="panel panel-default">
-						  <div class="panel-heading">
-							<h4 class="panel-title">
-							  <a data-toggle="collapse" data-parent="#dishes" href="#collapseOthers">
-								Other
-							  </a>
-							</h4>
-						  </div>
-		  
-						  <div id="collapseOthers" class="panel-collapse collapse">
-							<div class="panel-body" id="panelOthers"> </div>
-						  </div>
-					  </div>
-		  
-				  </div> 			
-			  </div>
-				  
-				  <div id="dish" class="col-md-6 column" style="padding: 0 10px; color: white">
+				  </div>
+				</div>
+				<div id="dish" class="col-md-6 column" style="padding: 0 10px; color: white">
 					<div style="padding: 10px 25px; background-color: #FF7373; border-radius: 5px;">
+					  <div id="placeholder-dishinfo" style="font-size: 20px; font-weight: 900">Please select a dish from the menu. <br />If you don't have any dishes, go ahead and add one!</div>
 					  <div id="dishinfo" class="row noshow" style="background-color:#ff4040; border: solid 2px #A60000; border-radius: 5px;"> 
 						  <div class="col-md-3 column"> 
 							  <img alt="140x140" src="http://lorempixel.com/120/120/food" />
 						  </div>
 						  <div class="col-md-6 column"> 
-								  <h2> <strong id="dish-details-name"> Dish name </strong> </h2>
+								  <h2> <strong id="dish-details-name">[ Dish Name ]</strong> </h2>
 								  <p id="dish-details-rating-stars"></p> 
-								  <p>Dish Description</p> 				
+								  <p id="dish-details-description">[ Dish Description ]</p> 				
 						  </div>
 					  </div>
-					  <br />
-					  <div class="row"  style="background-color:#ff4040; border: solid 2px #A60000; border-radius: 5px;">
-						<div class="col-md-12 column"> 
-					  
-					  <div id="review" style="display: none">
-						<div class="row dishes-comments-new" > 
-						  <p>Dude's Name</p> 
-						  <div class="col-md-3 column">
-							<img alt="100x100" src="http://lorempixel.com/100/100/food" />
-						  </div> 
-						  <div class="col-md-9 column"> 
-							  <textarea id="dishes-comments-text" class="form-control" rows="4"></textarea>
-						  </div>
-						</div>
-						<br />
-						<div class="btn-group btn-group-justified">
-								<a id="dishes-comments-button0" class="btn btn-danger" role="button">0</a>
-								<a id="dishes-comments-button1" class="btn btn-warning" role="button">1</a>
-								<a id="dishes-comments-button2" class="btn btn-default" role="button">2</a>					  
-								<a id="dishes-comments-button3" class="btn btn-info" role="button">3</a>
-								<a id="dishes-comments-button4" class="btn btn-primary" role="button">4</a>					  
-								<a id="dishes-comments-button5" class="btn btn-success" role="button">5</a>
-						  </div>
-					  </div>
-		  
-					  <div id="dish-details-comments"></div>
-		  
-					  <div class="row _dish-details-comments-entry noshow" id="comment" style="margin: 0 -15px; border-top: solid 2px #A60000" > 
-						  <div class="col-md-3 column"  > 
-							  <img alt="100x100" class="_dish-details-comments-entry-picture" style="height:100px; width: 100px;" src="" />
-						  </div>
-						  <div class="col-md-6 column"> 
-								   <strong class="_dish-details-comments-entry-user"> USer id </strong> <span class="pull-right _dish-details-comments-entry-ratingvalue"> **** </span> </br> 
-								  <p class="_dish-details-comments-entry-commenttext"> Review goes here and it is really good </p> 		
-						  </div>
-					  
-					  </div>
-					  </div>
-					  
-					</div>
-				  </div>
-		  </div>
+				</div>
         </div>
     </div>
 </body>

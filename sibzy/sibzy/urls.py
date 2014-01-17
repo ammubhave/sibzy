@@ -13,7 +13,8 @@ urlpatterns = patterns('',
     url(r'^!/frontend/', include('frontend.urls')),
 
     # Restaurant admin
-    url(r'^!/edit/(.*)', 'restaurant.views.profile_edit'),
+    url(r'^!/edit/(.*)/edit', 'restaurant.views.profile_edit'),
+    url(r'^!/edit/(.*)/save', 'restaurant.views.profile_edit_save'),
 
     # Admin Site urls
     url(r'^admin/', include(admin.site.urls)),

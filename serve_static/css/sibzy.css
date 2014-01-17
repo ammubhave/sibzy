@@ -1,14 +1,77 @@
 .fb-login {
 
-			display: none;
-		}
+            display: none;
+        }
 
-		.fb-nologin {
-			display: none;
-		}
+.fb-nologin {
+    display: none;
+}
 
 h1 { 
-font-family: "Helvetica";
-
-
+    font-family: "Helvetica";
 }
+
+#restaurant-head { 
+   /* margin-top: 50px;*/
+   padding:20px;
+    margin-bottom: 50px;
+    background-color: rgba(105, 105, 179, 0.32);
+}
+
+#profile-image { 
+    
+}
+
+.rating { 
+    background-image: url('http://i.imgur.com/pDkElep.png');
+    background-repeat: repeat-x; 
+    height: 20px; 
+    width:0px; 
+    background-size: 100px 20px
+}
+
+.noshow {
+    display:none;
+}
+
+#mapcanvas {
+    width: 500px; 
+    height: 500px; 
+    display: none
+}
+
+#dishinfo {
+    padding:12px; padding-left: 0px;  background-color: rgba(105, 105, 179, 0.32); display:none
+}
+
+#review { 
+    padding:12px; 
+    margin-top:10px;
+    background-color: rgba(240, 102, 26, 0.41);
+}
+
+#comment { 
+    display: none;
+    margin-top: 10px; 
+    padding:12px;
+    padding-left: 0px;
+    background-color: rgba(82, 204, 41, 0.22)
+   }
+
+.menu-dish { 
+ background-color: rgba(82, 204, 41, 0.22);
+ padding: 10px; 
+ margin-top: 5px; 
+ color: black;
+ text-decoration: none !important; 
+ border-radius: 5px;
+}
+
+.menu-dish:hover {
+    background-color: rgba(105, 105, 179, 0.32); 
+    text-decoration: none !important;
+    cursor: pointer;
+}
+
+
+

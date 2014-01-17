@@ -1,7 +1,7 @@
 from django.shortcuts import render
 # from restaurant.models import Restaurant
 from django.http import HttpResponse
-
+from django.views.decorators.csrf import csrf_exempt
 import os
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
@@ -11,10 +11,27 @@ import urllib2
 import re
 import contextlib
 
+
 # For restaurant owners, let them edit profiles
 def profile_edit(request, id):
     restaurant = get_object_or_404(Restaurant, id=id)
     return render(request, 'restaurant_profile_edit.html', {'restaurant': restaurant})
+
+@csrf_exempt
+def profile_edit_save(request, id):
+    restaurant = get_object_or_404(Restaurant, id=id)
+
+    if 'name' in request.REQUEST:
+        restaurant.name = request.REQUEST['name']
+    if 'description' in request.REQUEST:
+        restaurant.description = request.REQUEST['description']
+    if 'section_id' in request.REQUEST and 'section_name' in request.REQUEST:
+        section = get_object_or_404(DishCategory, id=int(request.REQUEST['section_id']))
+        section.name = request.REQUEST['section_name']
+        section.save()
+
+    restaurant.save();
+    return HttpResponse("{'status': 'success'}");
 
 # initialize database
 def fill_locations(request):
