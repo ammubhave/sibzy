@@ -10,6 +10,9 @@ function updateLoginStatus(response) {
       console.log('Already logged in!');
     } else {
       console.log(response);
+      
+  
+  
       $.ajax({
         type: 'POST',
         url: '/!/auth/login/fb',

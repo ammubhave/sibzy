@@ -22,3 +22,10 @@ def q(request, query):
         resp.append(element)
     response = HttpResponse(json.dumps(resp))
     return response
+
+
+def set_location(request):
+    response = HttpResponse("{'status': 'success'}");
+    response.set_cookie('lat', request.REQUEST['lat']);
+    response.set_cookie('lng', request.REQUEST['lng']);
+    return response

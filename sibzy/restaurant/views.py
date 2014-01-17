@@ -11,11 +11,16 @@ import urllib2
 import re
 import contextlib
 
+# For restaurant owners, let them edit profiles
+def profile_edit(request, id):
+    restaurant = get_object_or_404(Restaurant, id=id)
+    return render(request, 'restaurant_profile_edit.html', {'restaurant': restaurant})
+
 # initialize database
 def fill_locations(request):
     country_usa = Country(name='United States')
 
-    if len(Country.objects.filter(name='United States')) == 0:        
+    if len(Country.objects.filter(name='United States')) == 0:
         country_usa.save()
 
     states = [

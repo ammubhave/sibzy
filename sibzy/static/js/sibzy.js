@@ -19,6 +19,28 @@ function getCookie(name) {
     return cookieValue;
 }
 
+var usrlocation = {
+    'lat': 0,
+    'lng': 0,
+};
+function sendLocToServer(position) {
+    usrlocation.lat = position.coords.latitude;
+    usrlocation.lng = position.coords.longitude;
+    console.log(navigator.geolocation && getCookie('lat') === null);
+    $.ajax({
+        url: '/!/search/set_location',
+        dataType: 'json',
+        data: usrlocation,
+    });
+}
+
+if (navigator.geolocation && getCookie('lat') === null) {
+    navigator.geolocation.getCurrentPosition(sendLocToServer);
+    console.log(navigator.geolocation);
+} else {
+    console.log("Geolocation is not supported by this browser.");
+}
+
 function activate_links() {
     
     $('a[href]').each(function (index, elem) {

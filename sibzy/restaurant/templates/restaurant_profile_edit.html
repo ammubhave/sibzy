@@ -1,0 +1,356 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Sibzy Alpha</title>
+	<meta name="description" content="Sibzy">
+    <meta name="google-site-verification" content="Ng7eN5Ek6stT6CDfCGy0-7WFs9zxdbzej5mWKPZYWuw" />
+	<meta name="author" content="Sibzy">
+
+	<!--
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<script src="js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery-1.6.1.min.js"></script>
+    -->
+    
+	<script src="http://codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/sibzy.css" />
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAz1kIQZGS8LeLJ4rFp7t3O9kAVRaHSHs0&sensor=true">
+    </script>
+
+
+	<style type="text/css">
+		html {
+			height: 100%;
+			overflow: scroll;
+			overflow-x: hidden;
+		}
+		
+		body {
+			background-color: #f0f0f0;
+		}
+
+       .facebook 
+        { 
+            font-size: 10;
+        }
+		
+		.navbar {
+  background-color: #00ac6b;
+  border-color: #008b56;
+}
+.navbar .navbar-brand {
+  color: #ffffff;
+}
+.navbar .navbar-brand:hover,
+.navbar .navbar-brand:focus {
+  color: #e6e6e6;
+  background-color: transparent;
+}
+.navbar .navbar-text {
+  color: #ffffff;
+}
+.navbar .navbar-nav > li:last-child > a {
+  border-right: 1px solid #008b56;
+}
+.navbar .navbar-nav > li > a {
+  color: #ffffff;
+  border-left: 1px solid #008b56;
+}
+.navbar .navbar-nav > li > a:hover,
+.navbar .navbar-nav > li > a:focus {
+  color: #007046;
+  background-color: transparent;
+}
+.navbar .navbar-nav > .active > a,
+.navbar .navbar-nav > .active > a:hover,
+.navbar .navbar-nav > .active > a:focus {
+  color: #007046;
+  background-color: #008b56;
+}
+.navbar .navbar-nav > .disabled > a,
+.navbar .navbar-nav > .disabled > a:hover,
+.navbar .navbar-nav > .disabled > a:focus {
+  color: #cccccc;
+  background-color: transparent;
+}
+.navbar .navbar-toggle {
+  border-color: #dddddd;
+}
+.navbar .navbar-toggle:hover,
+.navbar .navbar-toggle:focus {
+  background-color: #dddddd;
+}
+.navbar .navbar-toggle .icon-bar {
+  background-color: #cccccc;
+}
+.navbar .navbar-collapse,
+.navbar .navbar-form {
+  border-color: #008855;
+}
+.navbar .navbar-nav > .dropdown > a:hover .caret,
+.navbar .navbar-nav > .dropdown > a:focus .caret {
+  border-top-color: #007046;
+  border-bottom-color: #007046;
+}
+.navbar .navbar-nav > .open > a,
+.navbar .navbar-nav > .open > a:hover,
+.navbar .navbar-nav > .open > a:focus {
+  background-color: #008b56;
+  color: #007046;
+}
+.navbar .navbar-nav > .open > a .caret,
+.navbar .navbar-nav > .open > a:hover .caret,
+.navbar .navbar-nav > .open > a:focus .caret {
+  border-top-color: #007046;
+  border-bottom-color: #007046;
+}
+.navbar .navbar-nav > .dropdown > a .caret {
+  border-top-color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+@media (max-width: 767) {
+  .navbar .navbar-nav .open .dropdown-menu > li > a {
+    color: #ffffff;
+  }
+  .navbar .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #007046;
+    background-color: transparent;
+  }
+  .navbar .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #007046;
+    background-color: #008b56;
+  }
+  .navbar .navbar-nav .open .dropdown-menu > .disabled > a,
+  .navbar .navbar-nav .open .dropdown-menu > .disabled > a:hover,
+  .navbar .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+    color: #cccccc;
+    background-color: transparent;
+  }
+}
+.navbar .navbar-link {
+  color: #ffffff;
+}
+.navbar .navbar-link:hover {
+  color: #007046;
+}
+		
+	</style>
+</head>
+<body>
+    <div id="fb-root"></div>
+	<div style="width: 100%; height: 51px; width: 100%;height: 51px; background-color: #00ac6b; z-index: 99; border-bottom: solid 1px #008b56; top: 0; position: fixed;">
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="width: 910px; margin: 0 auto;">
+			<div class="navbar-header"> 
+				<a class="navbar-brand" href="">
+					<span style="">Sibzy <sup>&alpha;</sup></span>
+				</a>
+			</div> 
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">				
+				<form class="navbar-form navbar-left" role="search">
+					<div class="form-group">
+						<input type="text" value="Restaurant Administration: {{ restaurant.name }}" style="width: 500px; border-color: #007339; background-color: #228653; color: white; font-weight: 900;"  disabled="disabled" class="form-control" placeholder="">
+					</div>
+				</form>
+			</div>
+		</nav>
+	</div>
+    
+	<div id="content_parent" style="background-color: white; margin: 20px; margin-top: 70px; padding: 20px;">
+        <div id="content">
+		  <div class="container">
+			  <div class="row clearfix" id="restaurant-head" style="background-color: #ffb273; border: solid 2px #ff7400; border-radius: 5px;">
+				  <div class="col-md-2 column" style="padding:0">
+					  <img id="profile-image" alt="170x170" src="http://placehold.it/170&text=Restaurant" />
+				  </div>
+				  <div class="col-md-4 column">
+					  <style>
+						#restaurant-name:hover {
+						  background-color: #FFE900;
+						}
+					  </style>
+					  <h1><span id="restaurant-name">{{ restaurant.name }}</span></h1><br />
+					  
+					  <div id="rating" class="_restaurant-rating-total rating"> </div>
+					  <span class="_restaurant-categories-element-start noshow" > 
+						  <span class="_restaurant-categories-element-name"> </span> 
+					  </span>
+					  <span class="_restaurant-categories-element noshow" >
+						  <span class="_restaurant-categories-element-name"> </span>
+					  </span>
+					  <span class="_restaurant-categories-element-end noshow" > 
+						  <span class="_restaurant-categories-element-name"> </span>
+					  </span> 		
+					  <span class="restaurant-categories"></span>
+					  <span class="restaurant-rating-total"> </span> 
+				  </div>
+		  
+				  <div class="col-md-2 column">
+		  
+					  <address>
+						  <strong><span class="restaurant-name"></span></strong><br />
+						  <span class="restaurant-location-address"></span><br />
+						  <span class="restaurant-location-city"></span>, <span class="restaurant-location-state"></span> <span class="restaurant-location-zip"></span><br />
+						  <abbr title="Phone">P:</abbr> <span class="restaurant-location-phone"></span>
+					  </address></div>
+				  </br>
+				  <div class="col-md-4 column">
+				  <div id="map-canvas" style="width: 100%; height: 150px; display: none"></div>
+				  </div>
+				  
+			  </div>
+			  <style>
+				.panel-default {
+				  border-color: #006363;
+				}
+			  </style>
+			  <div class="row clearfix">
+				  <div class="col-md-6 column" style="padding :10px; background-color: #5CCCCC; border-radius: 5px;  border: solid 2px #009999">
+					<h2 style="text-align: center; color: #006363">Menu</h2>
+					<hr style="border-top-color: #006363" />
+					  <div class="panel-group _restaurant-dishes" id="dishes">
+						  <div class="_restaurant-dishes-entry noshow" style="text-decoration:none; border-radius: 5px;">
+							  <div class="menu-dish"> <span class="_restaurant-dishes-entry-name">Appetizer 1</span>
+								  <!-- This stuff needs to be linked --> 
+		  
+								  <span class="label label-success">Vegetarian</span>
+								  <span class="label label-info">Vegan</span>
+								  <span class="label label-primary">Organic</span>
+								  <span class="label label-warning">Nut watch</span>
+								  <span class="label label-danger">Gluten watch</span>
+		  
+									  <!-- For Restaurants
+								  <span class="label label-default">Vegetarian</span>
+								  <span class="label label-default">Vegan</span>
+								  <span class="label label-default">Organic</span>
+								  <span class="label label-default">Nut watch</span>
+								  <span class="label label-default">Gluten watch</span>
+									  -->
+									  
+							  <span class="pull-right">$<span class="_restaurant-dishes-entry-price">$15</span></span>
+							  </div> 
+						  </div>
+						<div class="panel panel-default">
+						  <div class="panel-heading">
+							<h4 class="panel-title">
+							  <a data-toggle="collapse" data-parent="#dishes" href="#collapseAppetizers">
+								Appetizers
+							  </a>
+							</h4>
+						  </div>
+		  
+						  <div id="collapseAppetizers" class="panel-collapse collapse">
+							  <div class="panel-body" id="panelAppetizers"> </div>
+						  </div>
+		  
+						</div>
+						<div class="panel panel-default">
+						  <div class="panel-heading">
+							<h4 class="panel-title">
+							  <a data-toggle="collapse" data-parent="#dishes" href="#collapseEntrees">
+								Entrees
+							  </a>
+							</h4>
+						  </div>
+		  
+						  <div id="collapseEntrees" class="panel-collapse collapse in">
+							<div class="panel-body" id="panelEntrees"></div>
+						  </div>
+						</div>
+						<div class="panel panel-default">
+						  <div class="panel-heading">
+							<h4 class="panel-title">
+							  <a data-toggle="collapse" data-parent="#dishes" href="#collapseDeserts">
+								Deserts
+							  </a>
+							</h4>
+						  </div>
+		  
+						  <div id="collapseDeserts" class="panel-collapse collapse">
+							<div class="panel-body" id="panelDeserts"></div>
+						  </div>
+						</div>
+						<div class="panel panel-default">
+						  <div class="panel-heading">
+							<h4 class="panel-title">
+							  <a data-toggle="collapse" data-parent="#dishes" href="#collapseOthers">
+								Other
+							  </a>
+							</h4>
+						  </div>
+		  
+						  <div id="collapseOthers" class="panel-collapse collapse">
+							<div class="panel-body" id="panelOthers"> </div>
+						  </div>
+					  </div>
+		  
+				  </div> 			
+			  </div>
+				  
+				  <div id="dish" class="col-md-6 column" style="padding: 0 10px; color: white">
+					<div style="padding: 10px 25px; background-color: #FF7373; border-radius: 5px;">
+					  <div id="dishinfo" class="row noshow" style="background-color:#ff4040; border: solid 2px #A60000; border-radius: 5px;"> 
+						  <div class="col-md-3 column"> 
+							  <img alt="140x140" src="http://lorempixel.com/120/120/food" />
+						  </div>
+						  <div class="col-md-6 column"> 
+								  <h2> <strong id="dish-details-name"> Dish name </strong> </h2>
+								  <p id="dish-details-rating-stars"></p> 
+								  <p>Dish Description</p> 				
+						  </div>
+					  </div>
+					  <br />
+					  <div class="row"  style="background-color:#ff4040; border: solid 2px #A60000; border-radius: 5px;">
+						<div class="col-md-12 column"> 
+					  
+					  <div id="review" style="display: none">
+						<div class="row dishes-comments-new" > 
+						  <p>Dude's Name</p> 
+						  <div class="col-md-3 column">
+							<img alt="100x100" src="http://lorempixel.com/100/100/food" />
+						  </div> 
+						  <div class="col-md-9 column"> 
+							  <textarea id="dishes-comments-text" class="form-control" rows="4"></textarea>
+						  </div>
+						</div>
+						<br />
+						<div class="btn-group btn-group-justified">
+								<a id="dishes-comments-button0" class="btn btn-danger" role="button">0</a>
+								<a id="dishes-comments-button1" class="btn btn-warning" role="button">1</a>
+								<a id="dishes-comments-button2" class="btn btn-default" role="button">2</a>					  
+								<a id="dishes-comments-button3" class="btn btn-info" role="button">3</a>
+								<a id="dishes-comments-button4" class="btn btn-primary" role="button">4</a>					  
+								<a id="dishes-comments-button5" class="btn btn-success" role="button">5</a>
+						  </div>
+					  </div>
+		  
+					  <div id="dish-details-comments"></div>
+		  
+					  <div class="row _dish-details-comments-entry noshow" id="comment" style="margin: 0 -15px; border-top: solid 2px #A60000" > 
+						  <div class="col-md-3 column"  > 
+							  <img alt="100x100" class="_dish-details-comments-entry-picture" style="height:100px; width: 100px;" src="" />
+						  </div>
+						  <div class="col-md-6 column"> 
+								   <strong class="_dish-details-comments-entry-user"> USer id </strong> <span class="pull-right _dish-details-comments-entry-ratingvalue"> **** </span> </br> 
+								  <p class="_dish-details-comments-entry-commenttext"> Review goes here and it is really good </p> 		
+						  </div>
+					  
+					  </div>
+					  </div>
+					  
+					</div>
+				  </div>
+		  </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+  
+

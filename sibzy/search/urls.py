@@ -9,4 +9,5 @@ urlpatterns = patterns(
     url(r'^load/q$', 'frontend.views.load_template', {'template_path': 'search_q'}),
 
     url(r'^q/(.*)$', 'search.views.q'),
+    url(r'^set_location$', 'search.views.set_location'),
 )

@@ -12,6 +12,9 @@ urlpatterns = patterns('',
     url(r'^!/search/', include('search.urls')),
     url(r'^!/frontend/', include('frontend.urls')),
 
+    # Restaurant admin
+    url(r'^!/edit/(.*)', 'restaurant.views.profile_edit'),
+
     # Admin Site urls
     url(r'^admin/', include(admin.site.urls)),
 

@@ -116,6 +116,23 @@ $(function () {
 					google.maps.event.addListener(marker, 'click', function() {
 					infowindow.open(map,marker);
 				});
+					
+					if (getCookie('lat') != null) { 
+         myLatlng = new google.maps.LatLng(getCookie('lat'), getCookie('lng'));
+                     marker = new google.maps.Marker({
+                        position: myLatlng,
+                        map: map,
+                        title: "You",
+                        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+                    });
+                     infowindow = new google.maps.InfoWindow({
+                        content: "Your location"
+                    });
+                    google.maps.event.addListener(marker, 'click', function() {
+                        infowindow.open(map,marker);
+                    });
+                    
+    }
 				
 			});
 
