@@ -1,0 +1,240 @@
+<script type="text/javascript">
+/*jslint nomen:false, debug:true, evil:true, vars:false, browser:true, forin:true, undef:false, white:false */
+/**
+ * Includes a Form with javascript
+ * @param {Object} formId
+ * @param {Object} initialHeight
+ * @param {Object} iframeCode
+ */
+function FrameBuilder (formId, appendTo, initialHeight, iframeCode){
+    this.formId = formId;
+    this.initialHeight = initialHeight;
+    this.iframeCode = iframeCode;
+    this.frame = null;
+    this.timeInterval= 200;
+    this.appendTo = appendTo || false;
+    this.formSubmitted = 0;
+
+    // initialize function for object
+    this.init = function(){
+        this.createFrame();
+        this.addFrameContent(this.iframeCode);
+    };
+    
+    // Create the frame
+   // Create the frame
+    this.createFrame = function(){
+        var tmp_is_ie = !!window.ActiveXObject; //IE detection
+
+        var htmlCode = "<"+"iframe onload=\"window.parent.scrollTo(0,0)\" src=\"\" allowtransparency=\"true\" frameborder=\"0\" name=\""+this.formId+"\" id=\""+this.formId+"\" style=\"width:100%; height:"+this.initialHeight+"px; border:none;\" scrolling=\"no\"></if"+"rame>";
+         
+        if(this.appendTo === false){
+            document.write(htmlCode);
+        }else{
+            var tmp = document.createElement('div');
+            tmp.innerHTML = htmlCode;
+            var a = this.appendTo;
+            document.getElementById(a).appendChild(tmp.firstChild);   
+            //var form = document.getElementById()         
+        }
+        // also get the frame for future use.
+        this.frame = document.getElementById(this.formId);
+
+        //correct fix to IE security bugfix
+        if(tmp_is_ie === true){
+                try { //check for security bug ahead! If bug occurs then parent frame's document.domain was set, if it does not then do not apply fix!!!
+                    var iframe = this.frame;
+                    var doc = iframe.contentDocument ? iframe.contentDocument : (iframe.contentWindow.document || iframe.document);
+                    doc.open();
+                    doc.write("");
+                }
+                catch (err) {
+                  this.frame.src= "javascript:void((function(){document.open();document.domain=\'"+ this.getBaseDomain()+"\';document.close();})())";
+                }
+        }
+        // set the time on the on load event of the frame
+        this.addEvent(this.frame, 'load', this.bindMethod(this.setTimer, this));
+
+        var self = this;
+
+        //on chrome to suppress unsafe attempt error this codes break setHeight-time interval loop
+        if(window.chrome!==undefined){
+            this.frame.onload = function(){
+                try{
+                    var doc = this.contentWindow.document;
+
+                    var _jotform = this.contentWindow.JotForm;
+                    if(doc!==undefined){
+                        var form = doc.getElementById(""+self.formId);
+                        self.addEvent(form, "submit", function(){
+                            if(_jotform.validateAll()){
+                                self.formSubmitted=1;
+                            }
+                        });
+                    }
+                } catch(e){
+
+                }
+            }
+        }
+    };
+    
+    // add event function for different browsers
+    this.addEvent = function (obj, type, fn) {
+        if (obj.attachEvent) {
+            obj["e" + type + fn] = fn;
+            obj[type + fn] = function () { obj["e" + type + fn](window.event); };
+            obj.attachEvent("on" + type, obj[type + fn]);
+        }
+        else{
+            obj.addEventListener(type, fn, false);
+        }
+    };
+
+    this.addFrameContent = function (string){
+        string = string.replace(new RegExp('src\\=\\"[^"]*captcha.php\"><\/scr'+'ipt>', 'gim'), 'src="http://api.recaptcha.net/js/recaptcha_ajax.js"></scr'+'ipt><'+'div id="recaptcha_div"><'+'/div>'+
+                '<'+'style>#recaptcha_logo{ display:none;} #recaptcha_tagline{display:none;} #recaptcha_table{border:none !important;} .recaptchatable .recaptcha_image_cell, #recaptcha_table{ background-color:transparent !important; } <'+'/style>'+
+                '<'+'script defer="defer"> window.onload = function(){ Recaptcha.create("6Ld9UAgAAAAAAMon8zjt30tEZiGQZ4IIuWXLt1ky", "recaptcha_div", {theme: "clean",tabindex: 0,callback: function (){'+
+                'if (document.getElementById("uword")) { document.getElementById("uword").parentNode.removeChild(document.getElementById("uword")); } if (window["validate"] !== undefined) { if (document.getElementById("recaptcha_response_field")){ document.getElementById("recaptcha_response_field").onblur = function(){ validate(document.getElementById("recaptcha_response_field"), "Required"); } } } if (document.getElementById("recaptcha_response_field")){ document.getElementsByName("recaptcha_challenge_field")[0].setAttribute("name", "anum"); } if (document.getElementById("recaptcha_response_field")){ document.getElementsByName("recaptcha_response_field")[0].setAttribute("name", "qCap"); }}})'+
+                ' }<'+'/script>');
+        string = string.replace(/(type="text\/javascript">)\s+(validate\(\"[^"]*"\);)/, '$1 jTime = setInterval(function(){if("validate" in window){$2clearTimeout(jTime);}}, 1000);');
+        var iframe = this.frame;
+        var doc = iframe.contentDocument ? iframe.contentDocument : (iframe.contentWindow.document || iframe.document);
+        doc.open();
+        doc.write(string);
+        
+        setTimeout( function(){
+            doc.close();
+            try{
+                if('JotFormFrameLoaded' in window){
+                    JotFormFrameLoaded();
+                }
+            }catch(e){
+                console.log("error on frame loading", e);
+            }
+        },200);
+    };
+    
+    this.setTimer = function(){
+        var self = this;
+        this.interval = setTimeout(function(){self.changeHeight();},this.timeInterval);
+    };
+
+    this.getBaseDomain = function(){
+         var thn = window.location.hostname;
+          var cc = 0;
+          var buff = "";
+          for(var i=0; i< thn.length;i++){
+                var chr = thn.charAt(i);
+
+                if(chr == "."){
+                    cc++;
+                }
+
+                if(cc == 0){
+                    buff+=chr;
+                }
+          }
+
+          if(cc == 2){
+            thn = thn.replace(buff+".","");
+          }
+
+          return thn;
+    }
+    
+    this.changeHeight = function (){
+        var actualHeight = this.getBodyHeight();
+        var currentHeight = this.getViewPortHeight();
+        if(actualHeight === undefined){
+            this.frame.style.height = this.frameHeight;
+            if(!this.frame.style.minHeight){
+                this.frame.style.minHeight = "300px";
+            }
+        }else if  (Math.abs(actualHeight - currentHeight) > 18){
+            this.frame.style.height = (actualHeight)+"px";
+        }
+
+        this.setTimer();
+    };
+    
+    this.bindMethod = function(method, scope) {
+        return function() {
+            method.apply(scope,arguments);
+        };
+    };
+    
+    this.frameHeight = 0;
+    this.getBodyHeight = function (){
+
+        if(this.formSubmitted===1){
+            return;
+        }
+        var height;
+        var scrollHeight;
+        var offsetHeight;
+
+        try{  // Prevent IE from throw errors
+            if (this.frame.contentWindow.document.height){
+                
+                height = this.frame.contentWindow.document.height;
+                //Emre: to prevent "iframe height"  problem (61059)
+                if (this.frame.contentWindow.document.body.scrollHeight){
+                    height = scrollHeight = this.frame.contentWindow.document.body.scrollHeight;
+                }
+                
+                if (this.frame.contentWindow.document.body.offsetHeight){
+                    height = offsetHeight = this.frame.contentWindow.document.body.offsetHeight;
+                }
+                
+            } else if (this.frame.contentWindow.document.body){
+                
+                if (this.frame.contentWindow.document.body.scrollHeight){
+                    height = scrollHeight = this.frame.contentWindow.document.body.scrollHeight;
+                }
+                
+                if (this.frame.contentWindow.document.body.offsetHeight){
+                    height = offsetHeight = this.frame.contentWindow.document.body.offsetHeight;
+                }
+                
+                if (scrollHeight && offsetHeight){
+                    height = Math.max(scrollHeight, offsetHeight);
+                }
+            }            
+        }catch(e){ }
+
+        this.frameHeight = height;
+        return height;
+    };
+    
+    this.getViewPortHeight = function(){
+        
+        if(this.formSubmitted===1){
+            return;
+        }
+        var height = 0;
+        try{ // Prevent IE from throw errors
+            if (this.frame.contentWindow.window.innerHeight)
+            {
+                height = this.frame.contentWindow.window.innerHeight - 18;
+            }
+            else if ((this.frame.contentWindow.document.documentElement) &&
+                     (this.frame.contentWindow.document.documentElement.clientHeight))
+            {
+                height = this.frame.contentWindow.document.documentElement.clientHeight;
+            }
+            else if ((this.frame.contentWindow.document.body) &&
+                     (this.frame.contentWindow.document.body.clientHeight))
+            {
+                height = this.frame.contentWindow.document.body.clientHeight;
+            }            
+        }catch(e){ }
+        return height;
+    };
+    
+    this.init();
+}
+FrameBuilder.get = [];
+var i40097174997872 = new FrameBuilder("40097174997872", "survey_div", "", "<!DOCTYPE HTML PUBLIC \"-\/\/W3C\/\/DTD HTML 4.01\/\/EN\" \"http:\/\/www.w3.org\/TR\/html4\/strict.dtd\">\n<html><head>\n<meta http-equiv=\"Content-Type\" content=\"text\/html; charset=utf-8\" \/>\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0\" \/>\n<meta name=\"HandheldFriendly\" content=\"true\" \/>\n<title>Form<\/title>\n<link href=\"http:\/\/cdn.jotfor.ms\/static\/formCss.css?3.2.107\" rel=\"stylesheet\" type=\"text\/css\" \/>\n<link type=\"text\/css\" rel=\"stylesheet\" href=\"http:\/\/cdn.jotfor.ms\/css\/styles\/nova.css?3.2.107\" \/>\n<link type=\"text\/css\" media=\"print\" rel=\"stylesheet\" href=\"http:\/\/cdn.jotfor.ms\/css\/printForm.css?3.2.107\" \/>\n<style type=\"text\/css\">\n    .form-label{\n        width:150px !important;\n    }\n    .form-label-left{\n        width:150px !important;\n    }\n    .form-line{\n        padding-top:12px;\n        padding-bottom:12px;\n    }\n    .form-label-right{\n        width:150px !important;\n    }\n    body, html{\n        margin:0;\n        padding:0;\n        background:false;\n    }\n\n    .form-all{\n        margin:0px auto;\n        padding-top:0px;\n        width:690px;\n        color:#555 !important;\n        font-family:'Lucida Grande';\n        font-size:14px;\n    }\n<\/style>\n\n<script src=\"http:\/\/cdn.jotfor.ms\/static\/jotform.js?3.2.107\" type=\"text\/javascript\"><\/script>\n<script type=\"text\/javascript\">\n var jsTime = setInterval(function(){try{\n   JotForm.jsForm = true;\n\n   JotForm.setConditions([{\"action\":[{\"field\":\"8\",\"visibility\":\"Show\"}],\"index\":\"0\",\"link\":\"Any\",\"priority\":\"0\",\"terms\":[{\"field\":\"7\",\"operator\":\"isFilled\",\"value\":false}],\"type\":\"field\"}]);\n   JotForm.init(function(){\n      $('input_10').hint('ex: myname@example.com');\n   });\n\n   clearInterval(jsTime);\n }catch(e){}}, 1000);\n<\/script>\n<\/head>\n<body>\n<form class=\"jotform-form\" action=\"http:\/\/submit.jotform.co\/submit\/40097174997872\/\" method=\"post\" name=\"form_40097174997872\" id=\"40097174997872\" accept-charset=\"utf-8\">\n  <input type=\"hidden\" name=\"formID\" value=\"40097174997872\" \/>\n  <div class=\"form-all\">\n    <ul class=\"form-section\">\n      <li id=\"cid_1\" class=\"form-input-wide\">\n        <div class=\"form-header-group\">\n          <h2 id=\"header_1\" class=\"form-header\">\n            Sibzy Survey\n          <\/h2>\n        <\/div>\n      <\/li>\n      <li class=\"form-line\" id=\"id_4\">\n        <label class=\"form-label-top\" id=\"label_4\" for=\"input_4\"> Do you have a dietary restriction(s)? Select all that apply. <\/label>\n        <div id=\"cid_4\" class=\"form-input-wide\">\n          <div class=\"form-single-column\"><span class=\"form-checkbox-item\" style=\"clear:left;\"><input type=\"checkbox\" class=\"form-checkbox\" id=\"input_4_0\" name=\"q4_doYou4[]\" value=\"None\" \/>\n              <label for=\"input_4_0\"> None <\/label><\/span><span class=\"clearfix\"><\/span><span class=\"form-checkbox-item\" style=\"clear:left;\"><input type=\"checkbox\" class=\"form-checkbox\" id=\"input_4_1\" name=\"q4_doYou4[]\" value=\"Vegetarian\" \/>\n              <label for=\"input_4_1\"> Vegetarian <\/label><\/span><span class=\"clearfix\"><\/span><span class=\"form-checkbox-item\" style=\"clear:left;\"><input type=\"checkbox\" class=\"form-checkbox\" id=\"input_4_2\" name=\"q4_doYou4[]\" value=\"Vegan\" \/>\n              <label for=\"input_4_2\"> Vegan <\/label><\/span><span class=\"clearfix\"><\/span><span class=\"form-checkbox-item\" style=\"clear:left;\"><input type=\"checkbox\" class=\"form-checkbox\" id=\"input_4_3\" name=\"q4_doYou4[]\" value=\"Food Alergy\" \/>\n              <label for=\"input_4_3\"> Food Alergy <\/label><\/span><span class=\"clearfix\"><\/span>\n          <\/div>\n        <\/div>\n      <\/li>\n      <li class=\"form-line\" id=\"id_6\">\n        <label class=\"form-label-top\" id=\"label_6\" for=\"input_6\"> How many days per week do you eat out on average? <\/label>\n        <div id=\"cid_6\" class=\"form-input-wide\">\n          <div class=\"form-single-column\"><span class=\"form-radio-item\" style=\"clear:left;\"><input type=\"radio\" class=\"form-radio\" id=\"input_6_0\" name=\"q6_howMany6\" value=\"0\" \/>\n              <label for=\"input_6_0\"> 0 <\/label><\/span><span class=\"clearfix\"><\/span><span class=\"form-radio-item\" style=\"clear:left;\"><input type=\"radio\" class=\"form-radio\" id=\"input_6_1\" name=\"q6_howMany6\" value=\"1-2\" \/>\n              <label for=\"input_6_1\"> 1-2 <\/label><\/span><span class=\"clearfix\"><\/span><span class=\"form-radio-item\" style=\"clear:left;\"><input type=\"radio\" class=\"form-radio\" id=\"input_6_2\" name=\"q6_howMany6\" value=\"3-5\" \/>\n              <label for=\"input_6_2\"> 3-5 <\/label><\/span><span class=\"clearfix\"><\/span><span class=\"form-radio-item\" style=\"clear:left;\"><input type=\"radio\" class=\"form-radio\" id=\"input_6_3\" name=\"q6_howMany6\" value=\"5-7\" \/>\n              <label for=\"input_6_3\"> 5-7 <\/label><\/span><span class=\"clearfix\"><\/span>\n          <\/div>\n        <\/div>\n      <\/li>\n      <li class=\"form-line form-line-column\" id=\"id_7\">\n        <label class=\"form-label-top\" id=\"label_7\" for=\"input_7\"> What is your favorite restaurant or food truck? <\/label>\n        <div id=\"cid_7\" class=\"form-input-wide\">\n          <input type=\"text\" class=\" form-textbox\" data-type=\"input-textbox\" id=\"input_7\" name=\"q7_whatIs\" size=\"30\" value=\"\" \/>\n        <\/div>\n      <\/li>\n      <li class=\"form-line form-line-column\" id=\"id_8\">\n        <label class=\"form-label-top\" id=\"label_8\" for=\"input_8\"> What is your favorite dish there? <\/label>\n        <div id=\"cid_8\" class=\"form-input-wide\">\n          <input type=\"text\" class=\" form-textbox\" data-type=\"input-textbox\" id=\"input_8\" name=\"q8_whatIs8\" size=\"20\" value=\"\" \/>\n        <\/div>\n      <\/li>\n      <li class=\"form-line\" id=\"id_9\">\n        <label class=\"form-label-left\" id=\"label_9\" for=\"input_9\"> What range best describes your age? <\/label>\n        <div id=\"cid_9\" class=\"form-input\">\n          <div class=\"form-single-column\"><span class=\"form-radio-item\" style=\"clear:left;\"><input type=\"radio\" class=\"form-radio\" id=\"input_9_0\" name=\"q9_whatRange\" value=\"Less that 22\" \/>\n              <label for=\"input_9_0\"> Less that 22 <\/label><\/span><span class=\"clearfix\"><\/span><span class=\"form-radio-item\" style=\"clear:left;\"><input type=\"radio\" class=\"form-radio\" id=\"input_9_1\" name=\"q9_whatRange\" value=\"22-30\" \/>\n              <label for=\"input_9_1\"> 22-30 <\/label><\/span><span class=\"clearfix\"><\/span><span class=\"form-radio-item\" style=\"clear:left;\"><input type=\"radio\" class=\"form-radio\" id=\"input_9_2\" name=\"q9_whatRange\" value=\"31-45\" \/>\n              <label for=\"input_9_2\"> 31-45 <\/label><\/span><span class=\"clearfix\"><\/span><span class=\"form-radio-item\" style=\"clear:left;\"><input type=\"radio\" class=\"form-radio\" id=\"input_9_3\" name=\"q9_whatRange\" value=\"Older than 45\" \/>\n              <label for=\"input_9_3\"> Older than 45 <\/label><\/span><span class=\"clearfix\"><\/span>\n          <\/div>\n        <\/div>\n      <\/li>\n      <li class=\"form-line\" id=\"id_10\">\n        <label class=\"form-label-top\" id=\"label_10\" for=\"input_10\"> Please enter your email if you'd like us to contact you in the future <\/label>\n        <div id=\"cid_10\" class=\"form-input-wide\">\n          <input type=\"email\" class=\" form-textbox validate[Email]\" id=\"input_10\" name=\"q10_pleaseEnter\" size=\"30\" value=\"\" \/>\n        <\/div>\n      <\/li>\n      <li class=\"form-line\" id=\"id_2\">\n        <div id=\"cid_2\" class=\"form-input-wide\">\n          <div style=\"margin-left:156px\" class=\"form-buttons-wrapper\">\n            <button id=\"input_2\" type=\"submit\" class=\"form-submit-button\">\n              Submit\n            <\/button>\n          <\/div>\n        <\/div>\n      <\/li>\n      <li style=\"display:none\">\n        Should be Empty:\n        <input type=\"text\" name=\"website\" value=\"\" \/>\n      <\/li>\n    <\/ul>\n  <\/div>\n  <input type=\"hidden\" id=\"simple_spc\" name=\"simple_spc\" value=\"40097174997872\" \/>\n  <script type=\"text\/javascript\">\n  document.getElementById(\"si\" + \"mple\" + \"_spc\").value = \"40097174997872-40097174997872\";\n  <\/script>\n<\/form><\/body>\n<\/html>\n");
+</script>
+<div id="survey_div"></div>
