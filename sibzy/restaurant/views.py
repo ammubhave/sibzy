@@ -6,7 +6,7 @@ import os
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from restaurant.models import *
-import simplejson
+import simplejson as json
 import urllib2
 import re
 import contextlib
