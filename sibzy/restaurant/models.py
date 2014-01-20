@@ -9,22 +9,22 @@ class Restaurant(models.Model):
     ''' Restaurant details '''
 
     #: CharField(255): Restaurant name
-    name = models.CharField(max_length=255)
+    name = models.CharField(db_index=True, max_length=255)
 
     #: TextField(255): Restaurant description
     description = models.TextField(blank=True)
 
     #: :py:class:`restaurant.models.Location`: Restaurant location
-    location = models.ForeignKey('Location')
+    location = models.ForeignKey(db_index=True, 'Location')
 
     #: ManyToManyField: List of all :py:class:`restaurant.models.RestaurantCategory` this restaurant belongs to
-    category = models.ManyToManyField('RestaurantCategory', related_name='restaurants', blank=True)
+    category = models.ManyToManyField(db_index=True, 'RestaurantCategory', related_name='restaurants', blank=True)
 
     #: ManyToManyField: List of all :py:class:`restaurant.models.Dish` this restaurant serves
-    dishes = models.ManyToManyField('Dish', related_name='restaurants', blank=True)
+    dishes = models.ManyToManyField(db_index=True, 'Dish', related_name='restaurants', blank=True)
 
     #: OneToOneField: The associated :py:class:`restaurant.models.RestaurantRating`
-    rating = models.OneToOneField('RestaurantRating', related_name='restaurant')
+    rating = models.OneToOneField(db_index=True, 'RestaurantRating', related_name='restaurant')
 
     def __str__(self):
         return self.name
@@ -44,7 +44,7 @@ class RestaurantCategory(models.Model):
     ''' Restaurant Category '''
 
     #: CharField(255): Category name
-    name = models.CharField(max_length=255)
+    name = models.CharField(db_index=True, max_length=255)
 
     #: CharField(255): Unique slug for this category
     slug = models.CharField(max_length=255, unique=True)
@@ -103,10 +103,10 @@ class Location(models.Model):
     ''' Restaurant Location '''
 
     #: DecimalField(6.1): Location latitude
-    latitude = models.DecimalField(max_digits=14, decimal_places=10)
+    latitude = models.DecimalField(db_index=True, max_digits=14, decimal_places=10)
 
     #: DecimalField(6.1): Location longitude
-    longitude = models.DecimalField(max_digits=14, decimal_places=10)
+    longitude = models.DecimalField(db_index=True, max_digits=14, decimal_places=10)
 
     #: TextField: Location street address, does not include city, state or country
     address = models.TextField()
@@ -193,7 +193,7 @@ class Dish(models.Model):
     ''' Dish '''
 
     #: CharField(255): Dish name
-    name = models.CharField(max_length=255)
+    name = models.CharField(db_index=True, max_length=255)
 
     #: TextField: Dish description
     description = models.TextField(blank=True)
@@ -205,7 +205,7 @@ class Dish(models.Model):
     price = models.DecimalField(max_digits=7, decimal_places = 2)
 
     #: ManyToManyField: List of all :py:class:`restaurant.models.DishCategory`
-    categories = models.ManyToManyField('DishCategory', related_name='dishes')
+    categories = models.ManyToManyField(db_index=True, 'DishCategory', related_name='dishes')
 
     #: ForeignKey(DishCategory): The Dish Category
     section = models.ForeignKey('DishCategory')
