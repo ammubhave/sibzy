@@ -15,16 +15,16 @@ class Restaurant(models.Model):
     description = models.TextField(blank=True)
 
     #: :py:class:`restaurant.models.Location`: Restaurant location
-    location = models.ForeignKey(db_index=True, 'Location')
+    location = models.ForeignKey('Location', db_index=True)
 
     #: ManyToManyField: List of all :py:class:`restaurant.models.RestaurantCategory` this restaurant belongs to
-    category = models.ManyToManyField(db_index=True, 'RestaurantCategory', related_name='restaurants', blank=True)
+    category = models.ManyToManyField('RestaurantCategory', related_name='restaurants', blank=True, , db_index=True)
 
     #: ManyToManyField: List of all :py:class:`restaurant.models.Dish` this restaurant serves
-    dishes = models.ManyToManyField(db_index=True, 'Dish', related_name='restaurants', blank=True)
+    dishes = models.ManyToManyField('Dish', related_name='restaurants', blank=True, , db_index=True)
 
     #: OneToOneField: The associated :py:class:`restaurant.models.RestaurantRating`
-    rating = models.OneToOneField(db_index=True, 'RestaurantRating', related_name='restaurant')
+    rating = models.OneToOneField('RestaurantRating', related_name='restaurant', , db_index=True)
 
     def __str__(self):
         return self.name
@@ -205,7 +205,7 @@ class Dish(models.Model):
     price = models.DecimalField(max_digits=7, decimal_places = 2)
 
     #: ManyToManyField: List of all :py:class:`restaurant.models.DishCategory`
-    categories = models.ManyToManyField(db_index=True, 'DishCategory', related_name='dishes')
+    categories = models.ManyToManyField('DishCategory', related_name='dishes', , db_index=True)
 
     #: ForeignKey(DishCategory): The Dish Category
     section = models.ForeignKey('DishCategory')
