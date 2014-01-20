@@ -6,7 +6,7 @@ import os
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from restaurant.models import *
-import simplejson as json
+import ujson as json
 import urllib2
 import re
 import contextlib
@@ -39,6 +39,8 @@ def fill_locations(request):
 
     if len(Country.objects.filter(name='United States')) == 0:
         country_usa.save()
+    else:
+        country_usa = Country.objects.get(name='United States')
 
     states = [
         ('AK', 'Alaska'),
@@ -99,6 +101,8 @@ def fill_locations(request):
         state = State(name=state_name, country=country_usa)
         if len(State.objects.filter(name=state_name)) == 0:        
             state.save()
+        else:
+            state = State.objects.get(name=state_name)
         
         if state.name == 'Massachusetts':
             if len(City.objects.filter(name='Cambridge')) == 0:
@@ -114,23 +118,25 @@ def fill_locations(request):
     return HttpResponse("Locations have been added to database")
 
 
-#Grubhub scraper for Cambridge area
-text = urllib2.urlopen("https://www.grubhub.com/search/Cambridge,_MA/").read()
-
-urls = re.findall('data-restaurant-id="(.*?)"', text)
-p = re.compile('<li class="item.*?<span class="name.*?">([a-zA-Z0-9 \']*?)</span>\s*<span class="price"><span class="dollarSign">\$</span>(.*?)</span>', flags = re.DOTALL)
-urls.pop(1)
 
 def printdishes(s):
     dishes = p.findall(s)
 def populateFromGrubhub():
+
+    #Grubhub scraper for Cambridge area
+    text = urllib2.urlopen("https://www.grubhub.com/search/Cambridge,_MA/").read()
+
+    urls = re.findall('data-restaurant-id="(.*?)"', text)
+    p = re.compile('<li class="item.*?<span class="name.*?">([a-zA-Z0-9 \']*?)</span>\s*<span class="price"><span class="dollarSign">\$</span>(.*?)</span>', flags = re.DOTALL)
+    urls.pop(1)
 
     for url in urls:
         listing = []
         with contextlib.closing(urllib2.urlopen("https://www.grubhub.com/restaurant/" + url)) as spage:
             s = spage.read()
             name = re.search('<div itemprop="name">(.*?)</div>', s)
-            if len(Restaurant.objects.filter(name= name.group(1))):
+            if len(Restaurant.objects.filter(name=name.group(1))) > 0:
+                print 'Exists: ', name.group(1)
                 continue
             #address = re.search('<p class="restaurantAddress fine_print">(.*?)</p>', s)
             #print "Address:", address.group(1)
@@ -142,36 +148,47 @@ def populateFromGrubhub():
             telephone = re.search('<div itemprop="telephone">(.*?)</div>', s)
             latitude = re.search('<meta itemprop="latitude" content="(.*?)"', s)
             longitude = re.search('<meta itemprop="longitude" content="(.*?)"', s)
-            cuisine = re.findall('<span itemprop="servesCuisine">(.*?)</span>', s)
-            loc = Location(latitude = latitude.group(1), longitude = longitude.group(1), address = street.group(1), city = City.objects.get(name = 'Boston'), state = State.objects.get(name = 'Massachusetts'), country = Country.objects.get(name = "United States"), phone = telephone.group(1))
+            cuisines = re.findall('<span itemprop="servesCuisine">(.*?)</span>', s)
+            loc = Location(latitude = latitude.group(1), longitude = longitude.group(1), address = street.group(1), city = City.objects.get(name = 'Cambridge'), state = State.objects.get(name = 'Massachusetts'), country = Country.objects.get(name = "United States"), phone = telephone.group(1))
             loc.save()
             dishes = p.findall(s) #dish menu
             sampledishlist = []
-            for dish in dishes:
-                categ = DishCategory.objects.filter(slug = 'b')
+            for dish in dishes:       
+                categ = DishCategory.objects.filter(name='Main')
                 if len(categ) == 0:
-                    categ = DishCategory(name = 'a', slug = 'b')
+                    categ = DishCategory(name = 'Main')
                     categ.save()
                 else:
-                    categ = categ[0]
-                dish = Dish(name = dish[0], tag = dish[0], price = dish[1].rstrip('+') )
+                    categ = categ[0] 
+
+                dish = Dish(name = dish[0], tag = dish[0], price = dish[1].rstrip('+'), section=categ )
                 #dish = Dish(name = dish[0], tag = dish[0], price = dish[1].rstrip('+'), vegetarian = len(dish[0])%2, vegan = len(dish[0])%2, gluten = len(dish[0])%2 )
                 dish.save()
-                dish.categories.add(categ)
-                dish.save()
+
                 sampledishlist.append(dish)
 
             rating = RestaurantRating(total = 1, vegetarian = 1, vegan = 1, glutenfree = 1, peanutfree = 1, lactoseint = 1, seafoodint = 1)
             rating.save()
             cool = Restaurant(name = name.group(1), location = loc, rating= rating)
             cool.save()
+
+            for cuisine in cuisines:
+                categ = RestaurantCategory.objects.filter(name=cuisine[0])
+                if len(categ) == 0:
+                    categ = RestaurantCategory(name=cuisine[0])
+                    categ.save()
+                else:
+                    categ = categ[0]
+                cool.category.add(categ)
+
             # print name.group(1)
             for dish in sampledishlist:
                 cool.dishes.add(dish)
             cool.save()
     return HttpResponse("Cambridge scraping finished")
+
+
 def test_view(request):
-    
     return HttpResponse(populateFromGrubhub())
 
 
@@ -187,6 +204,5 @@ def profile(request, restaurant_id):
     '''
 
     restaurant = Restaurant.objects.get(id=restaurant_id)
-
-    response = HttpResponse(restaurant.json())
+    response = HttpResponse(restaurant.json)
     return response

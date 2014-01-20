@@ -13,19 +13,25 @@ def q(request, query):
     **Returns:**
         ``[<restaurant object>, <restaurant object>, ...]``
     '''
+    #for restaurant in Restaurant.objects.all():
+    #    restaurant.serialize()
 
     restaurants = Restaurant.objects.filter(name__icontains=query)[:10]
-    resp = []
+    resp = '['
     for restaurant in restaurants:
-        element = {
-            'id': restaurant.id,
-            'name': restaurant.name,
-            'location': json.loads(restaurant.location.json()),
-            'category': [json.loads(c.json()) for c in restaurant.category.all()],
-            'rating': json.loads(restaurant.rating.json()),
-        }
-        resp.append(element)
-    response = HttpResponse(json.dumps(resp))
+        # element = {
+        #     'id': restaurant.id,
+        #     'name': restaurant.name,
+        #     'location': json.loads(restaurant.location.json()),
+        #     'category': [json.loads(c.json()) for c in restaurant.category.all()],
+        #     'rating': json.loads(restaurant.rating.json()),
+        # }
+        resp += restaurant.json + ','
+    if resp == '[':
+        resp = '[,'
+    #print resp
+    resp = resp[:-1] + ']'
+    response = HttpResponse(resp)
     return response
 
 

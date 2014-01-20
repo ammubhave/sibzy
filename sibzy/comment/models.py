@@ -4,7 +4,7 @@ from django.db import models
 from django.db import models
 from django.contrib.auth.models import User
 from restaurant.models import *
-import json
+import simplejson as json
 
 
 class Comment(models.Model):

@@ -1,9 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-import json
+import ujson as json
 from django.db.models import Avg
-
-
+from datetime import datetime
 
 class Restaurant(models.Model):
     ''' Restaurant details '''
@@ -26,18 +25,25 @@ class Restaurant(models.Model):
     #: OneToOneField: The associated :py:class:`restaurant.models.RestaurantRating`
     rating = models.OneToOneField('RestaurantRating', related_name='restaurant', db_index=True)
 
+    json = models.TextField(blank=True)
+
     def __str__(self):
         return self.name
 
-    def json(self):
-        return json.dumps({
+    def serialize(self):
+        self.json = json.dumps(self.jsono())
+        self.save()
+        return self.json
+
+    def jsono(self):
+        return {
             'id': self.id,
             'name': self.name,
             'location': json.loads(self.location.json()),
             'category': [json.loads(c.json()) for c in self.category.all()],
-            'dishes': [json.loads(d.json()) for d in self.dishes.all()],
+            'dishes': [d.jsono() for d in self.dishes.all()],
             'rating': json.loads(self.rating.json()),
-        })
+        }
 
 
 class RestaurantCategory(models.Model):
@@ -47,18 +53,16 @@ class RestaurantCategory(models.Model):
     name = models.CharField(db_index=True, max_length=255)
 
     #: CharField(255): Unique slug for this category
-    slug = models.CharField(max_length=255, unique=True)
+    #slug = models.CharField(max_length=255, unique=True)
 
     def json(self):
         return json.dumps({
             'name': self.name,
-            'slug': self.slug,
+            #'slug': self.slug,
         })
 
     def __str__(self):
         return self.name;
-
-
 
 class RestaurantRating(models.Model):
     ''' Restaurant Rating (One to one with :py:class:`restaurant.models.Restaurant`) '''
@@ -182,13 +186,14 @@ class Country(models.Model):
 
     def __unicode__(self):
         return "{0}".format(self.name)
-    
+
     def json(self):
         return json.dumps({
             'name': self.name,
         })
 
 
+from datetime import datetime
 class Dish(models.Model):
     ''' Dish '''
 
@@ -210,6 +215,8 @@ class Dish(models.Model):
     #: ForeignKey(DishCategory): The Dish Category
     section = models.ForeignKey('DishCategory')
 
+    json = models.TextField(blank=True)
+
     #: Return rating of this dish
     def ratings(self):
         from comment.models import Comment
@@ -217,16 +224,21 @@ class Dish(models.Model):
 
     #restaurants = models.ManyToManyFields(Restaurant, related_name='dishes') - ALREADY EXISTS BY DEFAULT
 
-    def json(self):
-        return json.dumps({
+    def serialize(self):
+        self.json = json.dumps(self.jsono())
+        self.save()
+        return self.json
+
+    def jsono(self):
+        return {
             'id': self.id,
             'name': self.name,
             'tag': self.tag,
             'price': float(self.price),
             'categories': [c.name for c in self.categories.all()],
             'rating': self.ratings().aggregate(Avg('rating_value'))['rating_value__avg'],
-        })
-    
+        }
+
     def __str__(self):
         return self.name
 
@@ -238,16 +250,18 @@ class DishCategory(models.Model):
     name = models.CharField(max_length=255)
 
     #: CharField(255): Unique slug for this category
-    slug = models.CharField(max_length=255, unique=True)
+    #slug = models.CharField(max_length=255, unique=True)
 
     #dishes = models.ManyToManyFields(Dish, related_name='categories') - ALREADY EXISTS BY DEFAULT
 
     def json(self):
-        return json.dumps({
+        return json.dumps(self.jsono())
+
+    def jsono(self):
+        return {
             'name': self.name,
-            'slug': self.slug,
-        })
-    
+        }
+
     def __str__(self):
         return self.name
 

@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-import json
+import simplejson as json
 
 User.profile = lambda self: UserProfile.objects.get(user=self.id)
 
