@@ -17,8 +17,13 @@ def q(request, query):
     restaurants = Restaurant.objects.filter(name__icontains=query)[:10]
     resp = []
     for restaurant in restaurants:
-        element = json.loads(restaurant.json())
-        element['dishes'] = None
+        element = {
+            'id': restaurant.id,
+            'name': restaurant.name,
+            'location': json.loads(self.location.json()),
+            'category': [json.loads(c.json()) for c in self.category.all()],
+            'rating': json.loads(self.rating.json()),
+        }
         resp.append(element)
     response = HttpResponse(json.dumps(resp))
     return response
