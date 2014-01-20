@@ -20,9 +20,9 @@ def q(request, query):
         element = {
             'id': restaurant.id,
             'name': restaurant.name,
-            'location': json.loads(self.location.json()),
-            'category': [json.loads(c.json()) for c in self.category.all()],
-            'rating': json.loads(self.rating.json()),
+            'location': json.loads(restaurant.location.json()),
+            'category': [json.loads(c.json()) for c in restaurant.category.all()],
+            'rating': json.loads(restaurant.rating.json()),
         }
         resp.append(element)
     response = HttpResponse(json.dumps(resp))
