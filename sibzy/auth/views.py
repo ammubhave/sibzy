@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from auth.models import User, UserProfile
 import facebook
-import json
+import simplejson
 from django.contrib.auth import logout, login, authenticate
 
 

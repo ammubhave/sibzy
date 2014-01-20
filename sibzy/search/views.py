@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from restaurant.models import Restaurant
 from django.http import HttpResponse
-import json
+import simplejson
 
 
 def q(request, query):

@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from auth.models import User, UserProfile
 from comment.models import Comment, CommentVote
 from restaurant.models import Dish
-import json
+import simplejson
 
 
 @login_required
