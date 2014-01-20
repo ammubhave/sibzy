@@ -125,7 +125,10 @@ class Location(models.Model):
     country = models.ForeignKey('Country')
 
     #: CharField(20): Contact phone number
-    phone = models.CharField(max_length=20)
+    phone = models.CharField(max_length=20, blank=True)
+
+    #: CharField(10): Zip code
+    zipcode = models.CharField(max_length=10, blank=True)
 
     def __unicode__(self):
         return "{0}, {1}".format(self.address, self.city)

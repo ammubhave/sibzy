@@ -206,3 +206,18 @@ def profile(request, restaurant_id):
     restaurant = Restaurant.objects.get(id=restaurant_id)
     response = HttpResponse(restaurant.json)
     return response
+
+
+def profile_noajax(request, restaurant_id):
+    ''' Return the restaurant profile page corresponsing to restaurant_id
+
+    **Arguments:**
+        *restaurant_id*: The numeric ID of the restaurant
+
+    **Returns:**
+        ``HTML Response``
+
+    '''
+
+    restaurant = Restaurant.objects.get(id=restaurant_id)
+    return render(request, 'restaurant_profile_noajax.html', {'restaurant': restaurant})

@@ -7,9 +7,15 @@ urlpatterns = patterns('',
 
     # Backend API urls
     url(r'^!/auth/', include('auth.urls')),
+
     url(r'^!/restaurant/', include('restaurant.urls')),
+    url(r'^restaurant/', include('restaurant.urls_noajax')),
+
     url(r'^!/comment/', include('comment.urls')),
+
     url(r'^!/search/', include('search.urls')),
+    url(r'^search/', include('search.urls_noajax')),
+
     url(r'^!/frontend/', include('frontend.urls')),
 
     # Restaurant admin
@@ -20,5 +26,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     # All else pass to frontend
-    url(r'', include('frontend.urls')),
+    url(r'', include('frontend.urls_noajax')),
 )

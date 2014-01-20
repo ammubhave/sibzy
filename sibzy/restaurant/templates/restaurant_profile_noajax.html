@@ -1,0 +1,268 @@
+{% extends "base_noajax.html" %}
+
+{% block content %}
+<script>
+  $('#txtSearch').val("{{ restaurant.name }}");
+  $('#txtSearch').click(function () {
+                    $(this).val('');
+                    $(this).unbind('click');
+  });
+</script>
+<script src="/static/js/restaurant_noajax.js"></script>
+
+<Style>
+  .arrow-left {
+	width: 0;
+	height: 0;
+	border-top: 10px solid white;
+	border-bottom: 10px solid white;
+	display: inline-block;
+	border-right:10px solid red; 
+} .arrow-left-2{
+	width: 0;
+	height: 0;
+	border-top: 10px solid red;
+	border-bottom: 10px solid red;
+	display: inline-block;
+	border-right:10px solid white; 
+}
+</Style>
+
+<a href="#" id="back_to_search" style="display: none; height: 20px; line-height:20px; color: white; width: 130px; background-color: red; margin-bottom:10px">
+  <span class="arrow-left">
+	
+  </span>
+  <span class="arrow-left-2">
+	
+  </span><span class="arrow-left">
+	
+  </span>
+  <span class="arrow-left-2">
+	
+  </span><span class="arrow-left">
+	
+  </span>
+  <span class="arrow-left-2">
+	
+  </span><span class="arrow-left">
+	
+  </span>
+</a>
+
+<div class="container">
+	<div class="row clearfix" id="restaurant-head" style="background-color: #ffb273; border: solid 2px #ff7400; border-radius: 5px;">
+		<div class="col-md-2 column" style="padding:0">
+			<img id="profile-image" alt="170x170" src="http://lorempixel.com/170/170/" />
+		</div>
+		<div class="col-md-4 column">
+			<h1> <span class="restaurant-name">{{ restaurant.name }}</span> </h1> </br> 
+			<div id="rating" class="_restaurant-rating-total rating"> </div>
+			<span class="_restaurant-categories-element-start noshow" > 
+                <span class="_restaurant-categories-element-name"> </span> 
+            </span>
+			<span class="_restaurant-categories-element noshow" >
+                <span class="_restaurant-categories-element-name"> </span>
+            </span>
+			<span class="_restaurant-categories-element-end noshow" > 
+                <span class="_restaurant-categories-element-name"> </span>
+            </span> 		
+			<span class="restaurant-categories"></span>
+			<span class="restaurant-rating-total"> </span> 
+		</div>
+
+		<div class="col-md-2 column">
+
+			<address>
+				<strong><span class="restaurant-name">{{ restaurant.name }}</span></strong><br />
+				<span class="restaurant-location-address">{{ restaurant.address }}</span><br />
+				<span class="restaurant-location-city">{{ restaurant.location.city }}</span>, <span class="restaurant-location-state">{{ restaurant.state }}</span> <span class="restaurant-location-zip">{{ restaurant.location.zipcode }}</span><br />
+				<abbr title="Phone">P:</abbr> <span class="restaurant-location-phone">{{ restaurant.location.phone }}</span>
+			</address></div>
+		</br>
+		<div class="col-md-4 column">
+		  <div id="map-canvas" style="width: 100%; height: 150px;"></div>
+		  <script>
+			  var myLatlng = new google.maps.LatLng({{ restaurant.location.latitude }}, {{ restaurant.location.longitude }});
+				var mapOptions = {
+					center: myLatlng,
+					zoom: 15
+				};
+				var map = new google.maps.Map(document.getElementById("map-canvas"),
+					mapOptions);
+				
+				var marker = new google.maps.Marker({
+					position: myLatlng,
+					map: map,
+					title: "{{ restaurant.name }}",
+				});
+				var infowindow = new google.maps.InfoWindow({
+					content: "{{ restaurant.name }}"
+				});
+					google.maps.event.addListener(marker, 'click', function() {
+					infowindow.open(map,marker);
+				});
+					
+					if (getCookie('lat') != null) { 
+					  myLatlng = new google.maps.LatLng(getCookie('lat'), getCookie('lng'));
+					  marker = new google.maps.Marker({
+						 position: myLatlng,
+						 map: map,
+						 title: "You",
+						 icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+					 });
+					 infowindow = new google.maps.InfoWindow({
+						 content: "Your location"
+					 });
+					 google.maps.event.addListener(marker, 'click', function() {
+						 infowindow.open(map,marker);
+					 });
+					}
+		  </script>
+		</div>
+		
+	</div>
+	<style>
+	  .panel-default {
+		border-color: #006363;
+	  }
+	</style>
+    <div class="row clearfix">
+        <div class="col-md-6 column" style="padding :10px; background-color: #5CCCCC; border-radius: 5px;  border: solid 2px #009999">
+		  <h2 style="text-align: center; color: #006363">Menu</h2>
+		  <hr style="border-top-color: #006363" />
+            <div class="panel-group _restaurant-dishes" id="dishes">
+            	<div class="_restaurant-dishes-entry noshow" style="text-decoration:none; border-radius: 5px;">
+            		<div class="menu-dish"> <span class="_restaurant-dishes-entry-name">Appetizer 1</span>
+                        <!-- This stuff needs to be linked --> 
+
+                        <span class="label label-success">Vegetarian</span>
+                        <span class="label label-info">Vegan</span>
+                        <span class="label label-primary">Organic</span>
+                        <span class="label label-warning">Nut watch</span>
+                        <span class="label label-danger">Gluten watch</span>
+
+                            <!-- For Restaurants
+                        <span class="label label-default">Vegetarian</span>
+                        <span class="label label-default">Vegan</span>
+                        <span class="label label-default">Organic</span>
+                        <span class="label label-default">Nut watch</span>
+                        <span class="label label-default">Gluten watch</span>
+                            -->
+                            
+            		<span class="pull-right">$<span class="_restaurant-dishes-entry-price">$15</span></span>
+                    </div> 
+            	</div>
+			  <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#dishes" href="#collapseAppetizers">
+                      Appetizers
+                    </a>
+                  </h4>
+                </div>
+
+                <div id="collapseAppetizers" class="panel-collapse collapse">
+                    <div class="panel-body" id="panelAppetizers"> </div>
+                </div>
+
+			  </div>
+			  <div class="panel panel-default">
+            	<div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#dishes" href="#collapseEntrees">
+                      Entrees
+                    </a>
+                  </h4>
+                </div>
+
+                <div id="collapseEntrees" class="panel-collapse collapse in">
+                  <div class="panel-body" id="panelEntrees"></div>
+                </div>
+			  </div>
+			  <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#dishes" href="#collapseDeserts">
+                      Deserts
+                    </a>
+                  </h4>
+                </div>
+
+                <div id="collapseDeserts" class="panel-collapse collapse">
+                  <div class="panel-body" id="panelDeserts"></div>
+                </div>
+			  </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#dishes" href="#collapseOthers">
+                      Other
+                    </a>
+                  </h4>
+                </div>
+
+                <div id="collapseOthers" class="panel-collapse collapse">
+                  <div class="panel-body" id="panelOthers"> </div>
+                </div>
+			</div>
+
+        </div> 			
+    </div>
+		
+		<div id="dish" class="col-md-6 column" style="padding: 0 10px; color: white">
+		  <div style="padding: 10px 25px; background-color: #FF7373; border-radius: 5px;">
+			<div id="dishinfo" class="row noshow" style="background-color:#ff4040; border: solid 2px #A60000; border-radius: 5px;"> 
+				<div class="col-md-3 column"> 
+					<img alt="140x140" src="http://lorempixel.com/120/120/food" />
+				</div>
+				<div class="col-md-6 column"> 
+						<h2> <strong id="dish-details-name"> Dish name </strong> </h2>
+						<p id="dish-details-rating-stars"></p> 
+						<p>Dish Description</p> 				
+				</div>
+			</div>
+			<br />
+			<div class="row"  style="background-color:#ff4040; border: solid 2px #A60000; border-radius: 5px;">
+			  <div class="col-md-12 column"> 
+			
+			<div id="review" style="display: none">
+			  <div class="row dishes-comments-new" > 
+				<p>Dude's Name</p> 
+				<div class="col-md-3 column">
+				  <img alt="100x100" src="http://lorempixel.com/100/100/food" />
+				</div> 
+				<div class="col-md-9 column"> 
+					<textarea id="dishes-comments-text" class="form-control" rows="4"></textarea>
+			  	</div>
+			  </div>
+			  <br />
+			  <div class="btn-group btn-group-justified">
+					  <a id="dishes-comments-button0" class="btn btn-danger" role="button">0</a>
+					  <a id="dishes-comments-button1" class="btn btn-warning" role="button">1</a>
+					  <a id="dishes-comments-button2" class="btn btn-default" role="button">2</a>					  
+					  <a id="dishes-comments-button3" class="btn btn-info" role="button">3</a>
+					  <a id="dishes-comments-button4" class="btn btn-primary" role="button">4</a>					  
+					  <a id="dishes-comments-button5" class="btn btn-success" role="button">5</a>
+				</div>
+			</div>
+
+			<div id="dish-details-comments"></div>
+
+			<div class="row _dish-details-comments-entry noshow" id="comment" style="margin: 0 -15px; border-top: solid 2px #A60000" > 
+				<div class="col-md-3 column"  > 
+					<img alt="100x100" class="_dish-details-comments-entry-picture" style="height:100px; width: 100px;" src="" />
+				</div>
+				<div class="col-md-6 column"> 
+						 <strong class="_dish-details-comments-entry-user"> USer id </strong> <span class="pull-right _dish-details-comments-entry-ratingvalue"> **** </span> </br> 
+						<p class="_dish-details-comments-entry-commenttext"> Review goes here and it is really good </p> 		
+				</div>
+			
+			</div>
+			</div>
+			
+		  </div>
+    	</div>
+	
+</div>
+
+{% endblock %}

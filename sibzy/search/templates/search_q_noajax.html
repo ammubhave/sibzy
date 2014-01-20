@@ -1,0 +1,99 @@
+{% extends "base_noajax.html" %}
+
+{% block content %}
+<script>
+  var json = {{ json | safe }};
+</script>
+<script src="/static/js/search_noajax.js"></script>
+
+<style>
+    /*
+ * Callouts
+ *
+ * Not quite alerts, but custom and helpful notes for folks reading the docs.
+ * Requires a base and modifier class.
+ */
+
+/* Common styles for all types */
+.bs-callout {
+  margin: 20px 0;
+  padding: 20px;
+  border-left: 3px solid #eee;
+}
+.bs-callout h4 {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+.bs-callout p:last-child {
+  margin-bottom: 0;
+}
+
+/* Variations */
+.bs-callout-danger {
+  background-color: #fdf7f7;
+  border-color: #eed3d7;
+}
+.bs-callout-danger h4 {
+  color: #b94a48;
+}
+.bs-callout-warning {
+  background-color: #faf8f0;
+  border-color: #faebcc;
+}
+.bs-callout-warning h4 {
+  color: #8a6d3b;
+}
+.bs-callout-info {
+  background-color: #f4f8fa;
+  border-color: #bce8f1;
+}
+.bs-callout-info h4 {
+  color: #34789a;
+}
+
+</style>
+
+<h2>Search for <span class="search-query">{{ q }}</span></h2>
+<hr />
+
+
+<div class="row">
+    <div id="search-result" class="col-lg-6">
+        
+{% for restaurant in restaurants %}
+
+  <div class="bs-callout bs-callout-info" id="search-data-item" style="cursor: pointer" onmouseenter="
+            $(this).removeClass('bs-callout-info');
+            $(this).addClass('bs-callout-warning');
+                    
+            var myLatlng = new google.maps.LatLng({{ restaurant.location.latitude }}, {{ restaurant.location.longitude }});
+                    
+            map.setCenter(myLatlng);
+          //  marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+        " onmouseleave="
+            $(this).removeClass('bs-callout-warning');
+            $(this).addClass('bs-callout-info');
+           // marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+        " onclick="
+            was_search = true;
+            last_search_q = $('#txtSearch').val();
+                    
+            window.location = '/restaurant/profile/' + {{ restaurant.id }};">
+	  <h4><span class="restaurant-name">{{ restaurant.name }}</span></h4>
+	  <p>
+		  <address style="margin-bottom: 0">
+			  <span class="restaurant-location-address">{{ restaurant.location.address }}</span><br />
+			  <span class="restaurant-location-city">{{ restaurant.location.city }}</span>, <span class="restaurant-location-state">{{ restaurant.location.state }}</span> <span class="restaurant-location-zip"></span><br />
+			  <abbr title="Phone">P:</abbr> <span class="restaurant-location-phone">{{ restaurant.location.phone }}</span>
+		  </address> 
+	  </p>
+  </div>
+
+{% endfor %}
+    </div>
+    <div id="map-canvas" class="col-lg-6" style="height: 400px;">
+        
+    </div>
+</div>
+
+{% endblock %}
