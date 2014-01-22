@@ -167,13 +167,22 @@
 						<input type="button" class="btn btn-success" onclick="window.location = '/search/q/' + encodeURIComponent($('#txtSearch').val())" value="Search" />
 					</div>
 				</form>
+				<script>
+					$('#txtSearch').keyup(function (e) {
+      var code = (e.keyCode ? e.keyCode : e.which);
+      if(code == 13) {
+        window.location = '/search/q/' + encodeURIComponent($('#txtSearch').val());
+      }
+      return false;
+    });
+				</script>
 		
 				<ul class="nav navbar-nav navbar-right">
 					<li class="fb-nologin">
-						<a href="#!frontend/home" style="padding: 13px 15px;" onclick="FB.login()"><img src="http://static.sticksports.com/images/fb_login_20121126.jpg" /></a>
+						<a href="/" style="padding: 13px 15px;" onclick="FB.login()"><img src="http://static.sticksports.com/images/fb_login_20121126.jpg" /></a>
 					</li>
 					<li style="line-height: 50px; color:white;" class="fb-login">
-						<a href="#!auth/me"><span class="fb-name"></span></a>
+						<a href="/auth/me"><span class="fb-name"></span></a>
 					</li> 
 					<li class="dropdown fb-login">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
@@ -185,9 +194,9 @@
 									<span class="fb-username"></span>
 								</div>
 							</li>
-							<li><a href="#!auth/me">My Account</a></li>				 
+							<li><a href="/auth/me">My Account</a></li>				 
 							<li class="divider"></li>
-							<li><a href="#!frontend/landing" onclick="FB.logout()">Logout</a></li>
+							<li><a href="/" onclick="FB.logout()">Logout</a></li>
 						</ul>
 					</li>
 				</ul>
