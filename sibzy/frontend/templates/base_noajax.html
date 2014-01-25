@@ -163,8 +163,8 @@
 				
 				<form class="navbar-form navbar-left" role="search">
 					<div class="form-group" style="width: 500px;">
-						<input type="text" id="txtSearch" style="width: 400px;border-color: #007339; background-color: #228653; color: white; font-weight: 900" class="form-control" placeholder="Search">
-						<input type="button" class="btn btn-success" onclick="window.location = '/search/q/' + encodeURIComponent($('#txtSearch').val())" value="Search" />
+						<input type="text" id="txtSearch" style="border-top-right-radius: 0;border-bottom-right-radius: 0; width: 400px;border-color: #007339; background-color: #228653; color: white; font-weight: 900" class="form-control" placeholder="Search">
+						<button style="margin-left: -4px; border-top-left-radius: 0; border-bottom-left-radius: 0" class="btn btn-success" onclick="window.location = '/search/q/' + encodeURIComponent($('#txtSearch').val()); return false;"><i class="glyphicon glyphicon-search"></i></button>
 					</div>
 				</form>
 				<script>

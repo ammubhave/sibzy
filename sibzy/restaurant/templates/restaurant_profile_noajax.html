@@ -1,6 +1,8 @@
 {% extends "base_noajax.html" %}
 
 {% block content %}
+<script src="http://leandrovieira.com/projects/jquery/lightbox/js/jquery.lightbox-0.5.pack.js"></script>
+<link rel="stylesheet" href="http://leandrovieira.com/projects/jquery/lightbox/css/jquery.lightbox-0.5.css" />
 <script>
   $('#txtSearch').val("{{ restaurant.name }}");
   $('#txtSearch').click(function () {
@@ -10,26 +12,34 @@
 </script>
 <script src="/static/js/restaurant_noajax.js"></script>
 
-<Style>
+<style>
   .arrow-left {
 	width: 0;
 	height: 0;
 	border-top: 10px solid white;
 	border-bottom: 10px solid white;
 	display: inline-block;
-	border-right:10px solid red; 
+	border-right:10px solid #ccc; 
 } .arrow-left-2{
 	width: 0;
 	height: 0;
-	border-top: 10px solid red;
-	border-bottom: 10px solid red;
+	border-top: 10px solid #ccc;
+	border-bottom: 10px solid #ccc;
 	display: inline-block;
 	border-right:10px solid white; 
 }
-</Style>
+#back_to_search {
+  color: black;
+}
+#back_to_search:hover {
+  text-decoration: none;
+  color: #6D6D6D;
+}
+</style>
 
-<a href="#" id="back_to_search" style="display: none; height: 20px; line-height:20px; color: white; width: 130px; background-color: red; margin-bottom:10px">
-  <span class="arrow-left">
+{% if q != '' %}
+<a href="/search/q/{{ q }}" id="back_to_search" style="display: block; height: 20px; margin-top: -20px; margin-left: -30px; line-height:20px; margin-right: -20px; background-color: #ccc; margin-bottom:10px">
+  <span class="arrow-left" style="border-top-color: #f0f0f0; border-bottom-color: #f0f0f0">
 	
   </span>
   <span class="arrow-left-2">
@@ -47,40 +57,44 @@
   </span><span class="arrow-left">
 	
   </span>
+  <span class="arrow-left-2">
+	
+  </span><span class="arrow-left">
+	
+  </span>
+  <span style="font-size: 22px; position: relative; top: -4px; left: 10px; font-variant: small-caps">back to search</span>
 </a>
+{% endif %}
 
 <div class="container">
-	<div class="row clearfix" id="restaurant-head" style="background-color: #ffb273; border: solid 2px #ff7400; border-radius: 5px;">
-		<div class="col-md-2 column" style="padding:0">
-			<img id="profile-image" alt="170x170" src="http://lorempixel.com/170/170/" />
+	<div class="row clearfix">
+	  <div class="col-md-8 column" style="border-right: 1px solid #008855">
+		<div class="row clearfix" style="background-color: #f0f0f0; margin-top: 10px; margin-bottom: 30px; margin-right: 0">
+		  <div class="col-md-8" style=" padding: 0">
+			<h1 style="color: #008b56; font-size: 24px; margin: 0"><a href="http://lorempixel.com/500/500/" class="lightbox" style="margin-right: 20px;"><img alt="75x75" src="http://lorempixel.com/75/75/" /></a>{{ restaurant.name }}</h1>
+		  </div>
+		  <div class="col-md-4" style="text-align: right; "><div style="display: inline-block; color: black; font-size: 24px; margin:0; line-height: 80px; height:70px; width: {{ restaurant.rating.total_display }}px; overflow: hidden"><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i></div><div style="display: inline-block; color: rgba(0,0,0,0.1); font-size: 24px; margin:0; line-height: 80px; height:70px; width: {{ restaurant.rating.total_display_negative }}px; overflow: hidden; margin-left: -1px; text-align: right"><i class="glyphicon glyphicon-star-empty"></i><i class="glyphicon glyphicon-star-empty"></i><i class="glyphicon glyphicon-star-empty"></i><i class="glyphicon glyphicon-star-empty"></i><i class="glyphicon glyphicon-star-empty"></i></div></div>
 		</div>
-		<div class="col-md-4 column">
-			<h1> <span class="restaurant-name">{{ restaurant.name }}</span> </h1> </br> 
-			<div id="rating" class="_restaurant-rating-total rating"> </div>
-			<span class="_restaurant-categories-element-start noshow" > 
-                <span class="_restaurant-categories-element-name"> </span> 
-            </span>
-			<span class="_restaurant-categories-element noshow" >
-                <span class="_restaurant-categories-element-name"> </span>
-            </span>
-			<span class="_restaurant-categories-element-end noshow" > 
-                <span class="_restaurant-categories-element-name"> </span>
-            </span> 		
-			<span class="restaurant-categories"></span>
-			<span class="restaurant-rating-total"> </span> 
-		</div>
-
-		<div class="col-md-2 column">
-
+		<div class="row clearfix">
+		  <div class="col-md-6">
 			<address>
-				<strong><span class="restaurant-name">{{ restaurant.name }}</span></strong><br />
-				<span class="restaurant-location-address">{{ restaurant.address }}</span><br />
+				<span class="restaurant-location-address">{{ restaurant.location.address }}</span><br />
 				<span class="restaurant-location-city">{{ restaurant.location.city }}</span>, <span class="restaurant-location-state">{{ restaurant.state }}</span> <span class="restaurant-location-zip">{{ restaurant.location.zipcode }}</span><br />
 				<abbr title="Phone">P:</abbr> <span class="restaurant-location-phone">{{ restaurant.location.phone }}</span>
-			</address></div>
-		</br>
-		<div class="col-md-4 column">
-		  <div id="map-canvas" style="width: 100%; height: 150px;"></div>
+			</address>
+		  </div>
+		  <div class="col-md-6">			
+			
+		  </div>
+		</div>
+		<div class="row clearfix">
+		  <div class="col-md-12">
+			
+		  </div>
+		</div>
+	  </div>
+	  <div class="col-md-4 column">
+		<div id="map-canvas" style="width: 100%; height: 300px;"></div>
 		  <script>
 			  var myLatlng = new google.maps.LatLng({{ restaurant.location.latitude }}, {{ restaurant.location.longitude }});
 				var mapOptions = {
@@ -118,9 +132,10 @@
 					 });
 					}
 		  </script>
-		</div>
-		
+	  </div>
 	</div>
+	<br />
+
 	<style>
 	  .panel-default {
 		border-color: #006363;
@@ -264,5 +279,14 @@
     	</div>
 	
 </div>
-
+<script type="text/javascript">
+$(function() {
+	$('.lightbox').lightBox({
+	  imageLoading: '/static/images/loading.gif',
+	  imageBtnClose: '/static/images/close.gif',
+	  imageBtnPrev: '/static/images/prev.gif',
+	  imageBtnNext: '/static/images/next.gif',
+	}); // Select all links that contains lightbox in the attribute rel
+});
+</script>
 {% endblock %}

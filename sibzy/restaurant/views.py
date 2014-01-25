@@ -10,6 +10,7 @@ import ujson as json
 import urllib2
 import re
 import contextlib
+import math
 
 
 # For restaurant owners, let them edit profiles
@@ -220,4 +221,12 @@ def profile_noajax(request, restaurant_id):
     '''
 
     restaurant = Restaurant.objects.get(id=restaurant_id)
-    return render(request, 'restaurant_profile_noajax.html', {'restaurant': restaurant})
+    q = ''
+    if 'HTTP_REFERER' in request.META and '/search/q/' in request.META['HTTP_REFERER']:
+        q = request.META['HTTP_REFERER'][request.META['HTTP_REFERER'].rfind('/') + 1:]
+        
+    RestaurantRating.total_display = property(lambda self: 24*int(math.ceil(self.total)))
+    RestaurantRating.total_display_negative = property(lambda self: 24*(5-int(math.ceil(self.total))))
+    #print restaurant.rating.total_display
+    #restaurant.rating['total_display'] = 
+    return render(request, 'restaurant_profile_noajax.html', {'restaurant': restaurant, 'q': q})
