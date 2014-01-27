@@ -179,7 +179,11 @@
 					<div id="collapseAppetizers" class="panel-collapse collapse">
 						<div class="panel-body" id="panelAppetizers" style="height: 400px; overflow-y: scroll">
 						  {% for dish in section.list %}
-						  <div style="text-decoration:none; border-radius: 5px;">
+						  <div style="text-decoration:none; border-radius: 5px;" onclick="
+							$('#dishinfo').show();
+							$('#dish-details-name').text('{{ dish.name }}');
+							$('#dish-details-description').text('{{ dish.description }}');
+						  ">
 							  <div class="menu-dish"><span>{{ dish.name }}</span>
 								  <!-- This stuff needs to be linked -->
 								  <span class="pull-right" style="font-family: Courier New">
@@ -194,22 +198,22 @@
 								  {% if DishCategory.Vegetarian in categories %}
 									<span class="label label-success">Veg.</span>
 								  {% else %}
-									<span class="label label-default">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									<span class="label label-default">Veg.</span>
 								  {% endif %}
 								  {% if DishCategory.Vegan in categories %}
 									<span class="label label-info">Vegan</span>
 								  {% else %}
-									<span class="label label-default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									<span class="label label-default">Vegan</span>
 								  {% endif %}
 								  {% if DishCategory.Organic in categories %}
 									<span class="label label-primary">Org.</span>
 								  {% else %}
-									<span class="label label-default">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									<span class="label label-default">Org.</span>
 								  {% endif %}
 								  {% if DishCategory.Nutfree in categories %}
 									<span class="label label-warning">No nuts</span>
 								  {% else %}
-									<span class="label label-default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									<span class="label label-default">No nuts</span>
 								  {% endif %}
 								  
 								{% endwith %} 
@@ -223,16 +227,9 @@
 				</div>
 			  </div>
 			</div>
-	    </div>		
-	</div>
-	<br />
-    <div class="row clearfix">
-        <div class="col-md-6 column" style="padding :10px; background-color: #5CCCCC; border-radius: 5px;  border: solid 2px #009999">
-		  
-        </div> 			
-    </div>
-		
-		<div id="dish" class="col-md-6 column" style="padding: 0 10px; color: white">
+			<div class="col-md-6">
+			  
+			  <div id="dish" style="padding: 0 10px; color: white">
 		  <div style="padding: 10px 25px; background-color: #FF7373; border-radius: 5px;">
 			<div id="dishinfo" class="row noshow" style="background-color:#ff4040; border: solid 2px #A60000; border-radius: 5px;"> 
 				<div class="col-md-3 column"> 
@@ -241,52 +238,45 @@
 				<div class="col-md-6 column"> 
 						<h2> <strong id="dish-details-name"> Dish name </strong> </h2>
 						<p id="dish-details-rating-stars"></p> 
-						<p>Dish Description</p> 				
+						<p id="dish-details-description">Dish Description</p> 				
 				</div>
 			</div>
 			<br />
 			<div class="row"  style="background-color:#ff4040; border: solid 2px #A60000; border-radius: 5px;">
-			  <div class="col-md-12 column"> 
-			
-			<div id="review" style="display: none">
-			  <div class="row dishes-comments-new" > 
-				<p>Dude's Name</p> 
-				<div class="col-md-3 column">
-				  <img alt="100x100" src="http://lorempixel.com/100/100/food" />
-				</div> 
-				<div class="col-md-9 column"> 
-					<textarea id="dishes-comments-text" class="form-control" rows="4"></textarea>
-			  	</div>
-			  </div>
-			  <br />
-			  <div class="btn-group btn-group-justified">
-					  <a id="dishes-comments-button0" class="btn btn-danger" role="button">0</a>
-					  <a id="dishes-comments-button1" class="btn btn-warning" role="button">1</a>
-					  <a id="dishes-comments-button2" class="btn btn-default" role="button">2</a>					  
-					  <a id="dishes-comments-button3" class="btn btn-info" role="button">3</a>
-					  <a id="dishes-comments-button4" class="btn btn-primary" role="button">4</a>					  
-					  <a id="dishes-comments-button5" class="btn btn-success" role="button">5</a>
+			  <div class="col-md-12 column">
+				<div id="review" style="display: none">
+				  <div class="row dishes-comments-new" > 
+					<p>Dude's Name</p> 
+					<div class="col-md-3 column">
+					  <img alt="100x100" src="http://lorempixel.com/100/100/food" />
+					</div> 
+					<div class="col-md-9 column"> 
+						<textarea id="dishes-comments-text" class="form-control" rows="4"></textarea>
+					</div>
+				  </div>
+				  <br />
+				  <div class="btn-group btn-group-justified">
+						  <a id="dishes-comments-button0" class="btn btn-danger" role="button">0</a>
+						  <a id="dishes-comments-button1" class="btn btn-warning" role="button">1</a>
+						  <a id="dishes-comments-button2" class="btn btn-default" role="button">2</a>					  
+						  <a id="dishes-comments-button3" class="btn btn-info" role="button">3</a>
+						  <a id="dishes-comments-button4" class="btn btn-primary" role="button">4</a>					  
+						  <a id="dishes-comments-button5" class="btn btn-success" role="button">5</a>
+					</div>
 				</div>
-			</div>
 
-			<div id="dish-details-comments"></div>
-
-			<div class="row _dish-details-comments-entry noshow" id="comment" style="margin: 0 -15px; border-top: solid 2px #A60000" > 
-				<div class="col-md-3 column"  > 
-					<img alt="100x100" class="_dish-details-comments-entry-picture" style="height:100px; width: 100px;" src="" />
-				</div>
-				<div class="col-md-6 column"> 
-						 <strong class="_dish-details-comments-entry-user"> USer id </strong> <span class="pull-right _dish-details-comments-entry-ratingvalue"> **** </span> </br> 
-						<p class="_dish-details-comments-entry-commenttext"> Review goes here and it is really good </p> 		
-				</div>
-			
-			</div>
-			</div>
+				<div id="dish-details-comments"></div>			  </div>
 			
 		  </div>
-    	</div>
-	
-</div>
+    	</div>	
+	  </div>
+			  
+			</div>
+	    </div>		
+	</div>
+	<br />
+		
+		
 <script type="text/javascript">
 $(function() {
 	$('.lightbox').lightBox({
