@@ -36,7 +36,7 @@ function updateLoginStatus(response) {
       $('.fb-firstname').text(response.first_name);
       $('.fb-lastname').text(response.last_name);
       $('.fb-username').text(response.username);
-      $('.fb-picture').attr('src', 'http://graph.facebook.com/' + response.username + '/picture?type=square&type=large');
+      $('.fb-picture').attr('src', 'http://graph.facebook.com/' + response.username + '/picture?type=square');
       me = response;
     });
     

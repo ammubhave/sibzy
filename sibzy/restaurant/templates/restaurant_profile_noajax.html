@@ -1,10 +1,11 @@
 {% extends "base_noajax.html" %}
+{% load num_format %}
 
 {% block content %}
 <script src="http://leandrovieira.com/projects/jquery/lightbox/js/jquery.lightbox-0.5.pack.js"></script>
 <link rel="stylesheet" href="http://leandrovieira.com/projects/jquery/lightbox/css/jquery.lightbox-0.5.css" />
 <script>
-  $('#txtSearch').val("{{ restaurant.name }}");
+  $('#txtSearch').val("{{ restaurant.name | safe }}");
   $('#txtSearch').click(function () {
                     $(this).val('');
                     $(this).unbind('click');
@@ -71,7 +72,7 @@
 	  <div class="col-md-8 column" style="border-right: 1px solid #008855">
 		<div class="row clearfix" style="background-color: #f0f0f0; margin-top: 10px; margin-bottom: 30px; margin-right: 0">
 		  <div class="col-md-8" style=" padding: 0">
-			<h1 style="color: #008b56; font-size: 24px; margin: 0"><a href="http://lorempixel.com/500/500/" class="lightbox" style="margin-right: 20px;"><img alt="75x75" src="http://lorempixel.com/75/75/" /></a>{{ restaurant.name }}</h1>
+			<h1 style="color: #008b56; font-size: 24px; margin: 0"><a href="http://lorempixel.com/500/500/" class="lightbox" style="margin-right: 20px;"><img alt="75x75" src="http://lorempixel.com/75/75/" /></a>{{ restaurant.name  }}</h1>
 		  </div>
 		  <div class="col-md-4" style="text-align: right; "><div style="display: inline-block; color: black; font-size: 24px; margin:0; line-height: 80px; height:70px; width: {{ restaurant.rating.total_display }}px; overflow: hidden"><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i></div><div style="display: inline-block; color: rgba(0,0,0,0.1); font-size: 24px; margin:0; line-height: 80px; height:70px; width: {{ restaurant.rating.total_display_negative }}px; overflow: hidden; margin-left: -1px; text-align: right"><i class="glyphicon glyphicon-star-empty"></i><i class="glyphicon glyphicon-star-empty"></i><i class="glyphicon glyphicon-star-empty"></i><i class="glyphicon glyphicon-star-empty"></i><i class="glyphicon glyphicon-star-empty"></i></div></div>
 		</div>
@@ -88,13 +89,30 @@
 		  </div>
 		</div>
 		<div class="row clearfix">
+		  <div class="col-md-1">
+			
+			<!-- Place this tag where you want the +1 button to render. -->
+			<div class="g-plusone" data-width="300" data-href="http://www.sibzy.com/restaurant/profile/{{ restaurant.id }}"></div>
+			
+			<!-- Place this tag after the last +1 button tag. -->
+			<script type="text/javascript">
+			  (function() {
+				var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+				po.src = 'https://apis.google.com/js/platform.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+			  })();
+			</script>
+			<br />
+			<div class="fb-share-button" data-href="http://www.sibzy.com/restaurant/profile/{{ restaurant.id }}" data-type="button_count"></div>
+
+		  </div>
 		  <div class="col-md-12">
 			
 		  </div>
 		</div>
 	  </div>
 	  <div class="col-md-4 column">
-		<div id="map-canvas" style="width: 100%; height: 300px;"></div>
+		<div id="map-canvas" style="width: 100%; height: 300px; border: 1px solid #bbb;"></div>
 		  <script>
 			  var myLatlng = new google.maps.LatLng({{ restaurant.location.latitude }}, {{ restaurant.location.longitude }});
 				var mapOptions = {
@@ -141,86 +159,76 @@
 		border-color: #006363;
 	  }
 	</style>
+	<div class="row clearfix">
+        <div class="col-md-12 column" style="padding: 10px; background-color: #E7E8FD; border-radius: 5px;  border: solid 2px #D2D7FA; padding-top: 0">
+		    <h2 style="text-align: center; color: #006363; font-variant: small-caps">menu</h2>
+			{% regroup restaurant.dishes.all by section as section_list%}
+			<div class="row">
+			  <div class="col-md-6">
+				<div class="panel-group _restaurant-dishes" id="dishes">				  
+				{% for section in section_list %}
+				  <div class="panel panel-default">
+					<div class="panel-heading">
+					  <h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#dishes" href="#collapseAppetizers">
+						  {{ section.grouper.name }}
+						</a>
+					  </h4>
+					</div>
+	
+					<div id="collapseAppetizers" class="panel-collapse collapse">
+						<div class="panel-body" id="panelAppetizers" style="height: 400px; overflow-y: scroll">
+						  {% for dish in section.list %}
+						  <div style="text-decoration:none; border-radius: 5px;">
+							  <div class="menu-dish"><span>{{ dish.name }}</span>
+								  <!-- This stuff needs to be linked -->
+								  <span class="pull-right" style="font-family: Courier New">
+								  {% with  dish.categories.all as categories %}
+									
+								  {% if DishCategory.Glutenfree in categories %}
+									<span class="label label-danger">No Glu.</span>
+								  {% else %}
+									
+								  {% endif %}
+								  
+								  {% if DishCategory.Vegetarian in categories %}
+									<span class="label label-success">Veg.</span>
+								  {% else %}
+									<span class="label label-default">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								  {% endif %}
+								  {% if DishCategory.Vegan in categories %}
+									<span class="label label-info">Vegan</span>
+								  {% else %}
+									<span class="label label-default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								  {% endif %}
+								  {% if DishCategory.Organic in categories %}
+									<span class="label label-primary">Org.</span>
+								  {% else %}
+									<span class="label label-default">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								  {% endif %}
+								  {% if DishCategory.Nutfree in categories %}
+									<span class="label label-warning">No nuts</span>
+								  {% else %}
+									<span class="label label-default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								  {% endif %}
+								  
+								{% endwith %} 
+								${{ dish.price|num_format }}</span>
+							  </div>
+						  </div>
+						  {% endfor %}
+					</div>	
+				  </div>
+				{% endfor %}
+				</div>
+			  </div>
+			</div>
+	    </div>		
+	</div>
+	<br />
     <div class="row clearfix">
         <div class="col-md-6 column" style="padding :10px; background-color: #5CCCCC; border-radius: 5px;  border: solid 2px #009999">
-		  <h2 style="text-align: center; color: #006363">Menu</h2>
-		  <hr style="border-top-color: #006363" />
-            <div class="panel-group _restaurant-dishes" id="dishes">
-            	<div class="_restaurant-dishes-entry noshow" style="text-decoration:none; border-radius: 5px;">
-            		<div class="menu-dish"> <span class="_restaurant-dishes-entry-name">Appetizer 1</span>
-                        <!-- This stuff needs to be linked --> 
-
-                        <span class="label label-success">Vegetarian</span>
-                        <span class="label label-info">Vegan</span>
-                        <span class="label label-primary">Organic</span>
-                        <span class="label label-warning">Nut watch</span>
-                        <span class="label label-danger">Gluten watch</span>
-
-                            <!-- For Restaurants
-                        <span class="label label-default">Vegetarian</span>
-                        <span class="label label-default">Vegan</span>
-                        <span class="label label-default">Organic</span>
-                        <span class="label label-default">Nut watch</span>
-                        <span class="label label-default">Gluten watch</span>
-                            -->
-                            
-            		<span class="pull-right">$<span class="_restaurant-dishes-entry-price">$15</span></span>
-                    </div> 
-            	</div>
-			  <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#dishes" href="#collapseAppetizers">
-                      Appetizers
-                    </a>
-                  </h4>
-                </div>
-
-                <div id="collapseAppetizers" class="panel-collapse collapse">
-                    <div class="panel-body" id="panelAppetizers"> </div>
-                </div>
-
-			  </div>
-			  <div class="panel panel-default">
-            	<div class="panel-heading">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#dishes" href="#collapseEntrees">
-                      Entrees
-                    </a>
-                  </h4>
-                </div>
-
-                <div id="collapseEntrees" class="panel-collapse collapse in">
-                  <div class="panel-body" id="panelEntrees"></div>
-                </div>
-			  </div>
-			  <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#dishes" href="#collapseDeserts">
-                      Deserts
-                    </a>
-                  </h4>
-                </div>
-
-                <div id="collapseDeserts" class="panel-collapse collapse">
-                  <div class="panel-body" id="panelDeserts"></div>
-                </div>
-			  </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#dishes" href="#collapseOthers">
-                      Other
-                    </a>
-                  </h4>
-                </div>
-
-                <div id="collapseOthers" class="panel-collapse collapse">
-                  <div class="panel-body" id="panelOthers"> </div>
-                </div>
-			</div>
-
+		  
         </div> 			
     </div>
 		

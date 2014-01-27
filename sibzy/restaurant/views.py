@@ -228,5 +228,10 @@ def profile_noajax(request, restaurant_id):
     RestaurantRating.total_display = property(lambda self: 24*int(math.ceil(self.total)))
     RestaurantRating.total_display_negative = property(lambda self: 24*(5-int(math.ceil(self.total))))
     #print restaurant.rating.total_display
-    #restaurant.rating['total_display'] = 
-    return render(request, 'restaurant_profile_noajax.html', {'restaurant': restaurant, 'q': q})
+    #restaurant.rating['total_display']
+    
+    dc = {
+        'Vegetarian': DishCategory.objects.get(name='Vegetarian')
+    }
+    
+    return render(request, 'restaurant_profile_noajax.html', {'restaurant': restaurant, 'q': q, 'DishCategory': dc})

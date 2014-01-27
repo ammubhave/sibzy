@@ -13,6 +13,10 @@ def me(request):
     return render(request, 'auth_me.html')
 
 @login_required
+def me_noajax(request):
+    return render(request, 'auth_me_noajax.html')
+
+@login_required
 def logout_fb(request):
     ''' Logout from the django seesion. Delete the *fbaccess_token* and *fbid* cookie.
 
@@ -66,7 +70,7 @@ def login_fb(request):
     profile = graph.get_object('me')
     print profile
     user = User.objects.filter(userprofile__fbid=profile['id'])
-   
+
     if len(user) > 0:
         user = user[0]
         user_profile = user.userprofile

@@ -7,6 +7,7 @@ urlpatterns = patterns('',
 
     # Backend API urls
     url(r'^!/auth/', include('auth.urls')),
+    url(r'^auth/', include('auth.urls_noajax')),
 
     url(r'^!/restaurant/', include('restaurant.urls')),
     url(r'^restaurant/', include('restaurant.urls_noajax')),
