@@ -215,8 +215,14 @@ class Dish(models.Model):
     #: ManyToManyField: List of all :py:class:`restaurant.models.DishCategory`
     categories = models.ManyToManyField('DishCategory', related_name='dishes', db_index=True)
 
+    #: TextField: Serialized categories
+    categories_json = models.TextField(blank=True)
+
     #: ForeignKey(DishCategory): The Dish Category
     section = models.ForeignKey('DishCategory')
+
+    #: TextField: Serialized section
+    section_json = models.TextField(blank=True)
 
     json = models.TextField(blank=True)
 

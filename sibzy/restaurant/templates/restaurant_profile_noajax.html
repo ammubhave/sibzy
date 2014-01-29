@@ -70,7 +70,7 @@
 <div class="container">
 	<div class="row clearfix">
 	  <div class="col-md-8 column" style="border-right: 1px solid #008855">
-		<div class="row clearfix" style="background-color: #f0f0f0; margin-top: 10px; margin-bottom: 30px; margin-right: 0">
+		<div class="row clearfix" style="border: 1px solid #CCC; background-color: #f0f0f0; margin-top: 10px; margin-bottom: 30px; margin-right: 0">
 		  <div class="col-md-8" style=" padding: 0">
 			<h1 style="color: #008b56; font-size: 24px; margin: 0"><a href="http://lorempixel.com/500/500/" class="lightbox" style="margin-right: 20px;"><img alt="75x75" src="http://lorempixel.com/75/75/" /></a>{{ restaurant.name  }}</h1>
 		  </div>
@@ -85,7 +85,7 @@
 			</address>
 		  </div>
 		  <div class="col-md-6">			
-			
+			{{ restaurant.description }}
 		  </div>
 		</div>
 		<div class="row clearfix">
@@ -152,19 +152,19 @@
 		  </script>
 	  </div>
 	</div>
-	<br />
 
 	<style>
 	  .panel-default {
 		border-color: #006363;
 	  }
 	</style>
+	<hr />
 	<div class="row clearfix">
-        <div class="col-md-12 column" style="padding: 10px; background-color: #E7E8FD; border-radius: 5px;  border: solid 2px #D2D7FA; padding-top: 0">
-		    <h2 style="text-align: center; color: #006363; font-variant: small-caps">menu</h2>
-			{% regroup restaurant.dishes.all by section as section_list%}
+        <div class="col-md-12 column" style="background-color: white; border-radius: 5px;  padding-top: 0">
+		    <h3 style="text-align: center; color: #006363;">MENU</h3>
+			{% regroup restaurant.dishes_all by section_json as section_list %}
 			<div class="row">
-			  <div class="col-md-6">
+			  <div class="col-md-8">
 				<div class="panel-group _restaurant-dishes" id="dishes">				  
 				{% for section in section_list %}
 				  <div class="panel panel-default">
@@ -181,43 +181,46 @@
 						  {% for dish in section.list %}
 						  <div style="text-decoration:none; border-radius: 5px;" onclick="
 							$('#dishinfo').show();
-							$('#dish-details-name').text('{{ dish.name }}');
+							$('#dish-details-name').text('{{ dish.name }}');							
+							if ($('#dish-details-name').text().length > 37) {
+							  $('#dish-details-name').css('line-height', '37px');
+							} else {
+							  $('#dish-details-name').css('line-height', '74px');
+							}
 							$('#dish-details-description').text('{{ dish.description }}');
 						  ">
 							  <div class="menu-dish"><span>{{ dish.name }}</span>
-								  <!-- This stuff needs to be linked -->
+							
 								  <span class="pull-right" style="font-family: Courier New">
-								  {% with  dish.categories.all as categories %}
-									
-								  {% if DishCategory.Glutenfree in categories %}
-									<span class="label label-danger">No Glu.</span>
-								  {% else %}
-									
-								  {% endif %}
 								  
-								  {% if DishCategory.Vegetarian in categories %}
-									<span class="label label-success">Veg.</span>
+
+								  {% if 'Vegetarian' in dish.categories_json %}
+									<span class="label label-success">Vegetarian</span>
 								  {% else %}
-									<span class="label label-default">Veg.</span>
+									<span class="label label-default">Vegetarian</span>
 								  {% endif %}
-								  {% if DishCategory.Vegan in categories %}
+								  {% if 'Vegan' in dish.categories_json %}
 									<span class="label label-info">Vegan</span>
 								  {% else %}
 									<span class="label label-default">Vegan</span>
 								  {% endif %}
-								  {% if DishCategory.Organic in categories %}
-									<span class="label label-primary">Org.</span>
+								  {% if 'Organic' in dish.categories_json %}
+									<span class="label label-primary">Organic</span>
 								  {% else %}
-									<span class="label label-default">Org.</span>
+									<span class="label label-default">Organic</span>
 								  {% endif %}
-								  {% if DishCategory.Nutfree in categories %}
-									<span class="label label-warning">No nuts</span>
+								  {% if 'Nutfree' in dish.categories_json %}
+									<span class="label label-warning">Nutfree</span>
 								  {% else %}
-									<span class="label label-default">No nuts</span>
+									<span class="label label-default">Nutfree</span>
 								  {% endif %}
-								  
-								{% endwith %} 
-								${{ dish.price|num_format }}</span>
+								  {% if 'GlutenFree' in dish.categories_json %}
+									<span class="label label-danger">Glutenfree</span>
+								  {% else %}
+									<span class="label label-default">Glutenfree</span>
+								  {% endif %}
+								
+								$ {{ dish.price|num_format }}</span>
 							  </div>
 						  </div>
 						  {% endfor %}
@@ -227,50 +230,47 @@
 				</div>
 			  </div>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-4">
 			  
-			  <div id="dish" style="padding: 0 10px; color: white">
-		  <div style="padding: 10px 25px; background-color: #FF7373; border-radius: 5px;">
-			<div id="dishinfo" class="row noshow" style="background-color:#ff4040; border: solid 2px #A60000; border-radius: 5px;"> 
-				<div class="col-md-3 column"> 
-					<img alt="140x140" src="http://lorempixel.com/120/120/food" />
-				</div>
-				<div class="col-md-6 column"> 
-						<h2> <strong id="dish-details-name"> Dish name </strong> </h2>
-						<p id="dish-details-rating-stars"></p> 
-						<p id="dish-details-description">Dish Description</p> 				
-				</div>
-			</div>
-			<br />
-			<div class="row"  style="background-color:#ff4040; border: solid 2px #A60000; border-radius: 5px;">
-			  <div class="col-md-12 column">
-				<div id="review" style="display: none">
-				  <div class="row dishes-comments-new" > 
-					<p>Dude's Name</p> 
-					<div class="col-md-3 column">
-					  <img alt="100x100" src="http://lorempixel.com/100/100/food" />
-					</div> 
-					<div class="col-md-9 column"> 
-						<textarea id="dishes-comments-text" class="form-control" rows="4"></textarea>
-					</div>
+			  <div id="dish" style="color: black; border: solid 1px #008b56;">
+				<div style="background-color: #ECECFF;">
+				  <div id="dishinfo" style="display: block; background-color: #00ac6b; padding: 0; color: white;  border-bottom: solid 1px #008b56;">
+					  <a href="http://lorempixel.com/500/500/food" class="lightbox" style="margin-right: 10px; display: block; float: left"><img alt="74x74" src="http://lorempixel.com/74/74/food" /></a>
+					  <h3 style="font-size: 18px; margin: 0; line-height: 74px" id="dish-details-name">Best of Restaurant</h3>
 				  </div>
-				  <br />
-				  <div class="btn-group btn-group-justified">
-						  <a id="dishes-comments-button0" class="btn btn-danger" role="button">0</a>
-						  <a id="dishes-comments-button1" class="btn btn-warning" role="button">1</a>
-						  <a id="dishes-comments-button2" class="btn btn-default" role="button">2</a>					  
-						  <a id="dishes-comments-button3" class="btn btn-info" role="button">3</a>
-						  <a id="dishes-comments-button4" class="btn btn-primary" role="button">4</a>					  
-						  <a id="dishes-comments-button5" class="btn btn-success" role="button">5</a>
-					</div>
+				  <span id="dish-details-rating-stars" style="clear:both; width: 100%; display: block; text-align: center">
+					<div style="display: inline-block; color: black; font-size: 24px; margin:0; line-height: 40px; height:30px; width: 48px; overflow: hidden"><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i></div>
+					<div style="display: inline-block; color: rgba(0,0,0,0.1); font-size: 24px; margin:0; line-height: 40px; height:30px; width: 72px; overflow: hidden; margin-left: -1px; text-align: right"><i class="glyphicon glyphicon-star-empty"></i><i class="glyphicon glyphicon-star-empty"></i><i class="glyphicon glyphicon-star-empty"></i><i class="glyphicon glyphicon-star-empty"></i><i class="glyphicon glyphicon-star-empty"></i></div>
+				  </span>
+				  		  
 				</div>
-
-				<div id="dish-details-comments"></div>			  </div>
-			
-		  </div>
-    	</div>	
-	  </div>
-			  
+		  
+				<div style="background-color: white; border-top: solid solid 1px #008b56; ">
+					
+						<div id="review" class="noshow">
+						  <div class="row dishes-comments-new" > 
+							<p>Dude's Name</p> 
+							<div class="col-md-3 column">
+							  <img alt="100x100" src="http://lorempixel.com/100/100/food" />
+							</div> 
+							<div class="col-md-9 column"> 
+								<textarea id="dishes-comments-text" class="form-control" rows="4"></textarea>
+							</div>
+						  </div>
+						  <br />
+						  <div class="btn-group btn-group-justified">
+								  <a id="dishes-comments-button0" class="btn btn-danger" role="button">0</a>
+								  <a id="dishes-comments-button1" class="btn btn-warning" role="button">1</a>
+								  <a id="dishes-comments-button2" class="btn btn-default" role="button">2</a>					  
+								  <a id="dishes-comments-button3" class="btn btn-info" role="button">3</a>
+								  <a id="dishes-comments-button4" class="btn btn-primary" role="button">4</a>					  
+								  <a id="dishes-comments-button5" class="btn btn-success" role="button">5</a>
+							</div>
+						</div>
+						<div id="dish-details-comments"></div>
+					
+				</div>
+			  </div>
 			</div>
 	    </div>		
 	</div>

@@ -1,3 +1,4 @@
+{% load num_format %}
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
@@ -173,7 +174,7 @@
 	  $(function () {
 		edit_restaurant_name = function() {
 		  $('.noedit-restaurant-name').hide();
-		  $('.edit-restaurant-name').show();
+		  $('.edit-restaurant-name').css('display', 'inline-block');
 		  
 		  $('#text-restaurant-name').focus();
 		  $('#text-restaurant-name').blur(save_restaurant_name);
@@ -225,19 +226,31 @@
 	<div id="content_parent" style="background-color: white; margin: 20px; margin-top: 70px; padding: 20px;">
         <div id="content">
 		  <div class="container">
-			  <div class="row clearfix" id="restaurant-head" style="background-color: #ffb273; border: solid 2px #ff7400; border-radius: 5px;">
-				  <div class="col-md-2 column" style="padding:0">
-					  <img id="profile-image" alt="170x170" src="http://placehold.it/170&text=Restaurant" />
-				  </div>
-				  <div class="col-md-4 column">
+			
+			<div class="row clearfix">
+				<div class="col-md-8 column" style="border-right: 1px solid #008855">
+				  <div class="row clearfix" style="border: 1px solid #CCC ;background-color: #f0f0f0; margin-top: 10px; margin-bottom: 30px; margin-right: 0">
+					<div class="col-md-12" style=" padding: 0">
 					  <style>
 						#restaurant-name:hover {
 						  background-color: #FFE900;
 						}
 					  </style>
-					  <h1 class="noedit-restaurant-name"><span id="restaurant-name" class="restaurant-name">{{ restaurant.name }}</span></h1><br />
-					  <input id="text-restaurant-name" class="form-control edit-restaurant-name" value="{{ restaurant.name }}" />
-					  
+					  <h1 style="color: #008b56; font-size: 24px; margin: 0"><a href="http://lorempixel.com/500/500/" class="lightbox" style="margin-right: 20px;"><img alt="75x75" src="http://lorempixel.com/75/75/" /></a>
+						<span id="restaurant-name" class="restaurant-name noedit-restaurant-name">{{ restaurant.name }}</span>
+						<input style="width: 500px" id="text-restaurant-name" class="form-control edit-restaurant-name" value="{{ restaurant.name }}" />
+					  </h1>
+					</div>					
+				  </div>
+				  <div class="row clearfix">
+					<div class="col-md-6">
+					  <address>
+						  <span class="restaurant-location-address">{{ restaurant.location.address }}</span><br />
+						  <span class="restaurant-location-city">{{ restaurant.location.city }}</span>, <span class="restaurant-location-state">{{ restaurant.state.name }}</span> <span class="restaurant-location-zip">{{ restaurant.location.zipcode }}</span><br />
+						  <abbr title="Phone">P:</abbr> <span class="restaurant-location-phone">{{ restaurant.location.phone }}</span>
+					  </address>
+					</div>
+					<div class="col-md-6">			
 					  <style>
 						#restaurant-description:hover {
 						  background-color: #FFE900;
@@ -245,175 +258,229 @@
 					  </style>
 					  <div class="noedit-restaurant-description" id="restaurant-description">{{ restaurant.description }}</div>
 					  <textarea class="edit-restaurant-description form-control" id="text-restaurant-description">{{ restaurant.description }}</textarea>
-					  
-					  <div id="rating" class="_restaurant-rating-total rating"> </div>
-					  <span class="_restaurant-categories-element-start noshow" > 
-						  <span class="_restaurant-categories-element-name"> </span> 
-					  </span>
-					  <span class="_restaurant-categories-element noshow" >
-						  <span class="_restaurant-categories-element-name"> </span>
-					  </span>
-					  <span class="_restaurant-categories-element-end noshow" > 
-						  <span class="_restaurant-categories-element-name"> </span>
-					  </span> 		
-					  <span class="restaurant-categories"></span>
-					  <span class="restaurant-rating-total"> </span> 
+					</div>
 				  </div>
-		  
-				  <div class="col-md-2 column">
-		  
-					  <address>
-						  <strong><span class="restaurant-name"></span></strong><br />
-						  <span class="restaurant-location-address">{{ restaurant.location.address }}</span><br />
-						  <span class="restaurant-location-city">{{ restaurant.location.city.name }}</span>, <span class="restaurant-location-state">{{ restaurant.location.state.name }}</span> <span class="restaurant-location-zip">{{ restaurant.location.zip }}</span><br />
-						  <abbr title="Phone">P:</abbr> <span class="restaurant-location-phone">{{ restaurant.location.phone }}</span>
-					  </address></div>
-				  </br>
-				  <div class="col-md-4 column">
-				  <div id="map-canvas" style="width: 100%; height: 150px; display: none"></div>
-				  </div>				  
+				</div>
+				<div class="col-md-4 column">
+				  <div id="map-canvas" style="width: 100%; height: 300px; border: 1px solid #bbb;"></div>
+					<script>
+						var myLatlng = new google.maps.LatLng({{ restaurant.location.latitude }}, {{ restaurant.location.longitude }});
+						  var mapOptions = {
+							  center: myLatlng,
+							  zoom: 15
+						  };
+						  var map = new google.maps.Map(document.getElementById("map-canvas"),
+							  mapOptions);
+						  
+						  var marker = new google.maps.Marker({
+							  position: myLatlng,
+							  map: map,
+							  title: "{{ restaurant.name }}",
+						  });
+						  var infowindow = new google.maps.InfoWindow({
+							  content: "{{ restaurant.name }}"
+						  });
+							  google.maps.event.addListener(marker, 'click', function() {
+							  infowindow.open(map,marker);
+						  });
+							  
+							  if (getCookie('lat') != null) { 
+								myLatlng = new google.maps.LatLng(getCookie('lat'), getCookie('lng'));
+								marker = new google.maps.Marker({
+								   position: myLatlng,
+								   map: map,
+								   title: "You",
+								   icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+							   });
+							   infowindow = new google.maps.InfoWindow({
+								   content: "Your location"
+							   });
+							   google.maps.event.addListener(marker, 'click', function() {
+								   infowindow.open(map,marker);
+							   });
+							  }
+					</script>
+				</div>
 			  </div>
+			
+			<br />
 			  <style>
 				.panel-default {
 				  border-color: #006363;
 				}
 			  </style>
-			  <div class="row clearfix">
-				  <div class="col-md-6 column" style="padding :10px; background-color: #5CCCCC; border-radius: 5px;  border: solid 2px #009999">
-					<h2 style="text-align: center; color: #006363">Menu</h2>
-					<hr style="border-top-color: #006363" />
-					  <div class="panel-group _restaurant-dishes" id="dishes">
-						{% regroup restaurant.dishes.all by section as section_list %}
-						<style>
-							.section-head:hover {
-							  background-color: yellow;
-							  cursor: text;
-							}
-						</style>
-						{% for section in section_list %}				
-						<div class="panel panel-default">
-						  <div class="panel-heading" style="margin:0; padding: 0">
-							<h4 class="panel-title" style="width: 100%;">
-							  <div style="display: inline-block; width: 100%; padding: 10px;">
-								<span id="{{ section.grouper.id }}section-name" class="noedit-{{ section.grouper.id }}section-name section-head" style="float: left; padding: 2px; display: inline-block; width: 100%;">{{ section.grouper.name }}</span>
-								<input id="text-{{ section.grouper.id }}section-name" class="edit-{{ section.grouper.id }}section-name form-control" value="{{ section.grouper.name }}" />
-								
-								<script>
-								  function edit_{{section.grouper.id}}section_name() {
-									$('.noedit-{{ section.grouper.id }}section-name').hide();
-									$('.edit-{{ section.grouper.id }}section-name').show();
-									
-									$('#text-{{ section.grouper.id }}section-name').focus();
-									$('#text-{{ section.grouper.id }}section-name').blur(save_{{ section.grouper.id }}section_name);
-								  }
-								  function save_{{section.grouper.id}}section_name() {
-									$('.noedit-{{ section.grouper.id }}section-name').show();
-									$('.edit-{{ section.grouper.id }}section-name').hide();
-									
-									$.ajax({
-									  url: 'save',
-									  data: {
-										'section_id': {{ section.grouper.id }},
-										'section_name': $('#text-{{ section.grouper.id }}section-name').val()
-									  }
-									});
-									$('#{{ section.grouper.id }}section-name').text($('#text-{{ section.grouper.id }}section-name').val());
-									if($('#text-{{ section.grouper.id }}section-name').val() == '') {
-									  $('#{{ section.grouper.id }}section-name').text('[Section Name]')
-									}
-									$('#{{ section.grouper.id }}section-name').click(edit_{{ section.grouper.id }}section_name);
-								  }
-								  save_{{section.grouper.id}}section_name();
-								</script>
-							  </div>
-							</h4>
-						  </div>
-						  <div id="collapse{{ section.grouper.slug }}" class="panel-collapse">
-							  <div class="panel-body" id="panel{{ section.grouper.slug }}">
-								
-								{% for dish in section.list %}
-								
-								  <div style="text-decoration:none; border-radius: 5px;" onclick="(function () {
-									  $('#placeholder-dishinfo').hide();
-									  $('#dishinfo').show();
-									  
-									  $('#dish-details-name').text($('#{{ dish.id }}-dish-entry-name').text());
-									  $('#dish-details-description').text($('#{{ dish.id }}-dish-entry-description').text());
-									})();">
-									<div class="menu-dish"> <span id="{{ dish.id }}-dish-entry-name">{{ dish.name }}</span>
-									    <span id="{{ dish.id }}-dish-entry-description" class="noshow">{{ dish.description }}</span>
-										<span class="label label-success">Vegetarian</span>
-										<span class="label label-info">Vegan</span>
-										<span class="label label-primary">Organic</span>
-										<span class="label label-warning">Nut watch</span>
-										<span class="label label-danger">Gluten watch</span>
-									<span class="pull-right" style="font-weight: 900; color: darkblue">$ <span class="_restaurant-dishes-entry-price">{{ dish.price }}</span></span>
-									</div>
-								  </div>
-								{% endfor %}
-							  </div>
-						  </div>		  
-						</div>
-						{% endfor %}
-						
-						<div class="panel panel-default">
-						  <div class="panel-heading" style="margin:0; padding: 0">
-							<h4 class="panel-title" style="width: 100%;">
-							  <div style="display: inline-block; width: 100%; padding: 10px;">
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			<div class="row clearfix">
+				<div class="col-md-12 column" style="background-color: white; border-radius: 5px;  padding-top: 0">
+					<h3 style="text-align: center; color: #006363;">MENU</h3>
+					{% regroup restaurant.dishes_all by section_json as section_list %}
+					<div class="row">
+					  <div class="col-md-8">
+						<div class="panel-group _restaurant-dishes" id="dishes">				  
+						{% for section in section_list %}
+						  <div class="panel panel-default">
+							<div class="panel-heading">
+							  <h4 class="panel-title">
 								<style>
-								  .section-new:hover {
-									cursor: pointer;
-									background-color: #AAFFAA;
-								  }
-								</style>
-								<span id="section-new" class="section-new" style="padding: 2px; display: inline-block; width: 100%">+ Add New Section</span>
-								<script>
-								  function edit_{{section.grouper.id}}section_name() {
-									$('.noedit-{{ section.grouper.id }}section-name').hide();
-									$('.edit-{{ section.grouper.id }}section-name').show();
-									
-									$('#text-{{ section.grouper.id }}section-name').focus();
-									$('#text-{{ section.grouper.id }}section-name').blur(save_{{ section.grouper.id }}section_name);
-								  }
-								  function save_{{section.grouper.id}}section_name() {
-									$('.noedit-{{ section.grouper.id }}section-name').show();
-									$('.edit-{{ section.grouper.id }}section-name').hide();
-									
-									$.ajax({
-									  url: 'save',
-									  data: {
-										'section_id': {{ section.grouper.id }},
-										'section_name': $('#text-{{ section.grouper.id }}section-name').val()
-									  }
-									});
-									$('#{{ section.grouper.id }}section-name').text($('#text-{{ section.grouper.id }}section-name').val());
-									if($('#text-{{ section.grouper.id }}section-name').val() == '') {
-									  $('#{{ section.grouper.id }}section-name').text('[Section Name]')
+									.noedit-{{ section.grouper.id }}section-name:hover {
+										background-color: yellow;
+										cursor: text;
 									}
-									$('#{{ section.grouper.id }}section-name').click(edit_{{ section.grouper.id }}section_name);
-								  }
-								  save_{{section.grouper.id}}section_name();
-								</script>
-							  </div>
-							</h4>
+									
+								</style>
+									<span id="{{ section.grouper.id }}section-name" class="noedit-{{ section.grouper.id }}section-name section-head" style="float: left; padding: 2px; display: inline-block; width: 100%;">{{ section.grouper }}</span>
+									<input id="text-{{ section.grouper.id }}section-name" class="edit-{{ section.grouper.id }}section-name form-control" value="{{ section.grouper.name }}" />
+								<br />
+									<script>
+									  function edit_{{section.grouper.id}}section_name() {
+										$('.noedit-{{ section.grouper.id }}section-name').hide();
+										$('.edit-{{ section.grouper.id }}section-name').css('display', 'inline-block');
+										
+										$('#text-{{ section.grouper.id }}section-name').focus();
+										$('#text-{{ section.grouper.id }}section-name').blur(save_{{ section.grouper.id }}section_name);
+									  }
+									  function save_{{section.grouper.id}}section_name() {
+										$('.noedit-{{ section.grouper.id }}section-name').show();
+										$('.edit-{{ section.grouper.id }}section-name').hide();
+										
+										$.ajax({
+										  url: 'save',
+										  data: {
+											'section_id': {{ section.grouper.id }},
+											'section_name': $('#text-{{ section.grouper.id }}section-name').val()
+										  }
+										});
+										$('#{{ section.grouper.id }}section-name').text($('#text-{{ section.grouper.id }}section-name').val());
+										if($('#text-{{ section.grouper.id }}section-name').val() == '') {
+										  $('#{{ section.grouper.id }}section-name').text('[Section Name]')
+										}
+										$('#{{ section.grouper.id }}section-name').click(edit_{{ section.grouper.id }}section_name);
+									  }
+									  save_{{section.grouper.id}}section_name();
+									</script>
+								
+							  </h4>
+							</div>
+			
+							<div class="panel-collapse">
+								<div class="panel-body" style="height: 400px; overflow-y: scroll">
+								  {% for dish in section.list %}
+								  <div style="text-decoration:none; border-radius: 5px;" onclick="
+									$('#dishinfo').show();
+									$('#dish-details-name').text('{{ dish.name }}');
+									$('#text-dish-details-name').val('{{ dish.name }}');
+									
+									if ($('#dish-details-name').text().length > 37) {
+									  $('#dish-details-name').css('line-height', '37px');
+									} else {
+									  $('#dish-details-name').css('line-height', '74px');
+									}
+									/*$('#dish-details-description').text('{{ dish.description }}');*/
+									$('#dish-details-price').text('{{ dish.price }}');
+									$('#dish-id').val('{{ dish.id }}')
+									save_dish_details_name();
+								  ">
+									  <div class="menu-dish"><span>{{ dish.name }}</span>
+										
+										  <span class="pull-right" style="font-family: Courier New">
+										  
+		
+										  {% if 'Vegetarian' in dish.categories_json %}
+											<span class="label label-success">Vegetarian</span>
+										  {% else %}
+											<span class="label label-default">Vegetarian</span>
+										  {% endif %}
+										  {% if 'Vegan' in dish.categories_json %}
+											<span class="label label-info">Vegan</span>
+										  {% else %}
+											<span class="label label-default">Vegan</span>
+										  {% endif %}
+										  {% if 'Organic' in dish.categories_json %}
+											<span class="label label-primary">Organic</span>
+										  {% else %}
+											<span class="label label-default">Organic</span>
+										  {% endif %}
+										  {% if 'Nutfree' in dish.categories_json %}
+											<span class="label label-warning">Nutfree</span>
+										  {% else %}
+											<span class="label label-default">Nutfree</span>
+										  {% endif %}
+										  {% if 'GlutenFree' in dish.categories_json %}
+											<span class="label label-danger">Glutenfree</span>
+										  {% else %}
+											<span class="label label-default">Glutenfree</span>
+										  {% endif %}
+										
+										$ {{ dish.price|num_format }}</span>
+									  </div>
+								  </div>
+								  {% endfor %}
+							</div>	
 						  </div>
+						{% endfor %}
 						</div>
-				  </div>
-				</div>
-				<div id="dish" class="col-md-6 column" style="padding: 0 10px; color: white">
-					<div style="padding: 10px 25px; background-color: #FF7373; border-radius: 5px;">
-					  <div id="placeholder-dishinfo" style="font-size: 20px; font-weight: 900">Please select a dish from the menu. <br />If you don't have any dishes, go ahead and add one!</div>
-					  <div id="dishinfo" class="row noshow" style="background-color:#ff4040; border: solid 2px #A60000; border-radius: 5px;"> 
-						  <div class="col-md-3 column"> 
-							  <img alt="140x140" src="http://lorempixel.com/120/120/food" />
-						  </div>
-						  <div class="col-md-6 column"> 
-								  <h2> <strong id="dish-details-name">[ Dish Name ]</strong> </h2>
-								  <p id="dish-details-rating-stars"></p> 
-								  <p id="dish-details-description">[ Dish Description ]</p> 				
-						  </div>
 					  </div>
-				</div>
+					</div>
+					
+					<div class="col-md-4">					  
+						<div id="dish" style="color: black; border: solid 1px #008b56;">
+							<div style="background-color: #ECECFF;">
+								<div id="dishinfo" style="display: block; background-color: #00ac6b; padding: 0; color: white;  border-bottom: solid 1px #008b56;">
+									<a href="http://lorempixel.com/500/500/food" class="lightbox" style="margin-right: 10px; display: block; float: left"><img alt="74x74" src="http://lorempixel.com/74/74/food" /></a>
+									<style>
+										#dish-details-name:hover {
+											background-color: yellow;
+											color: black;
+											cursor: text;
+										}
+									</style>
+									<h3 class="noedit-dish-details-name" style="font-size: 18px; margin: 0; line-height: 74px" id="dish-details-name">&nbsp;</h3>
+									<input id="text-dish-details-name" class="edit-dish-details-name form-control" value="" />
+								    <input id="dish-id" type="hidden" />
+									<script>
+									  function edit_dish_details_name() {
+										$('.noedit-dish-details-name').hide();
+										$('.edit-dish-details-name').css('display', 'inline-block');
+										
+										$('#text-dish-details-name').focus();
+										$('#text-dish-details-name').blur(save_dish_details_name);
+									  }
+									  function save_dish_details_name() {
+										$('.noedit-dish-details-name').show();
+										$('.edit-dish-details-name').hide();
+										
+										$.ajax({
+										  url: 'save',
+										  data: {
+											'dish_id': $('#dish-id').val(),
+											'dish_name': $('#text-dish-details-name').val()
+										  }
+										});
+										$('#dish-details-name').text($('#text-dish-details-name').val());
+										if($('#text-dish-details-name').val() == '') {
+										  $('#dish-details-name').text('[Dish Name]')
+										}
+										$('#dish-details-name').click(edit_dish_details_name);
+									  }
+									</script>
+									
+								</div>
+							</div>
+						</div>
+						<span style="clear:both; width: 100%; display: block; padding: 10px; border: solid 1px #008b56; font-size: 20px;">
+							Price: $ <span id="dish-details-price">12.56</span>
+							<br />
+						</span>
+					</div>
+				</div>		
+			</div>
         </div>
     </div>
 
@@ -450,11 +517,11 @@ tour.addSteps([
 tour.init();
 
 // Start the tour
-tour.start();
+//tour.start();
 
 if (tour.ended()) {
   // decide what to do
-  tour.restart();
+  //tour.restart();
 }
 	</script> 
 </body>

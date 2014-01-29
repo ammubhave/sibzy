@@ -16,7 +16,17 @@ import math
 # For restaurant owners, let them edit profiles
 def profile_edit(request, id):
     restaurant = get_object_or_404(Restaurant, id=id)
+
+    dishes_all = restaurant.dishes.all()
+
+    for dish in dishes_all:
+        dish.categories_json = json.loads(str(dish.categories_json))
+        dish.section_json = json.loads(str(dish.section_json))
+
+    Restaurant.dishes_all = property(lambda self: dishes_all)
+
     return render(request, 'restaurant_profile_edit.html', {'restaurant': restaurant})
+
 
 @csrf_exempt
 def profile_edit_save(request, id):
@@ -30,6 +40,14 @@ def profile_edit_save(request, id):
         section = get_object_or_404(DishCategory, id=int(request.REQUEST['section_id']))
         section.name = request.REQUEST['section_name']
         section.save()
+    if 'dish_id' in request.REQUEST:
+        dish = get_object_or_404(Dish, id=int(request.REQUEST['dish_id']))
+        if 'dish_name' in request.REQUEST:
+            dish.name = request.REQUEST['dish_name']
+        if 'dish_price' in request.REQUEST:
+            dish.price = float(request.REQUEST['dish_price'])
+        #if 'vegetarian' in request.REQUEST and dish.categories.
+        dish.save();
 
     restaurant.save();
     return HttpResponse("{'status': 'success'}");
@@ -224,14 +242,26 @@ def profile_noajax(request, restaurant_id):
     q = ''
     if 'HTTP_REFERER' in request.META and '/search/q/' in request.META['HTTP_REFERER']:
         q = request.META['HTTP_REFERER'][request.META['HTTP_REFERER'].rfind('/') + 1:]
-        
+
     RestaurantRating.total_display = property(lambda self: 24*int(math.ceil(self.total)))
     RestaurantRating.total_display_negative = property(lambda self: 24*(5-int(math.ceil(self.total))))
     #print restaurant.rating.total_display
     #restaurant.rating['total_display']
     
-    dc = {
-        'Vegetarian': DishCategory.objects.get(name='Vegetarian')
-    }
-    
-    return render(request, 'restaurant_profile_noajax.html', {'restaurant': restaurant, 'q': q, 'DishCategory': dc})
+    #for dish in Dish.objects.all():
+    #    dish.section_json = json.dumps({'id': dish.section.id, 'name': dish.section.name})
+    #    dish.save()
+
+
+    dishes_all = restaurant.dishes.all()
+
+
+    for dish in dishes_all:
+        if dish.categories_json == None: dish.categories_json = '[]'
+        dish.categories_json = json.loads(str(dish.categories_json))
+        dish.section_json = json.loads(str(dish.section_json))
+
+    Restaurant.dishes_all = property(lambda self: dishes_all)
+
+
+    return render(request, 'restaurant_profile_noajax.html', {'restaurant': restaurant, 'q': q})
