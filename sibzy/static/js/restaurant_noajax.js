@@ -1,9 +1,31 @@
 var restaurant = {};
 
-
-$('#rating').bind('ondataload', function () { 
-    $(this).css('width', (restaurant.rating.total * 20) + 'px' ) 
-});
+var comments_xhr = null;
+function load_comments(id) {
+    if (comments_xhr) {
+	comments_xhr.abort();
+	comments_xhr = null;
+    }
+    comments_xhr = $.ajax({
+	url: '!/comment/dish/' + id,
+	dataType: 'json',
+	success: function(data) {
+	    comments_xhr = null;
+	    //console.log(data);
+	    $.each(data, function(index, comment) {
+		var entry = $('._dish-details-comments-entry').clone();									
+		entry.show();
+		entry.removeClass('_dish-details-comments-entry');
+		console.log(comment);
+		entry.find('._dish-details-comments-entry-ratingvalue').text(comment.rating_value);
+		entry.find('._dish-details-comments-entry-commenttext').text(comment.comment_text);
+		entry.find('._dish-details-comments-entry-user').text(comment.user.fbusername);
+		entry.find('._dish-details-comments-entry-picture').attr('src', 'http://graph.facebook.com/' + comment.user.fbusername + '/picture?type=square&type=large');
+		$('#dish-details-comments').append(entry);
+	    });
+	}
+    })
+}
 
 $('._restaurant-dishes').bind('ondataload', function() {
             

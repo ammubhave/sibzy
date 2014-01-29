@@ -26,6 +26,10 @@ urlpatterns = patterns('',
     # Admin Site urls
     url(r'^admin/', include(admin.site.urls)),
 
+#    url(r'^facebook/', include('django_facebook.urls')),
+#    url(r'^accounts/', include('django_facebook.auth_urls')), #Don't add this line if you use django registration or userena for registration and auth.
+
+
     # All else pass to frontend
     url(r'', include('frontend.urls_noajax')),
 )

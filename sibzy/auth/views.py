@@ -9,26 +9,53 @@ import simplejson as json
 from django.contrib.auth import logout, login, authenticate
 
 
-def me(request):
-    return render(request, 'auth_me.html')
+def userprofile_processor(request):
+    "A context processor that provides 'app', 'user' and 'ip_address'."
+    if request.user.is_authenticated():
+        return {
+            'profile': UserProfile.objects.get(user=request.user.id)
+        }
+    else:
+        return {}
+
 
 @login_required
-def me_noajax(request):
-    return render(request, 'auth_me_noajax.html')
-
-@login_required
-def logout_fb(request):
+def logout_user(request):
     ''' Logout from the django seesion. Delete the *fbaccess_token* and *fbid* cookie.
 
     **Returns:**
         ``{status: 'success'}``
     '''
-
-    response = HttpResponse(json.dumps({'status': 'success'}))
+    response = HttpResponseRedirect('/')
     response.set_cookie('fbaccess_token', '', expires='Thu, 01-Jan-1970 00:00:00 GMT')
     response.set_cookie('fbid', '', expires='Thu, 01-Jan-1970 00:00:00 GMT')
     logout(request)
     return response
+
+
+def me(request):
+    return render(request, 'auth_me.html')
+
+
+@login_required
+def me_noajax(request):
+    return render(request, 'auth_me_noajax.html')
+
+
+
+#@login_required
+#def logout_fb(request):
+#    ''' Logout from the django seesion. Delete the *fbaccess_token* and *fbid* cookie.
+#
+#    **Returns:**
+#        ``{status: 'success'}``
+#    '''
+#
+#    response = HttpResponse(json.dumps({'status': 'success'}))
+#    response.set_cookie('fbaccess_token', '', expires='Thu, 01-Jan-1970 00:00:00 GMT')
+#    response.set_cookie('fbid', '', expires='Thu, 01-Jan-1970 00:00:00 GMT')
+#    logout(request)
+#    return response
 
 
 def login_fb(request):

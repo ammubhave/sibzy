@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+#    'django_facebook',
     'frontend',
     'auth',
     'restaurant',
@@ -99,7 +100,7 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_DIR, 'frontend', 'templates'),
     os.path.join(PROJECT_DIR, 'restaurant', 'templates'),
     os.path.join(PROJECT_DIR, 'auth', 'templates'),
-	os.path.join(PROJECT_DIR, 'search', 'templates'),
+    os.path.join(PROJECT_DIR, 'search', 'templates'),
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
@@ -109,7 +110,21 @@ TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
 "django.core.context_processors.static",
 "django.core.context_processors.tz",
 "django.contrib.messages.context_processors.messages",
-'django.core.context_processors.csrf',)
+'django.core.context_processors.csrf',
+'auth.userprofile_processor',
+#'django_facebook.context_processors.facebook',
+#'django.core.context_processors.request',
+)
 
 FB_APPID = '259749734165537'
 FB_APPSECRET = '30894c0518e604fa530c7c36f21cdaea'
+#FACEBOOK_APP_ID = '259749734165537'
+#FACEBOOK_APP_SECRET = '30894c0518e604fa530c7c36f21cdaea'
+#
+#AUTHENTICATION_BACKENDS = (
+#    'django_facebook.auth_backends.FacebookBackend',
+#    'django.contrib.auth.backends.ModelBackend',
+#)
+#
+#AUTH_USER_MODEL = 'django_facebook.FacebookCustomUser'
+#AUTH_PROFILE_MODULE = 'django_facebook.FacebookProfile'

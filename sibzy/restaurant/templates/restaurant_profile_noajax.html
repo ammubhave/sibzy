@@ -161,10 +161,11 @@
 	<hr />
 	<div class="row clearfix">
         <div class="col-md-12 column" style="background-color: white; border-radius: 5px;  padding-top: 0">
-		    <h3 style="text-align: center; color: #006363;">MENU</h3>
+		   
 			{% regroup restaurant.dishes_all by section_json as section_list %}
 			<div class="row">
 			  <div class="col-md-8">
+			      <h3 style="text-align: center; color: #006363;">MENU</h3>
 				<div class="panel-group _restaurant-dishes" id="dishes">				  
 				{% for section in section_list %}
 				  <div class="panel panel-default">
@@ -188,6 +189,7 @@
 							  $('#dish-details-name').css('line-height', '74px');
 							}
 							$('#dish-details-description').text('{{ dish.description }}');
+							load_comments({{ dish.id }});
 						  ">
 							  <div class="menu-dish"><span>{{ dish.name }}</span>
 							
@@ -244,11 +246,10 @@
 				  </span>
 				  		  
 				</div>
-		  
 				<div style="background-color: white; border-top: solid solid 1px #008b56; ">
 					
-						<div id="review" class="noshow">
-						  <div class="row dishes-comments-new" > 
+						<div id="review" class="" style="margin-top: 0">
+						  <div class="dishes-comments-new" > 
 							<p>Dude's Name</p> 
 							<div class="col-md-3 column">
 							  <img alt="100x100" src="http://lorempixel.com/100/100/food" />

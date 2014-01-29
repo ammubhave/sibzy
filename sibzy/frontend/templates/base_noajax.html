@@ -17,6 +17,13 @@
     <script src="/static/js/init.js"></script>
 	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+	<script>
+	    {% if request.user.is_authenticated %}
+	    var server_status = true;
+	    {% else %}
+	    var server_status = false;
+	    {% endif %}
+	</script>
     <script src="/static/js/fblogin.js"></script>
 	<script src="/static/js/sibzy_noajax.js"></script>
     <link rel="stylesheet" type="text/css" href="/static/css/sibzy.css" />
@@ -178,12 +185,14 @@
 				</script>
 		
 				<ul class="nav navbar-nav navbar-right">
+				    {% if not user.is_authenticated %}
 					<li class="fb-nologin">
-						<a href="/" style="padding: 13px 15px;" onclick="FB.login()"><img src="http://static.sticksports.com/images/fb_login_20121126.jpg" /></a>
+						<a href="#" style="padding: 15px 15px;" onclick="FB.login()"><img src="http://static.sticksports.com/images/fb_login_20121126.jpg" /></a>
 					</li>
+				    {% else %}
 					<li style="line-height: 50px; color:white;" class="fb-login">
-						<a href="/auth/me"><span class="fb-name"></span></a>
-					</li> 
+						<a href="/auth/me"><span class="fb-name">{{ profile.fbusername }}</span></a>
+					</li>
 					<li class="dropdown fb-login">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
 						   <i class="glyphicon glyphicon-cog"></i>
@@ -196,9 +205,10 @@
 							</li>
 							<li><a href="/auth/me">My Account</a></li>				 
 							<li class="divider"></li>
-							<li><a href="/" onclick="FB.logout()">Logout</a></li>
+							<li><a href="/auth/logout" onclick="FB.logout();">Logout</a></li>
 						</ul>
 					</li>
+				    {% endif %}
 				</ul>
 			</div>
 		</nav>

@@ -3,4 +3,5 @@ git+https://github.com/pythonforfacebook/facebook-sdk.git
 MySQL-python==1.2.4
 sqlparse==0.1.10
 selenium==2.39.0
-simplejson
+ujson
+django_facebook
