@@ -31,3 +31,6 @@ class UserProfile(models.Model):
     #dish_category_strong_user = ListField(EmbeddedModelField('DishCategory'), blank=True)
     #dish_category_weak_user = ListField(EmbeddedModelField('DishCategory'), blank=True)
     #dish_category_weak_sys = ListField(EmbeddedModelField('DishCategory'), blank=True)
+
+    def __unicode__(self):
+        return self.user.username
