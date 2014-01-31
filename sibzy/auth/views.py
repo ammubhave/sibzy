@@ -72,6 +72,7 @@ def me_save_noajax(request):
 #    return response
 
 
+@csrf_exempt
 def login_fb(request):
     ''' Login the user in the django session.
     Also convert short lived token to long lived token and tell the client about the long lived token.
