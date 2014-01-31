@@ -12,7 +12,7 @@
   });
 </script>
 <script src="/static/js/restaurant_noajax.js"></script>
-
+<script src="http://code.jquery.com/color/jquery.color-2.1.2.min.js"></script>
 <style>
   .arrow-left {
 	width: 0;
@@ -327,7 +327,8 @@
 							  'rating_value': rate
 							},
 							success: function(data) {
-							    $('#review').css('background-color', '#F0FFF0');
+							    $('#review').css('background-color', '#0F0');
+							    $('#review').animate({ backgroundColor: "#F0FFF0" }, 2000);
 							}
 						      });
 						    });

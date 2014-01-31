@@ -36,6 +36,7 @@ function load_comments(id) {
 			$('#rate'+j).addClass('glyphicon-star-empty');
 		    }
 		    $('#dishes-comments-text').val(comment.comment_text);
+		    $('#review').css('background-color', '#F0FFF0');
 		} else {
 		    var entry = $('._dish-details-comments-entry').clone();									
 		    entry.show();
