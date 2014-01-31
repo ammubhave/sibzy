@@ -266,23 +266,62 @@ color: #999;">Someone -</footer>
 						
 						<div id="review" class="" style="margin-top: 0; background-color: #F0FFF0">
 						  
-						  <blockquote  class="blockquote-reverse" style="padding-right: 15px;padding-left: 0;border-right: 5px solid #eee;border-left: 0;text-align: right;">
+						  <blockquote  class="blockquote-reverse" style="margin-bottom: 0; padding-right: 15px;padding-left: 0;border-right: 5px solid #eee;border-left: 0;text-align: right;">
 						    <p style="font-size: 15px;"><textarea id="dishes-comments-text" class="form-control" rows="3"></textarea></p>
 						    <footer style="display: block;font-size: 80%;line-height: 1.428571429;color: #999;">{{ profile.fbusername }} -</footer>
 						  </blockquote>
 						  
-						  <div>
-						    <i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i>
-						  </div>
+						  
+						  <span style="font-size: 20px;" >
+						    &nbsp;&nbsp;&nbsp;&nbsp;
+						    <i id="rate1" class="newcomment glyphicon glyphicon-star"></i>
+						    <i id="rate2" class="newcomment glyphicon glyphicon-star"></i>
+						    <i id="rate3" class="newcomment glyphicon glyphicon-star"></i>
+						    <i id="rate4" class="newcomment glyphicon glyphicon-star-empty"></i>
+						    <i id="rate5" class="newcomment glyphicon glyphicon-star-empty"></i>
+						  </span>
+						  <script>
+						    var rate = 3;
+						    $(function () {
+						      for (var i=1; i<=5; i++) {
+						      hoverifyStars(i);
+						      }  
+						    });
+						    
+						    function hoverifyStars(i) {
+						      $('#rate' + i).mouseover(function () {
+							for (var j=1; j<=i;j++) {
+							  $('#rate'+j).removeClass('glyphicon-star-empty');
+							  $('#rate'+j).addClass('glyphicon-star');
+							}
+							for (var j=i+1; j<=5;j++) {
+							  $('#rate'+j).removeClass('glyphicon-star');
+							  $('#rate'+j).addClass('glyphicon-star-empty');
+							}
+						      }).mouseout(function () {
+							for (var j=1; j<=rate;j++) {
+							  $('#rate'+j).removeClass('glyphicon-star-empty');
+							  $('#rate'+j).addClass('glyphicon-star');
+							}
+							for (var j=rate+1; j<=5;j++) {
+							  $('#rate'+j).removeClass('glyphicon-star');
+							  $('#rate'+j).addClass('glyphicon-star-empty');
+							}
+						      }).click(function () {
+							rate = i;
+						      });
+						    }
+						  </script>
+						  <input class="btn btn-primary pull-right" value="Submit" id="new-comment-submit" type="button" style="margin-right: 20px;" />
 						
-						  <div class="btn-group btn-group-justified">
+						  <!--div class="btn-group btn-group-justified">
 								  <a id="dishes-comments-button0" class="btn btn-danger" role="button">0</a>
 								  <a id="dishes-comments-button1" class="btn btn-warning" role="button">1</a>
 								  <a id="dishes-comments-button2" class="btn btn-default" role="button">2</a>					  
 								  <a id="dishes-comments-button3" class="btn btn-info" role="button">3</a>
 								  <a id="dishes-comments-button4" class="btn btn-primary" role="button">4</a>					  
 								  <a id="dishes-comments-button5" class="btn btn-success" role="button">5</a>
-							</div>
+							</div-->
 						</div>
 						<div id="dish-details-comments"></div>
 					
