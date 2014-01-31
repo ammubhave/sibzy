@@ -300,6 +300,12 @@ def profile_noajax(request, restaurant_id):
             dish.name = ''
         if not ((profile.vegan == 0) or (profile.vegan == 1 and 'Vegan' in dish.categories_json) or (profile.vegan == -1 and 'Vegan' not in dish.categories_json)):
             dish.name = ''
+        if not ((profile.organic == 0) or (profile.organic == 1 and 'Organic' in dish.categories_json) or (profile.organic == -1 and 'Organic' not in dish.categories_json)):
+            dish.name = ''
+        if not ((profile.nutfree == 0) or (profile.nutfree == 1 and 'Nutfree' in dish.categories_json) or (profile.nutfree == -1 and 'Nutfree' not in dish.categories_json)):
+            dish.name = ''
+        if not ((profile.glutenfree == 0) or (profile.glutenfree == 1 and 'Glutenfree' in dish.categories_json) or (profile.glutenfree == -1 and 'Glutenfree' not in dish.categories_json)):
+            dish.name = ''
 
     Restaurant.dishes_all = property(lambda self: dishes_all)
     

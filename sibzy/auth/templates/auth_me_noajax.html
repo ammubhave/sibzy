@@ -68,6 +68,46 @@
 		</label>
 	    </div>
 	    <hr />
+	    <h4>Nutfree</h4>
+	    <div class="radio-inline">
+		<label>
+		  <input type="radio" name="nutfree" value="1" {% if profile.nutfree == 1 %}checked{% endif %}>
+		  Only Nutfree
+		</label>
+	    </div>
+	    <div class="radio-inline">
+		<label>
+		  <input type="radio" name="nutfree" value="-1" {% if profile.nutfree == -1 %}checked{% endif %}>
+		  Only Non-nutfree
+		</label>
+	    </div>
+	    <div class="radio-inline">
+		<label>
+		  <input type="radio" name="nutfree" value="0" {% if profile.nutfree == 0 %}checked{% endif %}>
+		  No preference
+		</label>
+	    </div>
+	    <hr />
+	    <h4>Glutenfree</h4>
+	    <div class="radio-inline">
+		<label>
+		  <input type="radio" name="glutenfree" value="1" {% if profile.glutenfree == 1 %}checked{% endif %}>
+		  Only Glutenfree
+		</label>
+	    </div>
+	    <div class="radio-inline">
+		<label>
+		  <input type="radio" name="glutenfree" value="-1" {% if profile.glutenfree == -1 %}checked{% endif %}>
+		  Only Non-glutenfree
+		</label>
+	    </div>
+	    <div class="radio-inline">
+		<label>
+		  <input type="radio" name="glutenfree" value="0" {% if profile.glutenfree == 0 %}checked{% endif %}>
+		  No preference
+		</label>
+	    </div>
+	    <hr />
 	    <input type="submit" class="btn btn-success" />
 	</form>
 </div>

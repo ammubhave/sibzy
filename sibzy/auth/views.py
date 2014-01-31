@@ -49,11 +49,15 @@ def me_save_noajax(request):
     vegetarian = int(request.POST['vegetarian'])
     vegan = int(request.POST['vegan'])
     organic = int(request.POST['organic'])
+    nutfree = int(request.POST['nutfree'])
+    glutenfree = int(request.POST['glutenfree'])
     if vegetarian in (-1, 0, 1) and vegan in (-1, 0, 1):
         profile = UserProfile.objects.get(user=request.user.id)
         profile.vegetarian = vegetarian
         profile.vegan = vegan
         profile.organic = organic
+        profile.nutfree = nutfree
+        profile.glutenfree = glutenfree
         profile.save()
     return HttpResponseRedirect('/auth/me')
 
