@@ -290,6 +290,6 @@ def profile_noajax(request, restaurant_id):
             dish.name = ''
 
     Restaurant.dishes_all = property(lambda self: dishes_all)
-
+    
 
     return render(request, 'restaurant_profile_noajax.html', {'restaurant': restaurant, 'q': q})

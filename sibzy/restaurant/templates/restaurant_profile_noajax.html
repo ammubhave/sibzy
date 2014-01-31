@@ -190,6 +190,8 @@
 							  $('#dish-details-name').css('line-height', '74px');
 							}
 							$('#dish-details-description').text('{{ dish.description }}');
+							$('#dish-id').val('{{ dish.id }}');
+							$('#dish').show();
 							load_comments({{ dish.id }});
 						  ">
 							  <div class="menu-dish"><span>{{ dish.name }}</span>
@@ -236,7 +238,8 @@
 			</div>
 			<div class="col-md-4">
 			  
-			  <div id="dish" style="color: black; border: solid 1px #008b56;">
+			  <div id="dish" style="color: black; border: solid 1px #008b56; display: none">
+			    <input id="dish-id" type="hidden" />
 				<div style="background-color: #ECECFF;">
 				  <div id="dishinfo" style="display: block; background-color: #00ac6b; padding: 0; color: white;  border-bottom: solid 1px #008b56;">
 					  <a href="http://lorempixel.com/500/500/food" class="lightbox" style="margin-right: 10px; display: block; float: left"><img alt="74x74" src="http://lorempixel.com/74/74/food" /></a>
@@ -249,22 +252,23 @@
 				  		  
 				</div>
 				<div style="background-color: white; border-top: solid 1px #008b56;">
-						<div style="margin: 10px; font-size: 11px;">
-						  <blockquote  class="blockquote-reverse" style="padding-right: 15px;
-padding-left: 0;
-border-right: 5px solid #eee;
-border-left: 0;
-text-align: right;
-">
-						    <p style="font-size: 15px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-						    <footer style="display: block;
-font-size: 80%;
-line-height: 1.428571429;
-color: #999;">Someone -</footer>
+						<div class="_dish-details-comments-entry" style="margin: 10px; font-size: 11px; display: none">
+						  <blockquote  class="blockquote-reverse" style="padding-right: 15px;padding-left: 0;border-right: 5px solid #eee;border-left: 0;text-align: right;">
+						    <p style="font-size: 15px;" class="_dish-details-comments-entry-commenttext"></p>
+						    <footer style="display: block;font-size: 80%;line-height: 1.428571429;color: #999;">
+						      <span class="pull-left">
+							<i class="glyphicon glyphicon-star-empty rrate1"></i>
+							<i class="glyphicon glyphicon-star-empty rrate2"></i>
+							<i class="glyphicon glyphicon-star-empty rrate3"></i>
+							<i class="glyphicon glyphicon-star-empty rrate4"></i>
+							<i class="glyphicon glyphicon-star-empty rrate5"></i>
+						      </span>
+						      <span class="_dish-details-comments-entry-user"></span>
+						      -</footer>
 						  </blockquote>
 						</div>
-						
-						<div id="review" class="" style="margin-top: 0; background-color: #F0FFF0">
+						<div id="dish-details-comments"></div>
+						<div id="review" class="" style="margin-top: 0; background-color: #F0F2FF">
 						  
 						  <blockquote  class="blockquote-reverse" style="margin-bottom: 0; padding-right: 15px;padding-left: 0;border-right: 5px solid #eee;border-left: 0;text-align: right;">
 						    <p style="font-size: 15px;"><textarea id="dishes-comments-text" class="form-control" rows="3"></textarea></p>
@@ -313,7 +317,21 @@ color: #999;">Someone -</footer>
 						    }
 						  </script>
 						  <input class="btn btn-primary pull-right" value="Submit" id="new-comment-submit" type="button" style="margin-right: 20px;" />
-						
+						  <script>
+						    $('#new-comment-submit').click (function () {
+						      $.ajax({
+							method: 'POST',
+							url: '/!/comment/dish/' + $('#dish-id').val() + '/new',
+							data: {
+							  'comment_text': $('#dishes-comments-text').val(),
+							  'rating_value': rate
+							},
+							success: function(data) {
+							    $('#review').css('background-color', '#F0FFF0');
+							}
+						      });
+						    });
+						  </script>
 						  <!--div class="btn-group btn-group-justified">
 								  <a id="dishes-comments-button0" class="btn btn-danger" role="button">0</a>
 								  <a id="dishes-comments-button1" class="btn btn-warning" role="button">1</a>
@@ -323,7 +341,7 @@ color: #999;">Someone -</footer>
 								  <a id="dishes-comments-button5" class="btn btn-success" role="button">5</a>
 							</div-->
 						</div>
-						<div id="dish-details-comments"></div>
+						
 					
 				</div>
 			  </div>

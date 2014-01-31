@@ -2,6 +2,7 @@ var restaurant = {};
 
 var comments_xhr = null;
 function load_comments(id) {
+    $('#dish-details-comments').html('');
     if (comments_xhr) {
 	comments_xhr.abort();
 	comments_xhr = null;
@@ -13,15 +14,31 @@ function load_comments(id) {
 	    comments_xhr = null;
 	    //console.log(data);
 	    $.each(data, function(index, comment) {
-		var entry = $('._dish-details-comments-entry').clone();									
-		entry.show();
-		entry.removeClass('_dish-details-comments-entry');
-		console.log(comment);
-		entry.find('._dish-details-comments-entry-ratingvalue').text(comment.rating_value);
-		entry.find('._dish-details-comments-entry-commenttext').text(comment.comment_text);
-		entry.find('._dish-details-comments-entry-user').text(comment.user.fbusername);
-		entry.find('._dish-details-comments-entry-picture').attr('src', 'http://graph.facebook.com/' + comment.user.fbusername + '/picture?type=square&type=large');
-		$('#dish-details-comments').append(entry);
+		if (comment.user.id == user_id) {
+		    rate = comment.rating_value;
+		    for (var j=1; j<=rate;j++) {
+			$('#rate'+j).removeClass('glyphicon-star-empty');
+			$('#rate'+j).addClass('glyphicon-star');
+		    }
+		    for (var j=rate+1; j<=5;j++) {
+			$('#rate'+j).removeClass('glyphicon-star');
+			$('#rate'+j).addClass('glyphicon-star-empty');
+		    }
+		    $('#dishes-comments-text').val(comment.comment_text);
+		} else {
+		    var entry = $('._dish-details-comments-entry').clone();									
+		    entry.show();
+		    entry.removeClass('_dish-details-comments-entry');
+		    console.log(comment);
+		    entry.find('._dish-details-comments-entry-ratingvalue').text(comment.rating_value);
+		    for (var j=1; j<=comment.rating_value;j++) {
+			entry.find('.rrate'+j).removeClass('glyphicon-star-empty');
+			entry.find('.rrate'+j).addClass('glyphicon-star');
+		    }
+		    entry.find('._dish-details-comments-entry-commenttext').text(comment.comment_text);
+		    entry.find('._dish-details-comments-entry-user').text(comment.user.fbusername);	
+		    $('#dish-details-comments').append(entry);
+		}
 	    });
 	}
     })
