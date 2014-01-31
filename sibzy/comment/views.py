@@ -141,7 +141,7 @@ def dish_new(request, dish_id):
     if rating_value < 0 or rating_value > 5:
         return HttpResponse("{'status': 'failed'}")
 
-    comment = Comment.objects.filter(user=request.user.id)
+    comment = Comment.objects.filter(user=request.user.id, dish=dish.id)
     if len(comment) > 0:
         comment = comment[0]
         comment.rating_value = rating_value
