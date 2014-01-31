@@ -2,6 +2,7 @@ from .base import *
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+ON_SERVER = False
 
 
 DATABASES = {
