@@ -8,107 +8,122 @@
 	<form method="POST" action="/auth/me/save">
 	    <h2>Food preferences</h2>
 	    <hr />
-	    <h4>Vegetarian</h4>
-	    <div class="radio-inline">
-		<label>
-		  <input type="radio" name="vegetarian" value="1" {% if profile.vegetarian == 1 %}checked{% endif %}>
-		  Only Vegetarian
-		</label>
-	    </div>
-	    <div class="radio-inline">
-		<label>
-		  <input type="radio" name="vegetarian" value="-1" {% if profile.vegetarian == -1 %}checked{% endif %}>
-		  Only Non-vegetarian
-		</label>
-	    </div>
-	    <div class="radio-inline">
-		<label>
-		  <input type="radio" name="vegetarian" value="0" {% if profile.vegetarian == 0 %}checked{% endif %}>
-		  No preference
-		</label>
-	    </div>
-	    <hr />
-	    <h4>Vegan</h4>
-	    <div class="radio-inline">
-		<label>
-		  <input type="radio" name="vegan" value="1" {% if profile.vegan == 1 %}checked{% endif %}>
-		  Only Vegan
-		</label>
-	    </div>
-	    <div class="radio-inline">
-		<label>
-		  <input type="radio" name="vegan" value="-1" {% if profile.vegan == -1 %}checked{% endif %}>
-		  Only Non-vegan
-		</label>
-	    </div>
-	    <div class="radio-inline">
-		<label>
-		  <input type="radio" name="vegan" value="0" {% if profile.vegan == 0 %}checked{% endif %}>
-		  No preference
-		</label>
-	    </div>
-	    <hr />
-	    <h4>Organic</h4>
-	    <div class="radio-inline">
-		<label>
-		  <input type="radio" name="organic" value="1" {% if profile.organic == 1 %}checked{% endif %}>
-		  Only Organic
-		</label>
-	    </div>
-	    <div class="radio-inline">
-		<label>
-		  <input type="radio" name="organic" value="-1" {% if profile.organic == -1 %}checked{% endif %}>
-		  Only Non-organic
-		</label>
-	    </div>
-	    <div class="radio-inline">
-		<label>
-		  <input type="radio" name="organic" value="0" {% if profile.organic == 0 %}checked{% endif %}>
-		  No preference
-		</label>
+	    
+	    <div class="row">
+		<div class="col-md-6">
+		    <h4><span class="label label-success">Vegetarian</span></h4>
+		    <div class="radio-inline">
+			<label>
+			  <input type="radio" name="vegetarian" value="1" {% if profile.vegetarian == 1 %}checked{% endif %}>
+			  Only Vegetarian
+			</label>
+		    </div>
+		    <div class="radio-inline">
+			<label>
+			  <input type="radio" name="vegetarian" value="-1" {% if profile.vegetarian == -1 %}checked{% endif %}>
+			  Only Non-vegetarian
+			</label>
+		    </div>
+		    <div class="radio-inline">
+			<label>
+			  <input type="radio" name="vegetarian" value="0" {% if profile.vegetarian == 0 %}checked{% endif %}>
+			  No preference
+			</label>
+		    </div>
+		</div>
+		<div class="col-md-6">
+		    <h4><span class="label label-info">Vegan</span></h4>
+		    <div class="radio-inline">
+			<label>
+			  <input type="radio" name="vegan" value="1" {% if profile.vegan == 1 %}checked{% endif %}>
+			  Only Vegan
+			</label>
+		    </div>
+		    <div class="radio-inline">
+			<label>
+			  <input type="radio" name="vegan" value="-1" {% if profile.vegan == -1 %}checked{% endif %}>
+			  Only Non-vegan
+			</label>
+		    </div>
+		    <div class="radio-inline">
+			<label>
+			  <input type="radio" name="vegan" value="0" {% if profile.vegan == 0 %}checked{% endif %}>
+			  No preference
+			</label>
+		    </div>
+		</div>
 	    </div>
 	    <hr />
-	    <h4>Nutfree</h4>
-	    <div class="radio-inline">
-		<label>
-		  <input type="radio" name="nutfree" value="1" {% if profile.nutfree == 1 %}checked{% endif %}>
-		  Only Nutfree
-		</label>
-	    </div>
-	    <div class="radio-inline">
-		<label>
-		  <input type="radio" name="nutfree" value="-1" {% if profile.nutfree == -1 %}checked{% endif %}>
-		  Only Non-nutfree
-		</label>
-	    </div>
-	    <div class="radio-inline">
-		<label>
-		  <input type="radio" name="nutfree" value="0" {% if profile.nutfree == 0 %}checked{% endif %}>
-		  No preference
-		</label>
+	    <div class="row">
+		<div class="col-md-6">
+		    <h4><span class="label label-primary">Organic</span></h4>
+		    <div class="radio-inline">
+			<label>
+			  <input type="radio" name="organic" value="1" {% if profile.organic == 1 %}checked{% endif %}>
+			  Only Organic
+			</label>
+		    </div>
+		    <div class="radio-inline">
+			<label>
+			  <input type="radio" name="organic" value="-1" {% if profile.organic == -1 %}checked{% endif %}>
+			  Only Non-organic
+			</label>
+		    </div>
+		    <div class="radio-inline">
+			<label>
+			  <input type="radio" name="organic" value="0" {% if profile.organic == 0 %}checked{% endif %}>
+			  No preference
+			</label>
+		    </div>
+		</div>
+		<div class="col-md-6">
+		    <h4><span class="label label-warning">Nutfree</span></h4>
+		    <div class="radio-inline">
+			<label>
+			  <input type="radio" name="nutfree" value="1" {% if profile.nutfree == 1 %}checked{% endif %}>
+			  Only Nutfree
+			</label>
+		    </div>
+		    <div class="radio-inline">
+			<label>
+			  <input type="radio" name="nutfree" value="-1" {% if profile.nutfree == -1 %}checked{% endif %}>
+			  Only Non-nutfree
+			</label>
+		    </div>
+		    <div class="radio-inline">
+			<label>
+			  <input type="radio" name="nutfree" value="0" {% if profile.nutfree == 0 %}checked{% endif %}>
+			  No preference
+			</label>
+		    </div>
+		</div>
 	    </div>
 	    <hr />
-	    <h4>Glutenfree</h4>
-	    <div class="radio-inline">
-		<label>
-		  <input type="radio" name="glutenfree" value="1" {% if profile.glutenfree == 1 %}checked{% endif %}>
-		  Only Glutenfree
-		</label>
-	    </div>
-	    <div class="radio-inline">
-		<label>
-		  <input type="radio" name="glutenfree" value="-1" {% if profile.glutenfree == -1 %}checked{% endif %}>
-		  Only Non-glutenfree
-		</label>
-	    </div>
-	    <div class="radio-inline">
-		<label>
-		  <input type="radio" name="glutenfree" value="0" {% if profile.glutenfree == 0 %}checked{% endif %}>
-		  No preference
-		</label>
+	    <div class="row">
+		<div class="col-md-6">
+		    <h4><span class="label label-danger">Glutenfree</span></h4>
+		    <div class="radio-inline">
+			<label>
+			  <input type="radio" name="glutenfree" value="1" {% if profile.glutenfree == 1 %}checked{% endif %}>
+			  Only Glutenfree
+			</label>
+		    </div>
+		    <div class="radio-inline">
+			<label>
+			  <input type="radio" name="glutenfree" value="-1" {% if profile.glutenfree == -1 %}checked{% endif %}>
+			  Only Non-glutenfree
+			</label>
+		    </div>
+		    <div class="radio-inline">
+			<label>
+			  <input type="radio" name="glutenfree" value="0" {% if profile.glutenfree == 0 %}checked{% endif %}>
+			  No preference
+			</label>
+		    </div>
+		</div>
 	    </div>
 	    <hr />
-	    <input type="submit" class="btn btn-success" />
+	    <div style="text-align: center;"><input type="submit" class="btn btn-success" value="Save" style="font-size: 17px" /></div>
 	</form>
 </div>
 
