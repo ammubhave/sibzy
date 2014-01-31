@@ -7,7 +7,7 @@ function load_comments(id) {
 	comments_xhr = null;
     }
     comments_xhr = $.ajax({
-	url: '!/comment/dish/' + id,
+	url: '/!/comment/dish/' + id,
 	dataType: 'json',
 	success: function(data) {
 	    comments_xhr = null;

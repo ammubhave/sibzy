@@ -319,10 +319,11 @@
 			  
 			<div class="row clearfix">
 				<div class="col-md-12 column" style="background-color: white; border-radius: 5px;  padding-top: 0">
-					<h3 style="text-align: center; color: #006363;">MENU</h3>
+					
 					{% regroup restaurant.dishes_all by section_json as section_list %}
 					<div class="row">
 					  <div class="col-md-8">
+						<h3 style="text-align: center; color: #006363;">MENU</h3>	
 						<div class="panel-group _restaurant-dishes" id="dishes">				  
 						{% for section in section_list %}
 						  <div class="panel panel-default">
@@ -387,25 +388,25 @@
 									$('#dish-id').val('{{ dish.id }}')
 									save_dish_details_name();
 								  ">
-									  <div class="menu-dish"><span>{{ dish.name }}</span>
+									  <div class="menu-dish"><span class="dishname{{ dish.id }}">{{ dish.name }}</span>
 										
 										  <span class="pull-right" style="font-family: Courier New">
 										  
 		
 										  {% if 'Vegetarian' in dish.categories_json %}
-											<span class="label label-success">Vegetarian</span>
+											<span class="label label-success vegetarian{{ dish.id }}">Vegetarian</span>
 										  {% else %}
-											<span class="label label-default">Vegetarian</span>
+											<span class="label label-default vegetarian{{ dish.id }}">Vegetarian</span>
 										  {% endif %}
 										  {% if 'Vegan' in dish.categories_json %}
-											<span class="label label-info">Vegan</span>
+											<span class="label label-info vegan{{ dish.id }}">Vegan</span>
 										  {% else %}
-											<span class="label label-default">Vegan</span>
+											<span class="label label-default vegan{{ dish.id }}">Vegan</span>
 										  {% endif %}
 										  {% if 'Organic' in dish.categories_json %}
-											<span class="label label-primary">Organic</span>
+											<span class="label label-primary organic{{ dish.id }}">Organic</span>
 										  {% else %}
-											<span class="label label-default">Organic</span>
+											<span class="label label-default organic{{ dish.id }}">Organic</span>
 										  {% endif %}
 										  {% if 'Nutfree' in dish.categories_json %}
 											<span class="label label-warning">Nutfree</span>
@@ -419,6 +420,75 @@
 										  {% endif %}
 										
 										$ {{ dish.price|num_format }}</span>
+										<style>
+										    .vegetarian{{ dish.id }}:hover {
+											background-color: yellow;
+											color: black;
+										    }
+										    .vegan{{ dish.id }}:hover {
+											background-color: yellow;
+											color: black;
+										    }
+										    .organic{{ dish.id }}:hover {
+											background-color: yellow;
+											color: black;
+										    }
+										</style>
+										<script>
+										    $('.vegetarian{{ dish.id }}').click(function () {
+											if ($(this).hasClass('label-default')) {
+											    $(this).removeClass('label-default');
+											    $(this).addClass('label-success');
+											    $.ajax({
+												url: 'save',
+												data: {'dish_id': {{ dish.id }}, 'vegetarian': 1}
+											    });
+											} else {
+											    $(this).addClass('label-default');
+											    $(this).removeClass('label-success');
+											    $.ajax({
+												url: 'save',
+												data: {'dish_id': {{ dish.id }}, 'vegetarian': 0}
+											    });
+											}
+										    });
+										    
+										    $('.vegan{{ dish.id }}').click(function () {
+											if ($(this).hasClass('label-default')) {
+											    $(this).removeClass('label-default');
+											    $(this).addClass('label-info');
+											    $.ajax({
+												url: 'save',
+												data: {'dish_id': {{ dish.id }}, 'vegan': 1}
+											    });
+											} else {
+											    $(this).addClass('label-default');
+											    $(this).removeClass('label-info');
+											    $.ajax({
+												url: 'save',
+												data: {'dish_id': {{ dish.id }}, 'vegan': 0}
+											    });
+											}
+										    });
+										    
+										    $('.organic{{ dish.id }}').click(function () {
+											if ($(this).hasClass('label-default')) {
+											    $(this).removeClass('label-default');
+											    $(this).addClass('label-primary');
+											    $.ajax({
+												url: 'save',
+												data: {'dish_id': {{ dish.id }}, 'organic': 1}
+											    });
+											} else {
+											    $(this).addClass('label-default');
+											    $(this).removeClass('label-primary');
+											    $.ajax({
+												url: 'save',
+												data: {'dish_id': {{ dish.id }}, 'organic': 0}
+											    });
+											}
+										    });
+										</script>
 									  </div>
 								  </div>
 								  {% endfor %}
@@ -442,7 +512,7 @@
 										}
 									</style>
 									<h3 class="noedit-dish-details-name" style="font-size: 18px; margin: 0; line-height: 74px" id="dish-details-name">&nbsp;</h3>
-									<input id="text-dish-details-name" class="edit-dish-details-name form-control" value="" />
+									<input id="text-dish-details-name" style="line-height: 74px; height: 74px; width: inherit;" class="edit-dish-details-name form-control noshow" value="" />
 								    <input id="dish-id" type="hidden" />
 									<script>
 									  function edit_dish_details_name() {
@@ -463,6 +533,7 @@
 											'dish_name': $('#text-dish-details-name').val()
 										  }
 										});
+										$('.dishname' + $('#dish-id').val()).text($('#text-dish-details-name').val());
 										$('#dish-details-name').text($('#text-dish-details-name').val());
 										if($('#text-dish-details-name').val() == '') {
 										  $('#dish-details-name').text('[Dish Name]')
@@ -475,7 +546,7 @@
 							</div>
 						</div>
 						<span style="clear:both; width: 100%; display: block; padding: 10px; border: solid 1px #008b56; font-size: 20px;">
-							Price: $ <span id="dish-details-price">12.56</span>
+							Price: $ <span id="dish-details-price"></span>
 							<br />
 						</span>
 					</div>

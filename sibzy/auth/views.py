@@ -7,6 +7,7 @@ from auth.models import User, UserProfile
 import facebook
 import simplejson as json
 from django.contrib.auth import logout, login, authenticate
+from django.views.decorators.csrf import csrf_exempt
 
 
 def userprofile_processor(request):
@@ -42,6 +43,19 @@ def me_noajax(request):
     return render(request, 'auth_me_noajax.html')
 
 
+@csrf_exempt
+@login_required
+def me_save_noajax(request):
+    vegetarian = int(request.POST['vegetarian'])
+    vegan = int(request.POST['vegan'])
+    organic = int(request.POST['organic'])
+    if vegetarian in (-1, 0, 1) and vegan in (-1, 0, 1):
+        profile = UserProfile.objects.get(user=request.user.id)
+        profile.vegetarian = vegetarian
+        profile.vegan = vegan
+        profile.organic = organic
+        profile.save()
+    return HttpResponseRedirect('/auth/me')
 
 #@login_required
 #def logout_fb(request):

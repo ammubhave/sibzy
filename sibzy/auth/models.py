@@ -11,6 +11,7 @@ User.json = lambda self: json.dumps({
     'fbusername': self.profile().fbusername,
     })
 
+
 class UserProfile(models.Model):
     ''' Stores the profile details of a user '''
 
@@ -26,6 +27,10 @@ class UserProfile(models.Model):
     #: TextField: The short-lived access token of the user so we can make queries from the server
     #: since we cannot trust the client for the user details
     fbaccess_token = models.TextField(blank=True)
+
+    vegetarian = models.IntegerField(default=0)
+    vegan = models.IntegerField(default=0)
+    organic = models.IntegerField(default=0)
 
     # For later
     #dish_category_strong_user = ListField(EmbeddedModelField('DishCategory'), blank=True)

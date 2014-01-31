@@ -3,48 +3,73 @@
 {% block content %}
 
 <div class="container">
-	<div class="row">
-		<div class="col-md-9">
-			
-		</div>
-		<div class="col-md-3">
-			
-			<img class="fb-picture" style="padding: 20px; padding-left: 5px; width: 100px; height: 100px;" alt="100x100" src="http://lorempixel.com/170/170/" />
-			<span class="fb-name"></span>
-			<br />
-		</div>
-	</div>
-	
-	
-	<div class="row clearfix" style="margin-top: 50px; margin-bottom: 50px; border-radius: 5px; border: 2px solid blue; background-color: rgba(105, 105, 179, 0.32); ">
-		<div class="col-md-2 column">
-			
-		</div>
-		<div class="col-md-4 column">
-			
-			<h4><span class="fb-username"></span></h4>
-
-			
-		</div>
-		<div class="col-md-4 column">
-		
-        
-		
-		</div>
-	</div>
-	<div class="row clearfix" style="background-color: rgb(180,200,200); padding: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;">
-        Comments
-    </div>
-    <div id="user-comments" ></div>
-
-			<div class="row _dish-details-comments-entry noshow" style="background: orange; margin: 0 -15px; padding:10px; border-top: solid 2px #A60000" > 
-				<div class="col-md-12 column"> 
-					<span class="pull-right _dish-details-comments-entry-ratingvalue"></span> </br> 
-					<p class="_dish-details-comments-entry-commenttext">Review goes here and it is really good</p>
-				</div>
-			
-			</div>	
-	
+	<h1>{{ profile.fbusername }}</h1>
+	<hr />
+	<form method="POST" action="/auth/me/save">
+	    <h2>Food preferences</h2>
+	    <hr />
+	    <h4>Vegetarian</h4>
+	    <div class="radio-inline">
+		<label>
+		  <input type="radio" name="vegetarian" value="1" {% if profile.vegetarian == 1 %}checked{% endif %}>
+		  Only Vegetarian
+		</label>
+	    </div>
+	    <div class="radio-inline">
+		<label>
+		  <input type="radio" name="vegetarian" value="-1" {% if profile.vegetarian == -1 %}checked{% endif %}>
+		  Only Non-vegetarian
+		</label>
+	    </div>
+	    <div class="radio-inline">
+		<label>
+		  <input type="radio" name="vegetarian" value="0" {% if profile.vegetarian == 0 %}checked{% endif %}>
+		  No preference
+		</label>
+	    </div>
+	    <hr />
+	    <h4>Vegan</h4>
+	    <div class="radio-inline">
+		<label>
+		  <input type="radio" name="vegan" value="1" {% if profile.vegan == 1 %}checked{% endif %}>
+		  Only Vegan
+		</label>
+	    </div>
+	    <div class="radio-inline">
+		<label>
+		  <input type="radio" name="vegan" value="-1" {% if profile.vegan == -1 %}checked{% endif %}>
+		  Only Non-vegan
+		</label>
+	    </div>
+	    <div class="radio-inline">
+		<label>
+		  <input type="radio" name="vegan" value="0" {% if profile.vegan == 0 %}checked{% endif %}>
+		  No preference
+		</label>
+	    </div>
+	    <hr />
+	    <h4>Organic</h4>
+	    <div class="radio-inline">
+		<label>
+		  <input type="radio" name="organic" value="1" {% if profile.organic == 1 %}checked{% endif %}>
+		  Only Organic
+		</label>
+	    </div>
+	    <div class="radio-inline">
+		<label>
+		  <input type="radio" name="organic" value="-1" {% if profile.organic == -1 %}checked{% endif %}>
+		  Only Non-organic
+		</label>
+	    </div>
+	    <div class="radio-inline">
+		<label>
+		  <input type="radio" name="organic" value="0" {% if profile.organic == 0 %}checked{% endif %}>
+		  No preference
+		</label>
+	    </div>
+	    <hr />
+	    <input type="submit" class="btn btn-success" />
+	</form>
 </div>
 
 {% endblock %}

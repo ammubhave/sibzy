@@ -6,11 +6,13 @@ import os
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from restaurant.models import *
+from auth.models import *
 import ujson as json
 import urllib2
 import re
 import contextlib
 import math
+from django.contrib.auth.decorators import login_required
 
 
 # For restaurant owners, let them edit profiles
@@ -46,7 +48,24 @@ def profile_edit_save(request, id):
             dish.name = request.REQUEST['dish_name']
         if 'dish_price' in request.REQUEST:
             dish.price = float(request.REQUEST['dish_price'])
-        #if 'vegetarian' in request.REQUEST and dish.categories.
+        if 'vegetarian' in request.REQUEST:
+            if request.REQUEST['vegetarian'] == '1' and len(dish.categories.filter(name='Vegetarian')) == 0:
+                dish.categories.add(get_object_or_404(DishCategory, name='Vegetarian'))
+            elif request.REQUEST['vegetarian'] == '0' and len(dish.categories.filter(name='Vegetarian')) > 0:
+                dish.categories.remove(get_object_or_404(DishCategory, name='Vegetarian'))
+            dish.categories_json = json.dumps([x.name for x in dish.categories.all()])
+        if 'vegan' in request.REQUEST:
+            if request.REQUEST['vegan'] == '1' and len(dish.categories.filter(name='Vegan')) == 0:
+                dish.categories.add(get_object_or_404(DishCategory, name='Vegan'))
+            elif request.REQUEST['vegan'] == '0' and len(dish.categories.filter(name='Vegan')) > 0:
+                dish.categories.remove(get_object_or_404(DishCategory, name='Vegan'))
+            dish.categories_json = json.dumps([x.name for x in dish.categories.all()])
+        if 'organic' in request.REQUEST:
+            if request.REQUEST['organic'] == '1' and len(dish.categories.filter(name='Organic')) == 0:
+                dish.categories.add(get_object_or_404(DishCategory, name='Organic'))
+            elif request.REQUEST['organic'] == '0' and len(dish.categories.filter(name='Organic')) > 0:
+                dish.categories.remove(get_object_or_404(DishCategory, name='Organic'))
+            dish.categories_json = json.dumps([x.name for x in dish.categories.all()])
         dish.save();
 
     restaurant.save();
@@ -227,6 +246,7 @@ def profile(request, restaurant_id):
     return response
 
 
+@login_required
 def profile_noajax(request, restaurant_id):
     ''' Return the restaurant profile page corresponsing to restaurant_id
 
@@ -247,19 +267,23 @@ def profile_noajax(request, restaurant_id):
     RestaurantRating.total_display_negative = property(lambda self: 24*(5-int(math.ceil(self.total))))
     #print restaurant.rating.total_display
     #restaurant.rating['total_display']
-    
+
     #for dish in Dish.objects.all():
     #    dish.section_json = json.dumps({'id': dish.section.id, 'name': dish.section.name})
     #    dish.save()
 
-
     dishes_all = restaurant.dishes.all()
 
-
+    profile = UserProfile.objects.get(user=request.user.id)
     for dish in dishes_all:
         if dish.categories_json == None: dish.categories_json = '[]'
         dish.categories_json = json.loads(str(dish.categories_json))
         dish.section_json = json.loads(str(dish.section_json))
+
+        if not ((profile.vegetarian == 0) or (profile.vegetarian == 1 and 'Vegetarian' in dish.categories_json) or (profile.vegetarian == -1 and 'Vegetarian' not in dish.categories_json)):
+            dish.name = ''
+        if not ((profile.vegan == 0) or (profile.vegan == 1 and 'Vegan' in dish.categories_json) or (profile.vegan == -1 and 'Vegan' not in dish.categories_json)):
+            dish.name = ''
 
     Restaurant.dishes_all = property(lambda self: dishes_all)
 
