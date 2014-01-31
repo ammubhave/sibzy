@@ -201,6 +201,8 @@ def populateFromGrubhub():
 
                 dish = Dish(name = dish[0], tag = dish[0], price = dish[1].rstrip('+'), section=categ )
                 #dish = Dish(name = dish[0], tag = dish[0], price = dish[1].rstrip('+'), vegetarian = len(dish[0])%2, vegan = len(dish[0])%2, gluten = len(dish[0])%2 )
+                dish.section_json = json.dumps({'id': categ.id, 'name': categ.name})
+                dish.categories_json = '[]'
                 dish.save()
 
                 sampledishlist.append(dish)
@@ -222,6 +224,8 @@ def populateFromGrubhub():
             # print name.group(1)
             for dish in sampledishlist:
                 cool.dishes.add(dish)
+
+            cool.json = ''
             cool.save()
     return HttpResponse("Cambridge scraping finished")
 
