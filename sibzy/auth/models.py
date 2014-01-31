@@ -31,6 +31,8 @@ class UserProfile(models.Model):
     vegetarian = models.IntegerField(default=0)
     vegan = models.IntegerField(default=0)
     organic = models.IntegerField(default=0)
+    nutfree = models.IntegerField(default=0)
+    glutenfree = models.IntegerField(default=0)
 
     # For later
     #dish_category_strong_user = ListField(EmbeddedModelField('DishCategory'), blank=True)

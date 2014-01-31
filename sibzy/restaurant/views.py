@@ -66,6 +66,18 @@ def profile_edit_save(request, id):
             elif request.REQUEST['organic'] == '0' and len(dish.categories.filter(name='Organic')) > 0:
                 dish.categories.remove(get_object_or_404(DishCategory, name='Organic'))
             dish.categories_json = json.dumps([x.name for x in dish.categories.all()])
+        if 'nutfree' in request.REQUEST:
+            if request.REQUEST['nutfree'] == '1' and len(dish.categories.filter(name='Nutfree')) == 0:
+                dish.categories.add(get_object_or_404(DishCategory, name='Nutfree'))
+            elif request.REQUEST['nutfree'] == '0' and len(dish.categories.filter(name='Nutfree')) > 0:
+                dish.categories.remove(get_object_or_404(DishCategory, name='Nutfree'))
+            dish.categories_json = json.dumps([x.name for x in dish.categories.all()])
+        if 'glutenfree' in request.REQUEST:
+            if request.REQUEST['glutenfree'] == '1' and len(dish.categories.filter(name='Glutenfree')) == 0:
+                dish.categories.add(get_object_or_404(DishCategory, name='Glutenfree'))
+            elif request.REQUEST['glutenfree'] == '0' and len(dish.categories.filter(name='Glutenfree')) > 0:
+                dish.categories.remove(get_object_or_404(DishCategory, name='Glutenfree'))
+            dish.categories_json = json.dumps([x.name for x in dish.categories.all()])
         dish.save();
 
     restaurant.save();

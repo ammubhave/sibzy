@@ -409,14 +409,14 @@
 											<span class="label label-default organic{{ dish.id }}">Organic</span>
 										  {% endif %}
 										  {% if 'Nutfree' in dish.categories_json %}
-											<span class="label label-warning">Nutfree</span>
+											<span class="label label-warning nutfree{{ dish.id }}">Nutfree</span>
 										  {% else %}
-											<span class="label label-default">Nutfree</span>
+											<span class="label label-default nutfree{{ dish.id }}">Nutfree</span>
 										  {% endif %}
-										  {% if 'GlutenFree' in dish.categories_json %}
-											<span class="label label-danger">Glutenfree</span>
+										  {% if 'Glutenfree' in dish.categories_json %}
+											<span class="label label-danger glutenfree{{ dish.id }}">Glutenfree</span>
 										  {% else %}
-											<span class="label label-default">Glutenfree</span>
+											<span class="label label-default glutenfree{{ dish.id }}">Glutenfree</span>
 										  {% endif %}
 										
 										$ {{ dish.price|num_format }}</span>
@@ -430,6 +430,14 @@
 											color: black;
 										    }
 										    .organic{{ dish.id }}:hover {
+											background-color: yellow;
+											color: black;
+										    }
+										    .nutfree{{ dish.id }}:hover {
+											background-color: yellow;
+											color: black;
+										    }
+										    .glutenfree{{ dish.id }}:hover {
 											background-color: yellow;
 											color: black;
 										    }
@@ -485,6 +493,42 @@
 											    $.ajax({
 												url: 'save',
 												data: {'dish_id': {{ dish.id }}, 'organic': 0}
+											    });
+											}
+										    });
+										    
+										    $('.nutfree{{ dish.id }}').click(function () {
+											if ($(this).hasClass('label-default')) {
+											    $(this).removeClass('label-default');
+											    $(this).addClass('label-warning');
+											    $.ajax({
+												url: 'save',
+												data: {'dish_id': {{ dish.id }}, 'nutfree': 1}
+											    });
+											} else {
+											    $(this).addClass('label-default');
+											    $(this).removeClass('label-warning');
+											    $.ajax({
+												url: 'save',
+												data: {'dish_id': {{ dish.id }}, 'nutfree': 0}
+											    });
+											}
+										    });
+										    
+										    $('.glutenfree{{ dish.id }}').click(function () {
+											if ($(this).hasClass('label-default')) {
+											    $(this).removeClass('label-default');
+											    $(this).addClass('label-danger');
+											    $.ajax({
+												url: 'save',
+												data: {'dish_id': {{ dish.id }}, 'glutenfree': 1}
+											    });
+											} else {
+											    $(this).addClass('label-default');
+											    $(this).removeClass('label-danger');
+											    $.ajax({
+												url: 'save',
+												data: {'dish_id': {{ dish.id }}, 'glutenfree': 0}
 											    });
 											}
 										    });
