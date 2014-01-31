@@ -6,6 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'frontend.views.load_template', {'template_path': 'home_noajax'}),
+    
 
     # All Static pages
     url(r'^load/home$', 'frontend.views.load_template', {'template_path': 'home_noajax'}),

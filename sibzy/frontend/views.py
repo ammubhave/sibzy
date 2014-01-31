@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.conf import settings
 
+
 def load_template(request, template_path):
     ''' Render the static template <template_path>.html
 
@@ -11,5 +12,5 @@ def load_template(request, template_path):
         The contents of the file <template_path.html> rendered
     '''
     if not request.user.is_staff and not settings.DEBUG:
-        return render(request, 'temp_landing.html')
+        return render(request, 'landing.html')
     return render(request, template_path + '.html')
