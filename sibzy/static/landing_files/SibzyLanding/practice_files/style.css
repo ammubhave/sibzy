@@ -1,0 +1,156 @@
+body {
+    background:#F4F5F6;
+    font-family:'omnes-pro', 'helvetica', sans-serif;
+    text-align:center;  
+    margin:0;
+}
+
+ul {
+    float:left;
+    list-style:none;
+    padding-left: 50px;
+}
+
+#logo {
+    opacity:0;
+    padding-top:25px;
+}
+
+h1 {
+    font-size:2em;
+    font-weight:200;
+    color:#FFFFFF;
+    margin-bottom:1.2em;
+    margin-top:1.2em;
+}
+
+#iframe {
+    width:550px;
+    height:309px;
+    box-shadow: inset 5px;
+    z-index:2;
+}
+
+.playButton {
+    display:block;
+    background-image: url('../practice_files/logo_orange-light.jpg');
+    background-attachment:fixed;
+    background-position:center;
+    height:500px;
+    background-size: 100%;
+
+}
+.playButton:hover {
+    background-image: url('../practice_files/logo_orange-hover.jpg');
+}
+
+
+/*
+#mask {
+    width:540px;
+    height:299px;
+    position:absolute;
+    border:7px solid #B884BA;
+    border-radius:5px;
+}
+*/
+#video {
+    margin:auto;
+    height:500px;
+    border-radius:5px;
+    line-height:1.5em;
+    width:550px;
+
+}
+
+#container {
+    opacity:0;
+    margin-top:1.0em;
+    padding-top:1em;
+    padding-bottom:1em;
+    background:#B884BA;
+    font-size:1em;
+    font-weight:300;
+    color:#FFFFFF;
+    resize:both;
+    text-align:center;
+    display:block;
+}
+footer {
+    margin-top:1em;
+    font-family:'omnes-pro', 'helvetica', sans-serif;
+    text-align:center;
+    color:#555555;
+    font-size:1em;
+}
+#sibzyTag {
+    margin-bottom: 5px;
+}
+
+/*
+#mask {
+    width:540px;
+    height:299px;
+    position:absolute;
+    border:7px solid #B884BA;
+    border-radius:5px;
+}
+*/
+#video {
+	margin:auto;
+    height:500px;
+    border-radius:5px;
+    line-height:1.5em;
+    width:550px;
+
+}
+
+#container {
+    opacity:0;
+    margin-top:1.0em;
+    padding-top:1em;
+    padding-bottom:1em;
+    background:#B884BA;
+    font-size:1em;
+    font-weight:300;
+    color:#FFFFFF;
+    resize:both;
+    text-align:center;
+    display:block;
+}
+
+.orange-bg {
+    background-color: #F2721B
+}
+
+a.contact:link {
+    opacity:0;
+    color:#999;
+    background-color:transparent;
+    text-decoration:none;
+    font-weight:300;
+}
+a.contact:visited {
+    color:#999;
+    background-color:transparent;
+    text-decoration:none;
+}
+
+a.contact:hover{
+    position: relative;
+    top: -3px;
+    color: #111;
+}
+
+#c1{
+    width:27%;
+    float: left;
+}
+#c2{
+    width: 27%;
+    display: inline-block;
+}
+#c3{
+    width:27%;
+    float:right;
+}
