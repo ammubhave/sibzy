@@ -1,7 +1,7 @@
 var me;
 
 function updateLoginStatus(response) {
-  
+  return;
   // Here we specify what we do with the response anytime this event occurs. 
   if (response.status === 'connected') {
     
