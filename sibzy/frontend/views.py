@@ -12,5 +12,6 @@ def load_template(request, template_path):
         The contents of the file <template_path.html> rendered
     '''
     if not request.user.is_staff and not settings.DEBUG:
-        return render(request, 'landing.html')
+    	return render(request, 'SibzyLanding/sibzy_template.htm')
+        #return render(request, 'landing.html')
     return render(request, template_path + '.html')
