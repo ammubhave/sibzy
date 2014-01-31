@@ -195,7 +195,7 @@
 		  $('#head-restaurant-name').val('Restaurant Administration: ' + $('#text-restaurant-name').val());
 		  $('#restaurant-name').click(edit_restaurant_name);
 		};
-		save_restaurant_name();
+		//save_restaurant_name();
 		
 		
 		edit_restaurant_description = function() {
@@ -233,12 +233,12 @@
 					<div class="col-md-12" style=" padding: 0">
 					  <style>
 						#restaurant-name:hover {
-						  background-color: #FFE900;
+						  /*background-color: #FFE900;*/
 						}
 					  </style>
 					  <h1 style="color: #008b56; font-size: 24px; margin: 0"><a href="http://lorempixel.com/500/500/" class="lightbox" style="margin-right: 20px;"><img alt="75x75" src="http://lorempixel.com/75/75/" /></a>
 						<span id="restaurant-name" class="restaurant-name noedit-restaurant-name">{{ restaurant.name }}</span>
-						<input style="width: 500px" id="text-restaurant-name" class="form-control edit-restaurant-name" value="{{ restaurant.name }}" />
+						<input style="width: 500px" id="text-restaurant-name" class="noshow form-control edit-restaurant-name" value="{{ restaurant.name }}" />
 					  </h1>
 					</div>					
 				  </div>
@@ -257,7 +257,7 @@
 						}
 					  </style>
 					  <div class="noedit-restaurant-description" id="restaurant-description">{{ restaurant.description }}</div>
-					  <textarea class="edit-restaurant-description form-control" id="text-restaurant-description">{{ restaurant.description }}</textarea>
+					  <textarea class="noshow edit-restaurant-description form-control" id="text-restaurant-description">{{ restaurant.description }}</textarea>
 					</div>
 				  </div>
 				</div>
