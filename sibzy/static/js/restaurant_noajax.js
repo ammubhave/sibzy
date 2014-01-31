@@ -3,6 +3,17 @@ var restaurant = {};
 var comments_xhr = null;
 function load_comments(id) {
     $('#dish-details-comments').html('');
+    $('#dishes-comments-text').val('');
+    $('#review').css('background-color', '#F0F2FF');
+    rate = 3;
+    for (var j=1; j<=rate;j++) {
+	$('#rate'+j).removeClass('glyphicon-star-empty');
+	$('#rate'+j).addClass('glyphicon-star');
+    }
+    for (var j=rate+1; j<=5;j++) {
+	$('#rate'+j).removeClass('glyphicon-star');
+	$('#rate'+j).addClass('glyphicon-star-empty');
+    }    
     if (comments_xhr) {
 	comments_xhr.abort();
 	comments_xhr = null;
