@@ -258,7 +258,7 @@ body {
   font-family: "DIN Web", sans-serif;
   font-size: 15px;
   line-height: 1.333333333;
-  color: #f2f4f7;
+  color: #f2f4f72;
   background-color: #141c26;
 }
 input,
@@ -6804,5 +6804,5 @@ input.parsley-error {
 
 
 .orange-bg {
-    background-color: #F2721B
+    background-color: #F06e00
 }
