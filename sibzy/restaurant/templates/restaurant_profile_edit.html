@@ -238,6 +238,7 @@
 				</div>
 				<div class="row clearfix">
 				    <div class="col-md-6">
+					{% if user.is_staff %}&lt; <a target="_blank" href="/admin/restaurant/location/{{ restaurant.location.id }}">Edit Address</a> &gt;{% endif %}
 					<address>
 					    <span class="restaurant-location-address">{{ restaurant.location.address }}</span><br />
 					    <span class="restaurant-location-city">{{ restaurant.location.city }}</span>, <span class="restaurant-location-state">{{ restaurant.state.name }}</span> <span class="restaurant-location-zip">{{ restaurant.location.zipcode }}</span><br />

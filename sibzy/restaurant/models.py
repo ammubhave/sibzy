@@ -113,7 +113,7 @@ class Location(models.Model):
     longitude = models.DecimalField(db_index=True, max_digits=14, decimal_places=10)
 
     #: TextField: Location street address, does not include city, state or country
-    address = models.TextField()
+    address = models.TextField(blank=True)
 
     #: :py:class:`restaurant.models.City`: Location city
     city = models.ForeignKey('City')
