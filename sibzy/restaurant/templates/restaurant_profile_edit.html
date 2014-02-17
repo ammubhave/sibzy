@@ -365,16 +365,20 @@
 									$('#dish-details-name').text($('.dishname{{ dish.id }}').text());
 									$('#text-dish-details-name').val($('.dishname{{ dish.id }}').text());
 									
+									$('#dish-details-price').text($('.dishprice{{ dish.id }}').text());
+									$('#text-dish-details-price').val($('.dishprice{{ dish.id }}').text());
+									
 									if ($('#dish-details-name').text().length > 37) {
 									  $('#dish-details-name').css('line-height', '37px');
 									} else {
 									  $('#dish-details-name').css('line-height', '74px');
 									}
 									/*$('#dish-details-description').text('{{ dish.description }}');*/
-									$('#dish-details-price').text('{{ dish.price }}');
+									
 									$('#dish-id').val('{{ dish.id }}')
 									
-									save_dish_details_name();
+									save_dish_details_name();									
+									save_dish_details_price();
 								    ">
 									<div class="menu-dish">
 									    <span class="dishname{{ dish.id }}">{{ dish.name }}</span>
@@ -633,8 +637,8 @@
 										$('.edit-dish-details-price').css('display', 'inline-block');
 										
 										$('#text-dish-details-price').focus();
-										$('#text-dish-details-price').blur(save_dish_details_name);
-									.  }
+										$('#text-dish-details-price').blur(save_dish_details_price);
+									  }
 									  function save_dish_details_price() {
 										$('.noedit-dish-details-price').show();
 										$('.edit-dish-details-price').hide();
@@ -655,6 +659,7 @@
 									  }
 							</script>
 							Price: $ <span class="noedit-dish-details-price" id="dish-details-price"></span>
+							<input id="text-dish-details-price" style="width: 100px;" class="edit-dish-details-price form-control noshow" value="" />
 							<br />
 						</span>
 					</div>
