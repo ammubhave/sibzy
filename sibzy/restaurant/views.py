@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import os
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from restaurant.models import *
 from auth.models import *
 import ujson as json
@@ -15,6 +15,14 @@ import math
 from django.contrib.auth.decorators import login_required
 
 
+def profile_edit_new(request):
+    restaurant_rating = RestaurantRating.objects.create(total=0, vegetarian=0, vegan=0, glutenfree=0, peanutfree=0, lactoseint=0, seafoodint=0)
+    location = Location.objects.create(latitude=0, longitude=0, city=City.objects.get(name='Cambridge'), state=State.objects.get(name='Massachusetts'), country=Country.objects.get(name='United States'))
+    restaurant = Restaurant.objects.create(location=location, rating=restaurant_rating)
+
+    return HttpResponseRedirect('/!/edit/' + str(restaurant.id) + '/edit')
+
+
 # For restaurant owners, let them edit profiles
 def profile_edit(request, id):
     restaurant = get_object_or_404(Restaurant, id=id)
@@ -23,7 +31,10 @@ def profile_edit(request, id):
 
     for dish in dishes_all:
         dish.categories_json = json.loads(str(dish.categories_json))
-        dish.section_json = json.loads(str(dish.section_json))
+        if str(dish.section_json) == '':
+            dish.section_json = []
+        else:
+            dish.section_json = json.loads(str(dish.section_json))
 
     Restaurant.dishes_all = property(lambda self: dishes_all)
 
@@ -79,8 +90,20 @@ def profile_edit_save(request, id):
                 dish.categories.remove(get_object_or_404(DishCategory, name='Glutenfree'))
             dish.categories_json = json.dumps([x.name for x in dish.categories.all()])
         dish.save();
+    if 'new_section' in request.REQUEST:
+        section = DishCategory.objects.create(name=request.REQUEST['new_section'])
+        dish = Dish.objects.create(name='New Dish', section=section, price=0, categories_json='[]')
+        dish.section_json = json.dumps({'id': section.id, 'name': section.name})
+        dish.serialize()
+        restaurant.dishes.add(dish)
+    if 'new_dish' in request.REQUEST:
+        section = DishCategory.objects.get(id=int(request.REQUEST['section']))
+        dish = Dish.objects.create(name=request.REQUEST['new_dish'], section=section, price=0, categories_json='[]')
+        dish.section_json = json.dumps({'id': section.id, 'name': section.name})
+        dish.serialize()
+        restaurant.dishes.add(dish)
 
-    restaurant.save();
+    restaurant.save()
     return HttpResponse("{'status': 'success'}");
 
 # initialize database

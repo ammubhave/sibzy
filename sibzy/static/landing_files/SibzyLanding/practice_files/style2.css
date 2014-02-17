@@ -3330,6 +3330,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .input-group-btn > .btn:active {
   z-index: 2;
 }
+
+
 .nav {
   margin-bottom: 0;
   padding-left: 0;
@@ -3352,6 +3354,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
   display: table;
   /* 2 */
 }
+
+
 .nav:after {
   clear: both;
 }
@@ -6803,6 +6807,3 @@ input.parsley-error {
 }
 
 
-.orange-bg {
-    background-color: #F06e00
-}

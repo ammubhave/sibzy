@@ -1,228 +1,97 @@
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>Sibzy Alpha</title>
-	<meta name="description" content="Sibzy">
+    <meta charset="utf-8">
+    <title>Sibzy Alpha</title>
+    <meta name="description" content="Sibzy">
     <meta name="google-site-verification" content="Ng7eN5Ek6stT6CDfCGy0-7WFs9zxdbzej5mWKPZYWuw" />
-	<meta name="author" content="Sibzy">
 
-	<!--
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-	<script src="js/bootstrap.min.js"></script>
-    <script src="/static/js/jquery-1.6.1.min.js"></script>
-    -->
-    
+
+    <!-- Scripts -->
     <script>
+	// Initialization code
 	var user_id = '{{ user.id }}';
-    </script>
-    
-	<script src="http://codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="/static/js/init.js"></script>
-	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
-	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
-	<script>
-	    {% if user.is_authenticated %}
-	    var server_status = true;
-	    {% else %}
-	    var server_status = false;
-	    {% endif %}
-	</script>
+	
+	// Server login status
+	{% if user.is_authenticated %}
+	var server_status = true;
+	{% else %}
+	var server_status = false;
+        {% endif %}
+    </script>    
+    <script src="/static/js/jquery-1.11.0.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAz1kIQZGS8LeLJ4rFp7t3O9kAVRaHSHs0&sensor=true"></script>
     <script src="/static/js/fblogin.js"></script>
-	<script src="/static/js/sibzy_noajax.js"></script>
+    <script src="/static/js/sibzy_noajax.js"></script>
+    <script src="/static/js/bootstrap-tour.js"></script>
+
+
+    <!-- Stylesheets -->
+
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/static/css/sibzy.css" />
-	<script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAz1kIQZGS8LeLJ4rFp7t3O9kAVRaHSHs0&sensor=true">
-    </script>
-
-
-	<style type="text/css">
-		html {
-			height: 100%;
-			overflow: scroll;
-			overflow-x: hidden;
-		}
-		
-		body {
-			background-color: #f0f0f0;
-		}
-
-       .facebook 
-        { 
-            font-size: 10;
-        }
-		
-		.navbar {
-  background-color: #00ac6b;
-  border-color: #008b56;
-}
-.navbar .navbar-brand {
-  color: #ffffff;
-}
-.navbar .navbar-brand:hover,
-.navbar .navbar-brand:focus {
-  color: #e6e6e6;
-  background-color: transparent;
-}
-.navbar .navbar-text {
-  color: #ffffff;
-}
-.navbar .navbar-nav > li:last-child > a {
-  border-right: 1px solid #008b56;
-}
-.navbar .navbar-nav > li > a {
-  color: #ffffff;
-  border-left: 1px solid #008b56;
-}
-.navbar .navbar-nav > li > a:hover,
-.navbar .navbar-nav > li > a:focus {
-  color: #007046;
-  background-color: transparent;
-}
-.navbar .navbar-nav > .active > a,
-.navbar .navbar-nav > .active > a:hover,
-.navbar .navbar-nav > .active > a:focus {
-  color: #007046;
-  background-color: #008b56;
-}
-.navbar .navbar-nav > .disabled > a,
-.navbar .navbar-nav > .disabled > a:hover,
-.navbar .navbar-nav > .disabled > a:focus {
-  color: #cccccc;
-  background-color: transparent;
-}
-.navbar .navbar-toggle {
-  border-color: #dddddd;
-}
-.navbar .navbar-toggle:hover,
-.navbar .navbar-toggle:focus {
-  background-color: #dddddd;
-}
-.navbar .navbar-toggle .icon-bar {
-  background-color: #cccccc;
-}
-.navbar .navbar-collapse,
-.navbar .navbar-form {
-  border-color: #008855;
-}
-.navbar .navbar-nav > .dropdown > a:hover .caret,
-.navbar .navbar-nav > .dropdown > a:focus .caret {
-  border-top-color: #007046;
-  border-bottom-color: #007046;
-}
-.navbar .navbar-nav > .open > a,
-.navbar .navbar-nav > .open > a:hover,
-.navbar .navbar-nav > .open > a:focus {
-  background-color: #008b56;
-  color: #007046;
-}
-.navbar .navbar-nav > .open > a .caret,
-.navbar .navbar-nav > .open > a:hover .caret,
-.navbar .navbar-nav > .open > a:focus .caret {
-  border-top-color: #007046;
-  border-bottom-color: #007046;
-}
-.navbar .navbar-nav > .dropdown > a .caret {
-  border-top-color: #ffffff;
-  border-bottom-color: #ffffff;
-}
-@media (max-width: 767) {
-  .navbar .navbar-nav .open .dropdown-menu > li > a {
-    color: #ffffff;
-  }
-  .navbar .navbar-nav .open .dropdown-menu > li > a:hover,
-  .navbar .navbar-nav .open .dropdown-menu > li > a:focus {
-    color: #007046;
-    background-color: transparent;
-  }
-  .navbar .navbar-nav .open .dropdown-menu > .active > a,
-  .navbar .navbar-nav .open .dropdown-menu > .active > a:hover,
-  .navbar .navbar-nav .open .dropdown-menu > .active > a:focus {
-    color: #007046;
-    background-color: #008b56;
-  }
-  .navbar .navbar-nav .open .dropdown-menu > .disabled > a,
-  .navbar .navbar-nav .open .dropdown-menu > .disabled > a:hover,
-  .navbar .navbar-nav .open .dropdown-menu > .disabled > a:focus {
-    color: #cccccc;
-    background-color: transparent;
-  }
-}
-.navbar .navbar-link {
-  color: #ffffff;
-}
-.navbar .navbar-link:hover {
-  color: #007046;
-}
-		
-	</style>
-
     <link href="/static/css/bootstrap-tour.css" rel="stylesheet">
-
 </head>
 <body>
-    <script src="/static/js/bootstrap-tour.js"></script>
+   
     <div id="fb-root"></div>
-	<div style="width: 100%; height: 51px; width: 100%;height: 51px; background-color: #00ac6b; z-index: 99; border-bottom: solid 1px #008b56; top: 0; position: fixed;">
-		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="width: 910px; margin: 0 auto;">
-			<div class="navbar-header"> 
-				<a class="navbar-brand" href="/">
-					<span style="">Sibzy <sup>&alpha;</sup></span>
-				</a>
-			</div> 
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				
-				<form class="navbar-form navbar-left" role="search">
-					<div class="form-group" style="width: 500px;">
-						<input type="text" id="txtSearch" style="border-top-right-radius: 0;border-bottom-right-radius: 0; width: 400px;border-color: #007339; background-color: #228653; color: white; font-weight: 900" class="form-control" placeholder="Search">
-						<button style="margin-left: -4px; border-top-left-radius: 0; border-bottom-left-radius: 0" class="btn btn-success" onclick="window.location = '/search/q/' + encodeURIComponent($('#txtSearch').val()); return false;"><i class="glyphicon glyphicon-search"></i></button>
-					</div>
-				</form>
-				<script>
-					$('#txtSearch').keyup(function (e) {
-      var code = (e.keyCode ? e.keyCode : e.which);
-      if(code == 13) {
-        window.location = '/search/q/' + encodeURIComponent($('#txtSearch').val());
-      }
-      return false;
-    });
-				</script>
-		
-				<ul class="nav navbar-nav navbar-right">
-				    {% if not user.is_authenticated %}
-					<li class="fb-nologin">
-						<a href="#" style="padding: 15px 15px;" onclick="FB.login()"><img src="http://static.sticksports.com/images/fb_login_20121126.jpg" /></a>
-					</li>
-				    {% else %}
-					<li style="line-height: 50px; color:white;" class="fb-login">
-						<a href="/auth/me"><span class="fb-name">{{ profile.fbusername }}</span></a>
-					</li>
-					<li class="dropdown fb-login">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
-						   <i class="glyphicon glyphicon-cog"></i>
-						</a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header">
-								<div class="fb-login">
-									<span class="fb-username"></span>
-								</div>
-							</li>
-							<li><a href="/auth/me">My Account</a></li>				 
-							<li class="divider"></li>
-							<li><a href="/auth/logout" onclick="FB.logout();">Logout</a></li>
-						</ul>
-					</li>
-				    {% endif %}
-				</ul>
-			</div>
-		</nav>
-	</div>
+    <div style="width: 100%; height: 51px; width: 100%;height: 51px; background-color: #00ac6b; z-index: 99; border-bottom: solid 1px #008b56; top: 0; position: fixed;">
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="width: 1140px; margin: 0 auto;">
+	    <div class="navbar-header"> 
+		<a class="navbar-brand" href="/">
+		    <span style="">Sibzy <sup>&beta;</sup></span>
+		</a>
+	    </div> 
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		{% if user.is_authenticated %}
+		<form class="navbar-form navbar-left" role="search">
+		    <div class="form-group" style="width: 662px;">
+			<input type="text" id="txtSearch" style="border-top-right-radius: 0;border-bottom-right-radius: 0; width: 622px;border-color: #007339; background-color: #228653; color: white; font-weight: 900" class="form-control" placeholder="Search">
+			<button style="margin-left: -4px; border-top-left-radius: 0; border-bottom-left-radius: 0" class="btn btn-success" onclick="window.location = '/search/q/' + encodeURIComponent($('#txtSearch').val()); return false;"><i class="glyphicon glyphicon-search"></i></button>
+		    </div>
+		</form>
+		{% else %}
+		<a class="navbar-brand" href="/" style="width: 900px;">Signup for beta phase now!</a>
+		{% endif %}
+		<ul class="nav navbar-nav navbar-right">
+		    {% if not user.is_authenticated %}
+			<li class="fb-nologin">
+			    <a href="#" style="padding: 15px 15px;" onclick="FB.login()"><img src="http://static.sticksports.com/images/fb_login_20121126.jpg" /></a>
+			</li>
+		    {% else %}
+			<li style="line-height: 50px; color:white;" class="fb-login">
+			    <a href="/auth/me" style="padding: 0"><img src="https://graph.facebook.com/{{ profile.fbusername }}/picture?type=square" /></a>
+			</li>
+			<li style="line-height: 50px; color:white;" class="fb-login">
+			    <a href="/auth/me"><span class="fb-name">{{ profile.fbusername }}</span></a>
+			</li>
+			<li class="dropdown fb-login">
+			    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+				<i class="glyphicon glyphicon-cog"></i>
+			    </a>
+			    <ul class="dropdown-menu">
+				<li class="dropdown-header">
+				    <div class="fb-login">
+					<span class="fb-username">{{ profile.fbusername }}</span>
+				    </div>
+				</li>
+				<li><a href="/auth/me">My Account</a></li>				 
+				<li class="divider"></li>
+				<li><a href="/auth/logout" onclick="FB.logout();">Logout</a></li>
+			    </ul>
+			</li>
+		    {% endif %}
+		</ul>
+	    </div>
+	</nav>
+    </div>
     
-	<div id="content_parent" style="background-color: white; margin: 20px; margin-top: 70px; padding: 20px;">
-        <div id="content">
-			{% block content %}
-			{% endblock %}
-        </div>
+    <div id="content_parent" style="background-color: white; margin: 20px; margin-top: 70px; padding: 20px;">
+	<div id="content">
+	    {% block content %}
+	    {% endblock %}
+	</div>
     </div>
 </body>
 </html>

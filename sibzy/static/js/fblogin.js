@@ -1,7 +1,7 @@
 var me;
 
 function updateLoginStatus(response) {
-  return;
+  console.log(response.status);
   // Here we specify what we do with the response anytime this event occurs. 
   if (response.status === 'connected') {
     
@@ -11,14 +11,9 @@ function updateLoginStatus(response) {
         url: '/!/auth/login/fb',
         data: { 'access_token': response.authResponse.accessToken },
         dataType: 'json',
-        success: function (response) {
-          if (response.status == 'success') {
-            // We are logged in on the server. Reload the page.
-            document.location.reload();
-          } else {
-            // Server authentication was not successful. Alert the user.
-            alert('Server authentication failed. Code: 1');
-          }
+        success: function (response) {          
+          // We are logged in on the server. Reload the page.
+          document.location.reload();
         }
       })
     }

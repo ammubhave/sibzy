@@ -42,9 +42,15 @@ if (navigator.geolocation && getCookie('lat') === null) {
 }
 
 $(function () {
-    
-    
     $.ajaxSetup({
         headers: { 'X-CSRFToken': getCookie('csrftoken') }
-    }); 
+    });
+    
+    $('#txtSearch').keyup(function (e) {
+	var code = (e.keyCode ? e.keyCode : e.which);
+	if(code == 13) {
+	  window.location = '/search/q/' + encodeURIComponent($('#txtSearch').val());
+	}
+	return false;
+    });
 });

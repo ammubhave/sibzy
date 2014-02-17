@@ -171,13 +171,13 @@
 				  <div class="panel panel-default">
 					<div class="panel-heading">
 					  <h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#dishes" href="#collapseAppetizers">
+						<a data-toggle="collapse" data-parent="#dishes" href="#collapse{{ section.grouper.id }}">
 						  {{ section.grouper.name }}
 						</a>
 					  </h4>
 					</div>
 	
-					<div id="collapseAppetizers" class="panel-collapse collapse">
+					<div id="collapse{{ section.grouper.id }}" class="panel-collapse collapse">
 						<div class="panel-body" id="panelAppetizers" style="height: 400px; overflow-y: scroll">
 						  {% for dish in section.list %}
 						    {% if dish.name != '' %}
@@ -230,10 +230,11 @@
 						  </div>
 						    {% endif %}
 						  {% endfor %}
+						  </div>
 					</div>	
 				  </div>
 				{% endfor %}
-				</div>
+				
 			  </div>
 			</div>
 			<div class="col-md-4">
