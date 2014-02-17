@@ -360,6 +360,7 @@
 								{% for dish in section.list %}
 								    <div style="text-decoration:none; border-radius: 5px;" onclick="
 									$('#dishinfo').show();
+									$('#right-dish-details').show();
 									$('#dish-details-name').text($('.dishname{{ dish.id }}').text());
 									$('#text-dish-details-name').val($('.dishname{{ dish.id }}').text());
 									
@@ -371,6 +372,7 @@
 									/*$('#dish-details-description').text('{{ dish.description }}');*/
 									$('#dish-details-price').text('{{ dish.price }}');
 									$('#dish-id').val('{{ dish.id }}')
+									
 									save_dish_details_name();
 								    ">
 									<div class="menu-dish">
@@ -570,7 +572,14 @@
 					    </div>
 					</div>
 					
-					<div class="col-md-4">					  
+					<div class="col-md-4" style="display: none;" id="right-dish-details">
+						<div class="btn btn-danger" style="text-align: center; width: 100%" onclick="$.ajax({
+												    url: 'delete',
+												    data: {'dish_id': $('#dish-id').val()},
+												    success: function (data) { location.reload(); }
+												});">
+						    Delete
+						</div>
 						<div id="dish" style="color: black; border: solid 1px #008b56;">
 							<div style="background-color: #ECECFF;">
 								<div id="dishinfo" style="display: block; background-color: #00ac6b; padding: 0; color: white;  border-bottom: solid 1px #008b56;">
@@ -624,7 +633,7 @@
 										
 										$('#text-dish-details-price').focus();
 										$('#text-dish-details-price').blur(save_dish_details_name);
-									  }
+									.  }
 									  function save_dish_details_price() {
 										$('.noedit-dish-details-price').show();
 										$('.edit-dish-details-price').hide();

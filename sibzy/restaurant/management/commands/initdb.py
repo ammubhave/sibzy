@@ -90,3 +90,20 @@ class Command(NoArgsCommand):
                 #if len(City.objects.filter(name='Lexington')) == 0:
                 #    lexington = City(name='Lexington', state=state)
                 #    lexington.save()
+                
+        print '--- Dish Categories ---'
+        if len(DishCategories.objects.filter(name='Vegetarian')) == 0:
+            cat = DishCategory(name='Vegetarian')
+            cat.save()
+        if len(DishCategories.objects.filter(name='Vegan')) == 0:
+            cat = DishCategory(name='Vegan')
+            cat.save()
+        if len(DishCategories.objects.filter(name='Organic')) == 0:
+            cat = DishCategory(name='Organic')
+            cat.save()
+        if len(DishCategories.objects.filter(name='Nutfree')) == 0:
+            cat = DishCategory(name='Nutfree')
+            cat.save()
+        if len(DishCategories.objects.filter(name='Glutenfree')) == 0:
+            cat = DishCategory(name='Glutenfree')
+            cat.save()
