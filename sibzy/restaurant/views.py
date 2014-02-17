@@ -5,6 +5,8 @@ from django.views.decorators.csrf import csrf_exempt
 import os
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import ensure_csrf_cookie
 from restaurant.models import *
 from auth.models import *
 import ujson as json
@@ -12,9 +14,9 @@ import urllib2
 import re
 import contextlib
 import math
-from django.contrib.auth.decorators import login_required
 
-
+@ensure_csrf_cookie
+@login_required
 def profile_edit_new(request):
     restaurant_rating = RestaurantRating.objects.create(total=0, vegetarian=0, vegan=0, glutenfree=0, peanutfree=0, lactoseint=0, seafoodint=0)
     location = Location.objects.create(latitude=0, longitude=0, city=City.objects.get(name='Cambridge'), state=State.objects.get(name='Massachusetts'), country=Country.objects.get(name='United States'))
@@ -24,6 +26,8 @@ def profile_edit_new(request):
 
 
 # For restaurant owners, let them edit profiles
+@ensure_csrf_cookie
+@login_required
 def profile_edit(request, id):
     restaurant = get_object_or_404(Restaurant, id=id)
 
@@ -41,7 +45,9 @@ def profile_edit(request, id):
     return render(request, 'restaurant_profile_edit.html', {'restaurant': restaurant})
 
 
-@csrf_exempt
+#@csrf_exempt
+@ensure_csrf_cookie
+@login_required
 def profile_edit_save(request, id):
     restaurant = get_object_or_404(Restaurant, id=id)
 
@@ -53,6 +59,11 @@ def profile_edit_save(request, id):
         section = get_object_or_404(DishCategory, id=int(request.REQUEST['section_id']))
         section.name = request.REQUEST['section_name']
         section.save()
+
+        dishes = Dish.objects.filter(restaurants__in=[restaurant.id], section=section.id)
+        for dish in dishes:
+            dish.section_json = json.dumps({'id': section.id, 'name': section.name})
+            dish.save()
     if 'dish_id' in request.REQUEST:
         dish = get_object_or_404(Dish, id=int(request.REQUEST['dish_id']))
         if 'dish_name' in request.REQUEST:
@@ -107,6 +118,8 @@ def profile_edit_save(request, id):
     return HttpResponse("{'status': 'success'}");
 
 # initialize database
+@ensure_csrf_cookie
+@login_required
 def fill_locations(request):
     country_usa = Country(name='United States')
 
@@ -191,9 +204,9 @@ def fill_locations(request):
     return HttpResponse("Locations have been added to database")
 
 
-
 def printdishes(s):
     dishes = p.findall(s)
+
 def populateFromGrubhub():
 
     #Grubhub scraper for Cambridge area
@@ -264,11 +277,13 @@ def populateFromGrubhub():
             cool.save()
     return HttpResponse("Cambridge scraping finished")
 
-
+@ensure_csrf_cookie
+@login_required
 def test_view(request):
     return HttpResponse(populateFromGrubhub())
 
-
+@ensure_csrf_cookie
+@login_required
 def profile(request, restaurant_id):
     ''' Return the restaurant object corresponsing to restaurant_id
 
@@ -285,6 +300,7 @@ def profile(request, restaurant_id):
     return response
 
 
+@ensure_csrf_cookie
 @login_required
 def profile_noajax(request, restaurant_id):
     ''' Return the restaurant profile page corresponsing to restaurant_id

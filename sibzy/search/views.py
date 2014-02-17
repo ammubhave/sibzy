@@ -2,8 +2,9 @@ from django.shortcuts import render
 from restaurant.models import Restaurant
 from django.http import HttpResponse
 import simplejson as json
+from django.views.decorators.csrf import ensure_csrf_cookie
 
-
+@ensure_csrf_cookie
 def q(request, query):
     ''' Do a search from the query. Search details yet to be implemented.
 
@@ -34,7 +35,7 @@ def q(request, query):
     response = HttpResponse(resp)
     return response
 
-
+@ensure_csrf_cookie
 def q_noajax(request, query):
     ''' Do a search from the query. Search details yet to be implemented. Returns search html page.
 
@@ -67,7 +68,7 @@ def q_noajax(request, query):
                                                     'restaurants': restaurants,
                                                     'json': resp})
 
-
+@ensure_csrf_cookie
 def set_location(request):
     response = HttpResponse("{'status': 'success'}");
     response.set_cookie('lat', request.REQUEST['lat']);

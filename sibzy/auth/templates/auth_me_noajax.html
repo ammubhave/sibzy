@@ -6,6 +6,7 @@
 	<h1>{{ profile.fbusername }}</h1>
 	<hr />
 	<form method="POST" action="/auth/me/save">
+	    {% csrf_token %}
 	    <h2>Food preferences</h2>
 	    <hr />
 	    

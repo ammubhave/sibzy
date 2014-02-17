@@ -7,8 +7,9 @@ from auth.models import User, UserProfile
 from comment.models import Comment, CommentVote
 from restaurant.models import Dish
 import simplejson as json
+from django.views.decorators.csrf import ensure_csrf_cookie
 
-
+@ensure_csrf_cookie
 @login_required
 def comment_get(request, comment_id):
     ''' Get the comment with id = comment_id
@@ -24,7 +25,7 @@ def comment_get(request, comment_id):
 
     return HttpResponse(comment.json())
 
-
+@ensure_csrf_cookie
 @login_required
 def comment_set(request, comment_id):
     ''' Updates the comment with id = comment_id
@@ -46,7 +47,7 @@ def comment_set(request, comment_id):
 
     return HttpResponse("{'status': 'success'}")
 
-
+@ensure_csrf_cookie
 @login_required
 def comment_vote(request, comment_id, value):
     ''' Upvote or downvote a comment based on value
@@ -76,7 +77,7 @@ def comment_vote(request, comment_id, value):
 
     return HttpResponse("{'status': 'success'}")
 
-
+@ensure_csrf_cookie
 @login_required
 def dish(request, dish_id):
     ''' Gets all the comments on the dish
@@ -92,7 +93,7 @@ def dish(request, dish_id):
 
     return HttpResponse(json.dumps([json.loads(comment.json()) for comment in comments]))
 
-
+@ensure_csrf_cookie
 @login_required
 def restaurant(request, restaurant_id):
     ''' Gets all the comments on the dish
@@ -108,7 +109,7 @@ def restaurant(request, restaurant_id):
 
     return HttpResponse(json.dumps([json.loads(comment.json()) for comment in comments]))
 
-
+@ensure_csrf_cookie
 @login_required
 def user(request):
     ''' Gets all the comments on the dish by the current logged in user
@@ -124,7 +125,7 @@ def user(request):
 
     return HttpResponse(json.dumps([json.loads(comment.json()) for comment in comments]))
 
-
+@ensure_csrf_cookie
 @login_required
 def dish_new(request, dish_id):
     ''' Creates a new comment on a dish
@@ -152,7 +153,7 @@ def dish_new(request, dish_id):
 
     return HttpResponse(json.dumps({'status': 'success', 'id': comment.id}))
 
-
+@ensure_csrf_cookie
 @login_required
 def restaurant_new(request, restaurant_id):
     ''' Creates a new comment on a restaurant

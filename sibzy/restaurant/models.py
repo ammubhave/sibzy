@@ -28,7 +28,7 @@ class Restaurant(models.Model):
     json = models.TextField(blank=True)
 
     def __str__(self):
-        return self.name
+        return str(self.id) + ': ' + self.name
 
     def serialize(self):
         self.json = json.dumps(self.jsono())

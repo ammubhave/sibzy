@@ -7,7 +7,7 @@ from auth.models import User, UserProfile
 import facebook
 import simplejson as json
 from django.contrib.auth import logout, login, authenticate
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 
 def userprofile_processor(request):
@@ -21,6 +21,7 @@ def userprofile_processor(request):
 
 
 @login_required
+@ensure_csrf_cookie
 def logout_user(request):
     ''' Logout from the django seesion. Delete the *fbaccess_token* and *fbid* cookie.
 
@@ -33,18 +34,19 @@ def logout_user(request):
     logout(request)
     return response
 
-
+@ensure_csrf_cookie
 def me(request):
     return render(request, 'auth_me.html')
 
 
 @login_required
+@ensure_csrf_cookie
 def me_noajax(request):
     return render(request, 'auth_me_noajax.html')
 
 
-@csrf_exempt
 @login_required
+@ensure_csrf_cookie
 def me_save_noajax(request):
     vegetarian = int(request.POST['vegetarian'])
     vegan = int(request.POST['vegan'])
@@ -76,7 +78,7 @@ def me_save_noajax(request):
 #    return response
 
 
-@csrf_exempt
+@ensure_csrf_cookie
 def login_fb(request):
     ''' Login the user in the django session.
     Also convert short lived token to long lived token and tell the client about the long lived token.
