@@ -1,5 +1,5 @@
 from django.core.management.base import NoArgsCommand
-from restaurant.models import City, State, Country
+from restaurant.models import *
 
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
@@ -92,18 +92,18 @@ class Command(NoArgsCommand):
                 #    lexington.save()
                 
         print '--- Dish Categories ---'
-        if len(DishCategories.objects.filter(name='Vegetarian')) == 0:
+        if len(DishCategory.objects.filter(name='Vegetarian')) == 0:
             cat = DishCategory(name='Vegetarian')
             cat.save()
-        if len(DishCategories.objects.filter(name='Vegan')) == 0:
+        if len(DishCategory.objects.filter(name='Vegan')) == 0:
             cat = DishCategory(name='Vegan')
             cat.save()
-        if len(DishCategories.objects.filter(name='Organic')) == 0:
+        if len(DishCategory.objects.filter(name='Organic')) == 0:
             cat = DishCategory(name='Organic')
             cat.save()
-        if len(DishCategories.objects.filter(name='Nutfree')) == 0:
+        if len(DishCategory.objects.filter(name='Nutfree')) == 0:
             cat = DishCategory(name='Nutfree')
             cat.save()
-        if len(DishCategories.objects.filter(name='Glutenfree')) == 0:
+        if len(DishCategory.objects.filter(name='Glutenfree')) == 0:
             cat = DishCategory(name='Glutenfree')
             cat.save()
