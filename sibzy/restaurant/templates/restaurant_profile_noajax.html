@@ -84,7 +84,8 @@
 				<abbr title="Phone">P:</abbr> <span class="restaurant-location-phone">{{ restaurant.location.phone }}</span>
 			</address>
 		  </div>
-		  <div class="col-md-6">			
+		  <div class="col-md-6">
+			{% if user.is_staff %}<a class="btn btn-danger" style="float:right" href="/!/edit/{{restaurant.id}}/edit">Edit this restaurant</a><br /><br />{% endif %}
 			{{ restaurant.description }}
 		  </div>
 		</div>

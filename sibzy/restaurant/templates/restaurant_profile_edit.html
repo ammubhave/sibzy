@@ -151,7 +151,7 @@
 	<div style="width: 100%; height: 51px; width: 100%;height: 51px; background-color: #00ac6b; z-index: 99; border-bottom: solid 1px #008b56; top: 0; position: fixed;">
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="width: 910px; margin: 0 auto;">
 			<div class="navbar-header"> 
-				<a class="navbar-brand" href="">
+				<a class="navbar-brand" href="/">
 					<span style="">Sibzy <sup>&alpha;</sup></span>
 				</a>
 			</div> 
@@ -244,7 +244,8 @@
 					    <abbr title="Phone">P:</abbr> <span class="restaurant-location-phone">{{ restaurant.location.phone }}</span>
 					</address>
 				    </div>
-				    <div class="col-md-6">			
+				    <div class="col-md-6">
+					<a class="btn btn-danger" style="float:right" href="/restaurant/profile/{{restaurant.id}}">View this restaurant</a><br /><br />
 					<style>
 					    #restaurant-description:hover {
 						background-color: #FFE900;
@@ -402,7 +403,7 @@
 											<span class="label label-default glutenfree{{ dish.id }}">Glutenfree</span>
 										  {% endif %}
 										
-										$ {{ dish.price|num_format }}
+										$ <span class="dishprice{{dish.id}}">{{ dish.price|num_format }}</span>
 									    </span>
 									    <style>
 										    .vegetarian{{ dish.id }}:hover {
@@ -603,7 +604,7 @@
 											'dish_name': $('#text-dish-details-name').val()
 										  }
 										});
-										$('.dishname' + $('#dish-id').val()).text($('#text-dish-details-name').val());
+										$('.dishprice' + $('#dish-id').val()).text($('#text-dish-details-name').val());
 										$('#dish-details-name').text($('#text-dish-details-name').val());
 										if($('#text-dish-details-name').val() == '') {
 										  $('#dish-details-name').text('[Dish Name]')
@@ -616,7 +617,34 @@
 							</div>
 						</div>
 						<span style="clear:both; width: 100%; display: block; padding: 10px; border: solid 1px #008b56; font-size: 20px;">
-							Price: $ <span id="dish-details-price"></span>
+							<script>
+									  function edit_dish_details_price() {
+										$('.noedit-dish-details-price').hide();
+										$('.edit-dish-details-price').css('display', 'inline-block');
+										
+										$('#text-dish-details-price').focus();
+										$('#text-dish-details-price').blur(save_dish_details_name);
+									  }
+									  function save_dish_details_price() {
+										$('.noedit-dish-details-price').show();
+										$('.edit-dish-details-price').hide();
+										
+										$.ajax({
+										  url: 'save',
+										  data: {
+											'dish_id': $('#dish-id').val(),
+											'dish_price': $('#text-dish-details-price').val()
+										  }
+										});
+										$('.dishname' + $('#dish-id').val()).text($('#text-dish-details-price').val());
+										$('#dish-details-price').text($('#text-dish-details-price').val());
+										if($('#text-dish-details-price').val() == '') {
+										  $('#dish-details-price').text('0.00')
+										}
+										$('#dish-details-price').click(edit_dish_details_price);
+									  }
+							</script>
+							Price: $ <span class="noedit-dish-details-price" id="dish-details-price"></span>
 							<br />
 						</span>
 					</div>
