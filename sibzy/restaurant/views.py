@@ -113,6 +113,16 @@ def profile_edit_save(request, id):
         dish.section_json = json.dumps({'id': section.id, 'name': section.name})
         dish.serialize()
         restaurant.dishes.add(dish)
+    if 'delete_dish_id' in request.REQUEST:
+        dish = get_object_or_404(Dish, id=request.REQUEST['delete_dish_id'])
+
+        section_id = dish.section.id
+
+        restaurant.dishes.remove(dish)
+        dish.delete()
+        if len(Dish.objects.filter(section=section_id)) == 0:
+            section = DishCategory.objects.get(id=section_id)
+            section.delete()
 
     restaurant.save()
     return HttpResponse("{'status': 'success'}");

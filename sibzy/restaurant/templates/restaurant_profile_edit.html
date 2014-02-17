@@ -574,8 +574,8 @@
 					
 					<div class="col-md-4" style="display: none;" id="right-dish-details">
 						<div class="btn btn-danger" style="text-align: center; width: 100%" onclick="$.ajax({
-												    url: 'delete',
-												    data: {'dish_id': $('#dish-id').val()},
+												    url: 'save',
+												    data: {'delete_dish_id': $('#dish-id').val()},
 												    success: function (data) { location.reload(); }
 												});">
 						    Delete
