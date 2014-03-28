@@ -341,6 +341,7 @@ def profile_noajax(request, restaurant_id):
     #    dish.save()
 
     dishes_all = restaurant.dishes.all()
+    dishes_all = sorted(dishes_all, key=lambda x: x.section_json)
 
     profile = UserProfile.objects.get(user=request.user.id)
     for dish in dishes_all:
