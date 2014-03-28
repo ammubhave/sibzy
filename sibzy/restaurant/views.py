@@ -32,7 +32,7 @@ def profile_edit(request, id):
     restaurant = get_object_or_404(Restaurant, id=id)
 
     dishes_all = restaurant.dishes.all()
-    restaurant.dishes_all.sort(key=lambda x: x.section_json)
+    dishes_all.sort(key=lambda x: x.section_json)
 
     for dish in dishes_all:
         dish.categories_json = json.loads(str(dish.categories_json))
@@ -41,7 +41,7 @@ def profile_edit(request, id):
         else:
             dish.section_json = json.loads(str(dish.section_json))
 
-    Restaurant.dishes_all = property(lambda self: dishes_all)    
+    Restaurant.dishes_all = property(lambda self: dishes_all)
 
     return render(request, 'restaurant_profile_edit.html', {'restaurant': restaurant})
 
