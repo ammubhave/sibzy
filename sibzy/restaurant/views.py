@@ -43,6 +43,8 @@ def profile_edit(request, id):
 
     Restaurant.dishes_all = property(lambda self: dishes_all)
 
+    return HttpResponse(str(restaurant.dishes_all))
+
     return render(request, 'restaurant_profile_edit.html', {'restaurant': restaurant})
 
 
