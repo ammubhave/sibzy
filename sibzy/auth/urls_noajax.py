@@ -6,7 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    url(r'^logout$', 'auth.views.logout_user'),
+    url(r'^logout$', 'auth.views.logout_user', name='logout_user'),
     url(r'^me$', 'auth.views.me_noajax'),
     url(r'^me/save$', 'auth.views.me_save_noajax'),
 )

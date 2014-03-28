@@ -1,6 +1,8 @@
 var me;
 
+var loginInProcess = false;
 function updateLoginStatus(response) {
+  if (loginInProcess) return; else loginInProcess = true;
   console.log(response.status);
   // Here we specify what we do with the response anytime this event occurs. 
   if (response.status === 'connected') {
@@ -45,6 +47,7 @@ function updateLoginStatus(response) {
       */
     // alert('connectnot');
   }
+  loginInProcess = false;
 }
 
 window.fbAsyncInit = function() {

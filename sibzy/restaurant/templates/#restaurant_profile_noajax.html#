@@ -1,0 +1,367 @@
+{% extends "base_noajax.html" %}
+{% load num_format %}
+
+{% block content %}
+<script src="http://leandrovieira.com/projects/jquery/lightbox/js/jquery.lightbox-0.5.pack.js"></script>
+<link rel="stylesheet" href="http://leandrovieira.com/projects/jquery/lightbox/css/jquery.lightbox-0.5.css" />
+<script>
+  $('#txtSearch').val("{{ restaurant.name | safe }}");
+  $('#txtSearch').click(function () {
+                    $(this).val('');
+                    $(this).unbind('click');
+  });
+</script>
+<script src="/static/js/restaurant_noajax.js"></script>
+<script src="http://code.jquery.com/color/jquery.color-2.1.2.min.js"></script>
+<style>
+  .arrow-left {
+	width: 0;
+	height: 0;
+	border-top: 10px solid white;
+	border-bottom: 10px solid white;
+	display: inline-block;
+	border-right:10px solid #ccc; 
+} .arrow-left-2{
+	width: 0;
+	height: 0;
+	border-top: 10px solid #ccc;
+	border-bottom: 10px solid #ccc;
+	display: inline-block;
+	border-right:10px solid white; 
+}
+#back_to_search {
+  color: black;
+}
+#back_to_search:hover {
+  text-decoration: none;
+  color: #6D6D6D;
+}
+</style>
+
+{% if q != '' %}
+<a href="/search/q/{{ q }}" id="back_to_search" style="display: block; height: 20px; margin-top: -20px; margin-left: -30px; line-height:20px; margin-right: -20px; background-color: #ccc; margin-bottom:10px">
+  <span class="arrow-left" style="border-top-color: #f0f0f0; border-bottom-color: #f0f0f0">
+	
+  </span>
+  <span class="arrow-left-2">
+	
+  </span><span class="arrow-left">
+	
+  </span>
+  <span class="arrow-left-2">
+	
+  </span><span class="arrow-left">
+	
+  </span>
+  <span class="arrow-left-2">
+	
+  </span><span class="arrow-left">
+	
+  </span>
+  <span class="arrow-left-2">
+	
+  </span><span class="arrow-left">
+	
+  </span>
+  <span style="font-size: 22px; position: relative; top: -4px; left: 10px; font-variant: small-caps">back to search</span>
+</a>
+{% endif %}
+
+<div class="container">
+	<div class="row clearfix">
+	  <div class="col-md-8 column" style="border-right: 1px solid #008855">
+		<div class="row clearfix" style="border: 1px solid #CCC; background-color: #f0f0f0; margin-top: 10px; margin-bottom: 30px; margin-right: 0">
+		  <div class="col-md-8" style=" padding: 0">
+			<h1 style="color: #008b56; font-size: 24px; margin: 0"><a href="http://lorempixel.com/500/500/" class="lightbox" style="margin-right: 20px;"><img alt="75x75" src="http://lorempixel.com/75/75/" /></a>{{ restaurant.name  }}</h1>
+		  </div>
+		  <div class="col-md-4" style="text-align: right; "><div style="display: inline-block; color: black; font-size: 24px; margin:0; line-height: 80px; height:70px; width: {{ restaurant.rating.total_display }}px; overflow: hidden"><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i></div><div style="display: inline-block; color: rgba(0,0,0,0.1); font-size: 24px; margin:0; line-height: 80px; height:70px; width: {{ restaurant.rating.total_display_negative }}px; overflow: hidden; margin-left: -1px; text-align: right"><i class="glyphicon glyphicon-star-empty"></i><i class="glyphicon glyphicon-star-empty"></i><i class="glyphicon glyphicon-star-empty"></i><i class="glyphicon glyphicon-star-empty"></i><i class="glyphicon glyphicon-star-empty"></i></div></div>
+		</div>
+		<div class="row clearfix">
+		  <div class="col-md-6">
+			<address>
+				<span class="restaurant-location-address">{{ restaurant.location.address }}</span><br />
+				<span class="restaurant-location-city">{{ restaurant.location.city }}</span>, <span class="restaurant-location-state">{{ restaurant.state.name }}</span> <span class="restaurant-location-zip">{{ restaurant.location.zipcode }}</span><br />
+				<abbr title="Phone">P:</abbr> <span class="restaurant-location-phone">{{ restaurant.location.phone }}</span>
+			</address>
+		  </div>
+		  <div class="col-md-6">
+			{% if user.is_staff %}<a class="btn btn-danger" style="float:right" href="/!/edit/{{restaurant.id}}/edit">Edit this restaurant</a><br /><br />{% endif %}
+			{{ restaurant.description }}
+		  </div>
+		</div>
+		<div class="row clearfix">
+		  <div class="col-md-1">
+			
+			<!-- Place this tag where you want the +1 button to render. -->
+			<div class="g-plusone" data-width="300" data-href="http://www.sibzy.com/restaurant/profile/{{ restaurant.id }}"></div>
+			
+			<!-- Place this tag after the last +1 button tag. -->
+			<script type="text/javascript">
+			  (function() {
+				var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+				po.src = 'https://apis.google.com/js/platform.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+			  })();
+			</script>
+			<br />
+			<div class="fb-share-button" data-href="http://www.sibzy.com/restaurant/profile/{{ restaurant.id }}" data-type="button_count"></div>
+
+		  </div>
+		  <div class="col-md-12">
+			
+		  </div>
+		</div>
+	  </div>
+	  <div class="col-md-4 column">
+		<div id="map-canvas" style="width: 100%; height: 300px; border: 1px solid #bbb;"></div>
+		  <script>
+			  var myLatlng = new google.maps.LatLng({{ restaurant.location.latitude }}, {{ restaurant.location.longitude }});
+				var mapOptions = {
+					center: myLatlng,
+					zoom: 15
+				};
+				var map = new google.maps.Map(document.getElementById("map-canvas"),
+					mapOptions);
+				
+				var marker = new google.maps.Marker({
+					position: myLatlng,
+					map: map,
+					title: "{{ restaurant.name }}",
+				});
+				var infowindow = new google.maps.InfoWindow({
+					content: "{{ restaurant.name }}"
+				});
+					google.maps.event.addListener(marker, 'click', function() {
+					infowindow.open(map,marker);
+				});
+					
+					if (getCookie('lat') != null) { 
+					  myLatlng = new google.maps.LatLng(getCookie('lat'), getCookie('lng'));
+					  marker = new google.maps.Marker({
+						 position: myLatlng,
+						 map: map,
+						 title: "You",
+						 icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+					 });
+					 infowindow = new google.maps.InfoWindow({
+						 content: "Your location"
+					 });
+					 google.maps.event.addListener(marker, 'click', function() {
+						 infowindow.open(map,marker);
+					 });
+					}
+		  </script>
+	  </div>
+	</div>
+
+	<style>
+	  .panel-default {
+		border-color: #006363;
+	  }
+	</style>
+	<hr />
+	<div class="row clearfix">
+        <div class="col-md-12 column" style="background-color: white; border-radius: 5px;  padding-top: 0">
+		   
+			{% regroup restaurant.dishes_all by section_json as section_list %}
+			<div class="row">
+			  <div class="col-md-8">
+			      <h3 style="text-align: center; color: #006363;">MENU</h3>
+				<div class="panel-group _restaurant-dishes" id="dishes">				  
+				{% for section in section_list %}
+				  <div class="panel panel-default">
+					<div class="panel-heading">
+					  <h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#dishes" href="#collapse{{ section.grouper.id }}">
+						  {{ section.grouper.name }}
+						</a>
+					  </h4>
+					</div>
+	
+					<div id="collapse{{ section.grouper.id }}" class="panel-collapse collapse">
+						<div class="panel-body" id="panelAppetizers" style="height: 400px; overflow-y: scroll">
+						  {% for dish in section.list %}
+						    {% if dish.name != '' %}
+						  <div style="text-decoration:none; border-radius: 5px;" onclick="
+							$('#dishinfo').show();
+							$('#dish-details-name').text('{{ dish.name }}');							
+							if ($('#dish-details-name').text().length > 37) {
+							  $('#dish-details-name').css('line-height', '37px');
+							} else {
+							  $('#dish-details-name').css('line-height', '74px');
+							}
+							$('#dish-details-description').text('{{ dish.description }}');
+							$('#dish-id').val('{{ dish.id }}');
+							$('#dish').show();
+							load_comments({{ dish.id }});
+						  ">
+							  <div class="menu-dish"><span>{{ dish.name }}</span>
+							
+								  <span class="pull-right" style="font-family: Courier New">
+								  
+
+								  {% if 'Vegetarian' in dish.categories_json %}
+									<span class="label label-success">Vegetarian</span>
+								  {% else %}
+									<span class="label label-default">Vegetarian</span>
+								  {% endif %}
+								  {% if 'Vegan' in dish.categories_json %}
+									<span class="label label-info">Vegan</span>
+								  {% else %}
+									<span class="label label-default">Vegan</span>
+								  {% endif %}
+								  {% if 'Organic' in dish.categories_json %}
+									<span class="label label-primary">Organic</span>
+								  {% else %}
+									<span class="label label-default">Organic</span>
+								  {% endif %}
+								  {% if 'Nutfree' in dish.categories_json %}
+									<span class="label label-warning">Nutfree</span>
+								  {% else %}
+									<span class="label label-default">Nutfree</span>
+								  {% endif %}
+								  {% if 'Glutenfree' in dish.categories_json %}
+									<span class="label label-danger">Glutenfree</span>
+								  {% else %}
+									<span class="label label-default">Glutenfree</span>
+								  {% endif %}
+								
+								$ {{ dish.price|num_format }}</span>
+							  </div>
+						  </div>
+						    {% endif %}
+						  {% endfor %}
+						  </div>
+					</div>	
+				  </div>
+				{% endfor %}
+				
+			  </div>
+			</div>
+			<div class="col-md-4">
+			  
+			  <div id="dish" style="color: black; border: solid 1px #008b56; display: none">
+			    <input id="dish-id" type="hidden" />
+				<div style="background-color: #ECECFF;">
+				  <div id="dishinfo" style="display: block; background-color: #00ac6b; padding: 0; color: white;  border-bottom: solid 1px #008b56;">
+					  <a href="http://lorempixel.com/500/500/food" class="lightbox" style="margin-right: 10px; display: block; float: left"><img alt="74x74" src="http://lorempixel.com/74/74/food" /></a>
+					  <h3 style="font-size: 18px; margin: 0; line-height: 74px" id="dish-details-name">Best of Restaurant</h3>
+				  </div>
+				  <span id="dish-details-rating-stars" style="clear:both; width: 100%; display: block; text-align: center">
+					<div style="display: inline-block; color: black; font-size: 24px; margin:0; line-height: 40px; height:30px; width: 48px; overflow: hidden"><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i></div>
+					<div style="display: inline-block; color: rgba(0,0,0,0.1); font-size: 24px; margin:0; line-height: 40px; height:30px; width: 72px; overflow: hidden; margin-left: -1px; text-align: right"><i class="glyphicon glyphicon-star-empty"></i><i class="glyphicon glyphicon-star-empty"></i><i class="glyphicon glyphicon-star-empty"></i><i class="glyphicon glyphicon-star-empty"></i><i class="glyphicon glyphicon-star-empty"></i></div>
+				  </span>
+				  		  
+				</div>
+				<div style="background-color: white; border-top: solid 1px #008b56;">
+						<div class="_dish-details-comments-entry" style="margin: 10px; font-size: 11px; display: none">
+						  <blockquote  class="blockquote-reverse" style="padding-right: 15px;padding-left: 0;border-right: 5px solid #eee;border-left: 0;text-align: right;">
+						    <p style="font-size: 15px;" class="_dish-details-comments-entry-commenttext"></p>
+						    <footer style="display: block;font-size: 80%;line-height: 1.428571429;color: #999;">
+						      <span class="pull-left">
+							<i class="glyphicon glyphicon-star-empty rrate1"></i>
+							<i class="glyphicon glyphicon-star-empty rrate2"></i>
+							<i class="glyphicon glyphicon-star-empty rrate3"></i>
+							<i class="glyphicon glyphicon-star-empty rrate4"></i>
+							<i class="glyphicon glyphicon-star-empty rrate5"></i>
+						      </span>
+						      <span class="_dish-details-comments-entry-user"></span>
+						      -</footer>
+						  </blockquote>
+						</div>
+						<div id="dish-details-comments"></div>
+						<div id="review" class="" style="margin-top: 0; background-color: #F0F2FF">
+						  
+						  <blockquote  class="blockquote-reverse" style="margin-bottom: 0; padding-right: 15px;padding-left: 0;border-right: 5px solid #eee;border-left: 0;text-align: right;">
+						    <p style="font-size: 15px;"><textarea id="dishes-comments-text" class="form-control" rows="3"></textarea></p>
+						    <footer style="display: block;font-size: 80%;line-height: 1.428571429;color: #999;">{{ profile.fbusername }} -</footer>
+						  </blockquote>
+						  
+						  
+						  <span style="font-size: 20px;" >
+						    &nbsp;&nbsp;&nbsp;&nbsp;
+						    <i id="rate1" class="newcomment glyphicon glyphicon-star"></i>
+						    <i id="rate2" class="newcomment glyphicon glyphicon-star"></i>
+						    <i id="rate3" class="newcomment glyphicon glyphicon-star"></i>
+						    <i id="rate4" class="newcomment glyphicon glyphicon-star-empty"></i>
+						    <i id="rate5" class="newcomment glyphicon glyphicon-star-empty"></i>
+						  </span>
+						  <script>
+						    var rate = 3;
+						    $(function () {
+						      for (var i=1; i<=5; i++) {
+						      hoverifyStars(i);
+						      }  
+						    });
+						    
+						    function hoverifyStars(i) {
+						      $('#rate' + i).mouseover(function () {
+							for (var j=1; j<=i;j++) {
+							  $('#rate'+j).removeClass('glyphicon-star-empty');
+							  $('#rate'+j).addClass('glyphicon-star');
+							}
+							for (var j=i+1; j<=5;j++) {
+							  $('#rate'+j).removeClass('glyphicon-star');
+							  $('#rate'+j).addClass('glyphicon-star-empty');
+							}
+						      }).mouseout(function () {
+							for (var j=1; j<=rate;j++) {
+							  $('#rate'+j).removeClass('glyphicon-star-empty');
+							  $('#rate'+j).addClass('glyphicon-star');
+							}
+							for (var j=rate+1; j<=5;j++) {
+							  $('#rate'+j).removeClass('glyphicon-star');
+							  $('#rate'+j).addClass('glyphicon-star-empty');
+							}
+						      }).click(function () {
+							rate = i;
+						      });
+						    }
+						  </script>
+						  <input class="btn btn-primary pull-right" value="Submit" id="new-comment-submit" type="button" style="margin-right: 20px;" />
+						  <script>
+						    $('#new-comment-submit').click (function () {
+						      $.ajax({
+							method: 'POST',
+							url: '/!/comment/dish/' + $('#dish-id').val() + '/new',
+							data: {
+							  'comment_text': $('#dishes-comments-text').val(),
+							  'rating_value': rate
+							},
+							success: function(data) {
+							    $('#review').css('background-color', '#0F0');
+							    $('#review').animate({ backgroundColor: "#F0FFF0" }, 2000);
+							}
+						      });
+						    });
+						  </script>
+						  <!--div class="btn-group btn-group-justified">
+								  <a id="dishes-comments-button0" class="btn btn-danger" role="button">0</a>
+								  <a id="dishes-comments-button1" class="btn btn-warning" role="button">1</a>
+								  <a id="dishes-comments-button2" class="btn btn-default" role="button">2</a>					  
+								  <a id="dishes-comments-button3" class="btn btn-info" role="button">3</a>
+								  <a id="dishes-comments-button4" class="btn btn-primary" role="button">4</a>					  
+								  <a id="dishes-comments-button5" class="btn btn-success" role="button">5</a>
+							</div-->
+						</div>
+						
+					
+				</div>
+			  </div>
+			</div>
+	    </div>		
+	</div>
+	<br />
+		
+		
+<script type="text/javascript">
+$(function() {
+	$('.lightbox').lightBox({
+	  imageLoading: '/static/images/loading.gif',
+	  imageBtnClose: '/static/images/close.gif',
+	  imageBtnPrev: '/static/images/prev.gif',
+	  imageBtnNext: '/static/images/next.gif',
+	}); // Select all links that contains lightbox in the attribute rel
+});
+</script>
+{% endblock %}

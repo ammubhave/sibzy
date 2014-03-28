@@ -93,17 +93,22 @@ class Command(NoArgsCommand):
                 
         print '--- Dish Categories ---'
         if len(DishCategory.objects.filter(name='Vegetarian')) == 0:
+            print 'Creating Vegetarian...'
             cat = DishCategory(name='Vegetarian')
             cat.save()
         if len(DishCategory.objects.filter(name='Vegan')) == 0:
+            print 'Creating Vegan...'
             cat = DishCategory(name='Vegan')
             cat.save()
         if len(DishCategory.objects.filter(name='Organic')) == 0:
+            print 'Creating Organic...'
             cat = DishCategory(name='Organic')
             cat.save()
         if len(DishCategory.objects.filter(name='Nutfree')) == 0:
+            print 'Creating Nutfree...'
             cat = DishCategory(name='Nutfree')
             cat.save()
         if len(DishCategory.objects.filter(name='Glutenfree')) == 0:
+            print 'Creating Glutenfree...'
             cat = DishCategory(name='Glutenfree')
             cat.save()

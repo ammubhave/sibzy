@@ -116,6 +116,9 @@ def login_fb(request):
 
     graph = facebook.GraphAPI(long_access_token)
     profile = graph.get_object('me')
+    if 'username' not in profile:
+        profile['username'] = profile['id']
+        
     print profile
     user = User.objects.filter(userprofile__fbid=profile['id'])
 
