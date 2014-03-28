@@ -32,7 +32,7 @@ def profile_edit(request, id):
     restaurant = get_object_or_404(Restaurant, id=id)
 
     dishes_all = restaurant.dishes.all()
-    dishes_all.sort(key=lambda x: x.section_json)
+    dishes_all = sorted(dishes_all, key=lambda x: x.section_json)
 
     for dish in dishes_all:
         dish.categories_json = json.loads(str(dish.categories_json))
